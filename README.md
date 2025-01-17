@@ -3,7 +3,7 @@
 ## Content
 
 The course is divided into 5 units. That will take you from the basics of agents to a final assignment with a benchmark.
-
+Sign up here (it free) 👉 http://eepurl.com/i7MQOU
 | Unit | Topic                          | Description                                                                 |
 |------|--------------------------------|-----------------------------------------------------------------------------|
 | 0    | [0_onboarding](units/0_onboarding) | Welcome, guidelines, necessary tools, and course overview.                  |
