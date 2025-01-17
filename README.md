@@ -2,7 +2,9 @@
 
 ## Content
 
-The course is divided into 5 units. That will take you from the basics of agents to a final assignment with a benchmark.
+The course is divided into 5 units. That will take you from **the basics of agents to a final assignment with a benchmark**.
+
+Don't forget to ⭐ the repository (it helps other to discover the course) 🤗
 Sign up here (it free) 👉 http://eepurl.com/i7MQOU
 | Unit | Topic                          | Description                                                                 |
 |------|--------------------------------|-----------------------------------------------------------------------------|
