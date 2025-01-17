@@ -1,4 +1,4 @@
-# agents-course
+# The Hugging Face Agents Course
 
 ## Content
 
