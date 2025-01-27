@@ -4,13 +4,17 @@ This page introduces the concept of an LLM Agent, a type of artificial intellige
 
 ## What is an LLM Agent?
 
-An LLM Agent is like a digital brain that can understand and respond to complex situations. It uses an LLM as its core reasoning engine, allowing it to:
+LLM agents are AI systems that combine the language processing capabilities of LLMs with other components to perform a wide range of tasks. These agents go beyond simple text generation and can engage in sequential reasoning, remember past interactions, and adapt their responses based on the context of the conversation. In essence, LLM agents are designed to enhance the capabilities of LLMs by incorporating mechanisms for planning, memory, and tool use, allowing them to be more interactive, adaptable, and capable of handling complex, multi-step tasks.
+
+LLM agents can parse complicated questions, analyze data from various sources, and provide in-depth responses. This characteristic separates agents from traditional retrieval augmented generation (RAG) systems, which primarily pull data from databases to answer questions in a single pass.
+
+One of the key advantages of LLM agents is their ability to break down complex tasks into smaller, more manageable subtasks. For instance, if an agent is asked to analyze a company's financial performance, it might divide the task into subtasks like gathering financial data, identifying key performance indicators, and summarizing the findings. This approach allows agents to tackle problems that require sequential reasoning and planning.
+
+To summarize, an LLM Agent is a system that uses an LLM as its core reasoning engine, allowing it to:
 
 * **Understand natural language:**  Interpret and respond to human instructions in a meaningful way.
 * **Reason and plan:** Analyze information, make decisions, and devise strategies to solve problems.
 * **Interact with its environment:**  Gather information, take actions, and observe the results of those actions.
-
-Think of it like this: a traditional LLM is like a librarian who can answer your questions based on the books in the library. An LLM agent is like a detective who can use the information in the library, but also go out into the world to gather clues, interview witnesses, and ultimately solve a case.
 
 ## Core Functions of an LLM Agent
 
@@ -44,7 +48,6 @@ Think of it like this: a traditional LLM is like a librarian who can answer your
 | **Safety and Security**   | Preventing unintended consequences and ensuring the agent's actions are safe and secure.                                                                               |
 | **Explainability**       |  Understanding how the agent makes decisions and providing transparency in its reasoning process.                                                                      |
 | **Control and Alignment** |  Ensuring the agent's goals and actions remain aligned with human intentions and ethical principles, especially as the agent learns and evolves.                           |
-
 
 By addressing these challenges and harnessing the capabilities of LLMs, we can create AI agents that augment human capabilities and solve complex problems in a responsible and beneficial way.
 
