@@ -1,12 +1,16 @@
-# Agents
+# smolagents
 
-AI Agents are autonomous systems that can understand user requests, break them down into steps, and execute actions to accomplish tasks. They combine language models with tools and external functions to interact with their environment. This module covers how to build effective agents using the [`smolagents`](https://github.com/huggingface/smolagents) library, which provides a lightweight framework for creating capable AI agents.
+This module covers how to build effective agents using the [`smolagents`](https://github.com/huggingface/smolagents) library, which provides a lightweight framework for creating capable AI agents.
 
 ## Module Overview
 
 Building effective agents requires understanding three key components. First, retrieval capabilities allow agents to access and use relevant information from various sources. Second, function calling enables agents to take concrete actions in their environment. Finally, domain-specific knowledge and tooling equip agents for specialized tasks like code manipulation.
 
 ## Contents
+
+### 0️⃣ [Why Use smolagents](./why_use_smolagents.md)
+
+smolagents is one of the many open-source agent frameworks available for application development. Alternative options include LlamaIndex and LangGraph. This library offers several key features that might make it a great fit for specific use cases, but there are also some limitations that may lead you to consider other solutions. This module explores the advantages and drawbacks of using smolagents, helping you make an informed decision based on your project's requirements.
 
 ### 1️⃣ [Retrieval Agents](./retrieval_agents.md)
 
@@ -19,6 +23,10 @@ Code agents are specialized autonomous systems designed for software development
 ### 3️⃣ [Custom Functions](./custom_functions.md)
 
 Custom function agents extend basic AI capabilities through specialized function calls. This module explores how to design modular and extensible function interfaces that integrate directly with your application's logic. You'll learn to implement proper validation and error handling while creating reliable function-driven workflows. The focus is on building simple systems where agents can predictably interact with external tools and services.
+
+### 4️⃣ [Vision Agents](./vision_agents.md)
+
+### 5️⃣ [Browser Agents](./browser_agents.md)
 
 ### Exercise Notebooks
 
