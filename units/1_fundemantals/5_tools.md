@@ -31,7 +31,7 @@ Here are some examples of how interface design can affect an AI agent's performa
 
 ## Tool Use as Action
 
-The use of tools is considered a form of "acting" by an AI agent in an environment. Agents can generate special tokens to invoke tool calls. This "acting" can be guided by "reasoning," which allows the agent to plan and re-plan based on the information gained from the tool. For example, an agent might use a search engine to find information and then use a calculator to perform calculations based on that information. The agent may revise its plan based on the result of the calculation and return the retrieved information. This kind of reasoning based tool use is the cornerstone of Agents, and we will explore this in more detail in the coming sections.
+The use of tools is considered a form of "acting" by an AI agent in an environment. Agents can generate special tokens to invoke tool calls. This "acting" can be guided by "reasoning," which allows the agent to plan and re-plan based on the information gained from the tool. For example, an agent might use a search engine to find information and then use a calculator to perform calculations based on that information. The agent may revise its plan based on the result of the calculation and return the retrieved information. This kind of reasoning-based tool use is the cornerstone of agents, and we will explore it in more detail in the coming sections.
 
 ## Conclusion
 
@@ -40,31 +40,37 @@ AI tools play a crucial role in enhancing the capabilities of AI agents. By effe
 ## Pop Quiz 🍾
 
 1. Which of the following best describes an AI tool?
-   A. A process that only generates text responses
-   B. An executable process or external API that allows agents to perform specific tasks and interact with external environments
-   C. A feature that stores agent conversations
+
+   A. A process that only generates text responses  
+   B. An executable process or external API that allows agents to perform specific tasks and interact with external environments  
+   C. A feature that stores agent conversations  
 
 2. Which interface design principle enhances an AI agent's ability to use tools effectively?
-   A. Displaying all tool outputs in random formats
-   B. Providing clear descriptions, structured output formats, and feedback mechanisms
-   C. Limiting tool descriptions to technical specifications only
+
+   A. Displaying all tool outputs in random formats  
+   B. Providing clear descriptions, structured output formats, and feedback mechanisms  
+   C. Limiting tool descriptions to technical specifications only  
 
 3. How do AI agents use tools as a form of "acting" in an environment?
-   A. By passively waiting for user instructions
-   B. By only using pre-programmed responses
-   C. By generating tokens to invoke tools and revising plans based on the information gained
+
+   A. By passively waiting for user instructions  
+   B. By only using pre-programmed responses  
+   C. By generating tokens to invoke tools and revising plans based on the information gained  
 
 ---
 <details>
 <summary>Answer Key (click to reveal)</summary>
 
 1. B. An executable process or external API that allows agents to perform specific tasks and interact with external environments
+
    • Explanation: The text defines tools as executable processes or external APIs that agents use to perform specific tasks and interact with external environments.
 
 2. B. Providing clear descriptions, structured output formats, and feedback mechanisms
+
    • Explanation: The interface design section emphasizes the importance of structured output, clear tool descriptions, tool selection, and feedback mechanisms.
 
 3. C. By generating tokens to invoke tools and revising plans based on the information gained
+
    • Explanation: The text explains that agents can generate special tokens to invoke tools and use reasoning to plan and re-plan based on the information gained.
 
 </details>
