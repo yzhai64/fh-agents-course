@@ -30,9 +30,9 @@ Tokenizers are crucial in preparing inputs for models. They convert text into a 
 
 ## Special Tokens
 
-Special tokens are different for every model and allow segmentation of generation in messages. Can go from messages to prompt with the chat_template. 
+Special tokens are different for every model and allow segmentation of generation in messages. Can go from messages to prompt with the chat template. 
 
-## Chat-Templates
+## Chat Templates
 
 Chat templates are essential for structuring interactions between language models and users. They provide a consistent format for conversations, ensuring that models understand the context and role of each message while maintaining appropriate response patterns.
 

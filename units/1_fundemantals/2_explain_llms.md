@@ -24,7 +24,7 @@ LLMs are trained on large datasets of text, where they learn to predict the next
 
 Following this, LLMs can be fine-tuned on a supervised learning objective to perform specific tasks. For example, some are trained for conversational structures or tool usage, while others focus on classification or code generation.
 
-Most LLMs use the Transformer architecture, which is a type of neural network that can store and handle complex patterns in language data. The most common type of Transformer for LLMs is the decoder, an autoregressive algorithm that continues generating text until a special stop token is reached. We will explore special tokens in more detail in the [next section](./3_messages_and_special_tokens).
+Most LLMs use the Transformer architecture, which is a type of neural network that can store and handle complex patterns in language data. The most common type of Transformer for LLMs is the decoder, an autoregressive algorithm that continues generating text until a special stop token is reached. We will explore special tokens in more detail in the [next section](./3_messages_and_special_tokens.md).
 
 ## How can I use LLMs?
 
