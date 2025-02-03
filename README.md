@@ -33,7 +33,7 @@ If you want to add a new unit, please create an issue in the repository, describ
 
 ### Work on existing units
 
-We are actively working on the units and If you want to join us, we will need to find a place in the workflow. Here's an overview of where we are open to collaboration:
+We are actively working on the units and if you want to join us, we will need to find a place in the workflow. Here's an overview of where we are open to collaboration:
 
 | Unit | Status        | Contributions                                                          |
 |------|--------------|------------------------------------------------------------------------|
