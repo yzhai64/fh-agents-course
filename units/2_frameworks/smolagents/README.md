@@ -4,32 +4,33 @@ This module covers how to build effective agents using the [`smolagents`](https:
 
 ## Module Overview
 
-Building effective agents requires understanding three key components. First, retrieval capabilities allow agents to access and use relevant information from various sources. Second, function calling enables agents to take concrete actions in their environment. Finally, domain-specific knowledge and tooling equip agents for specialized tasks like code manipulation.
+This module provides a comprehensive overview of key concepts and practical strategies for building intelligent agents using smolagents. With so many open-source frameworks available, it's essential to understand the components and capabilities that make smolagents a valuable option—or to determine when another solution might be a better fit. We'll explore critical agent types, including retrieval agents that access and synthesize information, code agents designed for software development tasks, and custom function agents for creating modular, function-driven workflows. Additionally, we'll cover the integration of vision capabilities and web browsing to unlock new possibilities for dynamic and context-aware applications.
 
 ## Contents
 
-### 0️⃣ [Why Use smolagents](./why_use_smolagents.md)
+### 1️⃣ [Why Use smolagents](./why_use_smolagents.md)
 
-smolagents is one of the many open-source agent frameworks available for application development. Alternative options include LlamaIndex and LangGraph. This library offers several key features that might make it a great fit for specific use cases, but there are also some limitations that may lead you to consider other solutions. This module explores the advantages and drawbacks of using smolagents, helping you make an informed decision based on your project's requirements.
+`smolagents` is one of the many open-source agent frameworks available for application development. Alternative options include `LangChain`, `LlamaIndex` and `LangGraph`. This library offers several key features that might make it a great fit for specific use cases, but there are also some limitations that may lead you to consider other solutions. This module explores the advantages and drawbacks of using `smolagents`, helping you make an informed decision based on your project's requirements.
 
-### 1️⃣ [Retrieval Agents](./retrieval_agents.md)
+### 2️⃣ [Retrieval Agents](./retrieval_agents.md)
 
 Retrieval agents combine models with knowledge bases. These agents can search and synthesize information from multiple sources, leveraging vector stores for efficient retrieval and implementing RAG (Retrieval Augmented Generation) patterns. They are great at combining web search with custom knowledge bases while maintaining conversation context through memory systems. The module covers implementation strategies including fallback mechanisms for robust information retrieval.
 
-### 2️⃣ [Code Agents](./code_agents.md)
+### 3️⃣ [Code Agents](./code_agents.md)
 
 Code agents are specialized autonomous systems designed for software development tasks. These agents excel at analyzing and generating code, performing automated refactoring, and integrating with development tools. The module covers best practices for building code-focused agents that can understand programming languages, work with build systems, and interact with version control while maintaining high code quality standards.
 
-### 3️⃣ [Custom Functions](./custom_functions.md)
+### 4️⃣ [Custom Functions](./custom_functions.md)
 
 Custom function agents extend basic AI capabilities through specialized function calls. This module explores how to design modular and extensible function interfaces that integrate directly with your application's logic. You'll learn to implement proper validation and error handling while creating reliable function-driven workflows. The focus is on building simple systems where agents can predictably interact with external tools and services.
 
-### 4️⃣ [Vision Agents](./vision_agents.md)
+### 5️⃣ [Vision Agents](./vision_agents.md)
 
+Vision agents enhance traditional agent capabilities by integrating vision as a new modality. This opens up opportunities to combine Vision-Language Models (VLMs) within agent pipelines, enabling applications that can process and interpret visual information. In this module, you'll learn how to design and implement agentic pipelines that incorporate VLMs, unlocking advanced functionalities such as image-based reasoning, visual data analysis, and multimodal interactions.
 
+### 6️⃣ [Browser Agents](./browser_agents.md)
 
-### 5️⃣ [Browser Agents](./browser_agents.md)
-
+Browser agents are a powerful application of vision agents, designed to enable web browsing with visual capabilities. By integrating vision models, these agents can interact with web content in new ways, such as interpreting visual elements, extracting relevant information from images or videos, and navigating web pages more effectively. This module explores how browser agents open up a wide range of innovative use cases, from dynamic content extraction to visual web automation. 
 
 
 ### Exercise Notebooks
