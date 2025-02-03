@@ -1,11 +1,15 @@
-# The Hugging Face Agents Course
+# [The Hugging Face Agents Course](https://hf.co/learn/agents-course)
+
+If you like the course, **don't hesitate to ⭐ star this repository**. This helps us to **make the course more visible 🤗**.
 
 ## Content
 
 The course is divided into 5 units. That will take you from **the basics of agents to a final assignment with a benchmark**.
 
-Don't forget to ⭐ the repository (it helps other to discover the course) 🤗
-Sign up here (it free) 👉 http://eepurl.com/i7MQOU
+Sign up here (it's free) 👉 http://eepurl.com/i7MQOU
+
+You can access the course here 👉 https://hf.co/learn/agents-course
+
 | Unit | Topic                          | Description                                                                 |
 |------|--------------------------------|-----------------------------------------------------------------------------|
 | 0    | [0_onboarding](units/0_onboarding) | Welcome, guidelines, necessary tools, and course overview.                  |
@@ -29,7 +33,7 @@ If you find a small typo or grammar mistake, please fix it yourself and submit a
 
 ### New unit
 
-If you want to add a new unit, please create an issue in the repository, describe the unit, and why it should be added. We will discuss it and if it's a good addition, we can collaborate on it.
+If you want to add a new unit, **please create an issue in the repository, describe the unit, and why it should be added**. We will discuss it and if it's a good addition, we can collaborate on it.
 
 ### Work on existing units
 
@@ -44,3 +48,18 @@ We are actively working on the units and if you want to join us, we will need to
 | 4    | 🚧 In Progress | Work is underway, no need for help with integration                         |
 
 If in doubt, join the discussion in the [Discord](https://discord.gg/GC7zFgvN).
+
+
+## Citing the project
+
+To cite this repository in publications:
+
+```bibtex
+@misc{agents-course,
+  author = {Burtenshaw, Ben and Thomas, Joffrey and Simonini, Thomas},
+  title = {The Hugging Face Agents Course},
+  year = {2025},
+  howpublished = {\url{https://github.com/huggingface/agents-course}},
+  note = {GitHub repository},
+}
+```
