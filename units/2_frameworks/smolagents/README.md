@@ -26,7 +26,11 @@ Custom function agents extend basic AI capabilities through specialized function
 
 ### 4️⃣ [Vision Agents](./vision_agents.md)
 
+
+
 ### 5️⃣ [Browser Agents](./browser_agents.md)
+
+
 
 ### Exercise Notebooks
 
