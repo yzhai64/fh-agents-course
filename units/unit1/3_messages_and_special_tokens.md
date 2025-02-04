@@ -8,7 +8,9 @@ In this section we will explore how Large Language Models (LLMs) structure their
 
 ## Tokenization
 
-Tokenization is the process of breaking down a text into smaller units, called tokens. These tokens are then used to represent the text in a way that can be processed by the model. For a detailed explanation, see the [Hugging Face NLP course](https://huggingface.co/learn/nlp-course/en/chapter2/4).
+We already talked a little bit about tokenization, but we only talked about the most prominant kinf of tokenization (**Subword Tokenization**), hence let's do a deeper dive.
+
+Tokenization is the process of breaking down a text into smaller units, called tokens. These tokens are then used to represent the text in a way that can be processed by the model. For a detailed explanation, see the 
 
 For natural language, tokens are frequently appearing combinations of characters within a language. 
 
@@ -28,11 +30,7 @@ Tokenizers are crucial in preparing inputs for models. They convert text into a 
 - **Handling Rare Words**: Subword tokenization helps in managing rare or unseen words by breaking them into known subword units.
 - **Language Agnostic**: Tokenization can be adapted to different languages, making it versatile for multilingual models.
 
-## Special Tokens
-
-Special tokens are different for every model and allow segmentation of generation in messages. Can go from messages to prompt with the chat template. 
-
-## Chat Templates
+## Chat-Templates
 
 Chat templates are essential for structuring interactions between language models and users. They provide a consistent format for conversations, ensuring that models understand the context and role of each message while maintaining appropriate response patterns.
 
@@ -40,13 +38,41 @@ Chat templates are essential for structuring interactions between language model
 
 A base model is trained on raw text data to predict the next token, while an instruct model is fine-tuned specifically to follow instructions and engage in conversations. For example, `SmolLM2-135M` is a base model, while `SmolLM2-135M-Instruct` is its instruction-tuned variant.
 
-To make a base model behave like an instruct model, we need to format our prompts in a consistent way that the model can understand. This is where chat templates come in. ChatML is one such template format that structures conversations with clear role indicators (system, user, assistant).
+To make a base model behave like an instruct model, we need to format our prompts in a consistent way that the model can understand. This is where chat templates come in. ChatML is one such template format that structures conversations with clear role indicators (system, user, assistant). If you have interacted with some AI API lately, you know what we're talking about.
 
-It's important to note that a base model could be fine-tuned on different chat templates, so when we're using an instruct model we need to make sure we're using the correct chat template.
+It's important to note that a base model could be fine-tuned on different chat templates, so when we're using an instruct model we need to make sure we're using the correct chat template. 
+
+Here is an example :
+
+```python
+messages = [
+    {"role": "system", "content": "You are a helpful assistant focused on technical topics."},
+    {"role": "user", "content": "Can you explain what a chat template is?"},
+    {"role": "assistant", "content": "A chat template structures conversations between users and AI models..."}
+]
+```
 
 ### Understanding Chat Templates
 
-At their core, chat templates define how conversations should be formatted when communicating with a language model. They include system-level instructions, user messages, and assistant responses in a structured format that the model can understand. This structure helps maintain consistency across interactions and ensures the model responds appropriately to different types of inputs. Below is an example of a chat template:
+Each model having different special token, chat templates have be implemented to ensure that we correctly format the prompt in each model. The user does not need to ensure that the 
+
+At their core, chat templates define how conversations should be formatted when communicating with a language model. They include code on how to transform the ChatML list of JSON data presented in the above example into a textual representation of the system-level instructions, user messages and assistant responses that the model can understand.
+
+This structure helps maintain consistency across interactions and ensures the model responds appropriately to different types of inputs.Below is an example of a chat template:
+
+chat_template of `SmolLM2-135M-Instruct`:
+```jinja2
+{% for message in messages %}
+{% if loop.first and messages[0]['role'] != 'system' %}
+<|im_start|>system
+You are a helpful AI assistant named SmolLM...
+<|im_end|>
+{% endif %}
+<|im_start|>{{ message['role'] }}
+{{ message['content'] }}<|im_end|>
+{% endfor %}
+```
+As you can see a chat_template is some code that will write how should the list of messages be formated inside 
 
 ```sh
 <|im_start|>user
@@ -58,15 +84,9 @@ Can I ask a question?<|im_end|>
 <|im_start|>assistant
 ```
 
-The `transformers` library will take care of chat templates for you in relation to the model's tokenizer. Read more about how transformers builds chat templates [here](https://huggingface.co/docs/transformers/en/chat_templating#how-do-i-use-chat-templates). All we have to do is structure our messages in the correct way and the tokenizer will take care of the rest. Here's a basic example of a conversation:
+If you remember last lesson, you will notice that "<|im_end|>" is the End of sequence ( EOS ) token of **SmolLM2-135M-Instruct**. Meaning that we only ask the assistant to generate some part of it ( in this case the assistant messages )
 
-```python
-messages = [
-    {"role": "system", "content": "You are a helpful assistant focused on technical topics."},
-    {"role": "user", "content": "Can you explain what a chat template is?"},
-    {"role": "assistant", "content": "A chat template structures conversations between users and AI models..."}
-]
-```
+The `transformers` library will take care of chat templates for you in relation to the model's tokenizer. Read more about how transformers builds chat templates [here](https://huggingface.co/docs/transformers/en/chat_templating#how-do-i-use-chat-templates). All we have to do is structure our messages in the correct way and the tokenizer will take care of the rest. Here's a basic example of a conversation:
 
 Let's break down the above example, and see how it maps to the chat template format.
 
@@ -82,6 +102,8 @@ system_message = {
 ```
 
 ### Conversations
+
+A conversation consist in alternating messages betwen a Human ( user ) and an LLM ( assistant )
 
 Chat templates maintain context through conversation history, storing previous exchanges between users and the assistant. This allows for more coherent multi-turn conversations:
 
@@ -104,18 +126,6 @@ messages = [
 ]
 ```
 
-### Custom Formatting
-
-You can customize how different message types are formatted. For example, adding special tokens or formatting for different roles:
-
-```python
-template = """
-<|system|>{system_message}
-<|user|>{user_message}
-<|assistant|>{assistant_message}
-""".lstrip()
-```
-
 ### Tool Usage
 
 Tool usage in chat templates allows models to interact with external functions and APIs in a structured way. AI agents rely on tools to perform tasks, such as searching the web, performing calculations, or even controlling physical robots. 
@@ -132,6 +142,8 @@ What is 123 multiplied by 456?<|im_end|>
 <|im_start|>tool
 Tool Name: calculator
 Tool Arguments: {"operation": "multiply", "x": 123, "y": 456}<|im_end|>
+<|im_start|>tool-answer
+Tool Answer : 56,088
 <|im_start|>assistant
 Based on the calculator tool, 123 multiplied by 456 equals 56,088.<|im_end|>
 ```
@@ -159,5 +171,4 @@ Remember that different models may expect different formatting for tool interact
 
 - [Hugging Face Chat Templating Guide](https://huggingface.co/docs/transformers/main/en/chat_templating)
 - [Transformers Documentation](https://huggingface.co/docs/transformers)
-- [Chat Templates Examples Repository](https://github.com/chujiezheng/chat_templates) 
 
