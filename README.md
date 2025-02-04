@@ -2,6 +2,8 @@
 
 If you like the course, **don't hesitate to ⭐ star this repository**. This helps us to **make the course more visible 🤗**.
 
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/communication/please_star.gif" alt="Star the repo" />
+
 ## Content
 
 The course is divided into 5 units. That will take you from **the basics of agents to a final assignment with a benchmark**.
