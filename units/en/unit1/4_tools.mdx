@@ -1,23 +1,145 @@
 # Tools
 <!-- Discussion on Pydantic tools, conversion to string in the system prompt, and other common tool formats. -->
 <!-- TODO: @jofthomas -->
+This page provides an overview of AI tools and how they can be integrated into AI agents.
 
-One crucial aspect of AI agents is their ability to utilize tools to enhance their capabilities and accomplish a wider range of tasks. AI agents can be even more effective when combined with other tools. This page provides an overview of AI tools and how they can be integrated into AI agents.
+One crucial aspect of AI agents is their ability to take **actions**. Tools exist in order to enhance the capabilities of the LLM and to accomplish a wider range of tasks.
 
-AI agents often rely on tools to extend their capabilities. These tools allow agents to interact with external environments to perform certain tasks. These tasks might include extracting information from databases, querying, coding, and anything else the agent needs to function. When an AI agent uses these tools, it follows specific workflows to carry out tasks, gather observations, or collect the information needed to complete subtasks and fulfill user requests.
 
 ## What are AI tools?
 
-Tools are executable processes or external APIs that the agent can use to perform specific tasks. Tools allow agents to interact with external environments to perform certain tasks. These tasks might include extracting information from databases, querying, coding, and anything else the agent needs to do to complete a task.
+A good tool should be something that complements the power of an LLM. For instance if you need to perform calculus, giving a **calculator tool** to your LLM will provide better result than relying on the native capacities of the model.
+Furthermore, LLM predict the completion of a prompt based on their training data. Which means that it's internal knowledge only cover events that happened before their training.
 
-| Tool Category | Description | Examples |
-|---|---|---|
-| **Data Retrieval** | Accessing and retrieving information from sources like databases or conversational memory. | Retrieving data from enterprise systems, retrieving information from internal knowledge bases, extracting text from images (OCR) |
-| **Code Generation and Execution** | Generating and executing code in different programming languages. | Executing code to perform a calculation. |
-| **API Interaction** | Connecting to external APIs to access various services. | Accessing fresh data via APIs (e.g., financial APIs, weather APIs) |
-| **General Purpose Tools** | Tools for common tasks and calculations. | Calculators, search engines, or file operations |
-| **Specialized Tools** | Tools designed for specific domains or tasks. | Custom scripts |
+Tools are executable code that the agent can use to perform specific tasks. These tasks might include extracting information from databases, search internet, generate images, or anything else the agent needs to do to complete a task.
 
+- A Tool is a reusable piece of code that contains:
+  - A textual description of what the function does.
+  - A Callable (something to perform an action).
+  - Arguments with typings.
+
+Let's understand Tools through a fictionnal example ( that is close to the real implementation in most library):
+
+```python
+class Tool:
+    """
+    A class representing a reusable piece of code (Tool).
+    
+    Attributes:
+        name (str): Name of the tool.
+        description (str): A textual description of what the tool does.
+        func (callable): The function or callable that this tool wraps.
+        arguments (list): A list of (argument_name, annotation) for each argument.
+        outputs (str or list): The return type(s) of the wrapped function.
+    """
+    def __init__(self, 
+                 name: str, 
+                 description: str, 
+                 func: callable, 
+                 arguments: list,
+                 outputs: str):
+        self.name = name
+        self.description = description
+        self.func = func
+        self.arguments = arguments
+        self.outputs = outputs
+
+    def to_string(self) -> str:
+        """
+        Return a string representation of the tool, 
+        including its name, description, arguments, and outputs.
+        """
+        args_str = ", ".join([
+            f"{arg_name}: {arg_type}" for arg_name, arg_type in self.arguments
+        ])
+        
+        return (
+            f"Tool Name: {self.name}\n"
+            f"Description: {self.description}\n"
+            f"Arguments: {args_str}\n"
+            f"Outputs: {self.outputs}"
+        )
+
+    def __call__(self, *args, **kwargs):
+        """
+        Invoke the underlying function (callable) with provided arguments.
+        """
+        return self.func(*args, **kwargs)
+```
+<details>
+<summary>Click to expand code</summary>
+
+```python
+def tool(func):
+    """
+    A decorator that creates a Tool instance from the given function.
+    """
+    # Get the function signature
+    signature = inspect.signature(func)
+    
+    # Extract (param_name, param_annotation) pairs for inputs
+    arguments = []
+    for param in signature.parameters.values():
+        annotation_name = (
+            param.annotation.__name__ 
+            if hasattr(param.annotation, '__name__') 
+            else str(param.annotation)
+        )
+        arguments.append((param.name, annotation_name))
+    
+    # Determine the return annotation
+    return_annotation = signature.return_annotation
+    if return_annotation is inspect._empty:
+        outputs = "No return annotation"
+    else:
+        outputs = (
+            return_annotation.__name__ 
+            if hasattr(return_annotation, '__name__') 
+            else str(return_annotation)
+        )
+    
+    # Use the function's docstring as the description (default if None)
+    description = func.__doc__ or "No description provided."
+    
+    # The function name becomes the Tool name
+    name = func.__name__
+    
+    # Return a new Tool instance
+    return Tool(
+        name=name, 
+        description=description, 
+        func=func, 
+        arguments=arguments, 
+        outputs=outputs
+    )
+```
+</details>
+
+
+tool:
+```python
+@tool
+def calculator(a: int, b: int) -> int:
+    """Multiply two integers."""
+    return a * b
+
+print(calculator.to_string())
+```
+Output :
+```
+Tool Name: calculator
+Description: Multiply two integers.
+Arguments: a: int, b: int
+Outputs: int
+```
+```python
+result = calculator(5, 6)
+print(f"Call result: {result}")
+```
+Output :
+```
+Call result: 30
+```
 ## Interface Design for Tools
 
 The design of the interface through which an agent uses tools can affect the agent's performance. For example, a search tool that returns results **ordered by relevance** may be more helpful to an AI agent than one that returns results **ordered by frequency**. The interface should be designed to be clear and concise, so that the agent can easily understand how to use the tools. It should also be designed to be flexible, so that the agent can use the tools in different ways depending on the task at hand.
