@@ -86,7 +86,15 @@ Can I ask a question?<|im_end|>
 
 If you remember last lesson, you will notice that "<|im_end|>" is the End of sequence ( EOS ) token of **SmolLM2-135M-Instruct**. Meaning that we only ask the assistant to generate some part of it ( in this case the assistant messages )
 
-The `transformers` library will take care of chat templates for you in relation to the model's tokenizer. Read more about how transformers builds chat templates [here](https://huggingface.co/docs/transformers/en/chat_templating#how-do-i-use-chat-templates). All we have to do is structure our messages in the correct way and the tokenizer will take care of the rest. Here's a basic example of a conversation:
+The `transformers` library will take care of chat templates for you in relation to the model's tokenizer. Read more about how transformers builds chat templates [here](https://huggingface.co/docs/transformers/en/chat_templating#how-do-i-use-chat-templates). All we have to do is structure our messages in the correct way and the tokenizer will take care of the rest.
+
+Or you can experiment with different conversations/models to see how they are then formated for the model in the following space :
+<iframe
+	src="https://jofthomas-chat-template-viewer.hf.space"
+	frameborder="0"
+	width="850"
+	height="450"
+></iframe>
 
 Let's break down the above example, and see how it maps to the chat template format.
 
