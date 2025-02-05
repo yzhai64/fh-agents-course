@@ -33,16 +33,15 @@ The Agent has a task to perform the LLM at his core should selectect the best co
 
 Example : "If I ask my personal assistant on my computer to send an email to my Manager asking to delay today's meeting", I will need to give code some Tool ( in this case a python function ) do such a thing :
 
-'''python
+```python
 Send_message_to(recipiant, message):
     """Usefull to send an e-mail message to someone"""
-    return f"Hi dear {recipriant}, /n {message}"
-'''
+```
 
 And the AI model will need to run that code somehow to fulfill the predefined task :
-'''python
+```python
 Send_message_to("Manager","Can we postopone today's meeting ?")
-'''
+```
 
 In Agents, the design of the Tools is very important that greatly impact the quality of your agent. Some task will requiere some very specific tools to be crafted, and other may be solved with some general purpose tool like "web_search".
 

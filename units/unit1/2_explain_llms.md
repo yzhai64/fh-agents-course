@@ -48,7 +48,12 @@ For example you can see interesting as "Interest" + "##ing" which can both be re
 
 You can play with different tokenizers in the space below:
 
-<INSERT Space : https://huggingface.co/spaces/Xenova/the-tokenizer-playground>
+<iframe
+	src="https://xenova-the-tokenizer-playground.static.hf.space"
+	frameborder="0"
+	width="850"
+	height="450"
+></iframe>
 
 Furthermore, each LLM have some **special tokens** specific to this model. The most important of those special token is the **End of sequence token** (EOS).
 
@@ -88,7 +93,7 @@ But there is also other more advanced decoding strategies like beam search. Wher
 ## Attention is all you need
 One small detail that we should still mention is **Attention**. When predicting the next word. Not all the words in the sentence have the same importance. For instance, when decoding " The Capital of France is ", the Attention will be higher on the words "France" and "Capital" as they are the ones holding the meaning of the sentence.
 
-<INSERT MANIM 3 (attention)>
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/AttentionSceneFinal.gif" alt="Visual Gif of Attention" width="75%">
 
 This simple process of finding the most probable word to complete a sequence proved itself to be very usefull, in fact, the basic principle of LLM did not change much since gpt2, but the sizes of the neural network and the way to change the attention has drastically changed.
 
