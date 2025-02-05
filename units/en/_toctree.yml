@@ -6,6 +6,36 @@
     title: Onboarding
   - local: unit0/03_discord101
     title: (Optional) Discord 101
+- title: Unit 1. Introduction to Agents
+  sections:
+  - local: unit1/introduction
+    title: Introduction
+  - local: unit1/what-are-agents
+    title: What are Agents?
+  - local: unit1/quiz1
+    title: Small Quiz
+  - local: unit1/what-are-llms
+    title: What are LLMs?
+  - local: unit1/messages-and-special-tokens
+    title: Messages and special tokens
+  - local: unit1/tools
+    title: Tools
+  - local: unit1/agent-steps-and-structure
+    title: agent_steps_and_structure
+  - local: unit1/thoughts
+    title: 6_thoughts
+  - local: unit1/actions
+    title: 7_actions
+  - local: unit1/dummy-agent-library
+    title: 8_dummy-agent-library
+  - local: unit1/observations
+    title: observations
+  - local: unit1/simple-use-case
+    title: 11_simple-use-case
+  - local: unit1/final-quiz
+    title: Unit 1 Final Quiz
+  - local: unit1/conclusion
+    title: conclusion
 - title: When the next steps are published?
   sections:
   - local: communication/next-units
