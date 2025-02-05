@@ -57,14 +57,15 @@ You can play with different tokenizers in the space below:
 
 Furthermore, each LLM have some **special tokens** specific to this model. The most important of those special token is the **End of sequence token** (EOS).
 
-| **Model**                          | **Provider**                              |**EOS Token**
-|-----------------------------------|--------------------------------------------|---------------------------------------
-| **GPT4**                           | OpenAI                                    | <|endoftext|>
-| **LLaMA3**                         | Meta (Facebook AI Research)               | <|end_header_id|>
-| **Deepseek-R1**                    | DeepSeek                                  | <｜end▁of▁sentence｜>
-| **SmollLM2**                       | Hugging Face                              | <|im_end|>
-| **Gemma**                          | Google                                    | <end_of_turn>
-| **Mistral**                        | Mistral                                   | [/INST]
+| **Model**     | **Provider**                  | **EOS Token**                  |
+|---------------|-------------------------------|---------------------------------|
+| **GPT4**      | OpenAI                        | `<|endoftext|>`                |
+| **LLaMA3**    | Meta (Facebook AI Research)   | `<|end_header_id|>`            |
+| **Deepseek-R1** | DeepSeek                   | `<｜end▁of▁sentence｜>`         |
+| **SmollLM2**  | Hugging Face                 | `<|im_end|>`                   |
+| **Gemma**     | Google                       | `<end_of_turn>`                |
+| **Mistral**   | Mistral                      | `[/INST]`                      |
+
 
 ## Understanding next token prediction.
 
