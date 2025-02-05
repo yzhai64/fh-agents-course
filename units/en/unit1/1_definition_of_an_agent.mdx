@@ -1,8 +1,38 @@
-# Definition of an Agent
-Since you are interested in learning more about **Agents**, here is the moment to discuss the fundamental question :
+# What is an Agent?
 
-## "What is an Agent ?"
-For now let's formally define it as follows :
+Since you are interested in learning more about **Agents**, here is the moment to discuss the fundamental question: **what is an Agent?**
+
+To explain this concept, let's start with an analogy.
+
+## The Big Picture: Alfred The Agent
+
+Meet Alfred. Alfred is an Agent.
+
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/this-is-alfred.jpg" alt="This is Alfred"/>
+
+Imagine Alfred receives a command, such as: "Alfred, I would like a coffee please."
+
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/coffee-please.jpg" alt="I would like a coffee"/>
+
+Because Alfred understands natural language, he quickly grasps our request.
+
+Before fulfilling the order, Alfred engages in reasoning and planning.
+
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/reason-and-plan.jpg" alt="Reason and plan"/>
+
+Once he has a plan in mind, Alfred must act. To execute his plan, he needs to use tools. In this case, to make a coffee, he uses a coffee machine. He activates the coffee machine to brew the coffee.
+
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/make-coffee.jpg" alt="Make coffee"/>
+
+Finally, Alfred brings the freshly made coffee to us.
+
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/bring-coffee.jpg" alt="Bring coffee"/>
+
+And this is what is an Agent: an AI model capable of reasoning, planning, and interacting with its environment. We call it Agent because it has the agency (interact with the environment).
+
+## Let's go more formal
+
+Now that we understood the big picture of what is an Agent, let's formally define it as follows :
 
 > An Agent, a type of system that gives an AI model the ability to interact with its environment to fulfill a pre-defined objective.s
 
@@ -14,20 +44,21 @@ To make things more visual, the AI model can be seen as the **brain of the agent
 
 ## "What type of AI Models ?"
 
-The most commonly AI model found at the core of an Agent is an LLM ( Large Language Model), this is a kind of AI model that takes **Text** as an input and Also output **Text**. It's most known represents are **GPT4** from **OpenAI**, **LLama** from **meta**, **Gemini** from **Google**, etc... Those models have been trained on a very vast amount of text and are able to generalize well. But we will learn more about LLMs in the next section.
+The most commonly AI model found at the core of an Agent is an LLM (Large Language Model), this is a kind of AI model that takes **Text** as an input and Also output **Text**. It's most known represents are **GPT4** from **OpenAI**, **LLama** from **meta**, **Gemini** from **Google**, etc... Those models have been trained on a very vast amount of text and are able to generalize well. But we will learn more about LLMs in the next section.
 
 LLMs only handling **Text**, if the use-case requiere other modalities (Images, Audio, Video, ...), you will have to use different AI models. For instance, to browse the web, you could use a Vision Language Model (VLM) as the Agent's core that understands both Images and Text to navigate your web page.
 
 A second example, of that could be to use **Whisper**, a very famous **Audio** to **Text** model as a "Tool" to allow your LLM agent to process audio into text in order to understand it.
 
-## "How does an AI take action on it's environment ?"
+## How does an AI take action on it's environment ?
+
 The general word for this set of possible action that an AI model can use is a "Tool". For instance by default, your LLM can't generate any images. But if you ask some well-known chat application like HuggingChat, ChatGPT or Le Chat, to generate an Image, they can do it !
 
 The model at the core of those application does not natively have the capacity to generate an Image. But the developpers of those applications created some code ( Tools ), that the LLM can call and execute to create an Image.
 
 We will learn more about tools in the Tool section [insert link]
 
-## "What can an Agent do ?"
+## That can an Agent do ?
 
 The Agent has a task to perform the LLM at his core should selectect the best course of **ACTIONS** to fullfill it.
 
