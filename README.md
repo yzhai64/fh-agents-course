@@ -16,7 +16,7 @@ You can access the course here 👉 https://hf.co/learn/agents-course
 |------|--------------------------------|-----------------------------------------------------------------------------|
 | 0    | [Onboarding](units/unit0/01_welcome_to_the_course.mdx) | Welcome, guidelines, necessary tools, and course overview.                  |
 | 1    | [Agent Fundamentals](units/unit1/1_definition_of_an_agent.md)       | Definition of agents, LLMs, model family tree, and special tokens.          |
-| 2    | [Frameworks](units/unit2/README.md)                     | Overview of Smolagents, LangChain, LangGraph, and LlamaIndex.               |
+| 2    | [Frameworks](units/unit2/README.md)                     | Overview of smolagents, LangChain, LangGraph, and LlamaIndex.               |
 | 3    | [Use Cases](units/unit3/README.md)                      | SQL, code, retrieval, and on-device agents using various frameworks.        |
 | 4    | [Final Assignment](units/unit4/README.md) | Automated evaluation of agents and leaderboard with student results.        |
 
