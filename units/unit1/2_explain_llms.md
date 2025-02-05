@@ -70,7 +70,7 @@ Furthermore, each LLM have some **special tokens** specific to this model. The m
 
 LLMs are said to be **autoregrassive**, meaning that the output from one pass become the input from the next one. This loop continue untill the model predict the next token to be the EOS token. At which point the model can stop.
 
-<INSERT MANIM (Decoding)>
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/AutoregressionFinal.gif" alt="Visual Gif of autoregressive decoding" width="60%">
 
 Alright, an LLM will decode untill reaching an EOS. But what happens during a single loop ?
 
@@ -78,22 +78,32 @@ The process is probably a bit too technical for the purpose of learning agents. 
 
 In short : Once we have tokenized our text, we compute a dense representation of the words that both accounts for their meaning and their position in the input sequence. This Dense representation goes into the model and outputs some logits and those logits can be remapped to a token id ( a unique number for each token ) through the softmax function.
 
-<INSERT MANIM 2 (Decoding)>
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/DecodingFinal.gif" alt="Visual Gif of decoding" width="60%">
 
 Once out of the model, we have multiple options of potential tokens that could complete the sentence. The most naive decoding strategy would be to always take the word with the maximum probability.
 
 You can interract with the decoding process yourself with SmollLM2 in this space (remember, it decodes untill reaching an **EOS** token which is  **<|im_end|>** for this model):
 
-<INSERT SPACE>
+<iframe
+	src="https://jofthomas-decoding-visualizer.hf.space"
+	frameborder="0"
+	width="850"
+	height="450"
+></iframe>
 
 But there is also other more advanced decoding strategies like beam search. Where instead of searching immediate reward, we will to find the maximum cummulative probability by exploring options when taking the sub-optimal options on the shorter term
 
-<INSERT Beam search SPACE>
+<iframe
+	src="https://m-ric-beam-search-visualizer.hf.space"
+	frameborder="0"
+	width="850"
+	height="450"
+></iframe>s
 
 ## Attention is all you need
 One small detail that we should still mention is **Attention**. When predicting the next word. Not all the words in the sentence have the same importance. For instance, when decoding " The Capital of France is ", the Attention will be higher on the words "France" and "Capital" as they are the ones holding the meaning of the sentence.
 
-<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/AttentionSceneFinal.gif" alt="Visual Gif of Attention" width="75%">
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/AttentionSceneFinal.gif" alt="Visual Gif of Attention" width="60%">
 
 This simple process of finding the most probable word to complete a sequence proved itself to be very usefull, in fact, the basic principle of LLM did not change much since gpt2, but the sizes of the neural network and the way to change the attention has drastically changed.
 
