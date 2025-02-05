@@ -1,10 +1,56 @@
 # Messages and Special Tokens
 
-<!-- Explanation of messages, special tokens, and chat-template usage. Special tokens are different for every model and allow segmentation of generation in messages. Can go from messages to prompt with the chat_template.  -->
+In this section we will explore how Large Language Models (LLMs) structure their generations through **tokenization**, **special tokens**, and **chat-templates**.
 
-<!-- TODO: @burtenshaw -->
+You have understood in the previous section that all LLMs have different EOS token. But this is not in fact no the only difference from one LLM to another. Each LLM have it's own way to format prompt.
 
-In this section we will explore how Large Language Models (LLMs) structure their generations through tokenization, special tokens, and chat-templates.
+Also up untill now we only talked about **Prompt** which are the tokens that goes as an input of your LLM. A prompt is universal for every LLM, they take a prompt as an input and complete the sequence with contextually probable words. 
+
+> **Q**: "But ... When, I'm interacting with chatGPT/Hugging Chat, I'm having a conversation in Messages, not prompts"
+>
+> **A**: This is correct ! But this in fact mostly a UI thing. When fed into the LLM, the messages are concatenated back into a prompt.
+
+<INSERT Illustration of huggingchat and the same conversation as prompt>
+
+## Messages
+
+### System Messages
+
+System messages set the foundation for how the model should behave. They act as persistent instructions that influence all subsequent interactions. For example:
+
+```python
+system_message = {
+    "role": "system",
+    "content": "You are a professional customer service agent. Always be polite, clear, and helpful."
+}
+```
+
+In Agents, the system prompt allows to store the information about available tools, provide instructions to the model on how to format the actions to take, and guide the overall guidelines of how the thought process should be segmented.
+
+### Conversations : User and Assistant Message
+
+A conversation consist in alternating messages betwen a Human ( user ) and an LLM ( assistant )
+
+Chat templates maintain context through conversation history, storing previous exchanges between users and the assistant. This allows for more coherent multi-turn conversations:
+
+```python
+conversation = [
+    {"role": "user", "content": "I need help with my order"},
+    {"role": "assistant", "content": "I'd be happy to help. Could you provide your order number?"},
+    {"role": "user", "content": "It's ORDER-123"},
+]
+```
+
+Templates can handle complex multi-turn conversations while maintaining context:
+
+```python
+messages = [
+    {"role": "system", "content": "You are a math tutor."},
+    {"role": "user", "content": "What is calculus?"},
+    {"role": "assistant", "content": "Calculus is a branch of mathematics..."},
+    {"role": "user", "content": "Can you give me an example?"},
+]
+```
 
 ## Tokenization
 
@@ -32,13 +78,13 @@ Tokenizers are crucial in preparing inputs for models. They convert text into a 
 
 ## Chat-Templates
 
-Chat templates are essential for structuring interactions between language models and users. They provide a consistent format for conversations, ensuring that models understand the context and role of each message while maintaining appropriate response patterns.
+Chat templates are essential for structuring interactions between language models and users. They provide instruction to format message conversations into prompt.
 
 ### Base Models vs Instruct Models
 
 A base model is trained on raw text data to predict the next token, while an instruct model is fine-tuned specifically to follow instructions and engage in conversations. For example, `SmolLM2-135M` is a base model, while `SmolLM2-135M-Instruct` is its instruction-tuned variant.
 
-To make a base model behave like an instruct model, we need to format our prompts in a consistent way that the model can understand. This is where chat templates come in. ChatML is one such template format that structures conversations with clear role indicators (system, user, assistant). If you have interacted with some AI API lately, you know what we're talking about.
+To make a base model behave like an instruct model, we need to format our prompts in a consistent way that the model can understand. This is where chat templates come in. ChatML is one such template format that structures conversations with clear role indicators (system, user, assistant). If you have interacted with some AI API lately, you know that's the standard practice.
 
 It's important to note that a base model could be fine-tuned on different chat templates, so when we're using an instruct model we need to make sure we're using the correct chat template. 
 
@@ -54,9 +100,9 @@ messages = [
 
 ### Understanding Chat Templates
 
-Each model having different special token, chat templates have be implemented to ensure that we correctly format the prompt in each model. The user does not need to ensure that the 
+Each model having different special token, chat templates have be implemented to ensure that we correctly format the prompt in each model. 
 
-At their core, chat templates define how conversations should be formatted when communicating with a language model. They include code on how to transform the ChatML list of JSON data presented in the above example into a textual representation of the system-level instructions, user messages and assistant responses that the model can understand.
+Chat templates include Jinj2 code on how to transform the ChatML list of JSON messages presented in the above example into a textual representation of the system-level instructions, user messages and assistant responses that the model can understand.
 
 This structure helps maintain consistency across interactions and ensures the model responds appropriately to different types of inputs.Below is an example of a chat template:
 
@@ -96,43 +142,6 @@ Or you can experiment with different conversations/models to see how they are th
 	height="450"
 ></iframe>
 
-Let's break down the above example, and see how it maps to the chat template format.
-
-### System Messages
-
-System messages set the foundation for how the model should behave. They act as persistent instructions that influence all subsequent interactions. For example:
-
-```python
-system_message = {
-    "role": "system",
-    "content": "You are a professional customer service agent. Always be polite, clear, and helpful."
-}
-```
-
-### Conversations
-
-A conversation consist in alternating messages betwen a Human ( user ) and an LLM ( assistant )
-
-Chat templates maintain context through conversation history, storing previous exchanges between users and the assistant. This allows for more coherent multi-turn conversations:
-
-```python
-conversation = [
-    {"role": "user", "content": "I need help with my order"},
-    {"role": "assistant", "content": "I'd be happy to help. Could you provide your order number?"},
-    {"role": "user", "content": "It's ORDER-123"},
-]
-```
-
-Templates can handle complex multi-turn conversations while maintaining context:
-
-```python
-messages = [
-    {"role": "system", "content": "You are a math tutor."},
-    {"role": "user", "content": "What is calculus?"},
-    {"role": "assistant", "content": "Calculus is a branch of mathematics..."},
-    {"role": "user", "content": "Can you give me an example?"},
-]
-```
 
 ### Tool Usage
 
