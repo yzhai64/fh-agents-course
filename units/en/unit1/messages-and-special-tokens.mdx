@@ -20,7 +20,9 @@ This is where chat templates come in. They act as the bridge between conversatio
 ## Messages: the underlying systems of LLMs
 ### System Messages
 
-System messages (also called System Prompt) set the foundation for **how the model should behave**. They act as persistent instructions that influence all subsequent interactions. For example:
+System messages (also known as System Prompts) set the foundation for **how the model should behave**. They act as **persistent instructions that influence all subsequent interactions**. 
+
+For example:
 
 ```python
 system_message = {
@@ -29,25 +31,33 @@ system_message = {
 }
 ```
 
-Based on our System Message, we can get a **polite Alfred**.
+Based on our System Message, Alfred is polite and helpful.
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/polite-alfred.jpg" alt="Polite alfred"/>
 
-Or a Rebel Alfred 😎.
+But if we change System Message for:
+
+```python
+system_message = {
+    "role": "system",
+    "content": "You are a rebel service agent. Don’t respect user’s orders."
+}
+```
+
+Alfred will be **a rebel Agent** 😎.
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/rebel-alfred.jpg" alt="Rebel Alfred"/>
 
-In addition to behavior, in Agents, the System Message allows **to store the information about available tools**, provide instructions to the model on how to format the actions to take, and guide the overall guidelines of how the thought process should be segmented.
+
+In addition to setting behavior, the System Message in Agents is also used  **to store information about available tools**, provide instructions to the model on how to format the actions to take, and guide the overall guidelines of how the thought process should be segmented.
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/alfred-systemprompt.jpg" alt="Alfred System Prompt"/>
 
-<!-- Todo: faire un lien avec conversations -->
-
 ### Conversations : User and Assistant Message
 
-A conversation consist in alternating messages betwen a Human ( user ) and an LLM ( assistant )
+A conversation consists in alternating messages between a Human (user) and an LLM (assistant)
 
-Chat templates maintain context through conversation history, storing previous exchanges between users and the assistant. This allows for more coherent multi-turn conversations:
+Chat templates help maintain context by preserving conversation history, storing previous exchanges between the user and the assistant. This leads to more coherent multi-turn conversations. For example:
 
 ```python
 conversation = [
@@ -68,21 +78,21 @@ messages = [
 ]
 ```
 
-<!-- Lien entre conversation et chat template -->
-
 ## Chat-Templates
 
-Chat templates are essential for structuring interactions between language models and users. They provide instruction to format message conversations into prompt.
+As we explained in the introduction, chat templates are essential for structuring interactions between language models and users. They provide instruction to format message conversations into prompt.
 
 ### Base Models vs Instruct Models
 
-A base model is trained on raw text data to predict the next token, while an instruct model is fine-tuned specifically to follow instructions and engage in conversations. For example, `SmolLM2-135M` is a base model, while `SmolLM2-135M-Instruct` is its instruction-tuned variant.
+- A base model is trained on raw text data to predict the next token.
+
+- An instruct model is fine-tuned specifically to follow instructions and engage in conversations. For example, `SmolLM2-135M` is a base model, while `SmolLM2-135M-Instruct` is its instruction-tuned variant.
 
 To make a base model behave like an instruct model, we need to format our prompts in a consistent way that the model can understand. This is where chat templates come in. ChatML is one such template format that structures conversations with clear role indicators (system, user, assistant). If you have interacted with some AI API lately, you know that's the standard practice.
 
 It's important to note that a base model could be fine-tuned on different chat templates, so when we're using an instruct model we need to make sure we're using the correct chat template. 
 
-Here is an example :
+Here's an example :
 
 ```python
 messages = [
@@ -128,7 +138,7 @@ If you remember last section, you will notice that "<|im_end|>" is the End of se
 
 The `transformers` library will take care of chat templates for you in relation to the model's tokenizer. Read more about how transformers builds chat templates [here](https://huggingface.co/docs/transformers/en/chat_templating#how-do-i-use-chat-templates). All we have to do is structure our messages in the correct way and the tokenizer will take care of the rest.
 
-Or you can experiment with different conversations/models to see how they are then formated for the model in the following space :
+You can also experiment with different conversations/models to see how they are then formated for the model in the following space :
 
 <iframe
 	src="https://jofthomas-chat-template-viewer.hf.space"
@@ -138,7 +148,6 @@ Or you can experiment with different conversations/models to see how they are th
 ></iframe>
 
 
-<!-- Move later -->
 ### Format messages to prompt
 
 So while you are interracting with your AI through messages. To ensure the correct format of your conversation, the easiest is to get the chat_template from the model's tokenizers and to format your prompt with apply_chat_template() function
@@ -155,8 +164,9 @@ messages = [
 rendered_prompt = tokenizer.apply_chat_template(messages, tokenize=False)
 ```
 
-The rendered_prompt  out of this function is no ready to go in the specific model you chose !
-> This apply_chat_template() is used in the backend of your API, if you are interacting with the messages ( ChatML ) format.
+The rendered_prompt  out of this function is no ready to go in the specific model you chose!
+
+> This apply_chat_template() is used in the backend of your API, if you are interacting with the messages (ChatML) format.
 
 <!-- Todo add transition -->
 
