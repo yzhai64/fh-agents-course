@@ -16,7 +16,7 @@ Also up untill now we only talked about **Prompt** which are the tokens that goe
 
 ### System Messages
 
-System messages set the foundation for how the model should behave. They act as persistent instructions that influence all subsequent interactions. For example:
+System messages (also called system prompt) set the foundation for how the model should behave. They act as persistent instructions that influence all subsequent interactions. For example:
 
 ```python
 system_message = {
@@ -25,7 +25,10 @@ system_message = {
 }
 ```
 
-In Agents, the system prompt allows to store the information about available tools, provide instructions to the model on how to format the actions to take, and guide the overall guidelines of how the thought process should be segmented.
+In Agents, the Message Prompt allows **to store the information about available tools**, provide instructions to the model on how to format the actions to take, and guide the overall guidelines of how the thought process should be segmented.
+
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/alfred-systemprompt.jpg" alt="Alfred System Prompt"/>
+
 
 ### Conversations : User and Assistant Message
 
@@ -147,7 +150,11 @@ Or you can experiment with different conversations/models to see how they are th
 
 Tool usage in chat templates allows models to interact with external functions and APIs in a structured way. AI agents rely on tools to perform tasks, such as searching the web, performing calculations, or even controlling physical robots. 
 
-When working with tools, chat templates need to handle three specific message types: tool definitions that describe available functions, tool calls that occur when the assistant wants to use a tool, and tool responses that contain results returned from tool execution.
+When working with tools, chat templates need to handle three specific message types: 
+
+- *Tool definitions* that describe available functions, 
+- *Tool calls* that occur when the assistant wants to use a tool, 
+- *Tool responses* that contain results returned from tool execution.
 
 Here's an example of how a tool interaction might look in a chat template:
 
