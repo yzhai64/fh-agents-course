@@ -11,7 +11,7 @@
   - local: unit1/introduction
     title: Introduction
   - local: unit1/what-are-agents
-    title: What are Agents?
+    title: What is an Agent?
   - local: unit1/quiz1
     title: Small Quiz 1
   - local: unit1/what-are-llms
