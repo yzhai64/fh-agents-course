@@ -1,14 +1,14 @@
-# Tools
+# What are Tools?
 <!-- Discussion on Pydantic tools, conversion to string in the system prompt, and other common tool formats. -->
 <!-- TODO: @jofthomas -->
-This page provides an overview of AI tools and how they can be integrated into AI agents.
 
-One crucial aspect of AI agents is their ability to take **actions**. Tools exist in order to enhance the capabilities of the LLM and to accomplish a wider range of tasks.
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/toolbox.jpg" alt="Toolbox"/>
 
+One crucial aspect of AI agents is their ability to take **actions**. Tools exist in order to enhance the capabilities of the LLM and to accomplish a wider range of tasks. We'll see in this section how AI Tools can be integrated into Agents.
 
-## What are AI tools?
+## What are AI Tools?
 
-A tool is a function given to the LLM. This function should fulfill a **clear objective**
+A **Tool is a function given to the LLM**. This function should fulfill a **clear objective**
 
 Here are some commonly used tools in AI agents :
 
@@ -19,30 +19,38 @@ Here are some commonly used tools in AI agents :
 | Retrieval      | Retrieves information from an external source.                |
 | API Interface  | Interacts with an external API (GitHub, YouTube, Spotify, etc.). |
 
-Those are only examples, as you can in fact create a tool for any use case !
+Those are only examples, as you can in fact create a tool for any use case!
 
-A good tool should be something that complements the power of an LLM. For instance if you need to perform calculus, giving a **calculator tool** to your LLM will provide better result than relying on the native capacities of the model.
-Furthermore, LLM predict the completion of a prompt based on their training data. Which means that it's internal knowledge only cover events that happened before their training, showcasing the need to get access to up to date data through tools.
+A good tool should be something that **complements the power of an LLM**. For instance if you need to perform calculus, giving a **calculator tool** to your LLM will provide better result than relying on the native capacities of the model.
+
+Furthermore, **LLM predict the completion of a prompt based on their training data**. Which means that it's internal knowledge only cover events that happened before their training, showcasing the need to get access to up to date data through tools.
+
+For instance, using a LLM to give you the today weather without having a web search tool, the LLM will hallucinate by giving you random weather.
+
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/weather.jpg" alt="Weather"/>
 
 - A Tool should contain:
-  - A textual description of what the function does.
-  - A Callable (something to perform an action).
-  - Arguments with typings.
-  - (Optionnal) Outputs with typings.
+
+  - A **textual description of what the function does**.
+  - A *Callable* (something to perform an action).
+  - *Arguments* with typings.
+  - (Optional) Outputs with typings.
 
 ## How do we give tools to an LLM ?
 
-The answer might be a bit underwhelming, but we simply provide textual descriptions of all the tools available for the model to use in the system prompt.
+The answer might be a bit overwhelming, but we simply provide textual descriptions of all the tools available for the model to use in the system prompt.
 
-here is dummy example:
+Here is dummy example:
+
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/Agent_system_prompt.png" alt="System prompt for tools"/>
 
 The key here is to ensure the most accurate textual description of:
 
-1. **"What does this tool do?"**
-2. **"What inputs does it expect?"**
+1. **What does this tool do?**
+2. **What inputs does it expect?**
 
 If that feels too theoretical, let's understand it through a concrete example:
+
 > **Disclaimer:** This example implementation is fictional but closely resembles real implementations in most libraries.
 
 ```python
@@ -103,7 +111,8 @@ It may seem complicated, but it's not. We simply define a **`Tool`** class that 
 - **`__call__()`**: Calls the function directly when the tool instance is invoked.  
 - **`to_string()`**: Converts the tool's attributes into a textual representation.  
 
-Now let's create a Tool ! 
+Now let's create a Tool.
+
 > For those interested, here’s the code to declare a Tool using a decorator.
 <details>
 <summary> decorator code</summary>
@@ -213,45 +222,6 @@ Here are some examples of how interface design can affect an AI agent's performa
 
 The use of tools is considered a form of "acting" by an AI agent in an environment. Agents can generate special tokens to invoke tool calls. This "acting" can be guided by "reasoning," which allows the agent to plan and re-plan based on the information gained from the tool. For example, an agent might use a search engine to find information and then use a calculator to perform calculations based on that information. The agent may revise its plan based on the result of the calculation and return the retrieved information. This kind of reasoning-based tool use is the cornerstone of agents, and we will explore it in more detail in the coming sections.
 
-## Conclusion
 
-AI tools play a crucial role in enhancing the capabilities of AI agents. By effectively utilizing these tools, AI agents can perform complex tasks, reason through problems, and interact with users in a more sophisticated and dynamic manner. As the field of AI agents continues to evolve, we can expect to see even more innovative and powerful tools being developed and integrated into these systems.
-
-## Pop Quiz 🍾
-
-1. Which of the following best describes an AI tool?
-
-   A. A process that only generates text responses  
-   B. An executable process or external API that allows agents to perform specific tasks and interact with external environments  
-   C. A feature that stores agent conversations  
-
-2. Which interface design principle enhances an AI agent's ability to use tools effectively?
-
-   A. Displaying all tool outputs in random formats  
-   B. Providing clear descriptions, structured output formats, and feedback mechanisms  
-   C. Limiting tool descriptions to technical specifications only  
-
-3. How do AI agents use tools as a form of "acting" in an environment?
-
-   A. By passively waiting for user instructions  
-   B. By only using pre-programmed responses  
-   C. By generating tokens to invoke tools and revising plans based on the information gained  
-
----
-<details>
-<summary>Answer Key (click to reveal)</summary>
-
-1. B. An executable process or external API that allows agents to perform specific tasks and interact with external environments
-
-   • Explanation: The text defines tools as executable processes or external APIs that agents use to perform specific tasks and interact with external environments.
-
-2. B. Providing clear descriptions, structured output formats, and feedback mechanisms
-
-   • Explanation: The interface design section emphasizes the importance of structured output, clear tool descriptions, tool selection, and feedback mechanisms.
-
-3. C. By generating tokens to invoke tools and revising plans based on the information gained
-
-   • Explanation: The text explains that agents can generate special tokens to invoke tools and use reasoning to plan and re-plan based on the information gained.
-
-</details>
+AI Tools play a crucial role in enhancing the capabilities of AI agents. By effectively utilizing these tools, AI agents can perform complex tasks, reason through problems, and interact with users in a more sophisticated and dynamic manner. As the field of AI agents continues to evolve, we can expect to see even more innovative and powerful tools being developed and integrated into these systems.
 
