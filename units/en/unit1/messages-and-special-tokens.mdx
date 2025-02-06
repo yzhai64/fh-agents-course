@@ -1,8 +1,8 @@
 # Messages and Special Tokens
 
-Now that we understood how LLMs work, it’s time to see how they actually **structure their generations through chat templates**.
+Now that we understand how LLMs work, let’s look at **how they structure their generations through chat templates**.
 
-Since you interact with Agents through a chat interface, it’s important to study the underlying Message System that turns user inputs and system instructions into a coherent prompt.
+Since you interact with Agents through a chat interface, it’s important to study the underlying Message System that tranforms user inputs and system instructions into a coherent prompt.
 
 In the previous section, you learned that every LLM has its own EOS (End Of Sequence) token. However, that’s just one of the differences between models. Each LLM also has its own way of formatting prompts. 
 
@@ -10,19 +10,23 @@ In the previous section, you learned that every LLM has its own EOS (End Of Sequ
 >
 > **A**: This is correct ! But this in fact mostly a UI abstraction. When fed into the LLM, the messages are concatenated back into a single prompt.
 
+<figure>
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/assistant.jpg" alt="Behind models"/>
+<figcaption>We see here the difference between what we see in UI and the prompt.
+</figcaption>
+</figure>
 
 Up until now, we’ve discussed prompts as the sequence of tokens fed into the model. But when you chat with systems like ChatGPT or HuggingChat, you’re actually exchanging messages. Behind the scenes, these messages are concatenated and formatted into a prompt that the model can understand.
 
-This is where chat templates come in. They act as the bridge between conversational messages (user and assistant) and the specific formatting requirements (including special tokens) of your chosen LLM. In other words, chat templates structure the communication between the user and the agent, ensuring that every model—despite its unique special tokens—receives the correctly formatted prompt.
+This is where chat templates come in. They act as the **bridge between conversational messages (user and assistant) and the specific formatting requirements** (including special tokens) of your chosen LLM. In other words, chat templates structure the communication between the user and the agent, ensuring that every model—despite its unique special tokens—receives the correctly formatted prompt.
 
 
-## Messages: the underlying systems of LLMs
+## Messages: The Underlying System of LLMs
 ### System Messages
 
-System messages (also known as System Prompts) set the foundation for **how the model should behave**. They act as **persistent instructions that influence all subsequent interactions**. 
+System messages (also called System Prompts) define **how the model should behave**. They serve as **persistent instructions**, guiding every subsequent interaction. 
 
-For example:
+For example: 
 
 ```python
 system_message = {
@@ -31,11 +35,11 @@ system_message = {
 }
 ```
 
-Based on our System Message, Alfred is polite and helpful.
+With this System Message, Alfred becomes polite and helpful:
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/polite-alfred.jpg" alt="Polite alfred"/>
 
-But if we change System Message for:
+But if we change it to:
 
 ```python
 system_message = {
@@ -44,12 +48,11 @@ system_message = {
 }
 ```
 
-Alfred will be **a rebel Agent** 😎.
+Alfred will act as a rebel Agent 😎:
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/rebel-alfred.jpg" alt="Rebel Alfred"/>
 
-
-In addition to setting behavior, the System Message in Agents is also used  **to store information about available tools**, provide instructions to the model on how to format the actions to take, and guide the overall guidelines of how the thought process should be segmented.
+In an Agent context, the System Message also stores information about available tools, provide instructions to the model on how to format the actions to take, and guide the overall guidelines of how the thought process should be segmented.
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/alfred-systemprompt.jpg" alt="Alfred System Prompt"/>
 
@@ -57,7 +60,9 @@ In addition to setting behavior, the System Message in Agents is also used  **to
 
 A conversation consists in alternating messages between a Human (user) and an LLM (assistant)
 
-Chat templates help maintain context by preserving conversation history, storing previous exchanges between the user and the assistant. This leads to more coherent multi-turn conversations. For example:
+Chat templates help maintain context by preserving conversation history, storing previous exchanges between the user and the assistant. This leads to more coherent multi-turn conversations. 
+
+For example:
 
 ```python
 conversation = [
@@ -80,15 +85,17 @@ messages = [
 
 ## Chat-Templates
 
-As we explained in the introduction, chat templates are essential for structuring interactions between language models and users. They provide instruction to format message conversations into prompt.
+As mentioned, chat templates are essential for **structuring conversations between language models and users**. They guide how message exchanges are formatted into a single prompt.
 
-### Base Models vs Instruct Models
+### Base Models vs. Instruct Models
 
 - A base model is trained on raw text data to predict the next token.
 
 - An instruct model is fine-tuned specifically to follow instructions and engage in conversations. For example, `SmolLM2-135M` is a base model, while `SmolLM2-135M-Instruct` is its instruction-tuned variant.
 
-To make a base model behave like an instruct model, we need to format our prompts in a consistent way that the model can understand. This is where chat templates come in. ChatML is one such template format that structures conversations with clear role indicators (system, user, assistant). If you have interacted with some AI API lately, you know that's the standard practice.
+To make a base model behave like an instruct model, we need to format our prompts in a consistent way that the model can understand. This is where chat templates come in. 
+
+*ChatML* is one such template format that structures conversations with clear role indicators (system, user, assistant). If you have interacted with some AI API lately, you know that's the standard practice.
 
 It's important to note that a base model could be fine-tuned on different chat templates, so when we're using an instruct model we need to make sure we're using the correct chat template. 
 
@@ -108,7 +115,9 @@ Each model having different special token, chat templates have be implemented to
 
 Chat templates include Jinja2 code on how to transform the ChatML list of JSON messages presented in the above example into a textual representation of the system-level instructions, user messages and assistant responses that the model can understand.
 
-This structure helps maintain consistency across interactions and ensures the model responds appropriately to different types of inputs.Below is an example of a chat template:
+This structure **helps maintain consistency across interactions and ensures the model responds appropriately to different types of inputs**. 
+
+Below is an example of a chat template:
 
 chat_template of `SmolLM2-135M-Instruct`:
 ```jinja2
@@ -134,7 +143,7 @@ Can I ask a question?<|im_end|>
 <|im_start|>assistant
 ```
 
-If you remember last section, you will notice that "<|im_end|>" is the End of sequence ( EOS ) token of **SmolLM2-135M-Instruct**. Meaning that we only ask the assistant to generate some part of it ( in this case the assistant messages )
+If you remember last section, you will notice that "<|im_end|>" is the End of sequence ( EOS ) token of **SmolLM2-135M-Instruct**. Meaning that we only ask the assistant to generate some part of it ( in this case the assistant messages)
 
 The `transformers` library will take care of chat templates for you in relation to the model's tokenizer. Read more about how transformers builds chat templates [here](https://huggingface.co/docs/transformers/en/chat_templating#how-do-i-use-chat-templates). All we have to do is structure our messages in the correct way and the tokenizer will take care of the rest.
 
@@ -150,7 +159,7 @@ You can also experiment with different conversations/models to see how they are 
 
 ### Format messages to prompt
 
-So while you are interracting with your AI through messages. To ensure the correct format of your conversation, the easiest is to get the chat_template from the model's tokenizers and to format your prompt with apply_chat_template() function
+So while you are interracting with your AI through messages. To ensure the correct format of your conversation, **the easiest is to get the chat_template from the model's tokenizers and to format your prompt with apply_chat_template() function**
 
 ```python
 messages = [
@@ -164,17 +173,17 @@ messages = [
 rendered_prompt = tokenizer.apply_chat_template(messages, tokenize=False)
 ```
 
-The rendered_prompt  out of this function is no ready to go in the specific model you chose!
+The `rendered_prompt` out of this function is no ready to go in the specific model you chose!
 
-> This apply_chat_template() is used in the backend of your API, if you are interacting with the messages (ChatML) format.
+> This `apply_chat_template()` is used in the backend of your API, if you are interacting with the messages (ChatML) format.
 
 
 __
-Now that we learned how LLMs  We can focus on the Agent, and understand how we define tools in the System Message.
+Now that we’ve seen how LLMs structure their generations via chat templates, let’s explore how Agents act in their environments. 
 
-Now that we’ve explored how LLMs structure their generations through chat templates and why, it’s time to see how Agents take action in their environments. One of the key ways they do this is by using Tools, functions that extend an AI model’s capabilities beyond just text generation. 
+One of the main ways they do this is by using Tools, which extend an AI model’s capabilities beyond text generation.
 
-We will talk again in the upcoming units on Message, but if you want to dive deeper you can check these two documentations:
+We’ll discuss messages again in upcoming units, but if you want a deeper dive now, check out:
 
 - [Hugging Face Chat Templating Guide](https://huggingface.co/docs/transformers/main/en/chat_templating)
 - [Transformers Documentation](https://huggingface.co/docs/transformers)
