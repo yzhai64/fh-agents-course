@@ -48,9 +48,8 @@ Now that we understood the big picture of what is an Agent, let's formally defin
 
 The AI model can be seen as the **brain of the agent** and the framework as the **remaining body parts**:
 
-- The AI model does the reasoning and will then send "Action" to execute. 
-- And the scope of what is possible depends on what the model has been equipped with by it's creator: a human by not having "wings" can't execute the **Action** "fly" while it is possible to execute the **Actions** "walk", "run" ,"jump", "grab" and so on.
-
+- The AI model does the reasoning and will then send **Action** to execute. 
+- And the scope of what is possible **depends on what the model has been equipped with by it's creator**. It's like a human by not having "wings" can't execute the **Action** "fly" while it is possible to execute the **Actions** "walk", "run" ,"jump", "grab" and so on.
 
 ## What type of AI Models do we use for Agents?
 
@@ -58,26 +57,29 @@ The most commonly AI model found at the core of an Agent is an LLM (Large Langua
 
 It's most known represents are **GPT4** from **OpenAI**, **LLama** from **meta**, **Gemini** from **Google**, etc... Those models have been trained on a very vast amount of text and are able to generalize well. But we will learn more about LLMs in the next section.
 
-LLMs only handling **Text**, if the use-case require other modalities (Images, Audio, Video, ...), you will have to use different AI models. 
+LLMs only handling **Text**, if the use-case require other modalities (Images, Audio, Video, ...), you will have to use different AI models:
+-  For instance, to browse the web, you could use a Vision Language Model (VLM) as the Agent's core that understands both Images and Text to navigate your web page.
+- To understand human speech, you could use **Whisper**, a well-known audio-to-text model, as a "Tool" to transcribe speech into text, allowing your LLM agent to process and understand it.
 
-For instance, to browse the web, you could use a Vision Language Model (VLM) as the Agent's core that understands both Images and Text to navigate your web page.
 
-A second example, of that could be to use **Whisper**, a very famous **Audio** to **Text** model as a "Tool" to allow your LLM agent to process audio into text in order to understand it.
-
-## How does an AI take action on it's environment ?
+## How does an AI take action on its environment ?
 
 The general word for this set of possible action that an AI model can use is a "Tool". For instance by default, your LLM can't generate any images. But if you ask some well-known chat application like HuggingChat, ChatGPT or Le Chat, to generate an Image, they can do it !
 
 The model at the core of those application does not natively have the capacity to generate an Image. But the developpers of those applications created some code (Tools), that the LLM can call and execute to create an Image.
 
+<figure>
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/eiffel_brocolis.jpg" alt="Eiffel Brocolis"/>
+<figcaption>The model used an Image Generation Tool to generate this image.
+</figcaption>
+</figure>
 
 We will learn more about tools in the Tool section.
 
 
-## What can an Agent do ?
+## What type of tasks an Agent can do?
 
-The Agent has a task to perform the LLM at his core should selectect the best course of **ACTIONS** to fullfill it.
+The Agent can perform any tasks, to do so it selects the best course of **ACTIONS** to fullfill it.
 
 Example : "If I ask my personal assistant (like Siri) on my computer to send an email to my Manager asking to delay today's meeting", I will need to give code some Tool (in this case a python function) do such a thing :
 
@@ -87,32 +89,38 @@ Send_message_to(recipient, message):
 ```
 
 And the AI model will need to run that code somehow to fulfill the predefined task :
+
 ```python
 Send_message_to("Manager","Can we postopone today's meeting ?")
 ```
 
-In Agents, the design of the Tools is very important that greatly impact the quality of your agent. Some task will requiere some very specific tools to be crafted, and other may be solved with some general purpose tool like "web_search".
+In Agents, **the design of the Tools is very important that greatly impact the quality of your Agent**. Some task will require some very specific tools to be crafted, and other may be solved with some general purpose tool like "web_search".
 
-Here we do the distinction between an Action and a Tool, because in some Agent implementations, one Action can contain multiples tool use.
+Here we do the distinction between an Action and a Tool, because in some Agent implementations, one Action can contain multiples tool use. 
 
 Having an AI interact with it's environment opens a lot of real life scenarios for companies and individuals.
 
-### Examples
+### Example 1: Personal Virtual Assistants
 
-Personal Virtual Assistants:
-Virtual assistants like Siri, Alexa, or Google Assistant function as agents when they interact with users and their digital environments. They take user queries, analyze context, retrieve information from databases, and provide responses or initiate actions (like setting reminders, sending messages, or controlling smart devices).
+Virtual assistants like Siri, Alexa, or Google Assistant function as agents when they interact with users and their digital environments. 
 
-Customer Service Chatbots:
-Many companies deploy chatbots as agents that interact with customers in natural language. These agents can answer questions, guide users through troubleshooting steps, or even complete transactions. Their predefined objectives might include improving user satisfaction, reducing wait times, or increasing sales conversion rates. By interacting directly with customers, learning from the dialogues, and adapting their responses over time, they demonstrate the core principles of an agent in action.
+They take user queries, analyze context, retrieve information from databases, and provide responses or initiate actions (like setting reminders, sending messages, or controlling smart devices).
 
-AI NPC ( Non Playable Character) in a video game:
+### Example 2: Customer Service Chatbots
+
+Many companies deploy chatbots as agents that interact with customers in natural language. These agents can answer questions, guide users through troubleshooting steps, or even complete transactions. 
+
+Their predefined objectives might include improving user satisfaction, reducing wait times, or increasing sales conversion rates. By interacting directly with customers, learning from the dialogues, and adapting their responses over time, they demonstrate the core principles of an agent in action.
+
+
+### Example 3: AI NPC ( Non Playable Character) in a video game
+
 AI agents powered by large language models (LLMs) can make NPCs more dynamic and unpredictable. Instead of following rigid behavior trees, they can respond contextually, adapt to player interactions, and generate more nuanced dialogue. This flexibility helps create more lifelike, engaging characters that evolve alongside the player’s actions.
-
 
 To summarize, an Agent is a system that uses an AI Model (mostly LLM) as its core reasoning engine, to :
 
-* **Understand natural language:**  Interpret and respond to human instructions in a meaningful way.
-* **Reason and plan:** Analyze information, make decisions, and devise strategies to solve problems.
-* **Interact with its environment:**  Gather information, take actions, and observe the results of those actions.
+- **Understand natural language:**  Interpret and respond to human instructions in a meaningful way.
+- **Reason and plan:** Analyze information, make decisions, and devise strategies to solve problems.
+- **Interact with its environment:**  Gather information, take actions, and observe the results of those actions.
 
-Now that we understood the big picture of what are Agents, we need to understand how works LLMs.
+Now that we understood what are the Agents, we need to dive deeper into the "Agent's brain": the LLMs.
