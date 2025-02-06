@@ -3,3 +3,22 @@
 Overview of actions and the stop and parse approach. Formats JSON/CODE. 
 
 <!-- TODO: @jofthomas -->
+
+
+
+
+
+## Interface Design for Tools
+
+The design of the interface through which an agent uses tools can affect the agent's performance. For example, a search tool that returns results **ordered by relevance** may be more helpful to an AI agent than one that returns results **ordered by frequency**. The interface should be designed to be clear and concise, so that the agent can easily understand how to use the tools. It should also be designed to be flexible, so that the agent can use the tools in different ways depending on the task at hand.
+
+Here are some examples of how interface design can affect an AI agent's performance:
+
+*   **Structured Output:** Providing a specific format or schema for the AI to follow in its response can help the agent to use tools more effectively. For example, if the agent is using a tool to retrieve data from a database, the interface should specify the format in which the data should be returned.
+*   **Tool Descriptions:** Providing clear and concise descriptions of the tools can help the agent to understand how to use them. The descriptions should include information about the tool's purpose, its inputs and outputs, and any limitations.
+*   **Tool Selection:** The interface should make it easy for the agent to select the appropriate tool for the task at hand. This could involve providing a list of tools or a search function.
+*   **Feedback:** The interface should provide feedback to the agent on the results of its tool use. This could involve displaying the output of the tool or providing an error message if the tool fails.
+
+## Tool Use as Action
+
+The use of tools is considered a form of "acting" by an AI agent in an environment. Agents can generate special tokens to invoke tool calls. This "acting" can be guided by "reasoning," which allows the agent to plan and re-plan based on the information gained from the tool. For example, an agent might use a search engine to find information and then use a calculator to perform calculations based on that information. The agent may revise its plan based on the result of the calculation and return the retrieved information. This kind of reasoning-based tool use is the cornerstone of agents, and we will explore it in more detail in the coming sections.
