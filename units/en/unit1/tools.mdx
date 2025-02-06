@@ -225,21 +225,17 @@ The descr is then **injected** in the system prompt. Taking the same dummy examp
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/Agent_system_prompt_tools.png" alt="System prompt for tools"/>
 
-## Interface Design for Tools
+--
+We just learned, that AI Tools play a crucial role in enhancing the capabilities of AI agents. 
 
-The design of the interface through which an agent uses tools can affect the agent's performance. For example, a search tool that returns results **ordered by relevance** may be more helpful to an AI agent than one that returns results **ordered by frequency**. The interface should be designed to be clear and concise, so that the agent can easily understand how to use the tools. It should also be designed to be flexible, so that the agent can use the tools in different ways depending on the task at hand.
+To summarize, we learned:
 
-Here are some examples of how interface design can affect an AI agent's performance:
+- What Tools Are: Functions that give LLMs extra capabilities, such as performing calculations or accessing external data.
 
-*   **Structured Output:** Providing a specific format or schema for the AI to follow in its response can help the agent to use tools more effectively. For example, if the agent is using a tool to retrieve data from a database, the interface should specify the format in which the data should be returned.
-*   **Tool Descriptions:** Providing clear and concise descriptions of the tools can help the agent to understand how to use them. The descriptions should include information about the tool's purpose, its inputs and outputs, and any limitations.
-*   **Tool Selection:** The interface should make it easy for the agent to select the appropriate tool for the task at hand. This could involve providing a list of tools or a search function.
-*   **Feedback:** The interface should provide feedback to the agent on the results of its tool use. This could involve displaying the output of the tool or providing an error message if the tool fails.
+- How to Define a Tool: By providing a clear textual description, inputs, outputs, and a callable function.
 
-## Tool Use as Action
+- Why Tools Are Essential: They enable Agents to overcome the limitations of static model training, handle real-time tasks, and perform specialized actions.
 
-The use of tools is considered a form of "acting" by an AI agent in an environment. Agents can generate special tokens to invoke tool calls. This "acting" can be guided by "reasoning," which allows the agent to plan and re-plan based on the information gained from the tool. For example, an agent might use a search engine to find information and then use a calculator to perform calculations based on that information. The agent may revise its plan based on the result of the calculation and return the retrieved information. This kind of reasoning-based tool use is the cornerstone of agents, and we will explore it in more detail in the coming sections.
+Now that we know how tools extend an LLM’s functionality, we’ll move on to the Agent Workflow. 
 
-
-AI Tools play a crucial role in enhancing the capabilities of AI agents. By effectively utilizing these tools, AI agents can perform complex tasks, reason through problems, and interact with users in a more sophisticated and dynamic manner. As the field of AI agents continues to evolve, we can expect to see even more innovative and powerful tools being developed and integrated into these systems.
-
+There, you’ll see how an Agent observes, thinks, and acts—bringing together everything we’ve covered so far and setting the stage for creating your own fully functional AI Agent.
