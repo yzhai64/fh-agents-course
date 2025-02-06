@@ -1,12 +1,12 @@
 # What is an Agent?
 
-<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/unit1-whiteboard-start.jpg" alt="Unit 1 planning"/>
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/uwhiteboard-no-check.jpg" alt="Unit 1 planning"/>
 
 So, the first step, is to understand **what an Agent is**. 
 
-By the end of this section, you'll feel comfortable with the concept of agents and their various applications in AI.
+Then, by the end of this section, you'll feel comfortable with the concept of agents and their various applications in AI.
 
-To explain this concept, let's start with an analogy.
+To explain what is an Agent, let's start with an analogy.
 
 ## The Big Picture: Alfred The Agent
 
@@ -20,39 +20,43 @@ Imagine Alfred receives a command, such as: "Alfred, I would like a coffee pleas
 
 Because Alfred **understands natural language**, he quickly grasps our request.
 
-Before fulfilling the order, Alfred engages in **reasoning and planning** to determine the step of actions he needs to make, and which tools to use.
+Before fulfilling the order, Alfred engages in **reasoning and planning**, figuring out the steps and tools he needs:
 
-Alfred defined his plan: go to the kitchen -> select the tool to make the coffee -> make the coffee -> bring the coffee back to us. 
+
+1. Go to the kitchen  
+2. Use the coffee machine  
+3. Brew the coffee  
+4. Bring the coffee back
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/reason-and-plan.jpg" alt="Reason and plan"/>
 
-Once he has a plan in mind **he must act**. 
-
-To execute his plan, **he can use tools in the list of tools he knows about**. In this case, to make a coffee, he uses a coffee machine. He activates the coffee machine to brew the coffee.
+Once he has a plan, he **must act**. To execute his plan, **he can use tools in the list of tools he knows about**. In this case, to make a coffee, he uses a coffee machine. He activates the coffee machine to brew the coffee.
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/make-coffee.jpg" alt="Make coffee"/>
 
-Finally, Alfred brings the freshly made coffee to us.
+Finally, Alfred brings the freshly brewed coffee to us.
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/bring-coffee.jpg" alt="Bring coffee"/>
 
-And this is what an Agent is: an AI model capable of reasoning, planning, and interacting with its environment. We call it Agent because it has _agency_, aka it has the ability to interact with the environment.
+And this is what an Agent is: an **AI model capable of reasoning, planning, and interacting with its environment**. 
+
+We call it Agent because it has _agency_, aka it has the ability to interact with the environment.
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/process.jpg" alt="Agent process"/>
 
-<!-- Maybe step 2 could be: select tools, then Step 3: Act -->
-
 ## Let's go more formal
 
-Now that we have the big picture, let's formally define an agent as follows :
+Now that you have the big picture, here’s a more precise definition:
 
 > An Agent is a system that leverages an AI model to interact with its environment in order to achieve a user-defined objective. It combines reasoning, planning, and the execution of actions (often via external tools) to fulfill tasks.
 
-The AI model can be seen as the **brain of the agent** and the framework as the **remaining body parts**:
+You can think of the AI model as the **brain of the agent** and the framework as the **remaining body parts**:
 
-- The AI model performs the reasoning and generate **Actions** to execute.
 
-- The scope of what is possible **depends on what the model has been equipped with**: it's like a human by not having "wings" can't execute the "fly" **Action**, while it is possible to execute **Actions** "walk", "run" ,"jump", "grab", and so on.
+- The **AI model** performs the reasoning and generates **Actions** to execute.  
+
+- The **scope of possible actions** depends on what the model **has been equipped with**: it's like a human by not having "wings" can't execute the "fly" **Action**, while it is possible to execute **Actions** "walk", "run" ,"jump", "grab", and so on.
+
 
 ## What type of AI Models do we use for Agents?
 
@@ -64,7 +68,9 @@ Note: it's possible to use slightly different models as the Agent's core. One ex
 
 ## How does an AI take action on its environment ?
 
-LLMs are amazing models, but they can only generate text. However, if you have used chat applications like HuggingChat, ChatGPT or Le Chat, you will have noticed that they are able to generate images too! How is that possible?
+LLMs are amazing models, but **they can only generate text**. 
+
+However, if you have used chat applications like HuggingChat, ChatGPT or Le Chat, you will have noticed that they are able to generate images too! How is that possible?
 
 The answer is that the developers of those applications created additional code (called **Tools**), that the LLM can use to create an image.
 
@@ -120,9 +126,9 @@ AI agents powered by LLMs can make NPCs more dynamic and unpredictable. Instead 
 To summarize, an Agent is a system that uses an AI Model (typically a LLM) as its core reasoning engine, to:
 
 - **Understand natural language:**  Interpret and respond to human instructions in a meaningful way.
+
 - **Reason and plan:** Analyze information, make decisions, and devise strategies to solve problems.
+
 - **Interact with its environment:**  Gather information, take actions, and observe the results of those actions.
 
-Now that we understand what Agents are, let's take a short, ungraded quiz to reinforce our knowledge. 
-
-After that, we'll dive deeper into the "Agent's brain": the [LLMs](what-are-llms).
+Now that we have a solid grasp of what Agents are, let’s reinforce your understanding with a short, ungraded quiz. After that, we’ll dive into the “Agent’s brain”: the [LLMs](what-are-llms).
