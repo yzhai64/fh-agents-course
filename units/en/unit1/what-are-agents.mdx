@@ -2,7 +2,9 @@
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/unit1-whiteboard-start.jpg" alt="Unit 1 planning"/>
 
-Since you are interested in learning more about **Agents**, here is the moment to discuss the fundamental question: **what is an Agent?**
+So, the first step, is to understand **what an Agent is**. 
+
+By the end of this section, you'll feel comfortable with the concept of agents and their various applications in AI.
 
 To explain this concept, let's start with an analogy.
 
@@ -18,7 +20,7 @@ Imagine Alfred receives a command, such as: "Alfred, I would like a coffee pleas
 
 Because Alfred **understands natural language**, he quickly grasps our request.
 
-Before fulfilling the order, Alfred engages in **reasoning and planning** to define the step of actions he needs to make, and which tools to use.
+Before fulfilling the order, Alfred engages in **reasoning and planning** to determine the step of actions he needs to make, and which tools to use.
 
 Alfred defined his plan: go to the kitchen -> select the tool to make the coffee -> make the coffee -> bring the coffee back to us. 
 
@@ -36,20 +38,19 @@ Finally, Alfred brings the freshly made coffee to us.
 
 And this is what an Agent is: an AI model capable of reasoning, planning, and interacting with its environment. We call it Agent because it has _agency_, aka it has the ability to interact with the environment.
 
-
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/process.jpg" alt="Agent process"/>
 
 <!-- Maybe step 2 could be: select tools, then Step 3: Act -->
 
 ## Let's go more formal
 
-Now that we understood the big picture, let's formally define an agent as follows :
+Now that we have the big picture, let's formally define an agent as follows :
 
 > An Agent is a system that leverages an AI model to interact with its environment in order to achieve a user-defined objective. It combines reasoning, planning, and the execution of actions (often via external tools) to fulfill tasks.
 
 The AI model can be seen as the **brain of the agent** and the framework as the **remaining body parts**:
 
-- The AI model does the reasoning and will then send **Actions** to execute.
+- The AI model performs the reasoning and generate **Actions** to execute.
 
 - The scope of what is possible **depends on what the model has been equipped with**: it's like a human by not having "wings" can't execute the "fly" **Action**, while it is possible to execute **Actions** "walk", "run" ,"jump", "grab", and so on.
 
@@ -60,7 +61,6 @@ The most commonly AI model found at the core of an Agent is an LLM (Large Langua
 Well known representatives are **GPT4** from **OpenAI**, **LLama** from **meta**, **Gemini** from **Google**, etc... Those models have been trained on a very vast amount of text and are able to generalize well. We will learn more about LLMs in [the next section](what-are-llms).
 
 Note: it's possible to use slightly different models as the Agent's core. One example is a Vision Language Model (VLM), which is like an LLM but also understands images as input. We'll focus on LLMs for now and will discuss other options later.
-
 
 ## How does an AI take action on its environment ?
 
@@ -75,7 +75,6 @@ The answer is that the developers of those applications created additional code 
 </figure>
 
 We will learn more about tools in the [Tools](tools) section.
-
 
 ## What type of tasks can an Agent do?
 
@@ -96,7 +95,7 @@ send_message_to("Manager", "Can we postopone today's meeting?")
 
 The **design of the Tools is very important and has a great impact on the quality of your Agent**. Some tasks will require very specific tools to be crafted, while others may be solved with general purpose tools like "web_search".
 
-Note that Actions are not the same as Tools. An Action, for instance, can involve the use of multiple Tools to complete.
+Note that **Actions are not the same as Tools**. An Action, for instance, can involve the use of multiple Tools to complete.
 
 Having an AI interact with its environment opens a lot of real-life scenarios for companies and individuals.
 
@@ -118,10 +117,12 @@ Their predefined objectives might include improving user satisfaction, reducing 
 AI agents powered by LLMs can make NPCs more dynamic and unpredictable. Instead of following rigid behavior trees, they can respond contextually, adapt to player interactions, and generate more nuanced dialogue. This flexibility helps create more lifelike, engaging characters that evolve alongside the player’s actions.
 
 --
-To summarize, an Agent is a system that uses an AI Model (mostly an LLM) as its core reasoning engine, to:
+To summarize, an Agent is a system that uses an AI Model (typically a LLM) as its core reasoning engine, to:
 
 - **Understand natural language:**  Interpret and respond to human instructions in a meaningful way.
 - **Reason and plan:** Analyze information, make decisions, and devise strategies to solve problems.
 - **Interact with its environment:**  Gather information, take actions, and observe the results of those actions.
 
-Now that we understand what Agents are, let's take a short, ungraded quiz to reinforce our knowledge. After that, we'll dive deeper into the "Agent's brain": the [LLMs](what-are-llms).
+Now that we understand what Agents are, let's take a short, ungraded quiz to reinforce our knowledge. 
+
+After that, we'll dive deeper into the "Agent's brain": the [LLMs](what-are-llms).

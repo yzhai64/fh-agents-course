@@ -1,21 +1,23 @@
 # Messages and Special Tokens
 
-Now that we understood how LLMs work, in this section we will explore how LLMs structure their generations through **tokenization**, **special tokens**, and **chat-templates**.
+Now that we understood how LLMs work, it’s time to see how they actually **structure their generations through chat templates**.
 
-This is important to understand this section in order to be able to understand the Agent Re-act flow.
+Since you interact with Agents through a chat interface, it’s important to study the underlying Message System that turns user inputs and system instructions into a coherent prompt.
 
-You have understood in the previous section that all LLMs have different EOS (End Of String) token. But this is not in fact no the only difference from one LLM to another. **Each LLM have it's own way to format prompt**. Yeah...
+In the previous section, you learned that every LLM has its own EOS (End Of Sequence) token. However, that’s just one of the differences between models. Each LLM also has its own way of formatting prompts. 
 
-Also up until now we only talked about **Prompt** which are the tokens that goes as an input of your LLM. A prompt is universal for every LLM, they take a prompt as an input and complete the sequence with contextually probable words. 
-
-> **Q**: But ... When, I'm interacting with chatGPT/Hugging Chat, I'm having a conversation in Messages, not prompts
+> **Q**: But ... When, I'm interacting with ChatGPT/Hugging Chat, I'm having a conversation in Messages, not prompts
 >
-> **A**: This is correct ! But this in fact mostly a UI thing. When fed into the LLM, the messages are concatenated back into a prompt.
+> **A**: This is correct ! But this in fact mostly a UI abstraction. When fed into the LLM, the messages are concatenated back into a single prompt.
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/assistant.jpg" alt="Behind models"/>
 
-## Messages: the underlying systems of LLMs
+Up until now, we’ve discussed prompts as the sequence of tokens fed into the model. But when you chat with systems like ChatGPT or HuggingChat, you’re actually exchanging messages. Behind the scenes, these messages are concatenated and formatted into a prompt that the model can understand.
 
+This is where chat templates come in. They act as the bridge between conversational messages (user and assistant) and the specific formatting requirements (including special tokens) of your chosen LLM. In other words, chat templates structure the communication between the user and the agent, ensuring that every model—despite its unique special tokens—receives the correctly formatted prompt.
+
+
+## Messages: the underlying systems of LLMs
 ### System Messages
 
 System messages (also called System Prompt) set the foundation for **how the model should behave**. They act as persistent instructions that influence all subsequent interactions. For example:
