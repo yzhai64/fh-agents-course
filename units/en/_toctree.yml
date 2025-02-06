@@ -36,6 +36,8 @@
     title: 11_simple-use-case
   - local: unit1/final-quiz
     title: Unit 1 Final Quiz
+  - local: unit1/get-your-certificate
+    title: Unit 1 Get Your Certificate
   - local: unit1/conclusion
     title: conclusion
 - title: When the next steps are published?
