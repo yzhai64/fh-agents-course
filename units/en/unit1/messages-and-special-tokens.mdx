@@ -2,9 +2,9 @@
 
 In this section we will explore how Large Language Models (LLMs) structure their generations through **tokenization**, **special tokens**, and **chat-templates**.
 
-You have understood in the previous section that all LLMs have different EOS token. But this is not in fact no the only difference from one LLM to another. Each LLM have it's own way to format prompt.
+You have understood in the previous section that all LLMs have different EOS (End Of String) token. But this is not in fact no the only difference from one LLM to another. **Each LLM have it's own way to format prompt**. Yeah...
 
-Also up untill now we only talked about **Prompt** which are the tokens that goes as an input of your LLM. A prompt is universal for every LLM, they take a prompt as an input and complete the sequence with contextually probable words. 
+Also up until now we only talked about **Prompt** which are the tokens that goes as an input of your LLM. A prompt is universal for every LLM, they take a prompt as an input and complete the sequence with contextually probable words. 
 
 > **Q**: But ... When, I'm interacting with chatGPT/Hugging Chat, I'm having a conversation in Messages, not prompts
 >
@@ -12,11 +12,11 @@ Also up untill now we only talked about **Prompt** which are the tokens that goe
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/assistant.jpg" alt="Behind models"/>
 
-## Messages
+## Messages: the underlying systems of LLMs
 
 ### System Messages
 
-System messages (also called system prompt) set the foundation for how the model should behave. They act as persistent instructions that influence all subsequent interactions. For example:
+System messages (also called System Prompt) set the foundation for **how the model should behave**. They act as persistent instructions that influence all subsequent interactions. For example:
 
 ```python
 system_message = {
@@ -24,6 +24,14 @@ system_message = {
     "content": "You are a professional customer service agent. Always be polite, clear, and helpful."
 }
 ```
+
+Based on our System Message, we can get a **polite Alfred**.
+
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/polite-alfred.jpg" alt="Polite alfred"/>
+
+Or a Rebel Alfred 😎.
+
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/rebel-alfred.jpg" alt="Rebel Alfred"/>
 
 In Agents, the Message Prompt allows **to store the information about available tools**, provide instructions to the model on how to format the actions to take, and guide the overall guidelines of how the thought process should be segmented.
 
