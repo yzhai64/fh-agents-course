@@ -8,17 +8,39 @@ One crucial aspect of AI agents is their ability to take **actions**. Tools exis
 
 ## What are AI tools?
 
+A tool is a function given to the LLM. This function should fulfill a **clear objective**
+
+Here are some commonly used tools in AI agents :
+
+| Tool            | Description                                                   |
+|----------------|---------------------------------------------------------------|
+| Web Search     | Allows the agent to fetch up-to-date information from the internet. |
+| Image Generation | Creates images based on text descriptions.                  |
+| Retrieval      | Retrieves information from an external source.                |
+| API Interface  | Interacts with an external API (GitHub, YouTube, Spotify, etc.). |
+
+Those are only examples, as you can in fact create a tool for any use case !
+
 A good tool should be something that complements the power of an LLM. For instance if you need to perform calculus, giving a **calculator tool** to your LLM will provide better result than relying on the native capacities of the model.
-Furthermore, LLM predict the completion of a prompt based on their training data. Which means that it's internal knowledge only cover events that happened before their training.
+Furthermore, LLM predict the completion of a prompt based on their training data. Which means that it's internal knowledge only cover events that happened before their training, showcasing the need to get access to up to date data through tools.
 
-Tools are executable code that the agent can use to perform specific tasks. These tasks might include extracting information from databases, search internet, generate images, or anything else the agent needs to do to complete a task.
-
-- A Tool is a reusable piece of code that contains:
+- A Tool should contain:
   - A textual description of what the function does.
   - A Callable (something to perform an action).
   - Arguments with typings.
+  - (Optionnal) Outputs with typings.
 
-Let's understand Tools through a fictionnal example ( that is close to the real implementation in most library):
+## How do we give tools to an LLM ?
+
+The answer might be a bit underwhelming, but we simply provide textual descriptions of all the tools available for the model to use in the system prompt.
+
+The key here is to ensure the most accurate textual description of:
+
+1. **"What does this tool do?"**
+2. **"What inputs does it expect?"**
+
+If that feels too theoretical, let's understand it through a concrete example:
+> **Disclaimer:** This example implementation is fictional but closely resembles real implementations in most libraries.
 
 ```python
 class Tool:
@@ -28,8 +50,8 @@ class Tool:
     Attributes:
         name (str): Name of the tool.
         description (str): A textual description of what the tool does.
-        func (callable): The function or callable that this tool wraps.
-        arguments (list): A list of (argument_name, annotation) for each argument.
+        func (callable): The function this tool wraps.
+        arguments (list): A list of argument.
         outputs (str or list): The return type(s) of the wrapped function.
     """
     def __init__(self, 
@@ -66,9 +88,22 @@ class Tool:
         """
         return self.func(*args, **kwargs)
 ```
-<details>
-<summary>Click to expand code</summary>
+This is the Python implementation of the tool we just discussed.  
 
+It may seem complicated, but it's not. We simply define a **`Tool`** class that includes:
+
+- **`name`** (*str*): The name of the tool.  
+- **`description`** (*str*): A brief description of what the tool does.  
+- **`function`** (*callable*): The function the tool executes.  
+- **`input_arguments`** (*list*): The expected input parameters.  
+- **`outputs`** (*str* or *list*): The expected outputs of the tool.  
+- **`__call__()`**: Calls the function directly when the tool instance is invoked.  
+- **`to_string()`**: Converts the tool's attributes into a textual representation.  
+
+Now let's create a Tool ! 
+<details>
+<summary>decorator code ( advanced )</summary>
+_For those interested, here’s the code to declare a Tool using a decorator._
 ```python
 def tool(func):
     """
@@ -115,8 +150,21 @@ def tool(func):
 ```
 </details>
 
+One of the most common tools in most demos is the **calculator** tool.  
+Here, we present a simplified version that only multiplies two integers.  
 
-tool:
+#### **Function Inputs**  
+- **`a`** (*int*): An integer.  
+- **`b`** (*int*): An integer.  
+
+#### **Returns**  
+- (*int*): The product of `a` and `b`.  
+
+We have provided a textual description of this function as a **docstring**,  
+so let’s see what it looks like as a **textual description**!  
+
+> **Reminder:** This textual description is *what we want the LLM to know about the tool*.
+
 ```python
 @tool
 def calculator(a: int, b: int) -> int:
@@ -125,13 +173,16 @@ def calculator(a: int, b: int) -> int:
 
 print(calculator.to_string())
 ```
-Output :
+Outputs the following text :
 ```
 Tool Name: calculator
 Description: Multiply two integers.
 Arguments: a: int, b: int
 Outputs: int
 ```
+Based on this Textual description, the LLM knows that it it can call the LLM  `calculator(a, b)`.
+
+Let's just **sanity check** the tool is properly working outside of an agent
 ```python
 result = calculator(5, 6)
 print(f"Call result: {result}")
@@ -140,6 +191,9 @@ Output :
 ```
 Call result: 30
 ```
+
+The function is perfectly working and we have provided an implementation that allows the Agent to textually know what tools it has at it's disposal. We learn more how an Agent can now **Call* this tool itself in the Actions section
+
 ## Interface Design for Tools
 
 The design of the interface through which an agent uses tools can affect the agent's performance. For example, a search tool that returns results **ordered by relevance** may be more helpful to an AI agent than one that returns results **ordered by frequency**. The interface should be designed to be clear and concise, so that the agent can easily understand how to use the tools. It should also be designed to be flexible, so that the agent can use the tools in different ways depending on the task at hand.
