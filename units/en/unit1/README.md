@@ -1,5 +1,7 @@
 # Table of Contents
 
+You can access the unit 1 on hf.co/learn 👉 <a href="https://hf.co/learn/agents-course/unit1/introduction">here</a> 
+
 | Title | Description |
 |-------|-------------|
 | [Definition of an Agent](1_definition_of_an_agent.md) | General example of what agents can do without technical jargon. |
