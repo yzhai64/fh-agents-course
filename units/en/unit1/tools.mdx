@@ -34,6 +34,9 @@ Furthermore, LLM predict the completion of a prompt based on their training data
 
 The answer might be a bit underwhelming, but we simply provide textual descriptions of all the tools available for the model to use in the system prompt.
 
+here is dummy example:
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/Agent_system_prompt.png" alt="System prompt for tools"/>
+
 The key here is to ensure the most accurate textual description of:
 
 1. **"What does this tool do?"**
@@ -76,10 +79,10 @@ class Tool:
         ])
         
         return (
-            f"Tool Name: {self.name}\n"
-            f"Description: {self.description}\n"
-            f"Arguments: {args_str}\n"
-            f"Outputs: {self.outputs}"
+            f"Tool Name: {self.name},"
+            f" Description: {self.description},"
+            f" Arguments: {args_str},"
+            f" Outputs: {self.outputs}"
         )
 
     def __call__(self, *args, **kwargs):
@@ -174,11 +177,8 @@ def calculator(a: int, b: int) -> int:
 print(calculator.to_string())
 ```
 Outputs the following text :
-```
-Tool Name: calculator
-Description: Multiply two integers.
-Arguments: a: int, b: int
-Outputs: int
+```python
+Tool Name: calculator, Description: Multiply two integers., Arguments: a: int, b: int, Outputs: int
 ```
 Based on this Textual description, the LLM knows that it it can call the LLM  `calculator(a, b)`.
 
@@ -193,6 +193,9 @@ Call result: 30
 ```
 
 The function is perfectly working and we have provided an implementation that allows the Agent to textually know what tools it has at it's disposal. We learn more how an Agent can now **Call* this tool itself in the Actions section
+
+The descr is then **injected** in the system prompt. Taking the same dummy example, here is what it would likle after replacing the variable:
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/Agent_system_prompt_tools.png" alt="System prompt for tools"/>
 
 ## Interface Design for Tools
 
