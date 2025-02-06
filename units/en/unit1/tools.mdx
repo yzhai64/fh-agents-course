@@ -1,11 +1,15 @@
 # What are Tools?
 
-<!-- Discussion on Pydantic tools, conversion to string in the system prompt, and other common tool formats. -->
-<!-- TODO: @jofthomas -->
-
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/toolbox.jpg" alt="Toolbox"/>
 
-One crucial aspect of AI agents is their ability to take **actions**. Tools exist in order to enhance the capabilities of the LLM and to accomplish a wider range of tasks. We'll see in this section how AI Tools can be integrated into Agents.
+One crucial aspect of AI agents is their ability to take **actions**. 
+
+Tools exist in order to enhance the capabilities of the LLM and to accomplish a wider range of tasks. We'll see in this section how AI Tools can be integrated into Agents.
+
+In this section, we’ll learn what Tools are, how to design them effectively, and how to integrate them into your Agent via the System Message. 
+
+By giving your Agent the right Tools—and clearly describing how those Tools work—you can dramatically increase what your AI can accomplish. Let’s dive in!
+
 
 ## What are AI Tools?
 
@@ -22,7 +26,9 @@ Here are some commonly used tools in AI agents :
 
 Those are only examples, as you can in fact create a tool for any use case!
 
-A good tool should be something that **complements the power of an LLM**. For instance if you need to perform calculus, giving a **calculator tool** to your LLM will provide better result than relying on the native capacities of the model.
+A good tool should be something that **complements the power of an LLM**. 
+
+For instance if you need to perform calculus, giving a **calculator tool** to your LLM will provide better result than relying on the native capacities of the model.
 
 Furthermore, **LLM predict the completion of a prompt based on their training data**. Which means that it's internal knowledge only cover events that happened before their training, showcasing the need to get access to up to date data through tools.
 
@@ -100,6 +106,7 @@ class Tool:
         """
         return self.func(*args, **kwargs)
 ```
+
 This is the Python implementation of the tool we just discussed.  
 
 It may seem complicated, but it's not. We simply define a **`Tool`** class that includes:
@@ -210,9 +217,12 @@ Output :
 Call result: 30
 ```
 
-The function is perfectly working and we have provided an implementation that allows the Agent to textually know what tools it has at it's disposal. We learn more how an Agent can now **Call* this tool itself in the Actions section
+The function is perfectly working and we have provided an implementation that allows the Agent to textually know what tools it has at it's disposal. 
+
+We learn more how an Agent can now **Call* this tool itself in the Actions section.
 
 The descr is then **injected** in the system prompt. Taking the same dummy example, here is what it would likle after replacing the variable:
+
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/Agent_system_prompt_tools.png" alt="System prompt for tools"/>
 
 ## Interface Design for Tools
