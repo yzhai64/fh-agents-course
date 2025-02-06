@@ -137,51 +137,24 @@ Or you can experiment with different conversations/models to see how they are th
 
 
 <!-- Move later -->
-### Tool Usage
+### Format messages to prompt
 
-Tool usage in chat templates allows models to interact with external functions and APIs in a structured way. AI agents rely on tools to perform tasks, such as searching the web, performing calculations, or even controlling physical robots. 
-
-When working with tools, chat templates need to handle three specific message types: 
-
-- *Tool definitions* that describe available functions, 
-- *Tool calls* that occur when the assistant wants to use a tool, 
-- *Tool responses* that contain results returned from tool execution.
-
-Here's an example of how a tool interaction might look in a chat template:
-
-```sh
-<|im_start|>system
-You are an AI assistant with access to a calculator tool.<|im_end|>
-<|im_start|>user
-What is 123 multiplied by 456?<|im_end|>
-<|im_start|>tool
-Tool Name: calculator
-Tool Arguments: {"operation": "multiply", "x": 123, "y": 456}<|im_end|>
-<|im_start|>tool-answer
-Tool Answer : 56,088
-<|im_start|>assistant
-Based on the calculator tool, 123 multiplied by 456 equals 56,088.<|im_end|>
-```
-
-This example shows how special tokens (`<|im_start|>` and `<|im_end|>`) are used to segment different parts of the conversation, including system context, user input, tool usage, and the assistant's response. Let's see it in action with an example conversation:
+So while you are interracting with your AI through messages. To ensure the correct format of your conversation, the easiest is to get the chat_template from the model's tokenizers and to format your prompt with apply_chat_template() function
 
 ```python
 messages = [
     {"role": "system", "content": "You are an AI assistant with access to various tools."},
-    {"role": "user", "content": "What's the weather in Paris?"},
-    {"role": "tool", "tool_name": "WeatherAPI", "args": {"location": "Paris"}},
-    {"role": "assistant", "content": "It's currently 20°C and partly cloudy."},
+    {"role": "user", "content": "Hi !"},
+    {"role": "assistant", "content": "Hi human, what can help you with ?"},
 ]
 ```
-
-To use this template with your model, you'll need to ensure your model is trained to work with tool calls in this format. Then, configure your tokenizer with the appropriate chat template. Finally, use the template to format messages before sending to the model:
 
 ```python
 rendered_prompt = tokenizer.apply_chat_template(messages, tokenize=False)
 ```
 
-Remember that different models may expect different formatting for tool interactions. Always check your model's documentation for the specific format it expects. The template shown here uses a common format with `<|im_start|>` and `<|im_end|>` tokens, but your model might use different special tokens or formatting.
-
+The rendered_prompt  out of this function is no ready to go in the specific model you chose !
+> This apply_chat_template() is used in the backend of your API, if you are interacting with the messages ( ChatML ) format.
 
 <!-- Todo add transition -->
 
