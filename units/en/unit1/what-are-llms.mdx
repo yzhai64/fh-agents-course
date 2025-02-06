@@ -1,16 +1,16 @@
 # What are LLMs?
 
-<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/whiteboard-unit1sub1DONE.jpg" alt="Unit 1 planning"/>
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/whiteboard-check-1.jpg" alt="Unit 1 planning"/>
 
-As we learned in the previous section, each Agent needs **an AI Model at its core**. And the currently most used AI model for those are LLMs (Large Language Model).
+As we learned in the previous section, each Agent needs **an AI Model at its core**. And the currently most used AI model for those are LLMs (Large Language Models).
 
-So the current step is to understand what are LLMs (Large Language Models) and how they are used by Agents.
+Therefore, we need now to understand what are LLMs and how they power Agents.
 
-This section will provide a concise technical explanation but if you’re **really not yet familiar with LLMs**, you should check first our [free Natural Language Processing Course](https://huggingface.co/learn/nlp-course/chapter1/1).
+This section offers a concise technical explanation but if you’re **really not yet familiar with LLMs**, you should check first our [free Natural Language Processing Course](https://huggingface.co/learn/nlp-course/chapter1/1).
 
 ## What is a Large Language Model?
 
-A Large Language Model (LLM) is a type of AI model that excels at **understanding and generating human language**. They are trained on vast amounts of text data, allowing them to learn patterns, nuances, and structure in language. These models typically consist of billions of parameters.
+A Large Language Model is a type of AI model that excels at **understanding and generating human language**. They are trained on vast amounts of text data, allowing them to learn patterns, nuances, and structure in language. These models typically consist of billions of parameters.
 
 Most LLMs are **built on the Transformer architecture**—a deep learning framework that has gained significant interest since the release of BERT from Google in 2018.
 
@@ -122,7 +122,8 @@ But there is also other more advanced decoding strategies such as *beam search*,
 
 ## Attention is all you need
 
-One small but crucial detail to mention is **Attention**. When predicting the next word, not all words in a sentence carry the same level of importance. For example, in the sentence "The capital of France is," the Attention will be stronger on the words "France" and "Capital" because they hold the core meaning of the sentence.
+A key aspect of the Transformer architecture is **Attention**. When predicting the next word,
+not every word in a sentence is equally important; words like “France” and “capital” in the sentence *“The capital of France is …”* carry the most meaning.
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/AttentionSceneFinal.gif" alt="Visual Gif of Attention" width="60%">
 This process of identifying the most relevant words to predict the next token has proven to be incredibly effective.
@@ -147,9 +148,14 @@ Following this, LLMs can be fine-tuned on a supervised learning objective to per
 
 ## How can I use LLMs?
 
-You can run LLMs locally on your own laptop (if you have sufficient hardware) or call them through an API. Some models require a lot of memory to run efficiently, so you'll need to factor in these hardware requirements when choosing a model.
+You have two main options:
 
-During this course, we will primarily use models via APIs on the Hugging Face Hub. Later on, we will explore how to run these models locally on your hardware.
+1. **Run Locally** (if you have sufficient hardware).
+
+2. **Use a Cloud/API** (e.g., via the Hugging Face API).
+
+Throughout this course, we will primarily use models via APIs on the Hugging Face Hub. Later on, we will explore how to run these models locally on your hardware.
+
 
 ## How are LLMs used in AI Agents?
 
@@ -160,6 +166,7 @@ They can interpret user instructions, maintain context in conversations, define 
 We will explore these steps in more detail in this Unit.
 
 __
+
 That was a lot of information! We’ve covered the basics of what LLMs are, how they function, and their role in powering AI agents. 
 
 If you’d like to dive even deeper into the fascinating world of language models and natural language processing, don’t hesitate to check out our [free NLP course](https://huggingface.co/learn/nlp-course/chapter1/1).
