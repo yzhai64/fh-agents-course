@@ -187,18 +187,24 @@ def calculator(a: int, b: int) -> int:
 
 print(calculator.to_string())
 ```
+
 Outputs the following text :
+
 ```python
 Tool Name: calculator, Description: Multiply two integers., Arguments: a: int, b: int, Outputs: int
 ```
+
 Based on this Textual description, the LLM knows that it it can call the LLM  `calculator(a, b)`.
 
 Let's just **sanity check** the tool is properly working outside of an agent
+
 ```python
 result = calculator(5, 6)
 print(f"Call result: {result}")
 ```
+
 Output :
+
 ```
 Call result: 30
 ```
