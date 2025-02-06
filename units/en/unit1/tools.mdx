@@ -1,4 +1,4 @@
-# Tools
+# What are Tools?
 <!-- Discussion on Pydantic tools, conversion to string in the system prompt, and other common tool formats. -->
 <!-- TODO: @jofthomas -->
 
@@ -19,9 +19,14 @@ Here are some commonly used tools in AI agents :
 
 Those are only examples, as you can in fact create a tool for any use case!
 
-A good tool should be something that complements the power of an LLM. For instance if you need to perform calculus, giving a **calculator tool** to your LLM will provide better result than relying on the native capacities of the model.
+A good tool should be something that **complements the power of an LLM**. For instance if you need to perform calculus, giving a **calculator tool** to your LLM will provide better result than relying on the native capacities of the model.
 
-Furthermore, **LLM predict the completion of a prompt based on their training data**. Which means that it's internal knowledge only cover events that happened before their training (for instance, using a LLM to give you the today weather without having a web search tool, the LLM will hallucinate by giving you random weather), showcasing the need to get access to up to date data through tools.
+Furthermore, **LLM predict the completion of a prompt based on their training data**. Which means that it's internal knowledge only cover events that happened before their training, showcasing the need to get access to up to date data through tools.
+
+For instance, using a LLM to give you the today weather without having a web search tool, the LLM will hallucinate by giving you random weather).
+
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/wheather.jpg" alt="Weather"/>
+
 
 - A Tool should contain:
 
