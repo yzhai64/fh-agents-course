@@ -105,7 +105,8 @@ Here's an example :
 messages = [
     {"role": "system", "content": "You are a helpful assistant focused on technical topics."},
     {"role": "user", "content": "Can you explain what a chat template is?"},
-    {"role": "assistant", "content": "A chat template structures conversations between users and AI models..."}
+    {"role": "assistant", "content": "A chat template structures conversations between users and AI models..."},
+    {"role": "user", "content": "How do I use it ?"},
 ]
 ```
 
@@ -134,13 +135,14 @@ You are a helpful AI assistant named SmolLM...
 As you can see a chat_template is some code that will write how should the list of messages be formated inside 
 
 ```sh
+<|im_start|>system
+You are a helpful assistant focused on technical topics.<|im_end|>
 <|im_start|>user
-Hi there!<|im_end|>
+Can you explain what a chat template is?<|im_end|>
 <|im_start|>assistant
-Nice to meet you!<|im_end|>
+A chat template structures conversations between users and AI models...<|im_end|>
 <|im_start|>user
-Can I ask a question?<|im_end|>
-<|im_start|>assistant
+"How do I use it ?<|im_end|>
 ```
 
 If you remember last section, you will notice that "<|im_end|>" is the End of sequence ( EOS ) token of **SmolLM2-135M-Instruct**. Meaning that we only ask the assistant to generate some part of it ( in this case the assistant messages)
