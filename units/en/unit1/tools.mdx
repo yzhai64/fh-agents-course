@@ -1,14 +1,12 @@
 # Tools
 <!-- Discussion on Pydantic tools, conversion to string in the system prompt, and other common tool formats. -->
 <!-- TODO: @jofthomas -->
-This page provides an overview of AI tools and how they can be integrated into AI agents.
 
-One crucial aspect of AI agents is their ability to take **actions**. Tools exist in order to enhance the capabilities of the LLM and to accomplish a wider range of tasks.
+One crucial aspect of AI agents is their ability to take **actions**. Tools exist in order to enhance the capabilities of the LLM and to accomplish a wider range of tasks. We'll see in this section how AI Tools can be integrated into Agents.
 
+## What are AI Tools?
 
-## What are AI tools?
-
-A tool is a function given to the LLM. This function should fulfill a **clear objective**
+A **Tool is a function given to the LLM**. This function should fulfill a **clear objective**
 
 Here are some commonly used tools in AI agents :
 
@@ -19,30 +17,34 @@ Here are some commonly used tools in AI agents :
 | Retrieval      | Retrieves information from an external source.                |
 | API Interface  | Interacts with an external API (GitHub, YouTube, Spotify, etc.). |
 
-Those are only examples, as you can in fact create a tool for any use case !
+Those are only examples, as you can in fact create a tool for any use case!
 
 A good tool should be something that complements the power of an LLM. For instance if you need to perform calculus, giving a **calculator tool** to your LLM will provide better result than relying on the native capacities of the model.
-Furthermore, LLM predict the completion of a prompt based on their training data. Which means that it's internal knowledge only cover events that happened before their training, showcasing the need to get access to up to date data through tools.
+
+Furthermore, **LLM predict the completion of a prompt based on their training data**. Which means that it's internal knowledge only cover events that happened before their training (for instance, using a LLM to give you the today weather without having a web search tool, the LLM will hallucinate by giving you random weather), showcasing the need to get access to up to date data through tools.
 
 - A Tool should contain:
-  - A textual description of what the function does.
-  - A Callable (something to perform an action).
-  - Arguments with typings.
-  - (Optionnal) Outputs with typings.
+
+  - A **textual description of what the function does**.
+  - A *Callable* (something to perform an action).
+  - *Arguments* with typings.
+  - (Optional) Outputs with typings.
 
 ## How do we give tools to an LLM ?
 
-The answer might be a bit underwhelming, but we simply provide textual descriptions of all the tools available for the model to use in the system prompt.
+The answer might be a bit overwhelming, but we simply provide textual descriptions of all the tools available for the model to use in the system prompt.
 
-here is dummy example:
+Here is dummy example:
+
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/Agent_system_prompt.png" alt="System prompt for tools"/>
 
 The key here is to ensure the most accurate textual description of:
 
-1. **"What does this tool do?"**
-2. **"What inputs does it expect?"**
+1. **What does this tool do?**
+2. **What inputs does it expect?**
 
 If that feels too theoretical, let's understand it through a concrete example:
+
 > **Disclaimer:** This example implementation is fictional but closely resembles real implementations in most libraries.
 
 ```python
@@ -103,7 +105,8 @@ It may seem complicated, but it's not. We simply define a **`Tool`** class that 
 - **`__call__()`**: Calls the function directly when the tool instance is invoked.  
 - **`to_string()`**: Converts the tool's attributes into a textual representation.  
 
-Now let's create a Tool ! 
+Now let's create a Tool.
+
 > For those interested, here’s the code to declare a Tool using a decorator.
 <details>
 <summary> decorator code</summary>
