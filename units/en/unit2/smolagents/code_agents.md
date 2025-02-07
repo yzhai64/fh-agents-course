@@ -24,6 +24,7 @@ In the following example, we create a code agent that can get the travel time be
 
 ```python
 from smolagents import CodeAgent, HfApiModel, tool
+from typing import Optional
 
 @tool
 def get_travel_duration(start_location: str, destination_location: str, departure_time: Optional[int] = None) -> str:
@@ -54,7 +55,6 @@ def get_travel_duration(start_location: str, destination_location: str, departur
 agent = CodeAgent(tools=[get_travel_duration], model=HfApiModel(), additional_authorized_imports=["datetime"])
 
 agent.run("Can you give me a nice one-day trip around Paris with a few locations and the times? Could be in the city or outside, but should fit in one day. I'm travelling only via public transportation.")
-
 ```
 
 These examples are just the beginning of what you can do with code agents. You can learn more about how to build code agents in the [smolagents documentation](https://huggingface.co/docs/smolagents).
