@@ -1,18 +1,24 @@
-# The Hugging Face Agents Course
+# [The Hugging Face Agents Course](https://hf.co/learn/agents-course)
+
+If you like the course, **don't hesitate to ⭐ star this repository**. This helps us to **make the course more visible 🤗**.
+
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/communication/please_star.gif" alt="Star the repo" />
 
 ## Content
 
 The course is divided into 5 units. That will take you from **the basics of agents to a final assignment with a benchmark**.
 
-Don't forget to ⭐ the repository (it helps other to discover the course) 🤗
-Sign up here (it free) 👉 http://eepurl.com/i7MQOU
+Sign up here (it's free) 👉 https://bit.ly/hf-learn-agents
+
+You can access the course here 👉 https://hf.co/learn/agents-course
+
 | Unit | Topic                          | Description                                                                 |
 |------|--------------------------------|-----------------------------------------------------------------------------|
-| 0    | [0_onboarding](units/0_onboarding) | Welcome, guidelines, necessary tools, and course overview.                  |
-| 1    | [1_introduction_to_concepts](units/1_introduction_to_concepts)       | Definition of agents, LLMs, model family tree, and special tokens.          |
-| 2    | [2_frameworks](units/2_frameworks)                     | Overview of Smolagents, LangChain, LangGraph, and LlamaIndex.               |
-| 3    | [3_use_cases](units/3_use_cases)                      | SQL, code, retrieval, and on-device agents using various frameworks.        |
-| 4    | [4_final_assignment_with_benchmark](units/4_final_assignment_with_benchmark) | Automated evaluation of agents and leaderboard with student results.        |
+| 0    | [Onboarding](units/unit0/01_welcome_to_the_course.mdx) | Welcome, guidelines, necessary tools, and course overview.                  |
+| 1    | [Agent Fundamentals](units/unit1/1_definition_of_an_agent.md)       | Definition of agents, LLMs, model family tree, and special tokens.          |
+| 2    | [Frameworks](units/unit2/README.md)                     | Overview of smolagents, LangChain, LangGraph, and LlamaIndex.               |
+| 3    | [Use Cases](units/unit3/README.md)                      | SQL, code, retrieval, and on-device agents using various frameworks.        |
+| 4    | [Final Assignment](units/unit4/README.md) | Automated evaluation of agents and leaderboard with student results.        |
 
 ## Prerequisites
 
@@ -29,7 +35,7 @@ If you find a small typo or grammar mistake, please fix it yourself and submit a
 
 ### New unit
 
-If you want to add a new unit, please create an issue in the repository, describe the unit, and why it should be added. We will discuss it and if it's a good addition, we can collaborate on it.
+If you want to add a new unit, **please create an issue in the repository, describe the unit, and why it should be added**. We will discuss it and if it's a good addition, we can collaborate on it.
 
 ### Work on existing units
 
@@ -44,3 +50,18 @@ We are actively working on the units and if you want to join us, we will need to
 | 4    | 🚧 In Progress | Work is underway, no need for help with integration                         |
 
 If in doubt, join the discussion in the [Discord](https://discord.gg/GC7zFgvN).
+
+
+## Citing the project
+
+To cite this repository in publications:
+
+```bibtex
+@misc{agents-course,
+  author = {Burtenshaw, Ben and Thomas, Joffrey and Simonini, Thomas},
+  title = {The Hugging Face Agents Course},
+  year = {2025},
+  howpublished = {\url{https://github.com/huggingface/agents-course}},
+  note = {GitHub repository},
+}
+```
