@@ -2,7 +2,7 @@
 
 Now that we understand how LLMs work, let’s look at **how they structure their generations through chat templates**.
 
-Since you interact with Agents through a chat interface, it’s important to study the underlying Message System that tranforms user inputs and system instructions into a coherent prompt.
+Since you interact with Agents through a chat interface, it’s important to understand how LLM manages the chat.
 
 In the previous section, you learned that every LLM has its own EOS (End Of Sequence) token. However, that’s just one of the differences between models. Each LLM also has its own way of formatting prompts. 
 
@@ -10,13 +10,13 @@ In the previous section, you learned that every LLM has its own EOS (End Of Sequ
 >
 > **A**: This is correct ! But this in fact mostly a UI abstraction. When fed into the LLM, the messages are concatenated back into a single prompt.
 
+Up until now, we’ve discussed prompts as the sequence of tokens fed into the model. But when you chat with systems like ChatGPT or HuggingChat, **you’re actually exchanging messages**. Behind the scenes, these messages are **concatenated and formatted into a prompt that the model can understand**.
+
 <figure>
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/assistant.jpg" alt="Behind models"/>
-<figcaption>We see here the difference between what we see in UI and the prompt.
+<figcaption>We see here the difference between what we see in UI and the prompt fed to the model.
 </figcaption>
 </figure>
-
-Up until now, we’ve discussed prompts as the sequence of tokens fed into the model. But when you chat with systems like ChatGPT or HuggingChat, you’re actually exchanging messages. Behind the scenes, these messages are concatenated and formatted into a prompt that the model can understand.
 
 This is where chat templates come in. They act as the **bridge between conversational messages (user and assistant) and the specific formatting requirements** (including special tokens) of your chosen LLM. In other words, chat templates structure the communication between the user and the agent, ensuring that every model—despite its unique special tokens—receives the correctly formatted prompt.
 
@@ -52,7 +52,7 @@ Alfred will act as a rebel Agent 😎:
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/rebel-alfred.jpg" alt="Rebel Alfred"/>
 
-In an Agent context, the System Message also stores information about available tools, provide instructions to the model on how to format the actions to take, and guide the overall guidelines of how the thought process should be segmented.
+In an Agent context, the System Message also **stores information about available tools, provide instructions to the model on how to format the actions to take, and guide the overall guidelines of how the thought process should be segmented**
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/alfred-systemprompt.jpg" alt="Alfred System Prompt"/>
 
@@ -89,11 +89,13 @@ As mentioned, chat templates are essential for **structuring conversations betwe
 
 ### Base Models vs. Instruct Models
 
-- A base model is trained on raw text data to predict the next token.
+Another point we need to understand is the difference between a Base Model vs. Instruct Model:
 
-- An instruct model is fine-tuned specifically to follow instructions and engage in conversations. For example, `SmolLM2-135M` is a base model, while `SmolLM2-135M-Instruct` is its instruction-tuned variant.
+- *A Base Model* is trained on raw text data to predict the next token.
 
-To make a base model behave like an instruct model, we need to format our prompts in a consistent way that the model can understand. This is where chat templates come in. 
+- An *Instruct Model* is fine-tuned specifically to follow instructions and engage in conversations. For example, `SmolLM2-135M` is a base model, while `SmolLM2-135M-Instruct` is its instruction-tuned variant.
+
+To make a Base Model behave like an instruct model, we need to **format our prompts in a consistent way that the model can understand**. This is where chat templates come in. 
 
 *ChatML* is one such template format that structures conversations with clear role indicators (system, user, assistant). If you have interacted with some AI API lately, you know that's the standard practice.
 
@@ -181,6 +183,7 @@ The `rendered_prompt` out of this function is no ready to go in the specific mod
 
 
 __
+
 Now that we’ve seen how LLMs structure their generations via chat templates, let’s explore how Agents act in their environments. 
 
 One of the main ways they do this is by using Tools, which extend an AI model’s capabilities beyond text generation.
