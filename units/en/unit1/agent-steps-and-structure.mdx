@@ -1,29 +1,43 @@
 # Understanding AI Agents through the Thought-Action-Observation Cycle
 
-AI agents are systems that can reason, plan, and interact with their environment. We just saw in the previous unit, how the tools are made available to the AI Agent
+In the previous Unit, we saw how tools are made available to the agent in the system prompt. 
 
-To grasp how they function, imagine a continuous cycle of thinking, acting, and observing. This dynamic process allows agents to retrieve information, make decisions, and take actions to navigate their environment and achieve their goals.
+Let's now continue building the system message with some instructions for the Agent.
 
 ## The Core Components
 
-This course will focus on three core components of AI agents. We will explore how they work together to form a cohesive system and refer back to these components throughout the course. In this section, we will explore components conceptually and in the following sections we focus on implementing them.
+AI agents are systems that can reason, plan, and interact with their environment.
+
+To grasp how they function, imagine a continuous cycle of thinking, acting, and observing. Let's break down thos actions together :
+
+1. **Thought:** The LLM in the agent decide what the next step should be
+2. **Action:** The agent takes an action, by querying the tools it want to call and the associated arguments.
+3. **Observation:** The agent reflect on the execution result.
 
 ## The Thought-Action-Observation Cycle
 
-The three components work together in a continuous loop:
+The three components work together in a continuous loop. In a programming analogy, you can see that as **while loop**. The loop continues untill the objective of the agent as been fulfilled.
 
-1. **Observation:** The agent observes its environment
-2. **Thought:** The agent processes the observation and decides what to do
-3. **Action:** The agent takes action based on its thoughts
-4. **Observation:** The agent observes the results, and the cycle continues
+Visually it looks like this :
+
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/Thought_Action_obs_cycle.gif" alt="Think, Act, Observe cycle"/>
+
+Just like tools, it may seem a bit underwelming but most agents actually only rely on prompting to have rules in place in the framework.
+
+In an simplified version, our system prompt now looks like that :
+
+
+Let's now decompose each step !
 
 ### Thoughts
 
-Thoughts represent the agent's internal reasoning and planning processes. This utilises the agent's Large Language Model (LLM) to analyze information. Think of it as the agent's internal dialogue, where it considers the task at hand and strategizes its approach.
+Thoughts represent the agent's internal reasoning and planning processes. 
+This utilises the agent's Large Language Model (LLM) capacity to analyze information when presented in it's prompt.
+Think of it as the agent's internal dialogue, where it considers the task at hand and strategizes its approach.
 
-The agent's thoughts are responsible for analyzing observations, deciding on actions, formulating plans, and engaging in multi-step reasoning. Through this process, the agent can break down complex problems into smaller, more manageable steps, reflect on past experiences, and continuously adjust its plans based on new information.
+The agent's thoughts are responsible for accessing the current situation and decide what the next action/actions should be.
 
-Below are some examples of the types of thoughts an agent might have:
+Here are some thought example:
 
 | Type of Thought | Example |
 |----------------|---------|
@@ -36,10 +50,37 @@ Below are some examples of the types of thoughts an agent might have:
 | Goal Setting | "To complete this task, I need to first establish the acceptance criteria" |
 | Prioritization | "The security vulnerability should be addressed before adding new features" |
 
+> **Note:** In the case of fine-tuned models for function-calling, the thought process is optional.  
+> *In case you're not familiar with function-calling, there will be more detail in the Action section.*
+
+#### ReAct
+
+This concept of thinking before Acting orginates from the ReAct prompt. ReAct is the concatenation of **"Reasoning"** and **"Acting"**.
+ReAct is a simple prompting trick that appends " Let's think step by step" before letting the LLM decode the next tokens. 
+
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/ReAct.png" alt="ReAct"/>
+
+Prompting the model to think "step by step" shift the decoding process toward next token that actually come up with a plan.
+After "Let's s-think step by step", the model will **decompose** the problem in sub-tasks. This leads to less errors than directly trying to jump to a conclusion.
+
+Recently we have seen a new rise in interest for reasoning. Indeed models like Deepseek-R1 or Open-AI-o1 have been fine-tuned to always "think before answering".
+> Note : Those model have been fine-tuned to always include thinking ( enclosed in <think></think> special token). This is not a prompting trick like ReAct
 
 ### Actions
 
 Actions are the concrete steps an AI agent takes to interact with its environment. These can range from browsing the web for information to controlling a robot in a physical space. Consider an agent assisting with customer service - it might retrieve customer data, offer support articles, or escalate issues to human representatives.
+
+There is multiple types of Agents, that take actions differently :
+
+| Type of Agent | Description |
+|----------------|-------------|
+| JSON Agent| The Action to take is specified as in JSON format |
+| Code Agent |The Agents writes a code bloc that is interpreted externally |
+|Function-calling Agent | It is a subgategory of the JSON Agent, that has been fine-tuned, and actions have new messages assigned to them |
+
+If this is blury, this is normal, we'll take some time to give more informationon each agent type in the **Action** section.
+
+Here are some example of Actions possible.
 
 | Type of Action | Description |
 |----------------|-------------|
@@ -48,6 +89,11 @@ Actions are the concrete steps an AI agent takes to interact with its environmen
 | Environment Interaction | Manipulating digital interfaces, controlling physical robots or devices |
 | Communication | Engaging with users through chat, collaborating with other AI agents |
 
+On crucial part of an agent is the abilityto **STOP** generating new tokens when an action has been taken. And that is true whatever the format of the Agent ( Json, code, ...).
+The LLM only handling text, it has to textually describe the action it want to take and the parameters to feed into the tool.
+
+<INSERT EXAMPLE>
+
 ### Observations
 
 Observations are how an AI agent perceives the world and the consequences of its actions. They provide crucial information that fuels the agent's thought process and guides future actions. These observations can take many forms, from reading webpage text to monitoring a robot arm's position.
@@ -55,7 +101,7 @@ Observations are how an AI agent perceives the world and the consequences of its
 | Type of Observation | Example |
 |-------------------|----------|
 | System Feedback | Error messages, success notifications, status codes |
-| Data Changes | Database updates, file modifications, state changes |
+| Data Changes | Database updates, file modifications, state changes, local file path |
 | Environmental Data | Sensor readings, system metrics, resource usage |
 | Response Analysis | API responses, query results, computation outputs |
 | Time-based Events | Deadlines reached, scheduled tasks completed |
