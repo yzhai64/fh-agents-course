@@ -28,9 +28,9 @@ A good tool should be something that **complements the power of an LLM**.
 
 For instance if you need to perform calculus, giving a **calculator tool** to your LLM will provide better result than relying on the native capacities of the model.
 
-Furthermore, **LLM predict the completion of a prompt based on their training data**. Which means that it's internal knowledge only cover events that happened before their training, showcasing the need to get access to up to date data through tools.
+Furthermore, **LLM predict the completion of a prompt based on their training data**. Which means that it's internal knowledge only includes events prior to their training. Therefore, agents need access to up to date data through tools.
 
-For instance, using a LLM to give you the today weather without having a web search tool, the LLM will hallucinate by giving you random weather.
+For instance, if you ask an LLM directly (without a search tool) for today's weather, the LLM will potentially hallucinate random weather.
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/weather.jpg" alt="Weather"/>
 
@@ -43,7 +43,7 @@ For instance, using a LLM to give you the today weather without having a web sea
 
 ## How do we give tools to an LLM ?
 
-The answer might be a bit overwhelming, but we simply provide textual descriptions of all the tools available for the model to use in the system prompt.
+The answer may seem overwhelming, but we provide textual descriptions of tools available for the model to use in the system prompt.
 
 Here is dummy example:
 
@@ -54,7 +54,7 @@ The key here is to ensure the most accurate textual description of:
 1. **What does this tool do?**
 2. **What inputs does it expect?**
 
-If that feels too theoretical, let's understand it through a concrete example:
+If that seems too theoretical, let's understand it through a concrete example:
 
 > **Disclaimer:** This example implementation is fictional but closely resembles real implementations in most libraries.
 
@@ -170,7 +170,7 @@ def tool(func):
     )
 ```
 
-One of the most common tools in most demos is the **calculator** tool.  
+One of the most common tools in agents is a **calculator** tool.  
 Here, we present a simplified version that only multiplies two integers.  
 
 #### **Function Inputs**  
@@ -215,17 +215,17 @@ Output :
 Call result: 30
 ```
 
-The function is perfectly working and we have provided an implementation that allows the Agent to textually know what tools it has at it's disposal. 
+We can see that the function is working and our implementation allows the Agent knows its available tools based on the textual description. 
 
-We learn more how an Agent can now **Call* this tool itself in the Actions section.
+In the Action section, we will learn more about how an Agent can **Call* this tool.
 
-The descr is then **injected** in the system prompt. Taking the same dummy example, here is what it would likle after replacing the variable:
+The description is **injected** in the system prompt. Taking the same dummy example, here is how it would look after replacing the parameters:
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/Agent_system_prompt_tools.png" alt="System prompt for tools"/>
 
 --
 
-AI Tools play a crucial role in enhancing the capabilities of AI agents. 
+Tools play a crucial role in enhancing the capabilities of AI agents. 
 
 To summarize, we learned:
 

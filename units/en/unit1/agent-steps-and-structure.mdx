@@ -6,9 +6,9 @@ Let's now continue building the system message with some instructions for the Ag
 
 ## The Core Components
 
-We learned that AI agents are systems that can reason, plan, and interact with their environment.
+We learned that AI agents are systems that can reason, plan, and interact with their environment. In this section, we will explore components conceptually and in the following sections we focus on implementing them.
 
-To grasp how they function, imagine a continuous cycle of thinking, acting, and observing. Let's break down thos actions together :
+To grasp how agents function, imagine a continuous cycle of thinking, acting, and observing. Let's break down these actions together :
 
 1. **Thought:** The LLM in the agent decides what the next step should be
 2. **Action:** The agent takes an action, by using the tools it wants to call with the associated arguments.
@@ -81,7 +81,7 @@ There is multiple types of Agents, that take actions differently:
 | Code Agent |The Agents writes a code bloc that is interpreted externally |
 |Function-calling Agent | It is a subcategory of the JSON Agent which has been fine-tuned to generate a new message for each action |
 
-If this is blury, this is normal, we'll take some time to give more informationon each agent type in the **Action** section.
+We've only touched the surface on actions. In the **Action** section, we'll give more information about each agent type.
 
 Here are some examples of possible Actions.
 
@@ -111,5 +111,3 @@ Observations are how an AI agent perceives the consequences of its actions. They
 
 
 Observation are added back into the prompt by the framework. This is why we need to stop generation of the next tokens when the model decides to take an action. If we don't stop the generation, the LLM would hallucinate an Observation.
-
-<!-- TODO: @Jofthomas -->

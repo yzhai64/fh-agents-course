@@ -2,7 +2,7 @@
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/whiteboard-check-1.jpg" alt="Unit 1 planning"/>
 
-As we learned in the previous section, each Agent needs **an AI Model at its core**. And the currently most used AI model for those are LLMs (Large Language Models).
+As we learned in the previous section, each Agent needs **an AI Model at its core**, and the most common AI model for those are Large Language Models (LLMs).
 
 Therefore, we need now to understand what are LLMs and how they power Agents.
 
@@ -69,7 +69,7 @@ You can experiment with different tokenizers in the interactive playground below
 	height="450"
 ></iframe>
 
-Each LLM have some **special tokens** specific to this model. The most important of those special token is the **End of sequence token** (EOS).
+Each LLM has some **special tokens** specific to the model. The most important of those special token is the **End of sequence token** (EOS).
 
 | **Model**     | **Provider**                  | **EOS Token**              |
 |---------------|-------------------------------|----------------------------|
@@ -92,13 +92,13 @@ In other words, an LLM will decode text until it reaches the EOS. But what happe
 While the full process can be quite technical for the purpose of learning agents, here’s a brief overview:
 
 - Once the input text is **tokenized**, the model computes a dense representation of the words that captures both the meaning and the position of each token in the input sequence. 
-- This Dense representation goes into the model and outputs some logits and those logits can be remapped to a token id (a unique number for each token) through the softmax function.
+- This dense representation goes into the model and outputs scores ranking the likelihood of each token in its vocabulary being next in the sequence.
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/DecodingFinal.gif" alt="Visual Gif of decoding" width="60%">
 
-- Once out of the model, we have multiple options of potential tokens that could complete the sentence. 
+- Once out of the model, we have multiple strategies to select the tokens to complete the sentence. 
 
-- The most naive decoding strategy would be to always take the word with the maximum probability.
+- The most naive decoding strategy would be to always take the word with the maximum score.
 
 You can interract with the decoding process yourself with SmollLM2 in this space (remember, it decodes untill reaching an **EOS** token which is  **<|im_end|>** for this model):
 
