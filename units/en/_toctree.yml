@@ -13,33 +13,33 @@
   - local: unit1/what-are-agents
     title: What is an Agent?
   - local: unit1/quiz1
-    title: Small Quiz 1
+    title: Quick Quiz 1
   - local: unit1/what-are-llms
     title: What are LLMs?
   - local: unit1/messages-and-special-tokens
-    title: Messages and special tokens
+    title: Messages and Special Tokens
   - local: unit1/tools
     title: Tools
   - local: unit1/quiz2
-    title: Small Quiz 2
+    title: Quick Quiz 2
   - local: unit1/agent-steps-and-structure
-    title: agent_steps_and_structure
+    title: Agent Steps and Structure
   - local: unit1/thoughts
-    title: 6_thoughts
+    title: Thoughts
   - local: unit1/actions
-    title: 7_actions
+    title: Actions
   - local: unit1/dummy-agent-library
-    title: 8_dummy-agent-library
+    title: Dummy Agent Library
   - local: unit1/observations
-    title: observations
+    title: Observations
   - local: unit1/simple-use-case
-    title: 11_simple-use-case
+    title: Simple Use Case
   - local: unit1/final-quiz
     title: Unit 1 Final Quiz
   - local: unit1/get-your-certificate
-    title: Unit 1 Get Your Certificate
+    title: Get Your Certificate
   - local: unit1/conclusion
-    title: conclusion
+    title: Conclusion
 - title: When the next steps are published?
   sections:
   - local: communication/next-units
