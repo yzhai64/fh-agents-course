@@ -1,6 +1,6 @@
 # Table of Contents
 
-You can access the unit 1 on hf.co/learn 👉 <a href="https://hf.co/learn/agents-course/unit1/introduction">here</a> 
+You can access Unit 1 on hf.co/learn 👉 <a href="https://hf.co/learn/agents-course/unit1/introduction">here</a> 
 
 | Title | Description |
 |-------|-------------|
