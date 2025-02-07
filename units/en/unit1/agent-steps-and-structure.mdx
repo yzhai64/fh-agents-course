@@ -1,16 +1,18 @@
 # Understanding AI Agents through the Thought-Action-Observation Cycle
 
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/whiteboard-check-3.jpg" alt="Unit 1 planning"/>
+
 In the previous Unit, we saw **how tools are made available to the agent in the system prompt**. 
 
-Let's now continue building the system message with some instructions for the Agent.
+We learned that AI agents are systems that can reason, plan, and interact with their environment.
+
+In this section, we will explore components conceptually and in the following sections we focus on implementing them.
 
 ## The Core Components
 
-We learned that AI agents are systems that can reason, plan, and interact with their environment. In this section, we will explore components conceptually and in the following sections we focus on implementing them.
-
 To grasp how agents function, imagine a continuous cycle of thinking, acting, and observing. Let's break down these actions together :
 
-1. **Thought:** The LLM in the agent decides what the next step should be
+1. **Thought:** The LLM in the agent decides what the next step should be.
 2. **Action:** The agent takes an action, by using the tools it wants to call with the associated arguments.
 3. **Observation:** The agent reflects on the response from the tool.
 
@@ -22,7 +24,7 @@ Visually it looks like this:
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/Thought_Action_obs_cycle.gif" alt="Think, Act, Observe cycle"/>
 
-Just like tools, it may seem a bit deceiving but most agents actually only rely on prompting to have rules in place in the framework.
+Just like tools, it may seem a bit deceiving but most agents actually **only rely on prompting to have rules in place in the framework**.
 
 In an simplified version, our system prompt now looks like this:
 
@@ -34,11 +36,13 @@ Let's now break down each step of the process.
 
 Thoughts represent the **Agent's internal reasoning and planning processes**. 
 
-This utilises the agent's Large Language Model (LLM) capacity to analyze information when presented in it's prompt.
+This utilises the agent's Large Language Model (LLM) capacity **to analyze information when presented in it's prompt**.
 
 Think of it as the agent's internal dialogue, where it considers the task at hand and strategizes its approach.
 
-The Agent's thoughts are responsible for accessing current observations and decide what the next action(s) should be. Through this process, the agent can break down complex problems into smaller, more manageable steps, reflect on past experiences, and continuously adjust its plans based on new information.
+The Agent's thoughts are responsible for accessing current observations and decide what the next action(s) should be. 
+
+Through this process, the agent can **break down complex problems into smaller, more manageable steps**, reflect on past experiences, and continuously adjust its plans based on new information.
 
 Here are some examples of common thoughts:
 
@@ -58,20 +62,33 @@ Here are some examples of common thoughts:
 
 #### ReAct
 
-This concept of thinking before Acting orginates from the ReAct prompt. ReAct is the concatenation of **"Reasoning"** and **"Acting"**.
+This concept of thinking before Acting orginates from the ReAct prompt. 
+
+ReAct is the concatenation of **"Reasoning"** and **"Acting"**.
+
 ReAct is a simple prompting technique that appends "Let's think step by step" before letting the LLM decode the next tokens. 
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/ReAct.png" alt="ReAct"/>
 
-Prompting the model to think "step by step" encourages the decoding process toward next tokens that generate a plan, rather than a final solution.
-After "Let's think step by step", the model will **decompose** the problem into sub-tasks. This allows the model to consider sub-steps in more detail, which in general leads to less errors than directly generating solution.
+Prompting the model to think "step by step" encourages the decoding process toward next tokens **that generate a plan**, rather than a final solution.
 
+After "Let's think step by step", the model will **decompose** the problem into *sub-tasks*. 
+
+This allows the model to consider sub-steps in more detail, which in general leads to less errors than directly generating solution.
+
+<Tip>
 Recently we have seen an interest for reasoning. Models like Deepseek-R1 or OpenAI's o1 have been fine-tuned to  "think before answering".
+</Tip>
+
 > Note : Those model have been fine-tuned to always include specific thinking ( enclosed in <think></think> special token). This is not a purely prompting technique like ReAct
 
 ### Actions
 
-Actions are the concrete steps an AI agent takes to interact with its environment. These can range from browsing the web for information to controlling a robot in a physical space. Consider an agent assisting with customer service - it might retrieve customer data, offer support articles, or escalate issues to human representatives.
+Actions are **the concrete steps an AI agent takes to interact with its environment**. 
+
+These can range from browsing the web for information to controlling a robot in a physical space. 
+
+For instance, consider an agent assisting with customer service - it might retrieve customer data, offer support articles, or transfer issues to human representatives.
 
 There is multiple types of Agents, that take actions differently:
 
@@ -83,7 +100,7 @@ There is multiple types of Agents, that take actions differently:
 
 We've only touched the surface on actions. In the **Action** section, we'll give more information about each agent type.
 
-Here are some examples of possible Actions.
+Here are some examples of possible Actions:
 
 | Type of Action | Description |
 |----------------|-------------|
@@ -93,13 +110,18 @@ Here are some examples of possible Actions.
 | Communication | Engaging with users through chat, collaborating with other AI agents |
 
 One crucial part of an agent is the ability to **STOP** generating new tokens when an action is complete, and that is true for all formats of Agent; JSON, code, or function-calling.
+
 The LLM only handles text, and uses it to describe the action it wants to take and the parameters to supply to the tool.
 
-<INSERT EXAMPLE>
+<INSERT EXAMPLE EITHER BEN ONE BUT IF WE CAN MAKE A ANIMATION OF BEN EXAMPLE THAT WOULD BE SUPER COOL>
 
 ### Observations
 
-Observations are how an AI agent perceives the consequences of its actions. They provide crucial information that fuels the agent's thought process and guides future actions. These observations can take many forms, from reading webpage text to monitoring a robot arm's position. This can be seen like Tool "logs" that provide textual feedback of the Action execution.
+Observations are **how an AI agent perceives the consequences of its actions**. 
+
+They provide crucial information that fuels the agent's thought process and guides future actions. 
+
+These observations can take many forms, from reading webpage text to monitoring a robot arm's position. This can be seen like Tool "logs" that provide textual feedback of the Action execution.
 
 | Type of Observation | Example |
 |-------------------|----------|
@@ -110,4 +132,9 @@ Observations are how an AI agent perceives the consequences of its actions. They
 | Time-based Events | Deadlines reached, scheduled tasks completed |
 
 
-Observation are added back into the prompt by the framework. This is why we need to stop generation of the next tokens when the model decides to take an action. If we don't stop the generation, the LLM would hallucinate an Observation.
+Observation are **added back into the prompt by the framework**. 
+
+This is why we need to stop generation of the next tokens when the model decides to take an action. If we don't stop the generation, the LLM would hallucinate an Observation.
+
+## An Example with Alfred
+<I THINK WE SHOULD ADD AN EXAMPLE WDYT?>
