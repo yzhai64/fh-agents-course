@@ -97,7 +97,7 @@ The LLM only handling text, it has to textually describe the action it want to t
 
 ### Observations
 
-Observations are how an AI agent perceives the world and the consequences of its actions. They provide crucial information that fuels the agent's thought process and guides future actions. These observations can take many forms, from reading webpage text to monitoring a robot arm's position.
+Observations are how an AI agent perceives the consequences of its actions. They provide crucial information that fuels the agent's thought process and guides future actions. These observations can take many forms, from reading webpage text to monitoring a robot arm's position. This can be seen as a kind of "logs" of the Tools, that provide a textual feedback of the Action execution.
 
 | Type of Observation | Example |
 |-------------------|----------|
@@ -107,6 +107,7 @@ Observations are how an AI agent perceives the world and the consequences of its
 | Response Analysis | API responses, query results, computation outputs |
 | Time-based Events | Deadlines reached, scheduled tasks completed |
 
-## Specialized Agents: Code vs. JSON
+
+Observation are manually added back into the prompt ( by the framework ). This is why we need to stop generation of the next tokens when the model wants to take an action. If we don't stop the generation, the LLM would hallucinate an Observation...
 
 <!-- TODO: @Jofthomas -->
