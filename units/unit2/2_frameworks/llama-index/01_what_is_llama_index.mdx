@@ -1,0 +1,44 @@
+# What is Llama Index?
+
+This module covers how to build effective agents using the [LlamaIndex](https://docs.llamaindex.ai/en/stable/) framework.
+
+## What is the framework?
+
+LlamaIndex is the leading framework for building LLM-powered agents on your data by creating `workflows`, using any integrated `components` available in `llama-index`. You can then build, iterate and deploy these agents in multi-agent systems using `LlamaDeploy`.
+
+### [What is LlamaParse?](./llamadeploy.md)
+
+LlamaParse is a GenAI-native document parser that can parse complex document data for any downstream LLM use case (RAG, agents).
+
+### [What are components?](./components.md)
+
+Components are the building blocks of workflows. They are any `llama-index` components that are integrated into the framework.
+
+### [What are workflows?](./workflows.md)
+
+Workflows are multi-step processes that combine one or more agents, data connectors, and other tools to complete a task. They are event-driven software that allows you to combine RAG data sources and multiple agents to create a complex application that can perform a wide variety of tasks with reflection, error-correction, and other hallmarks of advanced LLM applications. You can then deploy these agentic workflows as production microservices.
+
+## Why should you use this framework for agents over others?
+
+All frameworks are equal, but some are more equal than others. T
+
+## Core Concepts
+
+| Concept | Description |
+|---------|-------------|
+| [Components](./components.md) | A component is a building block of a workflow, like an agent, a model, a prompt, or a tool. |
+| [Workflows](./workflows.md) | A workflow is a sequence of steps, events made of components that are executed in order. |
+
+## [Integrations](./components.md)
+
+We have already mentioned that `llama-index` is a framework that relies on components to create agentic AI. These components also consist of LLM, embeddings, tool and AI integrations.
+
+## [Use-case](./use-case.md)
+
+
+
+## References
+
+- [Agents](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/)
+- [Workflows](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)
+- [LlamaDeploy](https://docs.llamaindex.ai/en/stable/module_guides/llama_deploy/)
