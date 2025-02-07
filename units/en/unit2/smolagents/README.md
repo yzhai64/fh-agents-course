@@ -1,5 +1,7 @@
 # smolagents
 
+![smolagents license to call](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/smolagents/license_to_call.png)
+
 This module covers how to build effective agents using the [`smolagents`](https://github.com/huggingface/smolagents) library, which provides a lightweight framework for creating capable AI agents.
 
 ## Module Overview
@@ -10,11 +12,11 @@ This module provides a comprehensive overview of key concepts and practical stra
 
 ### 1️⃣ [Why Use smolagents](./why_use_smolagents.md)
 
-`smolagents` is one of the many open-source agent frameworks available for application development. Alternative options include `LangChain`, `LlamaIndex` and `LangGraph`. This library offers several key features that might make it a great fit for specific use cases, but there are also some limitations that may lead you to consider other solutions. This module explores the advantages and drawbacks of using `smolagents`, helping you make an informed decision based on your project's requirements.
+`smolagents` is one of the many open-source agent frameworks available for application development. Alternative options include `LangChain`, `LlamaIndex` and `LangGraph`, which are also covered in other modules in this course. This library offers several key features that might make it a great fit for specific use cases, but there are also some limitations that may lead you to consider other solutions. This module explores the advantages and drawbacks of using `smolagents`, helping you make an informed decision based on your project's requirements.
 
 ### 2️⃣ [Retrieval Agents](./retrieval_agents.md)
 
-Retrieval agents combine models with knowledge bases. These agents can search and synthesize information from multiple sources, leveraging vector stores for efficient retrieval and implementing RAG (Retrieval Augmented Generation) patterns. They are great at combining web search with custom knowledge bases while maintaining conversation context through memory systems. The module covers implementation strategies including fallback mechanisms for robust information retrieval.
+Retrieval agents combine models with knowledge bases. These agents can search and synthesize information from multiple sources, leveraging vector stores for efficient retrieval and implementing Retrieval Augmented Generation (RAG) patterns. They are great at combining web search with custom knowledge bases while maintaining conversation context through memory systems. The module covers implementation strategies including fallback mechanisms for robust information retrieval.
 
 ### 3️⃣ [Code Agents](./code_agents.md)
 
