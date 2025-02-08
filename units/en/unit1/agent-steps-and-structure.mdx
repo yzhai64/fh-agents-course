@@ -14,7 +14,7 @@ And then, we’ll dive deeper on each of these steps.
 
 ## The Core Components
 
-An Agent function in a continuous cycle of: thinking (Thought) → acting (Act) and observing (Observe).
+An Agent function in a continuous cycle of: **thinking (Thought) → acting (Act) and observing (Observe)**.
 
 MAYBE AN ILLUSTRATION HERE
 
@@ -38,15 +38,22 @@ In an simplified version, our system prompt now looks like this:
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/system_prompt_cycle.png" alt="Think, Act, Observe cycle"/>
 
+We see here that in the System Message we defined :
+- The *Agent's behavior*.
+
+- The *Tools our Agent have access*.
+
+- The *Thought-Action-Observation Cycle*.
+
 Let’s take a small example to understand the process before going deeper into each step of the process.
 
 ## Alfred, the weather Agent
 
 We created Alfred, the Weather Agent.
 
-ILLUSTRATION ALFRED AGENT
+A user asks to Alfred: “What’s the weather like in New York today?”
 
-A user asks: “What’s the weather like in New York today?”
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/alfred-agent.jpg" alt="Alfred Agent"/>
 
 Alfred’s job is to answer this query using a weather API tool. 
 
