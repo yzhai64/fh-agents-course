@@ -30,26 +30,22 @@ Here are some examples of common thoughts:
 
 A key method is the **ReAct approach**, which is the concatenation of  "Reasoning" (Think) with "Acting" (Act). 
 
-ReAct is a simple prompting technique that appends "Let's think step by step" before letting the LLM decode the next tokens. This structured reflection minimizes mistakes and improve clarity.
+ReAct is a simple prompting technique that appends "Let's think step by step" before letting the LLM decode the next tokens. 
 
-<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/ReAct.png" alt="ReAct"/>
-
-Prompting the model to think "step by step" encourages the decoding process toward next tokens **that generate a plan**, rather than a final solution.
-
-After "Let's think step by step", the model will **decompose** the problem into *sub-tasks*.
+Indeed, prompting the model to think "step by step" encourages the decoding process toward next tokens **that generate a plan**, rather than a final solution, since the model will **decompose** the problem into *sub-tasks*.
 
 This allows the model to consider sub-steps in more detail, which in general leads to less errors than directly generating solution.
+
+<figure>
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/ReAct.png" alt="ReAct"/>
+<figcaption>The (d) is an example of Re-Act approach where we prompt "Let's think step by step"
+</figcaption>
+</figure>
 
 <Tip>
 Recently we have seen an interest for reasoning. Models like Deepseek-R1 or OpenAI's o1 have been fine-tuned to  "think before answering".
 </Tip>
 
-
 > **Note** : Those model have been fine-tuned to always include specific thinking ( enclosed in <think></think> special token). This is not a purely prompting technique like ReAct
 
-
-To summarize the key points in the Thought phase:
-
-- **Decomposition:** Breaking down a complex task into manageable subtasks.
-- **Planning:** Formulating a strategy based on current and past observations.
-- **ReAct Prompting:** Encouraging the model to think step by step, leading to more robust decision-making.
+Let's move now to the second step: Act.
