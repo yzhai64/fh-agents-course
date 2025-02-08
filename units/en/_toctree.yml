@@ -28,10 +28,10 @@
     title: Thought, Internal Reasoning and the Re-Act Approach
   - local: unit1/actions
     title: Actions
+  - local: unit1/observations
+    title: Observe, Integrating Feedback to Reflect and Adapt
   - local: unit1/dummy-agent-library
     title: Dummy Agent Library
-  - local: unit1/observations
-    title: Observations
   - local: unit1/simple-use-case
     title: Simple Use Case
   - local: unit1/final-quiz
