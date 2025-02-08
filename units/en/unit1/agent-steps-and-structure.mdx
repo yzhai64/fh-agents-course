@@ -69,6 +69,7 @@ Upon receiving the query, Alfred’s internal dialogue might be:
 
 This step shows the agent breaking the problem into steps: first gathering the necessary data.
 
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/alfred-agent-1.jpg" alt="Alfred Agent"/>
 
 ### Action
 
@@ -89,6 +90,8 @@ Thought: I need to check the current weather for New York.
 
 Here, the action clearly specifies which tool to call (e.g., get_weather) and what parameter to pass (the “location" : “New York”).
 
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/alfred-agent-2.jpg" alt="Alfred Agent"/>
+
 ### Observation
 
 **Feedback from the Environment:**
@@ -96,6 +99,8 @@ Here, the action clearly specifies which tool to call (e.g., get_weather) and wh
 After the tool call, Alfred receives an observation. This might be the raw weather data from the API such as:
 
 *"Current weather in New York: partly cloudy, 15°C, 60% humidity."*
+
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/alfred-agent-3.jpg" alt="Alfred Agent"/>
 
 This observation is then added to the agent’s context. It functions as real-world feedback, confirming whether the action succeeded and providing the needed details.
 
@@ -108,6 +113,9 @@ With the observation in hand, Alfred updates its internal reasoning:
 
 *"Now that I have the weather data for New York, I can compile an answer for the user."*
 
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/alfred-agent-4.jpg" alt="Alfred Agent"/>
+
+
 ### Final Action
 
 Alfred then generates a final response formatted in JSON:
@@ -118,7 +126,9 @@ Final answer : The current weather in New York is partly cloudy with a temperatu
 
 This final action sends the answer back to the user, closing the loop.
 
-ADD ANIMATION
+
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/alfred-agent-5.jpg" alt="Alfred Agent"/>
+
 
 What we see with example:
 
