@@ -25,7 +25,7 @@
   - local: unit1/agent-steps-and-structure
     title: Agent Steps and Structure
   - local: unit1/thoughts
-    title: Thoughts
+    title: Thought, Internal Reasoning and the Re-Act Approach
   - local: unit1/actions
     title: Actions
   - local: unit1/dummy-agent-library
