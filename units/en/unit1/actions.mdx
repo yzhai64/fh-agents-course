@@ -1,11 +1,8 @@
-# Actions [[Actions]]
+# Actions:  Enabling the Agent to Engage with Its Environment
 
  In this section, we explore the concrete steps an AI agent takes to interact with its environment. 
 
  We’ll cover how actions are represented (using JSON or code), the importance of the stop and parse approach, and introduce different types of agents.
-
-
-Actions are **the concrete steps an AI agent takes to interact with its environment**.
 
 Actions are the concrete steps an **AI agent takes to interact with its environment**. 
 
@@ -25,16 +22,16 @@ There is multiple types of Agents, that take actions differently:
 
 Actions themselves can serve many purposes:
 
-Type of Action	Description
-Information Gathering	Performing web searches, querying databases, or retrieving documents.
-Tool Usage	Making API calls, running calculations, and executing code.
-Environment Interaction	Manipulating digital interfaces or controlling physical devices.
-Communication	Engaging with users via chat or collaborating with other agents.
+| Type of Action           | Description                                                                              |
+|--------------------------|------------------------------------------------------------------------------------------|
+| Information Gathering    | Performing web searches, querying databases, or retrieving documents.                    |
+| Tool Usage               | Making API calls, running calculations, and executing code.                              |
+| Environment Interaction  | Manipulating digital interfaces or controlling physical devices.                         |
+| Communication            | Engaging with users via chat or collaborating with other agents.                           |
 
 One crucial part of an agent is the ability to STOP generating new tokens when an action is complete, and that is true for all formats of Agent; JSON, code, or function-calling. This prevents unintended output and ensures that the agent’s response is clear and precise.
 
 The LLM only handles text, and uses it to describe the action it wants to take and the parameters to supply to the tool.
-
 
 ## The Stop and Parse Approach
 
@@ -112,6 +109,9 @@ In this example, the Code Agent:
 This method also follows the stop and parse approach by clearly delimiting the code block and signaling when execution is complete (here, by printing the final_answer).
 
 
+
+
+JOFFREY: on fait quoi de ca? J'ai déja réutilisé dans d'autres sections.
 
 
 
