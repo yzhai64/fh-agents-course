@@ -2,27 +2,44 @@
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/whiteboard-unit1sub3DONE.jpg" alt="Unit 1 planning"/>
 
+This course is framework agnostic because we want to **focus on the concepts of AI agents and avoid getting bogged down in the specifics of a particular framework**. 
 
-This course is framework agnostic because we want to focus on the concepts of AI agents and avoid getting bogged down in the specifics of a particular framework. Also, we want students to be able to use the concepts they learn in this course in their own projects, in any framework.
+Also, we want students to be able to use the concepts they learn in this course in their own projects, in any framework.
 
-Therefore, for this introductory unit, we will use a dummy agent library and simple severless API, which will be our LLM engine. In reality, you would not use these in production, but they will serve as a good starting point for understanding how agents work. In the following units we will use AI Agent libraries like `smolagents`, `LangGraph`, `LangChain`, and `LlamaIndex`.
+Therefore, for this Unit 1, we will use a dummy agent library and simple severless API, which will be our LLM engine. 
 
+In reality, you would not use these in production, but they will serve as a good **starting point for understanding how agents work**. 
+
+But, after this section, you'll **create a simple Agent** using `smolagents`
+
+And in the following Units we will also use other AI Agent libraries like `LangGraph`, `LangChain`, and `LlamaIndex`.
+
+<<<<<<< Updated upstream
 To keep things simple we will use a simple Python function as a tools and agents. We will use built in python packages like `datetime` and `os` so that you can try it out in any environment.
+=======
+## Good Old Python 
 
-You can find the notebook [here](INSER LINK to the notebook section).
+To keep things simple we will use a simple Python function as a Tool and Agent. 
+>>>>>>> Stashed changes
+
+We will use built in python packages like `datetime` and `os` so that you can try it out in any environment.
+
+You can find the notebook [here](INSER LINK to the notebook section). If you **want to run the code**.
 
 ## Serverless API
-In the Hugging Face ecosystem there is a conveniant feature called Serverless API that allows you to test some models. This uses a shared enpoints between multiples users to compute some requests. This is conveniant to test some models.
+
+In the Hugging Face ecosystem there is a conveniant feature called *Serverless API* that allows you to **test some models**. This uses a shared enpoints between multiples users to compute some requests. This is conveniant to test some models.
 
 ```python
 import os
 from huggingface_hub import InferenceClient
 
-## The token can also be set in the "settings" tab under "secret". Make sure to call it "HF_TOKEN"
+## You need a token, this can be set in the "settings" tab under "secret". Make sure to call it "HF_TOKEN"
 os.environ["HF_TOKEN"]="hf_xxxxxxxxxxxxxx"
 
 client = InferenceClient("meta-llama/Llama-3.2-3B-Instruct")
 ```
+
 ```python
 output = client.text_generation(
     "The capital of france is",
@@ -35,9 +52,10 @@ output:
 ```
 Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris.
 ```
-As seen in the LLM section, if we just do decoding, the model will only stop when it predicts an EOS token and this does not happen here because we forgot to add the special tokens of this model.
+As seen in the LLM section, if we just do decoding, **the model will only stop when it predicts an EOS token** and this does not happen here because **we forgot to add the special tokens of this model**.
 
-If we now add the special tokens related to the Llama-3.2-3B-Instruct model that we're using, the behaviour changes and is now the expected oen.
+If we now add the special tokens related to the Llama-3.2-3B-Instruct model that we're using, the behaviour changes and is now the expected EOS.
+
 ```python
 prompt="""<|begin_of_text|><|start_header_id|>user<|end_header_id|>
 The capital of france is<|eot_id|><|start_header_id|>assistant<|end_header_id|>"""
@@ -66,7 +84,7 @@ output:
 ```
 Paris.
 ```
-The chat method is the RECOMMANDED method to use in order to ensure a smooth transition between models but since this notebook is only educationnal, we will keep using the "text_generation" method to understand the details.
+The chat method is the RECOMMENDED method to use in order to ensure a smooth transition between models but since this notebook is only educationnal, we will keep using the "text_generation" method to understand the details.
 
 ## Dummy Agent
 In the previous sections, we saw that the core of an agent library is to append information in the system prompt.
