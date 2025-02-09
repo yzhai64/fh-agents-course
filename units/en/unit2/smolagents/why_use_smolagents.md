@@ -2,8 +2,6 @@
 
 In this module, we will explore the pros and cons of using [smolagents](https://huggingface.co/blog/smolagents), helping you make an informed decision about whether it's the right framework for your needs.
 
-![Agentic pipeline](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/Agent_ManimCE.gif)
-
 ## When to Use an Agentic Framework
 
 An agentic framework is not always needed when building an application around LLMs. They provide flexibility in the workflow to efficiently solve a specific task, but they're not always necessary. Sometimes, predefined workflows are sufficient to fulfill user requests, and there is no real need for an agentic framework. Even if the agentic approach is low-level, like chains or routers, using plain code may be enough since the developer will have full control and understanding of the system.
@@ -21,18 +19,40 @@ Considering these ideas, we can already identify the need for some features:
 
 ## What is `smolagents`?
 
-`smolagents` is the simplest framework to build powerful agents. It provides the LLM the _agency_ to access the real world, for example, by calling a search or image generation tool. AI agents are programs where LLM outputs control the workflow.
+`smolagents` is a simple yet powerful framework for building AI agents. It provides LLMs with the _agency_ to interact with the real world, such as calling search or image generation tools. AI agents are programs where LLM outputs control the workflow.
 
-smolagents offers several advantages over other frameworks:
+### Key Advantages of `smolagents`
+- **Simplicity:** Minimal code complexity and abstractions.
+- **Flexible LLM Support:** Works with any LLM through integration with Hugging Face tools and external APIs.
+- **Code-First Approach:** First-class support for Code Agents that directly write their actions in code.
+- **HF Hub Integration:** Seamless integration with Hugging Face Hub, allowing the use of Gradio Spaces as tools.
 
-* Simple in terms of code complexity with minimal abstractions.
-* Support for any LLM through integration with Hugging Face's tools and external tools.
-* First-class support for Code Agents, which write their actions in code.
-* Integration with HF Hub, which, for example, allows using Gradio Spaces as tools.
-
-It also offers the features introduced in the previous section. Code agents are a key component of this framework. For some LLMs agentds, they use JSON for writing the actions that the agent needs to execute, which must be parsed for execution. In comparison, smolagents directly aim for tool calling in code. You can refer to the diagram below for a better understanding of this concept:
+### Code vs. JSON Actions
+Unlike other frameworks where agents write actions in JSON that require parsing, `smolagents` focuses on direct tool calls in code, simplifying the execution process. The following diagram illustrates this difference:
 
 ![Code vs. JSON actions](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/code_vs_json_actions.png)
+
+### Agent Types in `smolagents`
+Agents in `smolagents` inherit from [MultiStepAgent](https://huggingface.co/docs/smolagents/main/en/reference/agents#smolagents.MultiStepAgent), enabling them to operate in multiple steps, where each step consists of:
+- One thought
+- One tool call and execution
+
+There are two types of agents available:
+1. **[CodeAgent](https://huggingface.co/docs/smolagents/main/en/reference/agents#smolagents.CodeAgent):** The default agent type that writes tool calls using Python.
+2. **[ToolCallingAgent](https://huggingface.co/docs/smolagents/main/en/reference/agents#smolagents.ToolCallingAgent):** Writes tool calls in JSON.
+
+We will explore each agent type in more detail in the following units.
+
+### Model Integration in `smolagents`
+`smolagents` supports flexible LLM integration, allowing you to use any callable model as long as it meets [certain criteria](https://huggingface.co/docs/smolagents/main/en/reference/models). To simplify connections with various model types, the framework provides predefined classes:
+
+- **[TransformersModel](https://huggingface.co/docs/smolagents/main/en/reference/models#smolagents.TransformersModel):** Implements a local `transformers` pipeline for seamless integration.
+- **[HfApiModel](https://huggingface.co/docs/smolagents/main/en/reference/models#smolagents.HfApiModel):** Wraps Hugging Face's [InferenceClient](https://huggingface.co/docs/huggingface_hub/main/en/guides/inference) to support the [Inference API](https://huggingface.co/docs/api-inference/index) and [Inference Providers](https://huggingface.co/blog/inference-providers).
+- **[LiteLLMModel](https://huggingface.co/docs/smolagents/main/en/reference/models#smolagents.LiteLLMModel):** Leverages [LitLLM](https://www.litellm.ai/) for lightweight model interactions.
+- **[OpenAIServerModel](https://huggingface.co/docs/smolagents/main/en/reference/models#smolagents.OpenAIServerModel):** Connects to models compatible with the OpenAI API server.
+- **[AzureOpenAIServerModel](https://huggingface.co/docs/smolagents/main/en/reference/models#smolagents.AzureOpenAIServerModel):** Supports integration with any Azure OpenAI deployment.
+
+This flexibility ensures that developers can choose the most suitable model integration for their specific use cases.
 
 ## When to use smolagents
 
