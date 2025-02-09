@@ -27,7 +27,7 @@
   - local: unit1/thoughts
     title: Thought, Internal Reasoning and the Re-Act Approach
   - local: unit1/actions
-    title: Actions
+    title: Actions, Enabling the Agent to Engage with Its Environment
   - local: unit1/observations
     title: Observe, Integrating Feedback to Reflect and Adapt
   - local: unit1/dummy-agent-library
