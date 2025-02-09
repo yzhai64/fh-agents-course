@@ -23,7 +23,7 @@
   - local: unit1/quiz2
     title: Quick Quiz 2
   - local: unit1/agent-steps-and-structure
-    title: Agent Steps and Structure
+    title: Understanding AI Agents through the Thought-Action-Observation Cycle
   - local: unit1/thoughts
     title: Thought, Internal Reasoning and the Re-Act Approach
   - local: unit1/actions
