@@ -48,7 +48,7 @@ Paris. The capital of France is Paris. The capital of France is Paris. The capit
 ```
 As seen in the LLM section, if we just do decoding, **the model will only stop when it predicts an EOS token** and this does not happen here because **we forgot to add the special tokens of this model**.
 
-If we now add the special tokens related to the Llama-3.2-3B-Instruct model that we're using, the behaviour changes and is now the expected EOS.
+If we now add the special tokens related to the <a href="https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct">Llama-3.2-3B-Instruct model</a> that we're using, the behaviour changes and is now the expected EOS.
 
 ```python
 prompt="""<|begin_of_text|><|start_header_id|>user<|end_header_id|>
@@ -81,6 +81,7 @@ Paris.
 The chat method is the RECOMMENDED method to use in order to ensure a smooth transition between models but since this notebook is only educationnal, we will keep using the "text_generation" method to understand the details.
 
 ## Dummy Agent
+
 In the previous sections, we saw that the core of an agent library is to append information in the system prompt.
 
 This system prompt is a bit more complex than the one we saw earlier, but it already contains:
