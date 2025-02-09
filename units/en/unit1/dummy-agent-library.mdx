@@ -99,9 +99,9 @@ ALWAYS use the following format:
 Question: the input question you must answer
 Thought: you should always think about one action to take. Only one action at a time in this format:
 Action:
-```
-$JSON_BLOB
-```
+
+$JSON_BLOB (inside markdown cell)
+
 Observation: the result of the action. This Observation is unique, complete, and the source of truth.
 ... (this Thought/Action/Observation can repeat N times, you should take several steps when needed. The $JSON_BLOB must be formatted as markdown and only use a SINGLE action at a time.)
 
@@ -159,9 +159,9 @@ ALWAYS use the following format:
 Question: the input question you must answer
 Thought: you should always think about one action to take. Only one action at a time in this format:
 Action:
-```
-$JSON_BLOB
-```
+
+$JSON_BLOB (inside markdown cell)
+
 Observation: the result of the action. This Observation is unique, complete, and the source of truth.
 ... (this Thought/Action/Observation can repeat N times, you should take several steps when needed. The $JSON_BLOB must be formatted as markdown and only use a SINGLE action at a time.)
 
@@ -271,9 +271,9 @@ ALWAYS use the following format:
 Question: the input question you must answer
 Thought: you should always think about one action to take. Only one action at a time in this format:
 Action:
-```
-$JSON_BLOB
-```
+
+$JSON_BLOB (inside markdown cell)
+
 Observation: the result of the action. This Observation is unique, complete, and the source of truth.
 ... (this Thought/Action/Observation can repeat N times, you should take several steps when needed. The $JSON_BLOB must be formatted as markdown and only use a SINGLE action at a time.)
 
@@ -287,7 +287,7 @@ Now begin! Reminder to ALWAYS use the exact characters `Final Answer:` when you 
 What's the weither in London ?
 <|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
-     Action:
+Action:
 ```
 {
   "action": "get_weather",
