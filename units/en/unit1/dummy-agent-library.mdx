@@ -14,14 +14,6 @@ But, after this section, you'll **create a simple Agent** using `smolagents`
 
 And in the following Units we will also use other AI Agent libraries like `LangGraph`, `LangChain`, and `LlamaIndex`.
 
-<<<<<<< Updated upstream
-To keep things simple we will use a simple Python function as a tools and agents. We will use built in python packages like `datetime` and `os` so that you can try it out in any environment.
-=======
-## Good Old Python 
-
-To keep things simple we will use a simple Python function as a Tool and Agent. 
->>>>>>> Stashed changes
-
 We will use built in python packages like `datetime` and `os` so that you can try it out in any environment.
 
 You can find the notebook [here](INSER LINK to the notebook section). If you **want to run the code**.
@@ -84,9 +76,8 @@ output:
 ```
 Paris.
 ```
-The chat method is the RECOMMENDED method to use in order to ensure a smooth transition between models but since this notebook is only educationnal, we will keep using the "text_generation" method to understand the details.
+The chat method is the RECOMMENDED method to use in order to ensure a **smooth transition between models but since this notebook is only educational**, we will keep using the "text_generation" method to understand the details.
 
-## Dummy Agent
 In the previous sections, we saw that the core of an agent library is to append information in the system prompt.
 
 This system prompt is a bit more complex than the one we saw earlier, but it already contains:
@@ -95,7 +86,7 @@ This system prompt is a bit more complex than the one we saw earlier, but it alr
 2. **Cycle instructions** (Thought → Action → Observation)
 
 ```
-Answer the following questions as best you can. You have access to the following tools:
+SYSTEM_PROMPT = """Answer the following questions as best you can. You have access to the following tools:
 
 get_weather: Get the current weather in a given location
 
@@ -105,7 +96,7 @@ Specifically, this json should have a `action` key (with the name of the tool to
 The only values that should be in the "action" field are:
 get_weather: Get the current weather in a given location, args: {"location": {"type": "string"}}
 example use : 
-
+```
 {{
   "action": "get_weather",
   "action_input": {"location": "New York"}
@@ -122,12 +113,12 @@ $JSON_BLOB (inside markdown cell)
 Observation: the result of the action. This Observation is unique, complete, and the source of truth.
 ... (this Thought/Action/Observation can repeat N times, you should take several steps when needed. The $JSON_BLOB must be formatted as markdown and only use a SINGLE action at a time.)
 
-Youb must always end your output with the following format:
+You must always end your output with the following format:
 
 Thought: I now know the final answer
 Final Answer: the final answer to the original input question
 
-Now begin! Reminder to ALWAYS use the exact characters `Final Answer:` when you provide a definitive answer.
+Now begin! Reminder to ALWAYS use the exact characters `Final Answer:` when you provide a definitive answer. """
 ```
 
 Since we are running the "text_generation", we need to add the right special tokens.
@@ -165,7 +156,7 @@ Specifically, this json should have a `action` key (with the name of the tool to
 The only values that should be in the "action" field are:
 get_weather: Get the current weather in a given location, args: {"location": {"type": "string"}}
 example use : 
-
+```
 {{
   "action": "get_weather",
   "action_input": {"location": "New York"}
@@ -277,7 +268,7 @@ Specifically, this json should have a `action` key (with the name of the tool to
 The only values that should be in the "action" field are:
 get_weather: Get the current weather in a given location, args: {"location": {"type": "string"}}
 example use : 
-
+```
 {{
   "action": "get_weather",
   "action_input": {"location": "New York"}
