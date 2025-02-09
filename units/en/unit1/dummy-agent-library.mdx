@@ -77,7 +77,7 @@ This system prompt is a bit more complex than the one we saw earlier, but it alr
 2. **Cycle instructions** (Thought → Action → Observation)
 
 ```
-SYSTEM_PROMPT = """Answer the following questions as best you can. You have access to the following tools:
+Answer the following questions as best you can. You have access to the following tools:
 
 get_weather: Get the current weather in a given location
 
@@ -109,7 +109,7 @@ Youb must always end your output with the following format:
 Thought: I now know the final answer
 Final Answer: the final answer to the original input question
 
-Now begin! Reminder to ALWAYS use the exact characters `Final Answer:` when you provide a definitive answer. """
+Now begin! Reminder to ALWAYS use the exact characters `Final Answer:` when you provide a definitive answer.
 ```
 
 Since we are running the "text_generation", we need to add the right special tokens.
