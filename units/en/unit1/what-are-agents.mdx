@@ -51,12 +51,18 @@ Now that you have the big picture, here’s a more precise definition:
 
 > An Agent is a system that leverages an AI model to interact with its environment in order to achieve a user-defined objective. It combines reasoning, planning, and the execution of actions (often via external tools) to fulfill tasks.
 
-You can think of the LLM model as the **brain of the Agent** and the framework as the **remaining body parts**:
+Think of the Agent as having two main parts:
 
-- The **AI model** performs the reasoning and generates **Actions** to execute.  
+1. **The Brain (AI Model)**
 
-- The **scope of possible actions** depends on what the agent **has been equipped with**: it's like a human by not having "wings" can't execute the "fly" **Action**, while it is possible to execute **Actions** "walk", "run" ,"jump", "grab", and so on.
+This is where all the thinking happens. The AI model **handles reasoning and planning**.
+It decides **which Actions to take based on the situation**.
 
+2. **The Body (Capabilities and Tools)**
+
+This part represents **everything the Agent is equipped to do**.
+
+The **scope of possible actions** depends on what the agent **has been equipped with**: it's like a human by not having "wings" can't execute the "fly" **Action**, while it is possible to execute **Actions** "walk", "run" ,"jump", "grab", and so on.
 
 ## What type of AI Models do we use for Agents?
 
