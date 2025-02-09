@@ -85,7 +85,7 @@ Each LLM has some **special tokens** specific to the model. The most important o
 
 LLMs are said to be **autoregressive**, meaning that **the output from one pass becomes the input for the next one**. This loop continues until the model predicts the next token to be the EOS token, at which point the model can stop.
 
-<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/AutoregressionFinal.gif" alt="Visual Gif of autoregressive decoding" width="60%">
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/AutoregressionSchema.gif" alt="Visual Gif of autoregressive decoding" width="60%">
 
 In other words, an LLM will decode text until it reaches the EOS. But what happens during a single decoding loop?
 
