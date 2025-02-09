@@ -2,21 +2,21 @@
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/whiteboard-check-1.jpg" alt="Unit 1 planning"/>
 
-As we learned in the previous section, each Agent needs **an AI Model at its core**, and the most common AI model for those are Large Language Models (LLMs).
+In the previous section we learned that each Agent needs **an AI Model at its core**, and that LLMs are the most common type of AI models for this purpose.
 
-Therefore, we need now to understand what are LLMs and how they power Agents.
+Therefore, we need now to understand what LLMs are and how they power Agents.
 
-This section offers a concise technical explanation but if you’re **really not yet familiar with LLMs**, you should check first our [free Natural Language Processing Course](https://huggingface.co/learn/nlp-course/chapter1/1).
+This section offers a concise technical explanation of the use of LLMs. If you want to dive deeper, you can check our [free Natural Language Processing Course](https://huggingface.co/learn/nlp-course/chapter1/1) to understand the fundamentals on which LLMs are built.
 
 ## What is a Large Language Model?
 
-A Large Language Model is a type of AI model that excels at **understanding and generating human language**. They are trained on vast amounts of text data, allowing them to learn patterns, nuances, and structure in language. These models typically consist of billions of parameters.
+An LLM is a type of AI model that excels at **understanding and generating human language**. They are trained on vast amounts of text data, allowing them to learn patterns, structure, and even nuance in language. These models typically consist of many millions of parameters.
 
-Most LLMs are **built on the Transformer architecture**—a deep learning framework that has gained significant interest since the release of BERT from Google in 2018.
+Most LLMs nowadays are **built on the Transformer architecture**—a deep learning architecture based on the "Attention" algorithm, that has gained significant interest since the release of BERT from Google in 2018.
 
 <figure>
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/transformer.jpg" alt="Transformer"/>
-<figcaption>The original Transformer architecture looked like this, with the encoder on the left and the decoder on the right.
+<figcaption>The original Transformer architecture looked like this, with an encoder on the left and a decoder on the right.
 </figcaption>
 </figure>
 
@@ -30,11 +30,11 @@ There are 3 types of transformers :
    - **Typical Size**: Millions of parameters
 
 2. **Decoders**  
-   A decoder-based Transformer focuses **on generating new tokens to complete a sequence, token by token**.
+   A decoder-based Transformer focuses **on generating new tokens to complete a sequence, one token at a time**.
 
-   - **Example**: LLaMA from meta 
+   - **Example**: Llama from Meta 
    - **Use Cases**: Text generation, chatbots, code generation
-   - **Typical Size**: Billions of parameters
+   - **Typical Size**: Billions (in the US sense, i.e., 10^9) of parameters
 
 3. **Seq2Seq (Encoder–Decoder)**  
    A sequence-to-sequence Transformer _combines_ an encoder and a decoder. The encoder first processes the input sequence into a context representation, then the decoder generates an output sequence.
@@ -43,22 +43,22 @@ There are 3 types of transformers :
    - **Use Cases**:  Translation, Summarization, Paraphrasing
    - **Typical Size**: Millions of parameters
 
-Although Large Language Models come in various forms, most people think of LLMs as decoder-based models with billions of parameters. Here are some of the most well-known LLMs:
+Although Large Language Models come in various forms, LLMs are most usually decoder-based models with billions of parameters. Here are some of the most well-known LLMs:
 
 | **Model**                          | **Provider**                              |
 |-----------------------------------|-------------------------------------------|
-| **GPT4**                           | OpenAI                                    |
-| **LLaMA3**                         | Meta (Facebook AI Research)               |
 | **Deepseek-R1**                    | DeepSeek                                  |
-| **SmollLM2**                          | Hugging Face     |
+| **GPT4**                           | OpenAI                                    |
+| **Llama 3**                        | Meta (Facebook AI Research)               |
+| **SmollLM2**                       | Hugging Face     |
 | **Gemma**                          | Google                                    |
 | **Mistral**                        | Mistral                                |
 
-The underlying principle of an LLM is simple yet highly effective: **its objective is to predict the next token in a sequence**. We use the term “token” rather than “word” because not every token corresponds to a whole word.
+The underlying principle of an LLM is simple yet highly effective: **its objective is to predict the next token, given a sequence of previous tokens**. A "token" is the unit of information an LLM works with. You can think of a "token" as if it was a "word", but for efficiency reasons LLMs don't use whole words.
 
-For example, while English has an estimated 600,000 words, an LLM might have a vocabulary of around 32,000 tokens (as is the case with LLaMA 2). This tokenization often works on sub-word units.
+For example, while English has an estimated 600,000 words, an LLM might have a vocabulary of around 32,000 tokens (as is the case with Llama 2). Tokenization often works on sub-word units that can be combined.
 
-For instance, consider how the tokens “interest” and “##ing” can be combined to form “interesting” or “##ed” can be appended to form “interested.”
+For instance, consider how the tokens “interest” and “ing” can be combined to form “interesting”, or “ed” can be appended to form “interested.”
 
 You can experiment with different tokenizers in the interactive playground below:
 
@@ -69,16 +69,16 @@ You can experiment with different tokenizers in the interactive playground below
 	height="450"
 ></iframe>
 
-Each LLM has some **special tokens** specific to the model. The most important of those special token is the **End of sequence token** (EOS).
+Each LLM has some **special tokens** specific to the model. One important special token is the **End of sequence token** (EOS), which the model emits when it considers the sequence being completed has finished.
 
 | **Model**     | **Provider**                  | **EOS Token**              |
 |---------------|-------------------------------|----------------------------|
-| **GPT4**      | OpenAI                        | ``<\|endoftext\|>``       |
-| **LLaMA3**    | Meta (Facebook AI Research)   | ``<\|eot_id\|>``   |
-| **Deepseek-R1** | DeepSeek                   | ``<｜end▁of▁sentence｜>`` |
-| **SmollLM2**  | Hugging Face                 | ``<\|im_end\|>``          |
-| **Gemma**     | Google                       | ``<end_of_turn>``         |
-| **Mistral**   | Mistral                      | ``[/INST]``               |
+| **Deepseek-R1** | DeepSeek                   | `<｜end▁of▁sentence｜>` |
+| **GPT4**        | OpenAI                     | `<|endoftext|>`        |
+| **Llama 3**     | Meta                       | `<|eot_id|>`           |
+| **SmollLM2**    | Hugging Face               | `<|im_end|>`           |
+| **Gemma 2**     | Google                     | `<eos>`                |
+| **Mistral**     | Mistral                    | `</s>`                 |
 
 
 ## Understanding next token prediction.
@@ -91,16 +91,16 @@ In other words, an LLM will decode text until it reaches the EOS. But what happe
 
 While the full process can be quite technical for the purpose of learning agents, here’s a brief overview:
 
-- Once the input text is **tokenized**, the model computes a dense representation of the words that captures both the meaning and the position of each token in the input sequence. 
-- This dense representation goes into the model and outputs scores ranking the likelihood of each token in its vocabulary being next in the sequence.
+- Once the input text is **tokenized**, the model computes a representation of the sequence that captures information about the meaning and the position of each token in the input sequence.
+- This representation goes into the model, which outputs scores that rank the likelihood of each token in its vocabulary as being the next one in the sequence.
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/DecodingFinal.gif" alt="Visual Gif of decoding" width="60%">
 
-- Once out of the model, we have multiple strategies to select the tokens to complete the sentence. 
+Based on these scores, we have multiple strategies to select the tokens to complete the sentence. 
 
-- The most naive decoding strategy would be to always take the word with the maximum score.
+- The easiest decoding strategy would be to always take the token with the maximum score.
 
-You can interract with the decoding process yourself with SmollLM2 in this space (remember, it decodes untill reaching an **EOS** token which is  **<|im_end|>** for this model):
+You can interact with the decoding process yourself with SmollLM2 in this Space (remember, it decodes untill reaching an **EOS** token which is  **<|im_end|>** for this model):
 
 <iframe
 	src="https://jofthomas-decoding-visualizer.hf.space"
@@ -109,9 +109,7 @@ You can interract with the decoding process yourself with SmollLM2 in this space
 	height="450"
 ></iframe>
 
-If you want to know more about decoding, you can take a look at the [NLP course](https://huggingface.co/learn/nlp-course).
-
-But there are also more advanced decoding strategies. Fore example, *beam search* explores multiple candidate sequences to find the one with the maximum total score—even if some individual tokens have lower scores.
+- But there are more advanced decoding strategies. For example, *beam search* explores multiple candidate sequences to find the one with the maximum total score–even if some individual tokens have lower scores.
 
 <iframe
 	src="https://m-ric-beam-search-visualizer.hf.space"
@@ -119,6 +117,8 @@ But there are also more advanced decoding strategies. Fore example, *beam search
 	width="850"
 	height="450"
 ></iframe>
+
+If you want to know more about decoding, you can take a look at the [NLP course](https://huggingface.co/learn/nlp-course).
 
 ## Attention is all you need
 
@@ -128,23 +128,23 @@ not every word in a sentence is equally important; words like “France” and �
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/AttentionSceneFinal.gif" alt="Visual Gif of Attention" width="60%">
 This process of identifying the most relevant words to predict the next token has proven to be incredibly effective.
 
-Although the basic principle of LLMs—predicting the next token—has remained consistent since GPT-2, there have been significant advancements in scaling neural networks and refining attention mechanisms.
+Although the basic principle of LLMs—predicting the next token—has remained consistent since GPT-2, there have been significant advancements in scaling neural networks and making the attention mechanism work for longer and longer sequences.
 
-If you’ve interacted with LLMs, you’re probably familiar with the term *context length*, which refers to the maximum number of tokens the LLM can process. 
+If you’ve interacted with LLMs, you’re probably familiar with the term *context length*, which refers to the maximum number of tokens the LLM can process, and the maximum _attention span_ it has.
 
 ## Prompting the LLM is important
 
-Considering that the only job of an LLM is to predict the next token by looking at every input token, and to chose which are "important" to decode what the next word should be, the wording of your input token is very important.
+Considering that the only job of an LLM is to predict the next token by looking at every input token, and to choose which tokens are "important", the wording of your input sequence is very important.
 
-This called a prompt in LLM and will **allow to guide the generation of the LLM toward the desired output**.
+The input sequence you provide an LLM is called _a prompt_. Careful design of the prompt makes it easier **to guide the generation of the LLM toward the desired output**.
 
-## How do LLMs learn?
+## How are LLMs trained?
 
 LLMs are trained on large datasets of text, where they learn to predict the next word in a sequence through a self-supervised or masked language modeling objective. 
 
-From this unsupervised learning, the model learns the structure of the language and **underlying patterns in text allowing to generalize on unseen data**.
+From this unsupervised learning, the model learns the structure of the language and **underlying patterns in text, allowing the model to generalize to unseen data**.
 
-Following this, LLMs can be fine-tuned on a supervised learning objective to perform specific tasks. For example, some are trained for conversational structures or tool usage, while others focus on classification or code generation.
+After this initial _pre-training_, LLMs can be fine-tuned on a supervised learning objective to perform specific tasks. For example, some models are trained for conversational structures or tool usage, while others focus on classification or code generation.
 
 ## How can I use LLMs?
 
@@ -152,7 +152,7 @@ You have two main options:
 
 1. **Run Locally** (if you have sufficient hardware).
 
-2. **Use a Cloud/API** (e.g., via the Hugging Face API).
+2. **Use a Cloud/API** (e.g., via the Hugging Face Serverless Inference API).
 
 Throughout this course, we will primarily use models via APIs on the Hugging Face Hub. Later on, we will explore how to run these models locally on your hardware.
 
@@ -163,7 +163,7 @@ LLMs are a key component of AI Agents, **providing the foundation for understand
 
 They can interpret user instructions, maintain context in conversations, define a plan and decide which tools to use.
 
-We will explore these steps in more detail in this Unit, but for now, what you need to understand is that LLM is **the brain of the Agent**.
+We will explore these steps in more detail in this Unit, but for now, what you need to understand is that the LLM is **the brain of the Agent**.
 
 ---
 
