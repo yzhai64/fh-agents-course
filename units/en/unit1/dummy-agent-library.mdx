@@ -18,7 +18,7 @@ To keep things simple we will use a simple Python function as a Tool and Agent.
 
 We will use built in python packages like `datetime` and `os` so that you can try it out in any environment.
 
-You can find the notebook [here](INSER LINK to the notebook section). If you **want to run the code**.
+You can find the notebook [here](https://colab.research.google.com/drive/1MmVo8V9bLkgcVA1RB5LZtX_lO8y_HBxm?usp=sharing). If you **want to run the code**.
 
 ## Serverless API
 
@@ -239,13 +239,13 @@ Let's now create a dummy get weither function. In real situation you could call 
 ```python
 #Dummy function
 def get_weather(location):
-    return f"the weither in {location} is sunny with low temperatures. \n"
+    return f"the weather in {location} is sunny with low temperatures. \n"
 
 get_weather('London')
 ```
 output:
 ```
-'the weither in London is sunny with low temperatures. \n'
+'the weather in London is sunny with low temperatures. \n'
 ```
 
 Let's concatenate the base prompt, the completion untill function execution and the result of the function as an Observation and resume the generation.
