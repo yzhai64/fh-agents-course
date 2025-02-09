@@ -7,8 +7,6 @@ This course is framework agnostic because we want to focus on the concepts of AI
 
 Therefore, for this introductory unit, we will use a dummy agent library and simple severless API, which will be our LLM engine. In reality, you would not use these in production, but they will serve as a good starting point for understanding how agents work. In the following units we will use AI Agent libraries like `smolagents`, `LangGraph`, `LangChain`, and `LlamaIndex`.
 
-## Good Old Python 
-
 To keep things simple we will use a simple Python function as a tools and agents. We will use built in python packages like `datetime` and `os` so that you can try it out in any environment.
 
 You can find the notebook [here](INSER LINK to the notebook section).
@@ -70,6 +68,7 @@ Paris.
 ```
 The chat method is the RECOMMANDED method to use in order to ensure a smooth transition between models but since this notebook is only educationnal, we will keep using the "text_generation" method to understand the details.
 
+## Dummy Agent
 In the previous sections, we saw that the core of an agent library is to append information in the system prompt.
 
 This system prompt is a bit more complex than the one we saw earlier, but it already contains:
