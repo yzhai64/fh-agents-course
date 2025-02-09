@@ -99,6 +99,7 @@ For example, if I write an Agent to act as my personal assistant (like Siri) on 
 ```python
 def send_message_to(recipient, message):
     """Useful to send an e-mail message to a recipient"""
+    ...
 ```
 
 The LLM, as we'll see, will generate code to run the tool when it needs to, and thus fulfill the desired task.
@@ -107,11 +108,11 @@ The LLM, as we'll see, will generate code to run the tool when it needs to, and 
 send_message_to("Manager", "Can we postopone today's meeting?")
 ```
 
-The **design of the Tools is very important and has a great impact on the quality of your Agent**. Some tasks will require very specific tools to be crafted, while others may be solved with general purpose tools like "web_search".
+The **design of the Tools is very important and has a great impact on the quality of your Agent**. Some tasks will require very specific Tools to be crafted, while others may be solved with general purpose tools like "web_search".
 
 > Note that **Actions are not the same as Tools**. An Action, for instance, can involve the use of multiple Tools to complete.
 
-Allowing an agent to interact with its environment allows real-life scenarios for companies and individuals.
+Allowing an agent to interact with its environment **allows real-life usage for companies and individuals**.
 
 ### Example 1: Personal Virtual Assistants
 
@@ -121,14 +122,18 @@ They take user queries, analyze context, retrieve information from databases, an
 
 ### Example 2: Customer Service Chatbots
 
-Many companies deploy chatbots as agents that interact with customers in natural language. These agents can answer questions, guide users through troubleshooting steps, open issues in internal databases, or even complete transactions.
+Many companies deploy chatbots as agents that interact with customers in natural language. 
+
+These agents can answer questions, guide users through troubleshooting steps, open issues in internal databases, or even complete transactions.
 
 Their predefined objectives might include improving user satisfaction, reducing wait times, or increasing sales conversion rates. By interacting directly with customers, learning from the dialogues, and adapting their responses over time, they demonstrate the core principles of an agent in action.
 
 
 ### Example 3: AI Non-Playable Character in a video game
 
-AI agents powered by LLMs can make Non-Playable Characters (NPC) more dynamic and unpredictable. Instead of following rigid behavior trees, they can respond contextually, adapt to player interactions, and generate more nuanced dialogue. This flexibility helps create more lifelike, engaging characters that evolve alongside the player’s actions.
+AI agents powered by LLMs can make Non-Playable Characters (NPC) more dynamic and unpredictable. 
+
+Instead of following rigid behavior trees, they can **respond contextually, adapt to player interactions**, and generate more nuanced dialogue. This flexibility helps create more lifelike, engaging characters that evolve alongside the player’s actions.
 
 
 To summarize, an Agent is a system that uses an AI Model (typically a LLM) as its core reasoning engine, to:
