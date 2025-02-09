@@ -19,7 +19,7 @@
   - local: unit1/messages-and-special-tokens
     title: Messages and Special Tokens
   - local: unit1/tools
-    title: Tools
+    title: What are Tools?
   - local: unit1/quiz2
     title: Quick Quiz 2
   - local: unit1/agent-steps-and-structure
