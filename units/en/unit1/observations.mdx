@@ -28,10 +28,13 @@ These observations **can take many form**, from reading webpage text to monitori
 | Response Analysis   | API responses, query results, computation outputs                         |
 | Time-based Events   | Deadlines reached, scheduled tasks completed                              |
 
+## How Are the Results Appended?
 
-## How the results are append?
+After performing an action, the framework follows these steps in order:
 
-JOFFREY: tu voulais expliquer ca plus en détail ou out of scope?
+1. **Parse the action** to identify the function(s) to call and the argument(s) to use.  
+2. **Execute the action.**  
+3. **Append the result** as an **Observation**.  
 
 ---
 We've now learned the Agent Thought-Action-Observation Cycle. 
