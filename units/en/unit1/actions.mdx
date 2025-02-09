@@ -31,25 +31,25 @@ Actions themselves can serve many purposes:
 | Environment Interaction  | Manipulating digital interfaces or controlling physical devices.                         |
 | Communication            | Engaging with users via chat or collaborating with other agents.                           |
 
-One crucial part of an agent is the ability to STOP generating new tokens when an action is complete, and that is true for all formats of Agent; JSON, code, or function-calling. This prevents unintended output and ensures that the agent’s response is clear and precise.
+One crucial part of an agent is the **ability to STOP generating new tokens when an action is complete**, and that is true for all formats of Agent; JSON, code, or function-calling. This prevents unintended output and ensures that the agent’s response is clear and precise.
 
 The LLM only handles text, and uses it to describe the action it wants to take and the parameters to supply to the tool.
 
 ## The Stop and Parse Approach
 
-One key method for implementing actions is the stop and parse approach. This method ensures that the agent’s output is structured and predictable:
+One key method for implementing actions is the **stop and parse approach**. This method ensures that the agent’s output is structured and predictable:
 
-1. Generation in a Structured Format:
+1. **Generation in a Structured Format**:
 
 The agent outputs its intended action in a clear, predetermined format (JSON or code).
 
-2. Halting Further Generation:
+2. **Halting Further Generation**:
 
-Once the action is complete, the agent stops generating additional tokens. This prevents extra or erroneous output.
+Once the action is complete, **the agent stops generating additional tokens**. This prevents extra or erroneous output.
 
-3. Parsing the Output:
+3. **Parsing the Output**:
 
-An external parser reads the formatted action, determines which tool to call, and extracts the required parameters.
+An external parser reads the formatted action, determines which Tool to call, and extracts the required parameters.
 
 For example, an agent needing to check the weather might output:
 
@@ -67,10 +67,12 @@ For example, an agent needing to check the weather might output:
 This clear, machine-readable format minimizes errors and enables external tools to accurately process the agent’s command.
 
 Note: Function-calling agents operate similarly by structuring each action so that a designated function is invoked with the correct arguments.
+We'll dive deeper into that type of Agents in a future Unit.
 
 ## Code Agents
 
-An alternative approach is using Code Agents. Instead of outputting a simple JSON object, a Code Agent generates an executable code block—typically in a high-level language like Python. 
+An alternative approach is using *Code Agents*.
+The idea is: **instead of outputting a simple JSON object**, a Code Agent generates an **executable code block—typically in a high-level language like Python**. 
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/code-vs-json-actions.png" alt="Code Agents" />
 
@@ -87,7 +89,6 @@ For example, a Code Agent tasked with fetching the weather might generate the fo
 # Code Agent Example: Retrieve Weather Information
 def get_weather(city):
     import requests
-    # Replace YOUR_API_KEY with a valid weather API key
     api_url = f"https://api.weather.com/v1/location/{city}?apiKey=YOUR_API_KEY"
     response = requests.get(api_url)
     if response.status_code == 200:
@@ -104,31 +105,8 @@ print(final_answer)
 
 In this example, the Code Agent:
 
-- Retrieves weather data via an API call,
+- Retrieves weather data **via an API call**,
 - Processes the response,
 - And uses the print() function to output a final answer.
 
-This method also follows the stop and parse approach by clearly delimiting the code block and signaling when execution is complete (here, by printing the final_answer).
-
-
-
-
-JOFFREY: on fait quoi de ca? J'ai déja réutilisé dans d'autres sections.
-
-
-
-
-## Interface Design for Tools
-
-The design of the interface through which an agent uses tools can affect the agent's performance. For example, a search tool that returns results **ordered by relevance** may be more helpful to an AI agent than one that returns results **ordered by frequency**. The interface should be designed to be clear and concise, so that the agent can easily understand how to use the tools. It should also be designed to be flexible, so that the agent can use the tools in different ways depending on the task at hand.
-
-Here are some examples of how interface design can affect an AI agent's performance:
-
-*   **Structured Output:** Providing a specific format or schema for the AI to follow in its response can help the agent to use tools more effectively. For example, if the agent is using a tool to retrieve data from a database, the interface should specify the format in which the data should be returned.
-*   **Tool Descriptions:** Providing clear and concise descriptions of the tools can help the agent to understand how to use them. The descriptions should include information about the tool's purpose, its inputs and outputs, and any limitations.
-*   **Tool Selection:** The interface should make it easy for the agent to select the appropriate tool for the task at hand. This could involve providing a list of tools or a search function.
-*   **Feedback:** The interface should provide feedback to the agent on the results of its tool use. This could involve displaying the output of the tool or providing an error message if the tool fails.
-
-## Tool Use as Action
-
-The use of tools is considered a form of "acting" by an AI agent in an environment. Agents can generate special tokens to invoke tool calls. This "acting" can be guided by "reasoning," which allows the agent to plan and re-plan based on the information gained from the tool. For example, an agent might use a search engine to find information and then use a calculator to perform calculations based on that information. The agent may revise its plan based on the result of the calculation and return the retrieved information. This kind of reasoning-based tool use is the cornerstone of agents, and we will explore it in more detail in the coming sections.
+This method **also follows the stop and parse approach** by clearly delimiting the code block and signaling when execution is complete (here, by printing the final_answer).
