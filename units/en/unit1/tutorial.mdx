@@ -1,10 +1,10 @@
 # Let's Create Our First Agent Using Smolagents
 
-In the last section, we learned how we can create Agents from scratch using Python code, and we **saw just how tedious that process can be**. Fortunately, many Agent libraries simplify this work by handling much of the heavy lifting for you.
+In the last section, we learned how we can create Agents from scratch using Python code, and we **saw just how tedious that process can be**. Fortunately, many Agent libraries simplify this work by **handling much of the heavy lifting for you**.
 
-In this tutorial, you'll create your very first Agent—capable of performing actions such as image generation, web search, time zone checking and much more !
+In this tutorial, **you'll create your very first Agent** capable of performing actions such as image generation, web search, time zone checking and much more !
 
-You will also publish you argent on a Hugging Face Spaces so you can share it with friends and colleagues.
+You will also publish you argent **on a Hugging Face Spaces so you can share it with friends and colleagues**.
 
 Let's get started!
 
@@ -23,24 +23,29 @@ In short, SmolAgents is a library that focuses on codeAgent, a kind of agent tha
 
 Here is an example of what we'll build ! 
 
-I provided my agent with an **Image generation tool** and asked it to generate an image of a cat.
-The agent inside smolagents is going to have the same behaviors as the custom one we built previously. it's going to think, act and observe in cycle until it reaches a final answer :
+We provided our agent with an **Image generation tool** and asked it to generate an image of a cat.
+
+The agent inside `smolagents$ is going to have the **same behaviors as the custom one we built previously**: it's going **to think, act and observe in cycle** until it reaches a final answer :
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/PQDKcWiuln4?si=ysSTDZoi8y55FVvA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 Exciting right ?
 
-## Let's build !
+## Let's build our Agent!
+
 To start, duplicate this space : https://huggingface.co/spaces/agents-course/First_agent_template
 > Thanks to [Aymeric](https://huggingface.co/spaces/m-ric/agent) for this template! 
 
 
-Duplicating this space means creating a local copy on your own profile:
+Duplicating this space means **creating a local copy on your own profile**:
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/duplicate-space.gif" alt="Duplicate"/>
 
-throughtout this lesson, the only file you will need to modify is the currently incomplete "**app.py**"
-let's break it down together .
-here are some simple but necessary imports
+Throughtout this lesson, the only file you will need to modify is the currently incomplete "**app.py**"
+
+Let's break it down together:
+
+- Here are some simple but necessary library imports
+
 ```python
 from smolagents import CodeAgent,DuckDuckGoSearchTool, HfApiModel,load_tool,tool
 import datetime
@@ -49,9 +54,14 @@ import pytz
 import yaml
 from tools.final_answer import FinalAnswerTool
 ```
+
 As outlined earlier, we will directly use the **CodeAgent** class from **smolagents**.
 
-Now let's get into the tools ! If you want a refresher about tools, don't hesitate to go back to the tool section of the course.
+
+### The Tools
+
+Now let's get into the tools ! If you want a refresher about tools, don't hesitate to go back to the Tool section of the course.
+
 ```python
 @tool
 def my_custom_tool(arg1:str, arg2:int)-> str: #it's import to specify the return type
@@ -78,17 +88,20 @@ def get_current_time_in_timezone(timezone: str) -> str:
     except Exception as e:
         return f"Error fetching time for timezone '{timezone}': {str(e)}"
 ```
-### The Tools
+
+
 The Tools are what we are encouraging you to build in this section! We give you two examples:
 
-1. A non-working dummy tool that you can modify to make something useful.
-2. An actually working tool that gets the current time somewhere in the world.
+1. A **non-working dummy Tool** that you can modify to make something useful.
+2. An **actually working Tool** that gets the current time somewhere in the world.
 
 To define your tool it is important to :
-1. Provide input and output types for your function here (get_current_time_in_timezone(timezone: str) -> str:)
-2. A well formatted docstring. Smolagents is expecting all the arguments to have a textual description in the docstring.
+
+1. Provide input and output types for your function here `get_current_time_in_timezone(timezone: str) -> str:`
+2. **A well formatted docstring**. `smolagents` is expecting all the arguments to have a **textual description in the docstring**.
 
 ### The Agent
+
 ```python
 final_answer = FinalAnswerTool()
 model = HfApiModel(
@@ -101,6 +114,7 @@ custom_role_conversions=None,
 with open("prompts.yaml", 'r') as stream:
     prompt_templates = yaml.safe_load(stream)
     
+# We're creating our CodeAgent
 agent = CodeAgent(
     model=model,
     tools=[final_answer], ## add your tools here (don't remove final answer)
@@ -115,12 +129,19 @@ agent = CodeAgent(
 
 GradioUI(agent).launch()
 ```
-This Agent still use the InferenceClient we saw in earlier lessons behind this **HfApiModel** class !
-We will give more in depth example when we will present the framework in a later unit, but the import here is to add the list of tools to the the **tools** parameter of your agent.
 
-Adding or removing some tools will get your agent new capacities, hence be creative here !
+This Agent still use the `InferenceClient` we saw in earlier lessons behind this **HfApiModel** class !
 
-the complete "app.py" : 
+We will give more in-depth examples when we will present the framework in Unit 2, but the import here is **to add the list of tools** to the the **tools** parameter of your Agent.
+
+```
+from smolagents import CodeAgent,DuckDuckGoSearchTool, HfApiModel,load_tool,tool 
+```
+
+**Adding or removing some tools will get your agent new capacities**, hence be creative here !
+
+The complete "app.py" : 
+
 ```python
 from smolagents import CodeAgent,DuckDuckGoSearchTool, HfApiModel,load_tool,tool
 import datetime
@@ -189,9 +210,9 @@ agent = CodeAgent(
 GradioUI(agent).launch()
 ```
 
-Your **Objective** is now to get familiar with the space and the agent. 
+Your **Objective** is now to get familiar with the Space and the Agent. 
 
-Currently the agent in the template does not have tools loaded, so try to provide it some of the pre-made ones or even make some new tools yourselves !
+Currently the agent in the template **does not have tools loaded, so try to provide it some of the pre-made ones or even make some new tools yourselves**!
 
 We are eagerly waiting for your amazing agents output in the discord channel #agents-course-showcase !
 
