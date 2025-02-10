@@ -274,7 +274,9 @@ print(calculator.to_string())
 
 And we can use the tool's `to_string` method to automatically retrieve a text suitable to be used as a tool description for an LLM:
 
+```
 Tool Name: calculator, Description: Multiply two integers., Arguments: a: int, b: int, Outputs: int
+```
 
 The description is **injected** in the system prompt. Taking the example with which we started this section, here is how it would look like after replacing the `tools_description`:
 
