@@ -1,28 +1,129 @@
-# LlamaIndex concepts: Components
+# Components
 
-As we've seen in the previous section, `Components` are the building blocks of agentic workflows. There are many components available in LlamaIndex but we will focus on the most important ones for agentic workflows.
+**Components are building blocks for agentic workflows.** LlamaIndex has many components, but we'll focus on the key ones for building agentic workflows, including the `Agent` and `Tools` components.
 
-!!! note "Explore more components"
-    Some noteworthy components that we encourage you to explore by yourself are the components for evaluation and observability.
+Many of the components rely on integrations with other frameworks. So, before using them, we first need to learn how to install them as dependencies.
 
-## Models
+## Integrations
 
-LlamaIndex supports a wide range of models and 
+### Installation
 
-### LLMs
+Most frameworks add their installation guide to their main documentation but LlamaIndex keep a well structured overview in their [GitHub repository](https://github.com/run-llama/llama_index/tree/main/llama-index-integrations).
+This might be a bit overwhelming at first, but the **installation commands generally follow an easy to remember format**:
 
-### Embeddings
+```bash
+pip install llama-index-{component-type}-{framework-name}
+```
 
-### Multimodal
+Let's try install the depencies for an LLM and embedding component using Hugging Face inference API as framework.
 
-## Prompts
+```bash
+pip install llama-index-llms-huggingface-api llama-index-embeddings-huggingface-api
+```
 
-## Loading
+### Usage
 
-## Indexing
+Once installed, we can use the component in our workflow. The usage patterns have been outlined in [the documentation](https://docs.llamaindex.ai/en/stable/module_guides/) but framework specific versions are also shown in the [GitHub repository](https://github.com/run-llama/llama_index/tree/main/llama-index-integrations).
+Underneath, we can see an example of the usage of the Hugging Face inference API for an LLM component.
 
-## Storing
+```python
+from llama_index.llms.huggingface_api import HuggingFaceInferenceAPI
 
-## Querying
+llm = HuggingFaceInferenceAPI(
+    model_name="openai-community/gpt2",
+    temperature=0.7,
+    max_tokens=100,
+    token="<your-token>",  # Optional
+)
 
-## Agents
+llm.complete("Hello, how are you?")
+# I am good, how can I help you today?
+```
+
+Now, let's dive a bit deeper into the components and see how they work in context.
+
+## Components
+
+Instead of going over each of the components one by one, we will take a look at **how to use components in context within three common scenarios**.
+
+1. create a document index from a set of documents
+2. use the index to answer questions with prompts and LLMs
+3. use agents to answer questions with tools
+
+### 1. Creating a document or vector index
+
+We will work with the [Loading](https://docs.llamaindex.ai/en/stable/module_guides/loading/), [Embedding](https://docs.llamaindex.ai/en/stable/module_guides/embedding/), [Indexing](https://docs.llamaindex.ai/en/stable/module_guides/indexing/) and [Storing](https://docs.llamaindex.ai/en/stable/module_guides/storing/) components to create a document index.
+
+TODO: Add image of Alfred
+
+As mentioned before, LlamaIndex can work on top of your own data, however, **before accessing data, we need to load it into the library.**
+There are three main ways to do to load data into LlamaIndex:
+
+1. [`SimpleDirectoryReader`](https://docs.llamaindex.ai/en/stable/module_guides/loading/simpledirectoryreader/): A built-in loader for various file types from a local directory.
+2. [`LlamaParse`](https://docs.llamaindex.ai/en/stable/module_guides/loading/connector/llama_parse/): LlamaParse, LlamaIndex's official tool for PDF parsing, available as a managed API.
+3. [`LlamaHub`](https://docs.llamaindex.ai/en/stable/module_guides/loading/connector/): A registry of hundreds of data loading libraries to ingest data from any source.
+
+Let's start with the most basic and intuitive way to load data, using the `SimpleDirectoryReader`. This loader allows us to **load various file types from a local directory and loads them as `Document` objects.**
+
+```python
+from llama_index.core import SimpleDirectoryReader
+
+reader = SimpleDirectoryReader(input_dir="path/to/directory")
+documents = reader.load_data()
+```
+
+Now, we have access to our `Document` objects and can **load and transform them into `Node` objects, which represents "chunks" of a source `Document`.**  They can often be used interchangeably with Documents, and similar to `Documents`, they contain metadata and relationship information with other nodes.
+**The quickest way to create `Node` objects is using the [`IngestionPipeline`](https://docs.llamaindex.ai/en/stable/module_guides/loading/ingestion_pipeline/)** class with [`NodeParser`](https://docs.llamaindex.ai/en/stable/module_guides/loading/node_parsers/modules/) and [`Embeddings`](https://docs.llamaindex.ai/en/stable/module_guides/models/embeddings/) transformations.
+We will use a basic `SentenceSplitter` to split the `Document` into chunks of 25 sentences with no overlap and use `HuggingFaceInferenceAPIEmbedding` to add vectors to the `Node` objects.
+
+```python
+from llama_index.core import Document
+from llama_index.embeddings.huggingface_api import HuggingFaceInferenceAPIEmbedding
+from llama_index.core.node_parser import SentenceSplitter
+from llama_index.core.ingestion import IngestionPipeline, IngestionCache
+
+# create the pipeline with transformations
+pipeline = IngestionPipeline(
+    transformations=[
+        SentenceSplitter(chunk_size=25, chunk_overlap=0),
+        HuggingFaceInferenceAPIEmbedding("BAAI/bge-small-en-v1.5"),
+    ]
+)
+
+# run the pipeline
+nodes = pipeline.run(documents=[Document.example()])
+```
+
+> Loading and embedding can be computationally expensive, so LlamaIndex provides a way to cache the results of the ingestion pipeline, so we don't have to compute them again.
+
+Now we've got our `Node` objects, we can look into [storing](https://docs.llamaindex.ai/en/stable/module_guides/storing/) them.
+Similar to other components, there are a lot of integrations and **we can use various types of storage backends like a basic `DocumentStore` or a `VectorStore` for RAG.**
+By default, LlamaIndex uses the **`VectorStoreIndex` as a simple in-memory vector store that's great for quick experimentation.** You can also persist the vector store to a directory and load it again later.
+
+```python
+from llama_index.core import VectorStoreIndex
+
+vector_store = VectorStoreIndex().from_documents(nodes)
+
+# persist the vector store
+path = "path/to/vector/store"
+vector_store.persist(path)
+
+# load the vector store
+vector_store = VectorStoreIndex.from_persist_dir(path)
+```
+
+Now we've loaded and indexed our data, we can start querying it with prompts and LLMs.
+
+### 2. Querying a document index for RAG with Prompt and LLMs
+
+
+TODO: Add image of Alfred
+
+> Query workflows like the QueryEngine have a [low-level composition API](https://docs.llamaindex.ai/en/stable/module_guides/deploying/query_engine/usage_pattern/#low-level-composition-api), which allows for more fine-grained control over the query process.
+
+### 3. Using Agents and Tools
+
+TODO: Add image of Alfred
+
+Now, we've gotton familiar with the components, let's take a look at how to use them for agentic workflows!
