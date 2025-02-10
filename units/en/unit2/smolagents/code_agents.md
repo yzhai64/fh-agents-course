@@ -61,6 +61,8 @@ These examples are just the beginning of what you can do with code agents. You c
 
 smolagents provides a lightweight framework for building code agents, with a core implementation of approximately 1,000 lines of code. The framework specializes in agents that write and execute Python code snippets, offering sandboxed execution for security. It supports both open-source and proprietary language models, making it adaptable to various development environments.
 
+![](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/smolagents/codeagent_docs.png)
+
 ## Further Reading
 
 - [smolagents Blog](https://huggingface.co/blog/smolagents) - Introduction to smolagents and code interactions

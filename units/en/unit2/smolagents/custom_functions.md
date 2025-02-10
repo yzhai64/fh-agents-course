@@ -63,6 +63,8 @@ def process_search():
         logging.info("No results found for query")
 ```
 
+![Agentic pipeline](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/Agent_ManimCE.gif)
+
 ## Further Reading
 
 - [smolagents Blog](https://huggingface.co/blog/smolagents) - Learn about the latest advancements in AI agents and how they can be applied to custom function agents.

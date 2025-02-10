@@ -14,7 +14,7 @@ In this approach, images are passed at the beginning and stored as `task_images`
 A possible application is **document understanding**, where agents analyze long documents containing both text and visual elements, such as graphs or tables.
 
 ```python
-model_id = "meta-llama/Llama-3.3-70B-Instruct"  # Update with preferred VLM
+model_id = "Qwen/Qwen2.5-VL-72B-Instruct"  # Update with preferred VLM
 model = HfApiModel(model_id)
 
 # Instantiate the agent
