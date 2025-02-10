@@ -55,14 +55,14 @@ For example, an agent needing to check the weather might output:
 
 
 ```json
+Thought: I need to check the current weather for New York.
+Action :
 {
-  "thought": "I need to check the current weather for New York.",
   "action": "get_weather",
-  "action_input": {
-    "location": "New York"
-  }
+  "action_input": {"location": "New York"}
 }
 ```
+The framework can then parse the name of the function to call and the arguments easily.
 
 This clear, machine-readable format minimizes errors and enables external tools to accurately process the agent’s command.
 
