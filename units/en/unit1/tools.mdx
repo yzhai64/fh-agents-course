@@ -11,9 +11,9 @@ By giving your Agent the right Tools—and clearly describing how those Tools wo
 
 ## What are AI Tools?
 
-A **Tool is a function given to the LLM**. This function should fulfill a **clear objective**
+A **Tool is a function given to the LLM**. This function should fulfill a **clear objective**.
 
-Here are some commonly used tools in AI agents :
+Here are some commonly used tools in AI agents:
 
 | Tool            | Description                                                   |
 |----------------|---------------------------------------------------------------|
@@ -26,9 +26,9 @@ Those are only examples, as you can in fact create a tool for any use case!
 
 A good tool should be something that **complements the power of an LLM**. 
 
-For instance, if you need to perform arithmetic, giving a **calculator tool** to your LLM will provide better result than relying on the native capacities of the model.
+For instance, if you need to perform arithmetic, giving a **calculator tool** to your LLM will provide better results than relying on the native capabilities of the model.
 
-Furthermore, **LLMs predict the completion of a prompt based on their training data**. Which means that their internal knowledge only includes events prior to their training. Therefore, if your agent needs up-to-data data you must provide it through some tool.
+Furthermore, **LLMs predict the completion of a prompt based on their training data**, which means that their internal knowledge only includes events prior to their training. Therefore, if your agent needs up-to-date data you must provide it through some tool.
 
 For instance, if you ask an LLM directly (without a search tool) for today's weather, the LLM will potentially hallucinate random weather.
 
@@ -272,7 +272,7 @@ def calculator(a: int, b: int) -> int:
 print(calculator.to_string())
 ```
 
-And we can use the tools's `to_string` method to automatically retrieve a text suitable to be used as a tool description for an LLM:
+And we can use the tool's `to_string` method to automatically retrieve a text suitable to be used as a tool description for an LLM:
 
 Tool Name: calculator, Description: Multiply two integers., Arguments: a: int, b: int, Outputs: int
 
@@ -280,7 +280,7 @@ The description is **injected** in the system prompt. Taking the example with wh
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/Agent_system_prompt_tools.png" alt="System prompt for tools"/>
 
-In the [Actions](actions) section, we will learn more about how an Agent can **Call* this tool we just created.
+In the [Actions](actions) section, we will learn more about how an Agent can **Call** this tool we just created.
 
 ---
 
