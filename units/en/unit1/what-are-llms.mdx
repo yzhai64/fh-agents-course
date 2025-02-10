@@ -71,14 +71,15 @@ You can experiment with different tokenizers in the interactive playground below
 
 Each LLM has some **special tokens** specific to the model. One important special token is the **End of sequence token** (EOS), which the model emits when it considers the generated sequence complete.
 
-| **Model**     | **Provider**                  | **EOS Token**              |
-|---------------|-------------------------------|----------------------------|
-| **GPT4**      | OpenAI                        | `<|endoftext|>`            |
-| **LLaMA3**    | Meta (Facebook AI Research)   | `<|eot_id|>`               |
-| **Deepseek-R1** | DeepSeek                   | `<|end_of_sentence|>`      |
-| **SmollLM2**  | Hugging Face                 | `<|im_end|>`               |
-| **Gemma**     | Google                       | `<end_of_turn>`            |
-| **Mistral**   | Mistral                      | `[/INST]`                  |
+| **Model**       | **Provider**                  | **EOS Token**               |
+|-----------------|-------------------------------|-----------------------------|
+| **GPT4**        | OpenAI                        | `<\|endoftext\|>`          |
+| **LLaMA3**      | Meta (Facebook AI Research)   | `<\|eot_id\|>`             |
+| **Deepseek-R1** | DeepSeek                      | `<\|end_of_sentence\|>`    |
+| **SmollLM2**    | Hugging Face                  | `<\|im_end\|>`             |
+| **Gemma**       | Google                        | `<end_of_turn>`            |
+| **Mistral**     | Mistral                       | `[/INST]`                  |
+
 
 
 ## Understanding next token prediction.
