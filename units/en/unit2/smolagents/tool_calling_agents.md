@@ -1,5 +1,8 @@
 # Custom Function Agents
 
+
+https://huggingface.co/docs/smolagents/tutorials/tools
+
 Custom Function Agents are AI agents that leverage specialized function calls (or “tools”) to perform tasks. Unlike general-purpose agents, Custom Function Agents focus on powering advanced workflows by integrating directly with your application's logic. For example, you can expose database queries, system commands, or any custom utility as isolated functions for the agent to invoke.
 
 ## Why Custom Function Agents?
@@ -63,7 +66,7 @@ def process_search():
         logging.info("No results found for query")
 ```
 
-![Agentic pipeline](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/Agent_ManimCE.gif)
+![Agentic pipeline from https://huggingface.co/docs/smolagents/conceptual_guides/react](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/Agent_ManimCE.gif)
 
 ## Further Reading
 

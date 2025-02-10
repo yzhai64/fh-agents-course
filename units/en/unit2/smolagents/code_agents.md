@@ -1,5 +1,7 @@
 # Code Agents
 
+![From https://huggingface.co/docs/smolagents/conceptual_guides/react](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/smolagents/codeagent_docs.png)
+
 Code agents are specialized autonomous systems that handle coding tasks like analysis, generation, refactoring, and testing. These agents leverage domain knowledge about programming languages, build systems, and version control to enhance software development workflows.
 
 ## Why Code Agents?
@@ -61,7 +63,6 @@ These examples are just the beginning of what you can do with code agents. You c
 
 smolagents provides a lightweight framework for building code agents, with a core implementation of approximately 1,000 lines of code. The framework specializes in agents that write and execute Python code snippets, offering sandboxed execution for security. It supports both open-source and proprietary language models, making it adaptable to various development environments.
 
-![](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/smolagents/codeagent_docs.png)
 
 ## Further Reading
 
