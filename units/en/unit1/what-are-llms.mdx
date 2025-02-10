@@ -71,15 +71,47 @@ You can experiment with different tokenizers in the interactive playground below
 
 Each LLM has some **special tokens** specific to the model. One important special token is the **End of sequence token** (EOS), which the model emits when it considers the generated sequence complete.
 
-| **Model**       | **Provider**                  | **EOS Token**               |
-|-----------------|-------------------------------|-----------------------------|
-| **GPT4**        | OpenAI                        | `<\|endoftext\|>`          |
-| **LLaMA3**      | Meta (Facebook AI Research)   | `<\|eot_id\|>`             |
-| **Deepseek-R1** | DeepSeek                      | `<\|end_of_sentence\|>`    |
-| **SmollLM2**    | Hugging Face                  | `<\|im_end\|>`             |
-| **Gemma**       | Google                        | `<end_of_turn>`            |
-| **Mistral**     | Mistral                       | `[/INST]`                  |
-
+<table>
+  <thead>
+    <tr>
+      <th>Model</th>
+      <th>Provider</th>
+      <th>EOS Token</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GPT4</td>
+      <td>OpenAI</td>
+      <td>&lt;|endoftext|&gt;</td>
+    </tr>
+    <tr>
+      <td>LLaMA3</td>
+      <td>Meta (Facebook AI Research)</td>
+      <td>&lt;|eot_id|&gt;</td>
+    </tr>
+    <tr>
+      <td>Deepseek-R1</td>
+      <td>DeepSeek</td>
+      <td>&lt;|end_of_sentence|&gt;</td>
+    </tr>
+    <tr>
+      <td>SmollLM2</td>
+      <td>Hugging Face</td>
+      <td>&lt;|im_end|&gt;</td>
+    </tr>
+    <tr>
+      <td>Gemma</td>
+      <td>Google</td>
+      <td>&lt;end_of_turn&gt;</td>
+    </tr>
+    <tr>
+      <td>Mistral</td>
+      <td>Mistral</td>
+      <td>[/INST]</td>
+    </tr>
+  </tbody>
+</table>
 
 
 ## Understanding next token prediction.
