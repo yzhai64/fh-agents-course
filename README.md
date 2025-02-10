@@ -14,11 +14,12 @@ You can access the course here 👉 https://hf.co/learn/agents-course
 
 | Unit | Topic                          | Description                                                                 |
 |------|--------------------------------|-----------------------------------------------------------------------------|
-| 0    | [Onboarding](units/unit0/01_welcome_to_the_course.mdx) | Welcome, guidelines, necessary tools, and course overview.                  |
-| 1    | [Agent Fundamentals](units/unit1/1_definition_of_an_agent.md)       | Definition of agents, LLMs, model family tree, and special tokens.          |
-| 2    | [Frameworks](units/unit2/README.md)                     | Overview of smolagents, LangChain, LangGraph, and LlamaIndex.               |
-| 3    | [Use Cases](units/unit3/README.md)                      | SQL, code, retrieval, and on-device agents using various frameworks.        |
-| 4    | [Final Assignment](units/unit4/README.md) | Automated evaluation of agents and leaderboard with student results.        |
+| 0    | [Welcome to the Course](https://huggingface.co/learn/agents-course/en/unit0/introduction) | Welcome, guidelines, necessary tools, and course overview.                  |
+| 1    | [Introduction to Agents](https://huggingface.co/learn/agents-course/en/unit1/introduction)       | Definition of agents, LLMs, model family tree, and special tokens.          |
+| 2    | [2_frameworks](units/unit2/README.md)                     | Overview of smolagents, LangChain, LangGraph, and LlamaIndex.               |
+| 3    | [3_use_cases](units/unit3/README.md)                      | SQL, code, retrieval, and on-device agents using various frameworks.        |
+| 4    | [4_final_assignment_with_benchmark](units/unit4/README.md) | Automated evaluation of agents and leaderboard with student results.        |
+
 
 ## Prerequisites
 

@@ -1,5 +1,56 @@
-# Thoughts
+# Thought: Internal Reasoning and the Re-Act Approach
 
-Explanation of thoughts and the ReAct approach. 
+<Tip> 
+In this section, we dive into the inner workings of an AI agent—its ability to reason and plan. We’ll explore how the agent leverages its internal dialogue to analyze information, break down complex problems into manageable steps, and decide what action to take next. Additionally, we introduce the Re-Act approach, a prompting technique that encourages the model to think “step by step” before acting. 
+</Tip>
 
-<!-- TODO: @jofthomas -->
+Thoughts represent the **Agent's internal reasoning and planning processes** to solve the task.
+
+This utilises the agent's Large Language Model (LLM) capacity **to analyze information when presented in it's prompt**.
+
+Think of it as the agent's internal dialogue, where it considers the task at hand and strategizes its approach.
+
+The Agent's thoughts are responsible for accessing current observations and decide what the next action(s) should be.
+
+Through this process, the agent can **break down complex problems into smaller, more manageable steps**, reflect on past experiences, and continuously adjust its plans based on new information.
+
+Here are some examples of common thoughts:
+
+| Type of Thought | Example |
+|----------------|---------|
+| Planning | "I need to break this task into three steps: 1) gather data, 2) analyze trends, 3) generate report" |
+| Analysis | "Based on the error message, the issue appears to be with the database connection parameters" |
+| Decision Making | "Given the user's budget constraints, I should recommend the mid-tier option" |
+| Problem Solving | "To optimize this code, I should first profile it to identify bottlenecks" |
+| Memory Integration | "The user mentioned their preference for Python earlier, so I'll provide examples in Python" |
+| Self-Reflection | "My last approach didn't work well, I should try a different strategy" |
+| Goal Setting | "To complete this task, I need to first establish the acceptance criteria" |
+| Prioritization | "The security vulnerability should be addressed before adding new features" |
+
+> **Note:** In the case of fine-tuned models for function-calling, the thought process is optional.  
+> *In case you're not familiar with function-calling, there will be more detail in the Action section.*
+
+## The Re-Act Approach
+
+A key method is the **ReAct approach**, which is the concatenation of  "Reasoning" (Think) with "Acting" (Act). 
+
+ReAct is a simple prompting technique that appends "Let's think step by step" before letting the LLM decode the next tokens. 
+
+Indeed, prompting the model to think "step by step" encourages the decoding process toward next tokens **that generate a plan**, rather than a final solution, since the model will **decompose** the problem into *sub-tasks*.
+
+This allows the model to consider sub-steps in more detail, which in general leads to less errors than directly generating solution.
+
+<figure>
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/ReAct.png" alt="ReAct"/>
+<figcaption>The (d) is an example of Re-Act approach where we prompt "Let's think step by step"
+</figcaption>
+</figure>
+
+<Tip>
+Recently we have seen an interest for reasoning. Models like Deepseek-R1 or OpenAI's o1 have been fine-tuned to  "think before answering".
+</Tip>
+
+> **Note** : Those model have been fine-tuned to always include specific thinking ( enclosed in <think></think> special token). This is not a purely prompting technique like ReAct
+
+--- 
+Now that we better understand the Thought process, let's go deeper on the second part of the process: Act.

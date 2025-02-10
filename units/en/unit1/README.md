@@ -1,5 +1,8 @@
 # Table of Contents
 
+You can access Unit 1 on hf.co/learn 👉 <a href="https://hf.co/learn/agents-course/unit1/introduction">here</a> 
+
+<!--
 | Title | Description |
 |-------|-------------|
 | [Definition of an Agent](1_definition_of_an_agent.md) | General example of what agents can do without technical jargon. |
@@ -13,3 +16,4 @@
 | [Observations](9_observations.md) | Explanation of observations and append result to reflect. |
 | [Quizz](10_quizz.md) | Contains quizzes to test understanding of the concepts. |
 | [Simple Use Case](11_simple_use_case.md) | Provides a simple use case exercise using datetime and a Python function as a tool. |
+-->
