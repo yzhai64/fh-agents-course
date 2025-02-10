@@ -48,7 +48,7 @@ Paris. The capital of France is Paris. The capital of France is Paris. The capit
 ```
 As seen in the LLM section, if we just do decoding, **the model will only stop when it predicts an EOS token** and this does not happen here because **we forgot to add the special tokens of this model**.
 
-If we now add the special tokens related to the <a href="https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct">Llama-3.2-3B-Instruct model</a> that we're using, the behaviour changes and is now the expected EOS.
+If we now add the special tokens related to the <a href="https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct">Llama-3.2-3B-Instruct model</a> that we're using, the behavior changes and now produces the expected EOS.
 
 ```python
 prompt="""<|begin_of_text|><|start_header_id|>user<|end_header_id|>
@@ -130,7 +130,7 @@ Since we are running the "text_generation", we need to add the right special tok
 prompt=f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 {SYSTEM_PROMPT}
 <|eot_id|><|start_header_id|>user<|end_header_id|>
-What's the weither in London ?
+What's the weather in London ?
 <|eot_id|><|start_header_id|>assistant<|end_header_id|>
 """
 ```
@@ -139,7 +139,7 @@ This is equivalent to the following code that happens inside the chat method :
 ```
 messages=[
     {"role": "system", "content": SYSTEM_PROMPT},
-    {"role": "user", "content": "What's the weither in London ?"},
+    {"role": "user", "content": "What's the weather in London ?"},
     ]
 from transformers import AutoTokenizer
 tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.2-3B-Instruct")
@@ -184,11 +184,11 @@ Final Answer: the final answer to the original input question
 
 Now begin! Reminder to ALWAYS use the exact characters `Final Answer:` when you provide a definitive answer. 
 <|eot_id|><|start_header_id|>user<|end_header_id|>
-What's the weither in London ?
+What's the weather in London ?
 <|eot_id|><|start_header_id|>assistant<|end_header_id|>
 ```
 
-Let's decode !
+Let's decode!
 ```python
 output = client.text_generation(
     prompt,
@@ -210,8 +210,8 @@ Thought: I will check the weather in London.
 Observation: The current weather in London is mostly cloudy with a high of 12°C and a low of 8°C.
 ```
 
-Do you see the issue ?
->The answer was hallucinated by the model. We need to stop to actually execute the function !
+Do you see the issue?
+>The answer was hallucinated by the model. We need to stop to actually execute the function!
 Let's now stop on "Obersavation" so that we don't hallucinate the actual function response
 ```python
 output = client.text_generation(
@@ -234,8 +234,9 @@ output:
 Thought: I will check the weather in London.
 Observation:
 ```
-Much Better ! 
-Let's now create a dummy get weither function. In real situation you could call and API.
+Much Better! 
+Let's now create a dummy get weather function.  In a real situation, you could call and API.
+
 ```python
 #Dummy function
 def get_weather(location):
@@ -248,7 +249,7 @@ output:
 'the weather in London is sunny with low temperatures. \n'
 ```
 
-Let's concatenate the base prompt, the completion untill function execution and the result of the function as an Observation and resume the generation.
+Let's concatenate the base prompt, the completion until function execution and the result of the function as an Observation and resume the generation.
 
 ```python
 new_prompt=prompt+output+get_weather('London')
@@ -296,7 +297,7 @@ Final Answer: the final answer to the original input question
 
 Now begin! Reminder to ALWAYS use the exact characters `Final Answer:` when you provide a definitive answer. 
 <|eot_id|><|start_header_id|>user<|end_header_id|>
-What's the weither in London ?
+What's the weather in London ?
 <|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
 Action:
@@ -307,7 +308,7 @@ Action:
 }
 ```
 Thought: I will check the weather in London.
-Observation:the weither in London is sunny with low temperatures. 
+Observation:the weather in London is sunny with low temperatures. 
 ```
 output:
 ```
