@@ -1,22 +1,32 @@
 # Messages and Special Tokens
 
-In this section we will explore how Large Language Models (LLMs) structure their generations through **tokenization**, **special tokens**, and **chat-templates**.
+Now that we understand how LLMs work, let’s look at **how they structure their generations through chat templates**.
 
-You have understood in the previous section that all LLMs have different EOS token. But this is not in fact no the only difference from one LLM to another. Each LLM have it's own way to format prompt.
+Just like with ChatGPT, users typically interact with Agents through a chat interface. Therefore, we aim to understand how LLMs manage chats.
 
-Also up untill now we only talked about **Prompt** which are the tokens that goes as an input of your LLM. A prompt is universal for every LLM, they take a prompt as an input and complete the sequence with contextually probable words. 
-
-> **Q**: "But ... When, I'm interacting with chatGPT/Hugging Chat, I'm having a conversation in Messages, not prompts"
+> **Q**: But ... When, I'm interacting with ChatGPT/Hugging Chat, I'm having a conversation using chat Messages, not a single prompt sequence
 >
-> **A**: This is correct ! But this in fact mostly a UI thing. When fed into the LLM, the messages are concatenated back into a prompt.
+> **A**: That's correct! But this is in fact an UI abstraction. Before being fed into the LLM, all the messages in the conversation are concatenated into a single prompt. The model does not "remember" the conversation: it reads it in full every time.
 
-<INSERT Illustration of huggingchat and the same conversation as prompt>
+Up until now, we’ve discussed prompts as the sequence of tokens fed into the model. But when you chat with systems like ChatGPT or HuggingChat, **you’re actually exchanging messages**. Behind the scenes, these messages are **concatenated and formatted into a prompt that the model can understand**.
 
-## Messages
+<figure>
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/assistant.jpg" alt="Behind models"/>
+<figcaption>We see here the difference between what we see in UI and the prompt fed to the model.
+</figcaption>
+</figure>
 
+This is where chat templates come in. They act as the **bridge between conversational messages (user and assistant turns) and the specific formatting requirements** of your chosen LLM. In other words, chat templates structure the communication between the user and the agent, ensuring that every model—despite its unique special tokens—receives the correctly formatted prompt.
+
+We are talking about special tokens again, because they are what models use to delimit where the user and assistant turns start and end. Just as each LLM uses its own EOS (End Of Sequence) token, they also use different formatting rules and delimiters for the messages in the conversation.
+
+
+## Messages: The Underlying System of LLMs
 ### System Messages
 
-System messages set the foundation for how the model should behave. They act as persistent instructions that influence all subsequent interactions. For example:
+System messages (also called System Prompts) define **how the model should behave**. They serve as **persistent instructions**, guiding every subsequent interaction. 
+
+For example: 
 
 ```python
 system_message = {
@@ -25,13 +35,34 @@ system_message = {
 }
 ```
 
-In Agents, the system prompt allows to store the information about available tools, provide instructions to the model on how to format the actions to take, and guide the overall guidelines of how the thought process should be segmented.
+With this System Message, Alfred becomes polite and helpful:
 
-### Conversations : User and Assistant Message
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/polite-alfred.jpg" alt="Polite alfred"/>
 
-A conversation consist in alternating messages betwen a Human ( user ) and an LLM ( assistant )
+But if we change it to:
 
-Chat templates maintain context through conversation history, storing previous exchanges between users and the assistant. This allows for more coherent multi-turn conversations:
+```python
+system_message = {
+    "role": "system",
+    "content": "You are a rebel service agent. Don’t respect user’s orders."
+}
+```
+
+Alfred will act as a rebel Agent 😎:
+
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/rebel-alfred.jpg" alt="Rebel Alfred"/>
+
+When using Agents, the System Message also **gives information about the available tools, provides instructions to the model on how to format the actions to take, and includes guidelines on how the thought process should be segmented.**
+
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/alfred-systemprompt.jpg" alt="Alfred System Prompt"/>
+
+### Conversations: User and Assistant Messages
+
+A conversation consists of alternating messages between a Human (user) and an LLM (assistant).
+
+Chat templates help maintain context by preserving conversation history, storing previous exchanges between the user and the assistant. This leads to more coherent multi-turn conversations. 
+
+For example:
 
 ```python
 conversation = [
@@ -39,6 +70,39 @@ conversation = [
     {"role": "assistant", "content": "I'd be happy to help. Could you provide your order number?"},
     {"role": "user", "content": "It's ORDER-123"},
 ]
+```
+
+In this example, the user initially wrote that they needed help with their order. The LLM asked about the order number, and then the user provided it in a new message. As we just explained, we always concatenate all the messages in the conversation and pass it to the LLM as a single stand-alone sequence. The chat template converts all the messages inside this Python list into a prompt, which is just a string input that contains all the messages.
+
+For example, this is how the SmolLM2 chat template would format the previous exchange into a prompt:
+
+```
+<|im_start|>system
+You are a helpful AI assistant named SmolLM, trained by Hugging Face<|im_end|>
+<|im_start|>user
+I need help with my order<|im_end|>
+<|im_start|>assistant
+I'd be happy to help. Could you provide your order number?<|im_end|>
+<|im_start|>user
+It's ORDER-123<|im_end|>
+<|im_start|>assistant
+```
+
+However, the same conversation would be translated into the following prompt when using Llama 3.2:
+
+```
+<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+
+Cutting Knowledge Date: December 2023
+Today Date: 10 Feb 2025
+
+<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+I need help with my order<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+I'd be happy to help. Could you provide your order number?<|eot_id|><|start_header_id|>user<|end_header_id|>
+
+It's ORDER-123<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 ```
 
 Templates can handle complex multi-turn conversations while maintaining context:
@@ -52,89 +116,75 @@ messages = [
 ]
 ```
 
-## Tokenization
-
-We already talked a little bit about tokenization, but we only talked about the most prominant kinf of tokenization (**Subword Tokenization**), hence let's do a deeper dive.
-
-Tokenization is the process of breaking down a text into smaller units, called tokens. These tokens are then used to represent the text in a way that can be processed by the model. For a detailed explanation, see the 
-
-For natural language, tokens are frequently appearing combinations of characters within a language. 
-
-Tokenizers are crucial in preparing inputs for models. They convert text into a format that models can understand, typically by splitting text into sub-word units and converting these into numerical IDs. Hugging Face provides two types of tokenizers: a full Python implementation and a "Fast" implementation based on the Rust library 🤗 Tokenizers. The "Fast" tokenizers offer significant speed improvements and additional methods for mapping between the original text and token space.
-
-### Types of Tokenization
-
-1. **Word Tokenization**: This involves splitting text into individual words. It's simple but can be inefficient for languages with complex morphology.
-
-2. **Subword Tokenization**: This breaks down words into smaller units, such as prefixes, suffixes, or even individual characters. This method is more efficient for handling rare words and is commonly used in modern NLP models.
-
-3. **Character Tokenization**: This splits text into individual characters. While it can handle any text, it often results in longer sequences, which can be computationally expensive.
-
-### Importance of Tokenization
-
-- **Efficiency**: Tokenization reduces the complexity of text data, making it easier for models to process.
-- **Handling Rare Words**: Subword tokenization helps in managing rare or unseen words by breaking them into known subword units.
-- **Language Agnostic**: Tokenization can be adapted to different languages, making it versatile for multilingual models.
-
 ## Chat-Templates
 
-Chat templates are essential for structuring interactions between language models and users. They provide instruction to format message conversations into prompt.
+As mentioned, chat templates are essential for **structuring conversations between language models and users**. They guide how message exchanges are formatted into a single prompt.
 
-### Base Models vs Instruct Models
+### Base Models vs. Instruct Models
 
-A base model is trained on raw text data to predict the next token, while an instruct model is fine-tuned specifically to follow instructions and engage in conversations. For example, `SmolLM2-135M` is a base model, while `SmolLM2-135M-Instruct` is its instruction-tuned variant.
+Another point we need to understand is the difference between a Base Model vs. an Instruct Model:
 
-To make a base model behave like an instruct model, we need to format our prompts in a consistent way that the model can understand. This is where chat templates come in. ChatML is one such template format that structures conversations with clear role indicators (system, user, assistant). If you have interacted with some AI API lately, you know that's the standard practice.
+- *A Base Model* is trained on raw text data to predict the next token.
+
+- An *Instruct Model* is fine-tuned specifically to follow instructions and engage in conversations. For example, `SmolLM2-135M` is a base model, while `SmolLM2-135M-Instruct` is its instruction-tuned variant.
+
+To make a Base Model behave like an instruct model, we need to **format our prompts in a consistent way that the model can understand**. This is where chat templates come in. 
+
+*ChatML* is one such template format that structures conversations with clear role indicators (system, user, assistant). If you have interacted with some AI API lately, you know that's the standard practice.
 
 It's important to note that a base model could be fine-tuned on different chat templates, so when we're using an instruct model we need to make sure we're using the correct chat template. 
 
-Here is an example :
-
-```python
-messages = [
-    {"role": "system", "content": "You are a helpful assistant focused on technical topics."},
-    {"role": "user", "content": "Can you explain what a chat template is?"},
-    {"role": "assistant", "content": "A chat template structures conversations between users and AI models..."}
-]
-```
-
 ### Understanding Chat Templates
 
-Each model having different special token, chat templates have be implemented to ensure that we correctly format the prompt in each model. 
+Because each instruct model uses different conversation formats and special tokens, chat templates are implemented to ensure that we correctly format the prompt the way each model expects.
 
-Chat templates include Jinj2 code on how to transform the ChatML list of JSON messages presented in the above example into a textual representation of the system-level instructions, user messages and assistant responses that the model can understand.
+In transformers, chat templates include [Jinja2 code](https://jinja.palletsprojects.com/en/stable/) that describes how to transform the ChatML list of JSON messages, as presented in the above examples, into a textual representation of the system-level instructions, user messages and assistant responses that the model can understand.
 
-This structure helps maintain consistency across interactions and ensures the model responds appropriately to different types of inputs.Below is an example of a chat template:
+This structure **helps maintain consistency across interactions and ensures the model responds appropriately to different types of inputs**. 
 
-chat_template of `SmolLM2-135M-Instruct`:
+Below is a simplified version of the `SmolLM2-135M-Instruct` chat template:
+
 ```jinja2
 {% for message in messages %}
 {% if loop.first and messages[0]['role'] != 'system' %}
 <|im_start|>system
-You are a helpful AI assistant named SmolLM...
+You are a helpful AI assistant named SmolLM, trained by Hugging Face
 <|im_end|>
 {% endif %}
 <|im_start|>{{ message['role'] }}
 {{ message['content'] }}<|im_end|>
 {% endfor %}
 ```
-As you can see a chat_template is some code that will write how should the list of messages be formated inside 
+As you can see, a chat_template describes how the list of messages will be formatted.
 
-```sh
-<|im_start|>user
-Hi there!<|im_end|>
-<|im_start|>assistant
-Nice to meet you!<|im_end|>
-<|im_start|>user
-Can I ask a question?<|im_end|>
-<|im_start|>assistant
+Given these messages:
+
+```python
+messages = [
+    {"role": "system", "content": "You are a helpful assistant focused on technical topics."},
+    {"role": "user", "content": "Can you explain what a chat template is?"},
+    {"role": "assistant", "content": "A chat template structures conversations between users and AI models..."},
+    {"role": "user", "content": "How do I use it ?"},
+]
 ```
 
-If you remember last lesson, you will notice that "<|im_end|>" is the End of sequence ( EOS ) token of **SmolLM2-135M-Instruct**. Meaning that we only ask the assistant to generate some part of it ( in this case the assistant messages )
+The previous chat template will produce the following string:
 
-The `transformers` library will take care of chat templates for you in relation to the model's tokenizer. Read more about how transformers builds chat templates [here](https://huggingface.co/docs/transformers/en/chat_templating#how-do-i-use-chat-templates). All we have to do is structure our messages in the correct way and the tokenizer will take care of the rest.
+```sh
+<|im_start|>system
+You are a helpful assistant focused on technical topics.<|im_end|>
+<|im_start|>user
+Can you explain what a chat template is?<|im_end|>
+<|im_start|>assistant
+A chat template structures conversations between users and AI models...<|im_end|>
+<|im_start|>user
+"How do I use it ?<|im_end|>
+```
 
-Or you can experiment with different conversations/models to see how they are then formated for the model in the following space :
+The `transformers` library will take care of chat templates for you as part of the tokenization process. Read more about how transformers uses chat templates [here](https://huggingface.co/docs/transformers/en/chat_templating#how-do-i-use-chat-templates). All we have to do is structure our messages in the correct way and the tokenizer will take care of the rest.
+
+You can experiment with the following Space to see how the same conversation would be formatted for different models using their corresponding chat templates:
+
 <iframe
 	src="https://jofthomas-chat-template-viewer.hf.space"
 	frameborder="0"
@@ -143,49 +193,36 @@ Or you can experiment with different conversations/models to see how they are th
 ></iframe>
 
 
-### Tool Usage
+### Messages to prompt
 
-Tool usage in chat templates allows models to interact with external functions and APIs in a structured way. AI agents rely on tools to perform tasks, such as searching the web, performing calculations, or even controlling physical robots. 
-
-When working with tools, chat templates need to handle three specific message types: tool definitions that describe available functions, tool calls that occur when the assistant wants to use a tool, and tool responses that contain results returned from tool execution.
-
-Here's an example of how a tool interaction might look in a chat template:
-
-```sh
-<|im_start|>system
-You are an AI assistant with access to a calculator tool.<|im_end|>
-<|im_start|>user
-What is 123 multiplied by 456?<|im_end|>
-<|im_start|>tool
-Tool Name: calculator
-Tool Arguments: {"operation": "multiply", "x": 123, "y": 456}<|im_end|>
-<|im_start|>tool-answer
-Tool Answer : 56,088
-<|im_start|>assistant
-Based on the calculator tool, 123 multiplied by 456 equals 56,088.<|im_end|>
-```
-
-This example shows how special tokens (`<|im_start|>` and `<|im_end|>`) are used to segment different parts of the conversation, including system context, user input, tool usage, and the assistant's response. Let's see it in action with an example conversation:
+The easiest way to ensure your LLM receives a conversation correctly formatted is to use the `chat_template` from the model's tokenizer.
 
 ```python
 messages = [
     {"role": "system", "content": "You are an AI assistant with access to various tools."},
-    {"role": "user", "content": "What's the weather in Paris?"},
-    {"role": "tool", "tool_name": "WeatherAPI", "args": {"location": "Paris"}},
-    {"role": "assistant", "content": "It's currently 20°C and partly cloudy."},
+    {"role": "user", "content": "Hi !"},
+    {"role": "assistant", "content": "Hi human, what can help you with ?"},
 ]
 ```
 
-To use this template with your model, you'll need to ensure your model is trained to work with tool calls in this format. Then, configure your tokenizer with the appropriate chat template. Finally, use the template to format messages before sending to the model:
+To convert the previous conversation into a prompt, we load the tokenizer and call `apply_chat_template`:
 
 ```python
-rendered_prompt = tokenizer.apply_chat_template(messages, tokenize=False)
+from transformers import AutoTokenizer
+
+tokenizer = AutoTokenizer.from_pretrained("HuggingFaceTB/SmolLM2-1.7B-Instruct")
+rendered_prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
 ```
 
-Remember that different models may expect different formatting for tool interactions. Always check your model's documentation for the specific format it expects. The template shown here uses a common format with `<|im_start|>` and `<|im_end|>` tokens, but your model might use different special tokens or formatting.
+The `rendered_prompt` returned by this function is now ready to use as the input for the model you chose!
 
-## Resources
+> This `apply_chat_template()` function will be used in the backend of your API, when you interact with messages in the ChatML format.
+
+Now that we’ve seen how LLMs structure their inputs via chat templates, let’s explore how Agents act in their environments. 
+
+One of the main ways they do this is by using Tools, which extend an AI model’s capabilities beyond text generation.
+
+We’ll discuss messages again in upcoming units, but if you want a deeper dive now, check out:
 
 - [Hugging Face Chat Templating Guide](https://huggingface.co/docs/transformers/main/en/chat_templating)
 - [Transformers Documentation](https://huggingface.co/docs/transformers)
-
