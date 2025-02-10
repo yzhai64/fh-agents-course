@@ -58,7 +58,7 @@ The underlying principle of an LLM is simple yet highly effective: **its objecti
 
 For example, while English has an estimated 600,000 words, an LLM might have a vocabulary of around 32,000 tokens (as is the case with Llama 2). Tokenization often works on sub-word units that can be combined.
 
-For instance, consider how the tokens “interest” and “ing” can be combined to form “interesting”, or “ed” can be appended to form “interested.”
+For instance, consider how the tokens "interest" and "ing" can be combined to form "interesting", or "ed" can be appended to form "interested."
 
 You can experiment with different tokenizers in the interactive playground below:
 
@@ -69,16 +69,23 @@ You can experiment with different tokenizers in the interactive playground below
 	height="450"
 ></iframe>
 
-Each LLM has some **special tokens** specific to the model. One important special token is the **End of sequence token** (EOS), which the model emits when it considers the generated sequence complete.
+Each LLM has some **special tokens** specific to the model. The LLM uses these token to open and close the structured components of its generation. For example, to start a sequences, message, or response, and to close sequences or messages. Moreover, the input prompts that we pass to the model are also structured with special tokens. The most important of those special token is the **End of sequence token** (EOS).
 
-| **Model**     | **Provider**                  | **EOS Token**              |
-|---------------|-------------------------------|----------------------------|
-| **GPT4**      | OpenAI                        | `<|endoftext|>`            |
-| **LLaMA3**    | Meta (Facebook AI Research)   | `<|eot_id|>`               |
-| **Deepseek-R1** | DeepSeek                   | `<|end_of_sentence|>`      |
-| **SmollLM2**  | Hugging Face                 | `<|im_end|>`               |
-| **Gemma**     | Google                       | `<end_of_turn>`            |
-| **Mistral**   | Mistral                      | `[/INST]`                  |
+The form of special tokens are highly diverse across model providers.. The table below illustrates the diversity of special tokens.
+
+| **Model**     | **Provider**                  | **EOS Token**              | **Functionality** |
+|---------------|-------------------------------|----------------------------|-----------------|
+| **GPT4**      | OpenAI                        | `<|endoftext|>`            | End of message text |
+| **LLaMA3**    | Meta (Facebook AI Research)   | `<|eot_id|>`               | End of sequence |
+| **Deepseek-R1** | DeepSeek                   | `<|end_of_sentence|>`      | End of message text |
+| **SmollLM2**  | Hugging Face                 | `<|im_end|>`               | End of instruction or message |
+| **Gemma**     | Google                       | `<end_of_turn>`            | End of conversation turn |
+| **Mistral**   | Mistral                      | `[/INST]`                  | End of instruction block |
+
+
+<Tip>
+We do not expect you to memorize these special tokens, but it is important to appreciate their diversity and the role they play in the text generation of LLMs. If you want to know more about special tokens, you can check out the configuration of the model in its Hub repository. For example, you can find the special tokens of the SmollLM2 model in its [tokenizer_config.json](https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct/blob/main/tokenizer_config.json).
+</Tip>
 
 
 ## Understanding next token prediction.
@@ -89,7 +96,7 @@ LLMs are said to be **autoregressive**, meaning that **the output from one pass 
 
 In other words, an LLM will decode text until it reaches the EOS. But what happens during a single decoding loop?
 
-While the full process can be quite technical for the purpose of learning agents, here’s a brief overview:
+While the full process can be quite technical for the purpose of learning agents, here's a brief overview:
 
 - Once the input text is **tokenized**, the model computes a representation of the sequence that captures information about the meaning and the position of each token in the input sequence.
 - This representation goes into the model, which outputs scores that rank the likelihood of each token in its vocabulary as being the next one in the sequence.
@@ -123,14 +130,14 @@ If you want to know more about decoding, you can take a look at the [NLP course]
 ## Attention is all you need
 
 A key aspect of the Transformer architecture is **Attention**. When predicting the next word,
-not every word in a sentence is equally important; words like “France” and “capital” in the sentence *“The capital of France is …”* carry the most meaning.
+not every word in a sentence is equally important; words like "France" and "capital" in the sentence *"The capital of France is ..."* carry the most meaning.
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/AttentionSceneFinal.gif" alt="Visual Gif of Attention" width="60%">
 This process of identifying the most relevant words to predict the next token has proven to be incredibly effective.
 
 Although the basic principle of LLMs—predicting the next token—has remained consistent since GPT-2, there have been significant advancements in scaling neural networks and making the attention mechanism work for longer and longer sequences.
 
-If you’ve interacted with LLMs, you’re probably familiar with the term *context length*, which refers to the maximum number of tokens the LLM can process, and the maximum _attention span_ it has.
+If you've interacted with LLMs, you're probably familiar with the term *context length*, which refers to the maximum number of tokens the LLM can process, and the maximum _attention span_ it has.
 
 ## Prompting the LLM is important
 
@@ -167,8 +174,8 @@ We will explore these steps in more detail in this Unit, but for now, what you n
 
 ---
 
-That was a lot of information! We’ve covered the basics of what LLMs are, how they function, and their role in powering AI agents. 
+That was a lot of information! We've covered the basics of what LLMs are, how they function, and their role in powering AI agents. 
 
-If you’d like to dive even deeper into the fascinating world of language models and natural language processing, don’t hesitate to check out our [free NLP course](https://huggingface.co/learn/nlp-course/chapter1/1).
+If you'd like to dive even deeper into the fascinating world of language models and natural language processing, don't hesitate to check out our [free NLP course](https://huggingface.co/learn/nlp-course/chapter1/1).
 
 Now that we understand how LLMs work, it's time to see **how LLMs structure their generations in a conversational context**.
