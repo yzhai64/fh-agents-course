@@ -2,7 +2,7 @@
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/whiteboard-check-2.jpg" alt="Unit 1 planning"/>
 
-One crucial aspect of AI Agents is their ability to take **actions**. As we saw, this happens through the use of Tools.
+One crucial aspect of AI Agents is their ability to take **actions**. As we saw, this happens through the use of **Tools**.
 
 In this section, we’ll learn what Tools are, how to design them effectively, and how to integrate them into your Agent via the System Message.
 
@@ -43,7 +43,7 @@ For instance, if you ask an LLM directly (without a search tool) for today's wea
 
 ## How do tools work?
 
-LLMs, as we saw, can only receive text inputs and generate text outputs. They really have no way to call the tools on their own. What we mean when we talk about _providing tools to an Agent_, is that we **teach** the LLM about the existence of tools, and ask the model to generate text that will invoke tools when it needs to. For example, if we provide a tool to check the weather at a location from the Internet, and then ask the LLM about the weather in Paris, the LLM will recognize that question as a great opportunity to use the "weather" tool we taught it about. The LLM will generate _text_, in the form of code, to invoke that tool. It is the responsibility of the **Agent** to parse the LLM's output, recognize that a tool call is required, and invoke the tool on the LLM's behalf. The output from the tool will then be sent back to the LLM, which will compose its final response for the user.
+LLMs, as we saw, can only receive text inputs and generate text outputs. They have no way to call tools on their own. What we mean when we talk about _providing tools to an Agent_, is that we **teach** the LLM about the existence of tools, and ask the model to generate text that will invoke tools when it needs to. For example, if we provide a tool to check the weather at a location from the Internet, and then ask the LLM about the weather in Paris, the LLM will recognize that question as a relevant opportunity to use the "weather" tool we taught it about. The LLM will generate _text_, in the form of code, to invoke that tool. It is the responsibility of the **Agent** to parse the LLM's output, recognize that a tool call is required, and invoke the tool on the LLM's behalf. The output from the tool will then be sent back to the LLM, which will compose its final response for the user.
 
 The output from a tool call is another type of message in the conversation. Tool calling steps are typically not shown to the user: the Agent retrieves the conversation, calls the tool(s), gets the outputs, adds them as a new conversation message, and sends the updated conversation to the LLM again. From the user's point of view, it's like the LLM had used the tool, but in fact it was our application code (the **Agent**) who did it.
 
@@ -51,7 +51,7 @@ We'll talk a lot more about this process in future sessions.
 
 ## How do we give tools to an LLM?
 
-The complete answer may seem overwhelming, but we essentially use the system prompt to provide textual descriptions of what tools are  available to the model:
+The complete answer may seem overwhelming, but we essentially use the system prompt to provide textual descriptions of available tools to the model:
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/Agent_system_prompt.png" alt="System prompt for tools"/>
 
