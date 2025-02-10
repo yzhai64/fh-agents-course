@@ -12,6 +12,7 @@ permissions:
   deployments: write
   pull-requests: write
 
+
 jobs:
   build:
     uses: huggingface/doc-builder/.github/workflows/upload_pr_documentation.yml@main
