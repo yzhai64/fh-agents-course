@@ -2,7 +2,9 @@
 
 In the last section, we learned how we can create Agents from scratch using Python code, and we **saw just how tedious that process can be**. Fortunately, many Agent libraries simplify this work by handling much of the heavy lifting for you.
 
-In this tutorial, you'll create your very first Agent—capable of performing JOFFREY—and publish it on Hugging Face Spaces so you can share it with friends and colleagues.
+In this tutorial, you'll create your very first Agent—capable of performing actions such as image generation, web search, time zone checking and much more !
+
+You will also publish you argent on a Hugging Face Spaces so you can share it with friends and colleagues.
 
 Let's get started!
 
@@ -13,17 +15,110 @@ Let's get started!
 
 To make this Agent, we're going to use a library called `smolagents`, a library that **provides a framework for developing your agents with ease**.
 
-This lightweight library abstracts away much of the complexity of building an Agent we saw in the last section, allowing you to focus on designing your agent's behavior
+This lightweight library abstracts away much of the complexity of building an Agent we saw in the last section, allowing you to focus on designing your agent's behavior.
 
 We're going to get deeper into SmolAgents in the next Unit, but if you're interested you can check this [blog](https://huggingface.co/blog/smolagents).
 
-## Let's build
+In short, SmolAgents is a library that focuses on codeAgent, a kind of agent that perform Action throught code blocks and then **"Observe"** the result by executing that code.
+
+Here is an example of what we'll build ! 
+
+I provided my agent with an **Image generation tool** and asked it to generate an image of a cat.
+The agent inside smolagents is going to have the same behaviors as the custom one we built previously. it's going to think, act and observe in cycle until it reaches a final answer :
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PQDKcWiuln4?si=ysSTDZoi8y55FVvA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Exciting right ?
+
+## Let's build !
 To start, duplicate this space : https://huggingface.co/spaces/agents-course/First_agent_template
 
 Duplicating this space means creating a local copy on your own profile:
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/duplicate-space.gif" alt="Duplicate"/>
 
-The only file that you will have to modify is the incomplete "**app.py**"
+throughtout this lesson, the only file you will need to modify is the currently incomplete "**app.py**"
+let's break it down together .
+here are some simple but necessary imports
+```python
+from smolagents import CodeAgent,DuckDuckGoSearchTool, HfApiModel,load_tool,tool
+import datetime
+import requests
+import pytz
+import yaml
+from tools.final_answer import FinalAnswerTool
+```
+As outlined earlier, we will directly use the **CodeAgent** class from **smolagents**.
+
+Now let's get into the tools ! If you want a refresher about tools, don't hesitate to go back to the tool section of the course.
+```python
+@tool
+def my_custom_tool(arg1:str, arg2:int)-> str: #it's import to specify the return type
+    #Keep this format for the description / args / args description but feel free to modify the tool
+    """A tool that does nothing yet 
+    Args:
+        arg1: the first argument
+        arg2: the second argument
+    """
+    return "What magic will you build ?"
+
+@tool
+def get_current_time_in_timezone(timezone: str) -> str:
+    """A tool that fetches the current local time in a specified timezone.
+    Args:
+        timezone: A string representing a valid timezone (e.g., 'America/New_York').
+    """
+    try:
+        # Create timezone object
+        tz = pytz.timezone(timezone)
+        # Get current time in that timezone
+        local_time = datetime.datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
+        return f"The current local time in {timezone} is: {local_time}"
+    except Exception as e:
+        return f"Error fetching time for timezone '{timezone}': {str(e)}"
+```
+### The Tools
+The Tools are what we are encouraging you to build in this section! We give you two examples:
+
+1. A non-working dummy tool that you can modify to make something useful.
+2. An actually working tool that gets the current time somewhere in the world.
+
+To define your tool it is important to :
+1. Provide input and output types for your function here (get_current_time_in_timezone(timezone: str) -> str:)
+2. A well formatted docstring. Smolagents is expecting all the arguments to have a textual description in the docstring.
+
+### The Agent
+```python
+final_answer = FinalAnswerTool()
+model = HfApiModel(
+max_tokens=2096,
+temperature=0.5,
+model_id='Qwen/Qwen2.5-Coder-32B-Instruct',
+custom_role_conversions=None,
+)
+
+with open("prompts.yaml", 'r') as stream:
+    prompt_templates = yaml.safe_load(stream)
+    
+agent = CodeAgent(
+    model=model,
+    tools=[final_answer], ## add your tools here (don't remove final answer)
+    max_steps=6,
+    verbosity_level=1,
+    grammar=None,
+    planning_interval=None,
+    name=None,
+    description=None,
+    prompt_templates=prompt_templates
+)
+
+GradioUI(agent).launch()
+```
+This Agent still use the InferenceClient we saw in earlier lessons behind this **HfApiModel** class !
+We will give more in depth example when we will present the framework in a later unit, but the import here is to add the list of tools to the the **tools** parameter of your agent.
+
+Adding or removing some tools will get your agent new capacities, hence be creative here !
+
+the complete "app.py" : 
 ```python
 from smolagents import CodeAgent,DuckDuckGoSearchTool, HfApiModel,load_tool,tool
 import datetime
@@ -92,14 +187,9 @@ agent = CodeAgent(
 GradioUI(agent).launch()
 ```
 
-The agent inside smolagents is going to have the same behaviours as the custom one we built previously. it's going to think, act and observe in cycle until it reaches a final answer :
+Your **Objective** is now to get familiar with the space and the agent. 
 
-Here is an example by providing an **Image generation tool** to the agent and asking it to generate an image of a cat :
-<iframe width="560" height="315" src="https://www.youtube.com/embed/PQDKcWiuln4?si=ysSTDZoi8y55FVvA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-Your **Objective** is now to get familiar with the space and the agent. Currently the agent in the template does not have tools loaded, so try to provide it some of the pre-made ones or even make some new tools yourselves !
-
-We gave you an example of a custom tool that computes the current time in a different timezone but many tools are possible.
+Currently the agent in the template does not have tools loaded, so try to provide it some of the pre-made ones or even make some new tools yourselves !
 
 We are eagerly waiting for your amazing agents output in the discord channel #agents-course-showcase !
 
