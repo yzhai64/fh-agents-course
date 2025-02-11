@@ -76,6 +76,7 @@ output = client.chat.completions.create(
     stream=False,
     max_tokens=1024,
 )
+print(output.choices[0].message.content)
 ```
 output:
 ```
