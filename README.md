@@ -28,7 +28,7 @@ You can access the course here 👉 https://hf.co/learn/agents-course
 
 ## Contribution Guidelines
 
-If you want to contribute to this course, you're welcome to do so. Feel free to open an issue or join the discussion in the [Discord](https://discord.gg/GC7zFgvN). For specific contributions, here are some guidelines:
+If you want to contribute to this course, you're welcome to do so. Feel free to open an issue or join the discussion in the [Discord](https://discord.gg/UrrTSsSyjb). For specific contributions, here are some guidelines:
 
 ### Small typo and grammar fixes
 
@@ -50,7 +50,7 @@ We are actively working on the units and if you want to join us, we will need to
 | 3    | 🗓️ Planned    | If you're experienced with agents, we're open to help with use cases |
 | 4    | 🚧 In Progress | Work is underway, no need for help with integration                         |
 
-If in doubt, join the discussion in the [Discord](https://discord.gg/GC7zFgvN).
+If in doubt, join the discussion in the [Discord](https://discord.gg/UrrTSsSyjb).
 
 
 ## Citing the project
