@@ -6,5 +6,4 @@ This framework outline is part of unit 2 of the course. You can access the unit 
 | --- | --- |
 | [smolagents](smolagents/README.md) | Overview of smolagents |
 | [LangChain](langchain/README.md) | Overview of LangChain |
-| [LangGraph](langgraph/README.md) | Overview of LangGraph |
 | [LlamaIndex](llama-index/README.md) | Overview of LlamaIndex |

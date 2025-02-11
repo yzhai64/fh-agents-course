@@ -1,6 +1,6 @@
 # Components
 
-**Components are building blocks for agentic workflows.** LlamaIndex has many components, but we'll focus on the key ones for building agentic workflows, including the `Agent` and `Tools` components.
+**Components are building blocks for agentic workflows.** LlamaIndex has many components, but we'll focus on the key ones for building agentic workflows, including the `QueryEngine`, `Agent` and `Tool` components.
 
 Many of the components rely on integrations with other frameworks. So, before using them, we first need to learn how to install them as dependencies.
 
@@ -42,19 +42,18 @@ llm.complete("Hello, how are you?")
 
 Now, let's dive a bit deeper into the components and see how they work in context.
 
-## Components
+## Components for a QueryEngine
 
 Instead of going over each of the components one by one, we will take a look at **how to use components in context within three common scenarios**.
 
-1. create a document index from a set of documents
-2. use the index to answer questions with prompts and LLMs
-3. use agents to answer questions with tools
-
-### 1. Creating a document or vector index
-
-We will work with the [Loading](https://docs.llamaindex.ai/en/stable/module_guides/loading/), [Embedding](https://docs.llamaindex.ai/en/stable/module_guides/embedding/), [Indexing](https://docs.llamaindex.ai/en/stable/module_guides/indexing/) and [Storing](https://docs.llamaindex.ai/en/stable/module_guides/storing/) components to create a document index.
+1. creating an index from a set of documents
+2. querying an index with prompts and LLMs
 
 TODO: Add image of Alfred
+
+### 1. Creating an index from a set of documents
+
+We will work with the [Loading](https://docs.llamaindex.ai/en/stable/module_guides/loading/), [Embedding](https://docs.llamaindex.ai/en/stable/module_guides/embedding/), [Indexing](https://docs.llamaindex.ai/en/stable/module_guides/indexing/) and [Storing](https://docs.llamaindex.ai/en/stable/module_guides/storing/) components to create a document index.
 
 As mentioned before, LlamaIndex can work on top of your own data, however, **before accessing data, we need to load it into the library.**
 There are three main ways to do to load data into LlamaIndex:
@@ -96,34 +95,72 @@ nodes = pipeline.run(documents=[Document.example()])
 
 > Loading and embedding can be computationally expensive, so LlamaIndex provides a way to cache the results of the ingestion pipeline, so we don't have to compute them again.
 
-Now we've got our `Node` objects, we can look into [storing](https://docs.llamaindex.ai/en/stable/module_guides/storing/) them.
-Similar to other components, there are a lot of integrations and **we can use various types of storage backends like a basic `DocumentStore` or a `VectorStore` for RAG.**
-By default, LlamaIndex uses the **`VectorStoreIndex` as a simple in-memory vector store that's great for quick experimentation.** You can also persist the vector store to a directory and load it again later.
+Now that we have our `Node` objects, we need to store them somewhere. LlamaIndex lets us store nodes in different ways:
+
+- A simple `DocumentStore` for basic storage
+- A `VectorStore` for similarity search
+- Or one of [the other storage options](https://docs.llamaindex.ai/en/stable/module_guides/storing/)
+
+Don't worry too much about which storage to pick - LlamaIndex handles this for you with something called a `StorageContext`. You can save and load this context whenever you need it.
+
+For getting started, the `VectorStoreIndex` is your best bet. It allows you to store everything in memory which makes it fast and easy to experiment with.
+
+Let's create a `VectorStoreIndex` from our `Node` objects and persist it to disk by saving the `StorageContext`.
 
 ```python
 from llama_index.core import VectorStoreIndex
 
-vector_store = VectorStoreIndex().from_documents(nodes)
-
-# persist the vector store
-path = "path/to/vector/store"
-vector_store.persist(path)
-
-# load the vector store
-vector_store = VectorStoreIndex.from_persist_dir(path)
+index = VectorStoreIndex.from_documents(nodes)
+index.storage_context.persist("path/to/vector/store")
 ```
 
-Now we've loaded and indexed our data, we can start querying it with prompts and LLMs.
+Now, we can load the index using through the `StorageContext` and use it in our workflow. Make sure to also pass in the `embed_model` to the `VectorStoreIndex` constructor to search for embeddings in the same vector space.
 
-### 2. Querying a document index for RAG with Prompt and LLMs
+```python
+from llama_index.core import StorageContext, load_index_from_storage
+from huggingface_api import HuggingFaceInferenceAPIEmbedding
 
+embed_model = HuggingFaceInferenceAPIEmbedding("BAAI/bge-small-en-v1.5")
+storage_context = StorageContext.from_defaults(persist_dir="path/to/vector/store")
+index = load_index_from_storage(storage_context, embed_model=embed_model)
+```
 
 TODO: Add image of Alfred
 
-> Query workflows like the QueryEngine have a [low-level composition API](https://docs.llamaindex.ai/en/stable/module_guides/deploying/query_engine/usage_pattern/#low-level-composition-api), which allows for more fine-grained control over the query process.
+Great! Now that we can save and load our index easily, let's explore how to query it in different ways.
+
+### 2. Querying an index with prompts and LLMs
+
+Before querying our index, we need to convert it to a query interface. The most common options are:
+
+- `as_retriever`: For basic document retrieval, returning a list of `NodeWithScore` objects with similarity scores
+- `as_query_engine`: For single question-answer interactions, returning a written response
+- `as_chat_engine`: For conversational interactions that maintain memory across multiple messages, returning a chat history
+
+We'll focus on the query engine since it is more common for agent-like interactions.
+We also pass in an LLM to the query engine to use for the response.
+
+```python
+from llama_index.llms.huggingface_api import HuggingFaceInferenceAPILM
+
+llm = HuggingFaceInferenceAPILM(model_name="meta-llama/Meta-Llama-3-8B-Instruct")
+query_engine = index.as_query_engine(llm=llm)
+query_engine.query("What is the meaning of life?")
+# the meaning of life is 42
+```
+
+Under the hood, the query engine doesn't only use the LLM to answer the question, but also uses a `ResponseSynthesizer` as strategy to process the response.
+Once again, this is fully customisable but there are three main strategies that work well out of the box:
+
+- `refine`: create and refine an answer by sequentially going through each retrieved text chunk. This makes a separate LLM call per Node/retrieved chunk.
+- `compact` (default): similar to refine but concatenate the chunks beforehand, resulting in less LLM calls.
+- `tree_summarize`: create a detailed answer by going through each retrieved text chunk and creating a tree structure of the answer.
+
+TODO: Add image of Alfred
+
+> Take fine-grained control of your query workflows with the [low-level composition API](https://docs.llamaindex.ai/en/stable/module_guides/deploying/query_engine/usage_pattern/#low-level-composition-api). This API lets you customize and fine-tune every step of the query process to match your exact needs.
+
 
 ### 3. Using Agents and Tools
 
-TODO: Add image of Alfred
 
-Now, we've gotton familiar with the components, let's take a look at how to use them for agentic workflows!

@@ -1,33 +1,16 @@
 # What is LlamaIndex?
 
-LlamaIndex is **a complete toolkit for working with LLMs**. For this course we'll focus on three main parts that help build agents in LlamaIndex: **LlamaParse**, **Components** and **Workflows**.
+LlamaIndex is **a complete toolkit for working with LLMs**. For this course we'll focus on three main parts that help build agents in LlamaIndex: **Components**, **Agents and Tools** and **Workflows**.
 
-Let's look at each of these key parts of LlamaIndex and how they help with agents:
+Let's look at these key parts of LlamaIndex and how they help with agents:
 
-**LlamaParse** is a tool that reads documents and prepares them for LLMs to use (like in RAG or with agents). It can:
-- Read data from many different types of files and sources
-- Turn documents into formats that LLMs can easily understand
-- Work smoothly with other LlamaIndex tools
+**Components** are the basic building blocks you use in LlamaIndex. These include things like prompts, models and databases. Components often help connect LlamaIndex with other tools and libraries. For
 
-**Components** are the basic building blocks you use in LlamaIndex. These include things like prompts, models, agents and databases. Components often help connect LlamaIndex with other tools and libraries.
+**Agents and Tools** are LLM-powered knowledge workers that can intelligently perform various tasks over your data, including both reading and writing operations. They do so with tools and reasoning loops.
 
-**Workflows** are step-by-step processes that join components together. They:
-- React to events and triggers
-- Can use RAG data sources
-- Can check their work and fix mistakes
-- Can run as small services in production
+**Workflows** are step-by-step processes that processing logic together. Workflows or agentic workflows are a way to structure agentic behaviour.
 
-Now, let's see how these parts work together to help build agents and tools in LlamaIndex.
-
-## Agents and tools in LlamaIndex
-
-Now that we know the main parts of LlamaIndex, let's see how they help with agents and tools.
-
-`LlamaParse` helps agents and tools read and understand different types of data.
-`Components` are like tools that agents use to interact with things in the world.
-And `Workflows` give agents a clear path to follow when making decisions.
-
-Let's see how our friend Alfred would work in LlamaIndex:
+Now, let's see how how Alfred would operate in with these parts of LlamaIndex.
 
 TODO: Add image of Alfred
 
@@ -35,10 +18,10 @@ TODO: Add image of Alfred
 
 While LlamaIndex does some things similar to other frameworks like smolagents, it has some key benefits:
 
-1. **Built-in Document Reading with LlamaParse** LlamaParse was made specifically for LlamaIndex, so it works better than document readers in other frameworks
+1. **Built-in Document Reading with LlamaParse** LlamaParse was made specifically for LlamaIndex, so the integration is seamless, although it is a paid feature.
 
-2. **Many Ready-to-Use Components** LlamaIndex has been around for a while, so it works with lots of other tools and frameworks. This means it has many tested and reliable components
+2. **Many Ready-to-Use Components** LlamaIndex has been around for a while, so it works with lots of other frameworks. This means it has many tested and reliable components.
 
 3. **Clear Workflow System**. Workflows help break down how agents should make decisions step by step. This is like having a map for a conversation or task.
 
-We'll look more closely at each of these parts and how they work together in the next sections. Let's start with `LlamaParse`.
+We'll look more closely at each of these parts and how they work together in the next sections. Let's start with `Components`.
