@@ -14,12 +14,12 @@ For example, an agent assisting with customer service might retrieve customer da
 
 ## Types of Agent Actions
 
-There is multiple types of Agents, that take actions differently:
+There are multiple types of Agents that take actions differently:
 
 | Type of Agent          | Description                                                                                      |
 |------------------------|--------------------------------------------------------------------------------------------------|
 | JSON Agent             | The Action to take is specified as in JSON format                                                |
-| Code Agent             | The Agents writes a code bloc that is interpreted externally                                      |
+| Code Agent             | The Agents writes a code block that is interpreted externally                                      |
 | Function-calling Agent | It is a subcategory of the JSON Agent which has been fine-tuned to generate a new message for each action |
 
 Actions themselves can serve many purposes:
@@ -62,12 +62,12 @@ Action :
   "action_input": {"location": "New York"}
 }
 ```
-The framework can then parse the name of the function to call and the arguments easily.
+The framework can then easily parse the name of the function to call and the arguments to apply.
 
 This clear, machine-readable format minimizes errors and enables external tools to accurately process the agent’s command.
 
 Note: Function-calling agents operate similarly by structuring each action so that a designated function is invoked with the correct arguments.
-We'll dive deeper into that type of Agents in a future Unit.
+We'll dive deeper into those types of Agents in a future Unit.
 
 ## Code Agents
 
@@ -117,7 +117,7 @@ We learned that Actions bridge an agent's internal reasoning and its real-world 
 
 This deliberate execution ensures that each action is precise and ready for external processing via the stop and parse approach. In the next section, we will explore Observations to see how agents capture and integrate feedback from their environment.
 
-After this, we will **be finally ready to build our first Agent!**
+After this, we will **finally be ready to build our first Agent!**
 
 
 

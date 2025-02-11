@@ -202,7 +202,7 @@ calculator_tool = Tool(
     "calculator",                   # name
     "Multiply two integers.",       # description
     calculator,                     # function to call
-    [("a": "int"), ("b": "int")],   # inputs (names and types)
+    [("a", "int"), ("b", "int")],   # inputs (names and types)
     "int",                          # output
 )
 ```
@@ -272,9 +272,11 @@ def calculator(a: int, b: int) -> int:
 print(calculator.to_string())
 ```
 
-And we can use the tool's `to_string` method to automatically retrieve a text suitable to be used as a tool description for an LLM:
+And we can use the `Tool`'s `to_string` method to automatically retrieve a text suitable to be used as a tool description for an LLM:
 
+```
 Tool Name: calculator, Description: Multiply two integers., Arguments: a: int, b: int, Outputs: int
+```
 
 The description is **injected** in the system prompt. Taking the example with which we started this section, here is how it would look like after replacing the `tools_description`:
 
