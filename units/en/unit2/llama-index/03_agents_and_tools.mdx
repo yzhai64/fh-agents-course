@@ -6,10 +6,10 @@ Let's recap the definition of an Agent:
 
 Within LlamaIndex, we build data agents with two core components:
 
-1. A reasoning loop, discussed in [unit 1 on internal reasoning]
-2. A set of tools, discussed in [unit 1 on tools]
+1. A reasoning loop, discussed in [unit 1 on internal reasoning](../../unit1/thoughts.mdx)
+2. A set of tools, discussed in [unit 1 on tools](../../unit1/tools.mdx)
 
-### The Reasoning Loop
+## Thought: The Reasoning Loop
 
 LlamaIndex supports three main types of reasoning agents:
 
@@ -20,30 +20,96 @@ LlamaIndex supports three main types of reasoning agents:
 > [!NOTE]
 > Find more information on advanced agents on [LlamaIndex GitHub](https://github.com/run-llama/llama_index/tree/main/llama-index-packs)
 
-### The tools
+## What are Tools in LlamaIndex?
 
-Tools are like the different abilities a Data Agent has. They're basically APIs that the agent can use to:
-- Get information
-- Change data
-- Interact with other systems
+Defining a set of Tools is similar to defining any API interface.
+LlamaIndex  allows to define a `Tool` as well as a `ToolSpec` containing a series of customize functions under the hood.
 
-## How to Create a Basic Data Agent
+> When using an agent or LLM with function calling, the tool selected (and the arguments written for that tool) rely strongly on the tool name and description of the tools purpose and arguments.
 
-Here's a simple example using OpenAI's system:
+Let's explore the main types of tools in LlamaIndex:
+
+1. `FunctionTool`: Convert any Python function into a tool that an agent can use. It automatically figures out how the function works.
+2. `QueryEngineTool`: A tool that lets agents use query engines. Since agents are built on query engines, they can also use other agents as tools.
+3. `Toolspecs`: Tools created by the community to work with different services like Gmail.
+4. `Utility Tools`: Special tools that help handle large amounts of data from other tools.
+
+We will go over each of these in detail one by one.
+
+### FunctionTool
+
+A function tool is a simple wrapper around any existing function.
+We can choose to pass a sync or async function to the tool.
+Additionally, we can choose to name and describe the tool as we want.
 
 ```python
-from llama_index.agent.openai import OpenAIAgent
-from llama_index.llms.huggingface_api import HuggingFaceInferenceAPILM
+from llama_index.core.tools import FunctionTool
 
-# Set up the AI model
-llm = HuggingFaceInferenceAPILM(model_name="meta-llama/Meta-Llama-3-8B-Instruct")
+def get_weather(location: str) -> str:
+    """Usfeful for getting the weather for a given location."""
+    ...
 
-# Create the agent with your chosen tools
-agent = OpenAIAgent.from_tools(tools, llm=llm, verbose=True)
+tool = FunctionTool.from_defaults(
+    get_weather,
+    # async_fn=aget_weather, name="...", description="...",
+)
 ```
 
-You can use this agent in two ways:
-1. Let it complete tasks automatically from start to finish
-2. Control it step-by-step for more precise oversight
+### QueryEngineTool
 
-This setup gives you a powerful tool that can understand, process, and work with your data intelligently.
+The `QueryEngine` we defined in the previous unit can be turned into a a tool using the `QueryEngineTool` class.
+
+```python
+from llama_index.core import StorageContext, load_index_from_storage
+from llama_index.core.tools import QueryEngineTool
+from llama_index.llms.huggingface_api import HuggingFaceInferenceAPILM
+from llama_index.embeddings.huggingface_api import HuggingFaceInferenceAPIEmbedding
+
+embed_model = HuggingFaceInferenceAPIEmbedding("BAAI/bge-small-en-v1.5")
+storage_context = StorageContext.from_defaults(persist_dir="path/to/vector/store")
+index = load_index_from_storage(storage_context, embed_model=embed_model)
+
+llm = HuggingFaceInferenceAPILM(model_name="meta-llama/Meta-Llama-3-8B-Instruct")
+query_engine = index.as_query_engine(llm=llm)
+tool = QueryEngineTool.from_defaults(
+    query_engine,
+    # name="...", description="..."
+)
+```
+
+### Toolspecs
+
+Custom `Tools` and `ToolSpecs` are created by the community and shared on the [LlamaHub](https://llamahub.ai/).
+You can think of `ToolSpecs` like bundles of tools meant to be used together. Usually these cover useful tools across a single interface/service, like Gmail.
+
+Similarly to components, these toolspecs need to be installed and follow a similar pattern.
+
+```bash
+pip install llama-index-tools-{toolspec_name}
+```
+
+Let's install a toolspec that works on Gmail.
+
+```bash
+pip install llama-index-tools-google
+```
+
+And now we can load the toolspec.
+
+```python
+from llama_index.tools.google import GmailToolSpec
+
+tool_spec = GmailToolSpec()
+```
+
+### Utility Tools
+
+Oftentimes, directly querying an API can return a massive volume of data, which on its own may overflow the context window of the LLM (or at the very least unnecessarily increase the number of tokens that you are using).
+Let’s walk through our two main utility tools below.
+
+1. `OnDemandToalLoader`: This tool turns any existing LlamaIndex data loader ( BaseReader class) into a tool that an agent can use. The tool can be called with all the parameters needed to trigger load_data from the data loader, along with a natural language query string. During execution, we first load data from the data loader, index it (for instance with a vector store), and then query it “on-demand”. All three of these steps happen in a single tool call.
+2. `LoadAndSearchToolSpec`: The LoadAndSearchToolSpec takes in any existing Tool as input. As a tool spec, it implements to_tool_list , and when that function is called, two tools are returned: a load tool and then a search tool. The load Tool execution would call the underlying Tool, and the index the output (by default with a vector index). The search Tool execution would take in a query string as input and call the underlying index.
+
+> You can find other utility tools on the [LlamaHub](https://llamahub.ai/)
+
+## What are agents in LlamaIndex?

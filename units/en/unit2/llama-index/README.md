@@ -5,4 +5,7 @@ This LlamaIndex frame outline is part of unit 2 of the course. You can access th
 | Title | Description |
 | --- | --- |
 | [Introduction](introduction.mdx) | Introduction to LlamaIndex |
-| [Wh](05_llama_parse.mdx) | LlamaParse: a tool for parsing and extracting information from text |
+| [Components](components.mdx) | Components: the building blocks of workflows |
+| [Workflows](workflows.mdx) | Workflows: a sequence of steps, events made of components that are executed in order |
+| [Agents and Tools](agents_and_tools.mdx) | Agents and Tools: how to build agents and tools in LlamaIndex |
+| [Use Case](use_case.mdx) | Use Case: Agentic RAG |

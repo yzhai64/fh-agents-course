@@ -112,7 +112,7 @@ We also need to provide an embedding model which should be the same as the one u
 
 ```python
 from llama_index.core import VectorStoreIndex
-from huggingface_api import HuggingFaceInferenceAPIEmbedding
+from llama_index.embeddings.huggingface_api import HuggingFaceInferenceAPIEmbedding
 
 embed_model = HuggingFaceInferenceAPIEmbedding("BAAI/bge-small-en-v1.5")
 index = VectorStoreIndex.from_documents(nodes, embed_model=embed_model)
@@ -123,7 +123,7 @@ We can load our index again using files that were created when saving the `Stora
 
 ```python
 from llama_index.core import StorageContext, load_index_from_storage
-from huggingface_api import HuggingFaceInferenceAPIEmbedding
+from llama_index.embeddings.huggingface_api import HuggingFaceInferenceAPIEmbedding
 
 embed_model = HuggingFaceInferenceAPIEmbedding("BAAI/bge-small-en-v1.5")
 storage_context = StorageContext.from_defaults(persist_dir="path/to/vector/store")
