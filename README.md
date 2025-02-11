@@ -1,4 +1,4 @@
-# [The Hugging Face Agents Course](https://hf.co/learn/agents-course)
+# [The Hugging Face Agents Course](https://hf.co/learn/agents-course){:target="_blank"}
 
 If you like the course, **don't hesitate to ⭐ star this repository**. This helps us to **make the course more visible 🤗**.
 
@@ -8,9 +8,9 @@ If you like the course, **don't hesitate to ⭐ star this repository**. This hel
 
 The course is divided into 5 units. That will take you from **the basics of agents to a final assignment with a benchmark**.
 
-Sign up here (it's free) 👉 https://bit.ly/hf-learn-agents
+Sign up here (it's free) 👉 https://bit.ly/hf-learn-agents{:target="_blank"}
 
-You can access the course here 👉 https://hf.co/learn/agents-course
+You can access the course here 👉 https://hf.co/learn/agents-course{:target="_blank"}
 
 | Unit | Topic                          | Description                                                                 |
 |------|--------------------------------|-----------------------------------------------------------------------------|
