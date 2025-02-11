@@ -6,13 +6,13 @@ This module covers how to build effective agents using the [`smolagents`](https:
 
 ## Module Overview
 
-This module provides a comprehensive overview of key concepts and practical strategies for building intelligent agents using smolagents. With so many open-source frameworks available, it's essential to understand the components and capabilities that make smolagents a valuable option—or to determine when another solution might be a better fit. We'll explore critical agent types, including retrieval agents that access and synthesize information, code agents designed for software development tasks, and custom function agents for creating modular, function-driven workflows. Additionally, we'll cover the integration of vision capabilities and web browsing to unlock new possibilities for dynamic and context-aware applications.
+This module provides a comprehensive overview of key concepts and practical strategies for building intelligent agents using smolagents. With so many open-source frameworks available, it's essential to understand the components and capabilities that make smolagents a valuable option—or to determine when another solution might be a better fit.  We'll explore critical agent types, including code agents designed for software development tasks, tool calling agents for creating modular, function-driven workflows and retrieval agents that access and synthesize information. Additionally, we'll cover the orchestration of mutiple agents, the integration of vision capabilities and web browsing to unlock new possibilities for dynamic and context-aware applications.
 
 ## Contents
 
 ### 1️⃣ [Why Use smolagents](./why_use_smolagents.md)
 
-`smolagents` is one of the many open-source agent frameworks available for application development. Alternative options include `LangChain`, `LlamaIndex` and `LangGraph`, which are also covered in other modules in this course. This library offers several key features that might make it a great fit for specific use cases, but there are also some limitations that may lead you to consider other solutions. This module explores the advantages and drawbacks of using `smolagents`, helping you make an informed decision based on your project's requirements.
+`smolagents` is one of the many open-source agent frameworks available for application development. Alternative options include `LlamaIndex` and `LangGraph`, which are also covered in other modules in this course. This library offers several key features that might make it a great fit for specific use cases, but there are also some limitations that may lead you to consider other solutions. This module explores the advantages and drawbacks of using `smolagents`, helping you make an informed decision based on your project's requirements.
 
 ### 2️⃣  [Code Agents](./code_agents.md)
 
@@ -50,6 +50,6 @@ Browser agents are a powerful application of vision agents, designed to enable w
 - [smolagents Documentation](https://huggingface.co/docs/smolagents) - Official docs for the smolagents library
 - [Building Effective Agents](https://www.anthropic.com/research/building-effective-agents) - Research paper on agent architectures
 - [Agent Guidelines](https://huggingface.co/docs/smolagents/tutorials/building_good_agents) - Best practices for building reliable agents
-- [LangChain Agents](https://python.langchain.com/docs/how_to/#agents) - Additional examples of agent implementations
+- [LangGraph Agents](https://langchain-ai.github.io/langgraph/) - Additional examples of agent implementations
 - [Function Calling Guide](https://platform.openai.com/docs/guides/function-calling) - Understanding function calling in LLMs
 - [RAG Best Practices](https://www.pinecone.io/learn/retrieval-augmented-generation/) - Guide to implementing effective RAG

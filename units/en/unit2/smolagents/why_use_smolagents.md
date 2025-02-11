@@ -62,3 +62,5 @@ You may choose smolagents if:
 - You prioritize a lightweight and minimal solution.
 - You would like to experiment without complex configurations.
 - The logic for your application is straightforward.
+
+Join us as we dive deep into smolagents in the upcoming sections!
