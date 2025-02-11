@@ -1,18 +1,47 @@
 # Code Agents
 
-![From https://huggingface.co/docs/smolagents/conceptual_guides/react](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/smolagents/codeagent_docs.png)
+Code agents are the default agent type in smolagents. They generate Python tool calls to perform actions, improving both efficiency and accuracy. By reducing the number of actions required, simplifying complex operations, and enabling the reuse of existing functions in software infrastructures, code agents streamline the process.
 
-Code agents are specialized autonomous systems that handle coding tasks like analysis, generation, refactoring, and testing. These agents leverage domain knowledge about programming languages, build systems, and version control to enhance software development workflows.
+![Code vs JSON Actions](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/code_vs_json_actions.png)
 
 ## Why Code Agents?
 
-Code agents accelerate development by automating repetitive tasks while maintaining code quality. They excel at generating boilerplate code, performing systematic refactoring, and identifying potential issues through static analysis. The agents combine retrieval capabilities to access external documentation and repositories with function calling to execute concrete actions like creating files or running tests.
+In a multi-step agent process, the LLM writes and executes actions, often involving external tool calls. Typically, these actions are written in JSON format, specifying tool names and arguments, which the system must parse to determine which tool to execute.
 
-## Building Blocks of a Code Agent
+However, research has shown that it's more effective for tool-calling LLMs to work directly with code. This is one of the core ideas behind smolagents, as illustrated in the diagram above from the paper [Executable Code Actions Elicit Better LLM Agents](https://huggingface.co/papers/2402.01030).
 
-Code agents are built on specialized language models fine-tuned for code understanding. These models are augmented with development tools like linters, formatters, and compilers to interact with real-world environments. Through retrieval techniques, agents maintain contextual awareness by accessing documentation and code histories to align with organizational patterns and standards. Action-oriented functions enable agents to perform concrete tasks such as committing changes or initiating merge requests.
+Some key advantages of writing actions in code rather than JSON include:
 
-In the following example, we create a code agent that can search the web using DuckDuckGo much like the retrieval agent we built earlier.
+* **Composability**: Easily nest or reuse actions.
+* **Object Management**: Store complex structures, such as images, directly in code.
+* **Generality**: Code can express any task a computer is capable of performing.
+* **Representation in LLM Training Data**: High-quality code is already part of the LLM's training dataset.
+
+## How Does a Code Agent Work?
+
+![From https://huggingface.co/docs/smolagents/conceptual_guides/react](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/smolagents/codeagent_docs.png)
+
+The diagram above illustrates how `CodeAgent.run()` operates, following the [ReAct framework](https://huggingface.co/papers/2210.03629), which is currently the preferred approach for building multi-step agents. We introduced the `MultiStepAgent` in the previous section, which serves as the core building block for smolagents. Within these agents, we can incorporate a `CodeAgent`, as we will see in this example.
+
+A `CodeAgent` performs actions through a cycle of steps, with existing variables and knowledge being incorporated into the agent’s logs as follows:
+
+1. The system prompt is stored in a `SystemPromptStep`, and the user query is logged in a `TaskStep`.
+
+2. Then, the following while loop is executed:
+
+    2.1 `agent.write_memory_to_messages()` writes the agent's logs into a list of LLM-readable [chat messages](https://huggingface.co/docs/transformers/en/chat_templating).
+    
+    2.2 These messages are sent to a `Model`, which generates a completion. The completion is parsed to extract the action, which, in our case, could be a code snippet since we’re working with a `CodeAgent`.
+    
+    2.3 The action is executed.
+    
+    2.4 The results are logged into memory in an `ActionStep`.
+
+At the end of each step, if the agent includes any function calls (in `agent.step_callback`), they are executed.
+
+## Let's See Some Examples
+
+Now that we understand how a multi-step `CodeAgent` works, let’s look at two examples. In the following scenario, we create a code agent that can search the web using DuckDuckGo.
 
 ```python
 from smolagents import CodeAgent, DuckDuckGoSearchTool, HfApiModel
