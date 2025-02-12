@@ -1,7 +1,7 @@
 # What are components in LlamaIndex?
 
-**Components are building blocks for agentic workflows.** LlamaIndex has many components but instead of going over each of the components one by one, we will take a look at the components that are used to create a `QueryEngine`.
-We will focus on those components because they are **most relevant for building agentic workflows** in LlamaIndex.
+LlamaIndex has many components but instead of going over each of the components one by one, we will take a look at the components that are used to create a `QueryEngine`.
+We will focus on creating a `QueryEngine` component because the **`QueryEngine` is the most relevant component for building agentic RAG workflows** in LlamaIndex.
 
 **Many of the components rely on integrations with other libraries**. So, before using them, we first need to learn how to install these dependencies.
 
@@ -34,16 +34,32 @@ llm = HuggingFaceInferenceAPI(
     model_name="meta-llama/Meta-Llama-3-8B-Instruct",
     temperature=0.7,
     max_tokens=100,
-    token="<your-token>",  # Optional
+    token="hf_xxx",
 )
 
 llm.complete("Hello, how are you?")
 # I am good, how can I help you today?
 ```
 
-Now, let's dive a bit deeper into the components and see how you can use them to create a `QueryEngine`.
+Now, let's dive a bit deeper into the components and see how you can use them to create a RAG pipeline.
 
-## Loading and embedding documents
+## Creating a RAG pipeline using components
+
+LLMs are trained on enormous bodies of data but they aren't trained on your data. Retrieval-Augmented Generation (RAG) solves this problem by adding your data to the data LLMs already have access to.
+
+![Basic RAG Pipeline](https://docs.llamaindex.ai/en/stable/_static/getting_started/basic_rag.png)
+
+There are five key stages within RAG, which in turn will be a part of most larger applications you build. These are:
+
+1. **Loading**: this refers to getting your data from where it lives -- whether it's text files, PDFs, another website, a database, or an API -- into your workflow. LlamaHub provides hundreds of connectors to choose from.
+2. **Indexing**: this means creating a data structure that allows for querying the data. For LLMs this nearly always means creating vector embeddings, numerical representations of the meaning of your data, as well as numerous other metadata strategies to make it easy to accurately find contextually relevant data.
+3. **Storing**: once your data is indexed you will almost always want to store your index, as well as other metadata, to avoid having to re-index it.
+4. **Querying**: for any given indexing strategy there are many ways you can utilize LLMs and LlamaIndex data structures to query, including sub-queries, multi-step queries and hybrid strategies.
+5. **Evaluation**: a critical step in any flow is checking how effective it is relative to other strategies, or when you make changes. Evaluation provides objective measures of how accurate, faithful and fast your responses to queries are.
+
+Next, let's see how we can reproduce these stages using components.
+
+### Loading and embedding documents
 
 As mentioned before, LlamaIndex can work on top of your own data, however, **before accessing data, we need to load it.**
 There are three main ways to do to load data into LlamaIndex:
@@ -66,11 +82,11 @@ documents = reader.load_data()
 After loading our documents, we need to break them into smaller pieces called `Node` objects.
 A `Node` is just a chunk of text from the original document that's easier for the AI to work with, while it still has reteain references to the original `Document` object.
 
-To create these nodes, we use the `IngestionPipeline` with two simple simple transformations:
-1. `SentenceSplitter`: Break the document into smaller pieces of 25 sentences each
-2. `HuggingFaceInferenceAPIEmbedding`: Turn each piece into numbers (embeddings) that the AI can understand better
+To create these nodes, we use the `IngestionPipeline` along with two simple transformations:
+1. `SentenceSplitter`: Breaks the document into smaller pieces of text by splitting it into sentences
+2. `HuggingFaceInferenceAPIEmbedding`: Turns each piece into numbers (embeddings) that the AI can understand better
 
-This process helps us organize our documents in a way that's more useful for searching and analysis.
+This process helps us organise our documents in a way that's more useful for searching and analysis.
 
 ```python
 from llama_index.core import Document
@@ -92,7 +108,7 @@ nodes = pipeline.run(documents=[Document.example()])
 
 > To save time and computer power, **LlamaIndex caches the results of the ingestion pipeline** so you don't need to load and embed the same documents twice.
 
-## Storing and indexing documents
+### Storing and indexing documents
 
 After creating our `Node` objects we need to index them to make them searchable but before we can do that, we need a place to store our data.
 
@@ -107,7 +123,7 @@ It supports various stores for different purposes:
 We can set up a `StorageContext` ourselves, or let LlamaIndex create one for us when creating a search index.
 When we save the `StorageContext`, it creates files that store all the important information about our data.
 
-Now, let's see how to create a `VectorStoreIndex` and save it to your computer.
+Next, let's see how to create a `VectorStoreIndex` and save it to your computer.
 We also need to provide an embedding model which should be the same as the one used during ingestion.
 
 ```python
@@ -132,9 +148,9 @@ index = load_index_from_storage(storage_context, embed_model=embed_model)
 
 Great! Now that we can save and load our index easily, let's explore how to query it in different ways.
 
-## Querying a VectorStoreIndex with prompts and LLMs
+### Querying a VectorStoreIndex with prompts and LLMs
 
-Before querying our index, we need to convert it to a query interface. The most common options are:
+Before we can query our index, we need to convert it to a query interface. The most common conversion options are:
 
 - `as_retriever`: For basic document retrieval, returning a list of `NodeWithScore` objects with similarity scores
 - `as_query_engine`: For single question-answer interactions, returning a written response
@@ -160,5 +176,24 @@ Once again, this is fully customisable but there are three main strategies that 
 - `tree_summarize`: create a detailed answer by going through each retrieved text chunk and creating a tree structure of the answer.
 
 > Take fine-grained control of your query workflows with the [low-level composition API](https://docs.llamaindex.ai/en/stable/module_guides/deploying/query_engine/usage_pattern/#low-level-composition-api). This API lets you customize and fine-tune every step of the query process to match your exact needs.
+
+### Evaluation and observability
+
+Even if we don't directly evaluate, it is still important to understand what is going on.
+To install the integration package, do pip install -U llama-index-callbacks-arize-phoenix.
+Then create an account on LlamaTrace: https://llamatrace.com/login. Create an API key and put it in the PHOENIX_API_KEY variable below.
+
+```python
+import llama_index
+import os
+
+PHOENIX_API_KEY = "<PHOENIX_API_KEY>"
+os.environ["OTEL_EXPORTER_OTLP_HEADERS"] = f"api_key={PHOENIX_API_KEY}"
+llama_index.core.set_global_handler(
+    "arize_phoenix", endpoint="https://llamatrace.com/v1/traces"
+)
+```
+
+> Want to learn more about components and how to use them? Continue your journey with the [Components Guides](https://docs.llamaindex.ai/en/stable/module_guides/) or the [Guide on RAG](https://docs.llamaindex.ai/en/stable/understanding/rag/).
 
 We have seen how to use components to create a `QueryEngine`. Now, let's see how we can use that same `QueryEngine` as a tool for an agent!.

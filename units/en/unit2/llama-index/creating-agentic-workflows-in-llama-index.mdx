@@ -1,4 +1,12 @@
 # Creating agentic workflows in LlamaIndex
 
+A Workflow in LlamaIndex is an event-driven abstraction used to chain together several events. Workflows are made up of steps, with each step responsible for handling certain event types and emitting new events.
 
+Workflows in LlamaIndex work by decorating function with a `@step` decorator. This is used to infer the input and output types of each workflow for validation, and ensures each step only runs when an accepted event is ready.
 
+Workflows are defined by the `Workflow` class, which takes a list of steps and an optional name and description.
+
+### Creating Multi-Agent Workflows
+
+Insted of the 
+The AgentWorkflow uses Workflow Agents to allow you to create a system of one or more agents that can collaborate and hand off tasks to each other based on their specialized capabilities.
