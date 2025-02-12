@@ -1,4 +1,4 @@
-# Understanding Data Agents in LlamaIndex
+# Understanding Agents and Tools in LlamaIndex
 
 Let's recap the definition of an Agent:
 
@@ -6,21 +6,10 @@ Let's recap the definition of an Agent:
 
 Within LlamaIndex, we build data agents with two core components:
 
-1. A reasoning loop, discussed in [unit 1 on internal reasoning](../../unit1/thoughts.mdx)
-2. A set of tools, discussed in [unit 1 on tools](../../unit1/tools.mdx)
+1. A set of tools, discussed in [unit 1 on tools](../../unit1/tools.mdx)
+2. A reasoning loop, discussed in [unit 1 on internal reasoning](../../unit1/thoughts.mdx)
 
-## Thought: The Reasoning Loop
-
-LlamaIndex supports three main types of reasoning agents:
-
-1. Function Calling Agents - These work with AI models that can call specific functions
-2. ReAct Agents - These can work with any AI that does chat or text
-3. Advanced Agents - These use more complex methods like LLMCompiler or Chain-of-Abstraction
-
-> [!NOTE]
-> Find more information on advanced agents on [LlamaIndex GitHub](https://github.com/run-llama/llama_index/tree/main/llama-index-packs)
-
-## What are Tools in LlamaIndex?
+## Using Tools in LlamaIndex
 
 Defining a set of Tools is similar to defining any API interface.
 LlamaIndex  allows to define a `Tool` as well as a `ToolSpec` containing a series of customize functions under the hood.
@@ -88,18 +77,19 @@ Similarly to components, these toolspecs need to be installed and follow a simil
 pip install llama-index-tools-{toolspec_name}
 ```
 
-Let's install a toolspec that works on Gmail.
+Let's install a toolspec that works on Google services.
 
 ```bash
 pip install llama-index-tools-google
 ```
 
-And now we can load the toolspec.
+And now we can load the toolspec and convert it to a list of tools.
 
 ```python
 from llama_index.tools.google import GmailToolSpec
 
 tool_spec = GmailToolSpec()
+tool_spec_list = tool_spec.to_tool_list()
 ```
 
 ### Utility Tools
@@ -112,4 +102,102 @@ Let’s walk through our two main utility tools below.
 
 > You can find other utility tools on the [LlamaHub](https://llamahub.ai/)
 
-## What are agents in LlamaIndex?
+## Using Agents in LlamaIndex
+
+LlamaIndex supports three main types of reasoning agents:
+
+1. Function Calling Agents - These work with AI models that can call specific functions
+2. ReAct Agents - These can work with any AI that does chat or text
+3. Advanced Agents - These use more complex methods like LLMCompiler or Chain-of-Abstraction
+
+> [!NOTE]
+> Find more information on advanced agents on [LlamaIndex GitHub](https://github.com/run-llama/llama_index/tree/main/llama-index-packs)
+
+An agent is initialized from a set of Tools. Here's an example of instantiating a ReAct agent from a set of Tools.
+
+```python
+from llama_index.core.tools import FunctionTool
+from llama_index.llms.huggingface_api import HuggingFaceInferenceAPILM
+from llama_index.core.agent import ReActAgent
+
+
+# define sample Tool
+def multiply(a: int, b: int) -> int:
+    """Multiple two integers and returns the result integer"""
+    return a * b
+
+
+multiply_tool = FunctionTool.from_defaults(fn=multiply)
+
+# initialize llm
+llm = HuggingFaceInferenceAPILM(model_name="meta-llama/Meta-Llama-3-8B-Instruct")
+
+# initialize ReAct agent
+agent = ReActAgent.from_tools([multiply_tool], llm=llm, verbose=True)
+```
+
+Similarly, we can use the `AgentRunner` to automatically pick the best agent reasoning flow depending on the LLM.
+
+```python
+from llama_index.core.agent import AgentRunner
+
+agent_runner = AgentRunner.from_llm(llm, verbose=True)
+```
+
+An agent supports both chat and query endpoints with `query()` and `chat()` respectively.
+
+```python
+response = agent.query("What is 2 times 2?")
+print(response)
+
+response = agent.chat("What is 2 times 2?")
+print(response)
+```
+
+Now we've gotten the basic, let's take a look at how we can use tools in our agents.
+
+### Agents with QueryEngineTools
+
+It is easy to **wrap `QueryEngine` as tools** for an agent.
+When doing so, we need to **define a name and description within the `ToolMetadata`** to improve the agent's reasoning context.
+Let's see how to load in a `QueryEngineTool` using the `QueryEngine` we created in the [component section](02_components.mdx).
+
+```python
+from llama_index.core.tools import QueryEngineTool, ToolMetadata
+
+query_engine = index.as_query_engine(similarity_top_k=3) # as shown in the previous section
+
+query_engine_tool = QueryEngineTool(
+    query_engine=query_engine,
+    metadata=ToolMetadata(
+        name="a specific name",
+        description="a specific description",
+    ),
+    return_direct=False,
+)
+query_engine_agent = ReActAgent.from_tools([query_engine_tool], llm=llm, verbose=True)
+```
+
+### Multi-agent systems
+
+**Agents in LlamaIndex can directly be used as tools** for other agents by loading them as a `QueryEngineTool`.
+
+```python
+from llama_index.core.tools import QueryEngineTool
+
+query_engine_agent = # as defined in the previous section
+
+query_engine_agent_tool = QueryEngineTool(
+    query_engine=query_engine_agent,
+    metadata=ToolMetadata(
+        name="a specific name",
+        description="a specific description",
+    ),
+)
+
+multi_agent = ReActAgent.from_tools([query_engine_agent_tool], llm=llm, verbose=True)
+```
+
+> There is a lot more to discover about agents and tools in LlamaIndex within the [Agent Guides](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/modules/)
+
+Now that we understand the basics of agents and tools in LlamaIndex, let's see how they work together with workflows!
