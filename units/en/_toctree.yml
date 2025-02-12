@@ -40,6 +40,24 @@
     title: Get Your Certificate
   - local: unit1/conclusion
     title: Conclusion
+- title: Unit 2. Frameworks
+  sections:
+  - local: unit2/smolagents/why_use_smolagents
+    title: Why Use smolagents
+  - local: unit2/smolagents/code_agents
+    title: CodeAgents
+  - local: unit2/smolagents/tool_calling_agents
+    title: ToolCallingAgents
+  - local: unit2/smolagents/tools
+    title: Tools
+  - local: unit2/smolagents/retrieval_agents
+    title: Retrieval Agents
+  - local: unit2/smolagents/multi_agent_systems
+    title: Multi-Agent Systems
+  - local: unit2/smolagents/vision_agents
+    title: Vision Agents
+  - local: unit2/smolagents/browser_agents
+    title: Browser Agents
 - title: When the next steps are published?
   sections:
   - local: communication/next-units
