@@ -177,7 +177,34 @@ Once again, this is fully customisable but there are three main strategies that 
 
 > Take fine-grained control of your query workflows with the [low-level composition API](https://docs.llamaindex.ai/en/stable/module_guides/deploying/query_engine/usage_pattern/#low-level-composition-api). This API lets you customize and fine-tune every step of the query process to match your exact needs.
 
+Because we are working with stochastic models, we can't be sure that the answer we get is always correct. So we need to evaluate the quality of the answer.
+
 ### Evaluation and observability
+
+LlamaIndex has built-in tools to evaluate the quality of the answer.
+These evaluators use LLMs to judge and evaluate the quality of the answer according various criteria.
+There are three main evaluators:
+
+- `FaithfulnessEvaluator`: Evaluates the faithfulness of the answer by checking if the answer is supported by the context.
+- `AnswerRelevancyEvaluator`: Evaluates the relevance of the answer by checking if the answer is relevant to the question.
+- `CorrectnessEvaluator`: Evaluates the correctness of the answer by checking if the answer is correct.
+
+```python
+from llama_index.llms.openai import OpenAI
+from llama_index.core.evaluation import FaithfulnessEvaluator
+
+query_engine = # from previous section
+llm = # from previous section
+
+# query index
+evaluator = FaithfulnessEvaluator(llm=llm)
+response = query_engine.query(
+    "What battles took place in New York City in the American Revolution?"
+)
+eval_result = evaluator.evaluate_response(response=response)
+print(str(eval_result.passing))
+```
+
 
 Even if we don't directly evaluate, it is still important to understand what is going on.
 To install the integration package, do pip install -U llama-index-callbacks-arize-phoenix.

@@ -196,42 +196,6 @@ query_engine_agent_tool = QueryEngineTool(
 multi_agent = ReActAgent.from_tools([query_engine_agent_tool], llm=llm, verbose=True)
 ```
 
-### Creating Multi-Agent Workflows
-
-The `AgentWorkflow` uses Workflow Agents to allow you to create a system of one or more agents that can collaborate and hand off tasks to each other based on their specialized capabilities.
-This enables building complex agent systems where different agents handle different aspects of a task.
-Instead of importing classes from `llama_index.core.agent`, we will import the agent classes from `llama_index.core.agent.workflow`.
-One agent must be designated as the root agent in the `AgentWorkflow` constructor.
-When a user message comes in, it's first routed to the root agent. Each agent can then:
-
-- Handle the request directly using their tools
-- Hand off to another agent better suited for the task
-- Return a response to the user
-
-Let's see how to create a multi-agent workflow.
-```python
-from llama_index.core.agent.workflow import AgentWorkflow, FunctionAgent, ReActAgent
-
-query_engine_agent_tool = # as defined in the previous section
-# Define the agents
-multiply_agent = FunctionAgent(
-    fn=lambda x, y: x * y,
-    name="multiply",
-    description="Multiplies two integers",
-)
-retriever_agent = ReActAgent(
-    llm=llm,
-    tools=[query_engine_agent_tool],
-)
-# Create the workflow
-workflow = AgentWorkflow(
-    agents=[multiply_agent, retriever_agent], root_agent="multiply"
-)
-
-# Run the system
-response = await workflow.run(user_msg="Can you add 5 and 3?")
-```
-
 > Haven't learned enough yet? There is a lot more to discover about agents and tools in LlamaIndex within the [Agent Component Guide](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/modules/) or the [Agent Learning Guide](https://docs.llamaindex.ai/en/stable/understanding/agent/).
 
-Now that we understand the basics of agents and tools in LlamaIndex, let's see how we can use LlamaIndex to create configurable workflows!
+Now that we understand the basics of agents and tools in LlamaIndex, let's see how we can use LlamaIndex to create configurable and manageable workflows!
