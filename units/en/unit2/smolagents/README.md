@@ -14,29 +14,33 @@ This module provides a comprehensive overview of key concepts and practical stra
 
 `smolagents` is one of the many open-source agent frameworks available for application development. Alternative options include `LlamaIndex` and `LangGraph`, which are also covered in other modules in this course. This library offers several key features that might make it a great fit for specific use cases, but there are also some limitations that may lead you to consider other solutions. This module explores the advantages and drawbacks of using `smolagents`, helping you make an informed decision based on your project's requirements.
 
-### 2️⃣  [Code Agents](./code_agents.md)
+### 2️⃣ [CodeAgents](./code_agents.md)
 
-Code agents are specialized autonomous systems designed for software development tasks. These agents excel at analyzing and generating code, performing automated refactoring, and integrating with development tools. The module covers best practices for building code-focused agents that can understand programming languages, work with build systems, and interact with version control while maintaining high code quality standards.
+`CodeAgents` are the primary type of agent in **smolagents**. Instead of generating JSON or text blobs, these agents produce Python code to perform actions. This module explores their purpose, functionality, and how they work, along with hands-on examples to showcase their capabilities.  
 
-### 3️⃣ [Tool Calling Agents](./tool_calling_agents.md)
+### 3️⃣ [ToolCallingAgents](./tool_calling_agents.md)
 
-Custom function agents extend basic AI capabilities through specialized function calls. This module explores how to design modular and extensible function interfaces that integrate directly with your application's logic. You'll learn to implement proper validation and error handling while creating reliable function-driven workflows. The focus is on building simple systems where agents can predictably interact with external tools and services.
+`ToolCallingAgents` are the second type of agent supported by **smolagents**. Unlike `CodeAgents`, which generate Python code, these agents rely on JSON/text blobs that the system must parse and interpret to execute actions. This module covers their functionality, key differences from `CodeAgents`, and provides a coding example to illustrate their use.  
 
-### 4️⃣ [Retrieval Agents](./retrieval_agents.md)
+### 4️⃣ [Tools](./tools.md)
 
-Retrieval agents combine models with knowledge bases. These agents can search and synthesize information from multiple sources, leveraging vector stores for efficient retrieval and implementing Retrieval Augmented Generation (RAG) patterns. They are great at combining web search with custom knowledge bases while maintaining conversation context through memory systems. The module covers implementation strategies including fallback mechanisms for robust information retrieval.
+Tools are functions that an LLM can use within an agentic system, acting as essential building blocks for agent behavior. This module covers how to create tools, their structure, and different implementation methods using the `Tool` class or the `@tool` decorator. You'll also learn about the default toolbox, how to share tools with the community, and how to load community-contributed tools for use in your agents.  
 
-### 5️⃣ [Agents orchestration](./agents_orchestration.md)
+### 5️⃣ [Retrieval Agents](./retrieval_agents.md)
 
-Agents orchestration is essential for effectively managing a multi-agent system, where different agents work together to solve user problems. By combining agents with varied functionalities—such as a web search agent with a code execution agent—we can significantly enhance the system's capabilities. This module focuses on implementing and orchestrating multi-agent systems to build efficient, robust solutions.
+Retrieval agents combine models with knowledge bases, allowing them to search, synthesize, and retrieve information from multiple sources. They leverage vector stores for efficient retrieval and implement **Retrieval-Augmented Generation (RAG)** patterns. These agents are particularly useful for integrating web search with custom knowledge bases while maintaining conversation context through memory systems. This module explores implementation strategies, including fallback mechanisms for robust information retrieval.  
 
-### 6️⃣ [Vision Agents](./vision_agents.md)
+### 6️⃣ [Multi-Agent Systems](./multi_agent_systems.md)
 
-Vision agents enhance traditional agent capabilities by integrating vision as a new modality. This opens up opportunities to combine Vision-Language Models (VLMs) within agent pipelines, enabling applications that can process and interpret visual information. In this module, you'll learn how to design and implement agentic pipelines that incorporate VLMs, unlocking advanced functionalities such as image-based reasoning, visual data analysis, and multimodal interactions.
+Orchestrating multiple agents effectively is crucial for building powerful, multi-agent systems. By combining agents with different capabilities—such as a web search agent with a code execution agent—you can create more sophisticated solutions. This module focuses on designing, implementing, and managing multi-agent systems to maximize efficiency and reliability.  
 
-### 7️⃣ [Browser Agents](./browser_agents.md)
+### 7️⃣ [Vision Agents](./vision_agents.md)
 
-Browser agents are a powerful application of vision agents, designed to enable web browsing with visual capabilities. By integrating vision models, these agents can interact with web content in new ways, such as interpreting visual elements, extracting relevant information from images or videos, and navigating web pages more effectively. This module explores how browser agents open up a wide range of innovative use cases, from dynamic content extraction to visual web automation. 
+Vision agents extend traditional agent capabilities by incorporating **Vision-Language Models (VLMs)**, enabling them to process and interpret visual information. This module explores how to design and integrate VLM-powered agents, unlocking advanced functionalities like image-based reasoning, visual data analysis, and multimodal interactions.  
+
+### 8️⃣ [Browser Agents](./browser_agents.md)
+
+Browser agents are a specialized type of **vision agent** that enable web browsing with visual understanding. By integrating vision models, these agents can interact with web content in new ways, such as interpreting images, extracting relevant information from videos, and navigating web pages autonomously. This module covers various use cases, including dynamic content extraction and visual web automation.
 
 
 ### Exercise Notebooks

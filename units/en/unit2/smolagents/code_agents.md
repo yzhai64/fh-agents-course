@@ -37,11 +37,23 @@ A `CodeAgent` performs actions through a cycle of steps, with existing variables
     
     2.4 The results are logged into memory in an `ActionStep`.
 
-At the end of each step, if the agent includes any function calls (in `agent.step_callback`), they are executed.
+At the end of each step, if the agent includes any function calls (in `agent.step_callback`), they are executed. Below, you can see an comparison diagram between a multi-step agent using the ReAct framework and a one step agent.
+
+![Comparison diagram between a multi-step agent using the ReAct framework and a one step agent](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/open-source-llms-as-agents/ReAct.png)
 
 ## Let's See Some Examples
 
-Now that we understand how a multi-step `CodeAgent` works, let’s look at two examples. In the following scenario, we create a code agent that can search the web using DuckDuckGo.
+Now that we understand how a multi-step `CodeAgent` works, let's explore three examples. If you haven't install smolagents yet, you can run the following command:
+
+```bash
+pip install smolagents
+```
+
+In the first scenario, we create a code agent capable of searching the web using DuckDuckGo. To grant the agent access to this tool, we include it in the tool list when creating the agent.  
+
+For the model, we'll rely on `HfApiModel`, which provides access to Hugging Face's [Inference API](https://huggingface.co/docs/api-inference/index).  
+
+Running an agent is quite straightforward:
 
 ```python
 from smolagents import CodeAgent, DuckDuckGoSearchTool, HfApiModel
@@ -51,47 +63,58 @@ agent = CodeAgent(tools=[DuckDuckGoSearchTool()], model=HfApiModel())
 agent.run("How many seconds would it take for a leopard at full speed to run through Pont des Arts?")
 ```
 
-In the following example, we create a code agent that can get the travel time between two locations. Here, we use the `@tool` decorator to define a custom function that can be used as a tool.
+When you run this example, the output will display a trace of the workflow steps being executed. It will also print the corresponding Python code with the message:  
+
+```python
+Executing parsed code:...
+```
+
+After a few steps, you'll likely see the final answer!
+
+In the following example, we create a code agent that check which is the most downloaded 'text-to-video' model on the Hugging Face Hug. Here, we use the `@tool` decorator to define a custom function that acts as a tool. We'll cover tool creation in more detail later, so for now, we can simply run the code.  
+
+As you can see, the generated tool is included in the `tools` list. 
 
 ```python
 from smolagents import CodeAgent, HfApiModel, tool
-from typing import Optional
+from huggingface_hub import list_models
 
 @tool
-def get_travel_duration(start_location: str, destination_location: str, departure_time: Optional[int] = None) -> str:
-    """Gets the travel time in car between two places.
-    
-    Args:
-        start_location: the place from which you start your ride
-        destination_location: the place of arrival
-        departure_time: the departure time, provide only a `datetime.datetime` if you want to specify this
+def model_download_tool(task: str) -> str:
     """
-    import googlemaps # All imports are placed within the function, to allow for sharing to Hub.
-    import os
+    This is a tool that returns the most downloaded model of a given task on the Hugging Face Hub.
+    It returns the name of the checkpoint.
 
-    gmaps = googlemaps.Client(os.getenv("GMAPS_API_KEY"))
+    Args:
+        task: The task for which to get the download count.
+    """
+    most_downloaded_model = next(iter(list_models(filter=task, sort="downloads", direction=-1)))
+    return most_downloaded_model.id
 
-    if departure_time is None:
-        from datetime import datetime
-        departure_time = datetime(2025, 1, 6, 11, 0)
+agent = CodeAgent(tools=[model_download_tool], model=HfApiModel())
 
-    directions_result = gmaps.directions(
-        start_location,
-        destination_location,
-        mode="transit",
-        departure_time=departure_time
-    )
-    return directions_result[0]["legs"][0]["duration"]["text"]
+agent.run(
+    "Can you give me the name of the model that has the most downloads in the 'text-to-video' task on the Hugging Face Hub?"
+)
+```
 
-agent = CodeAgent(tools=[get_travel_duration], model=HfApiModel(), additional_authorized_imports=["datetime"])
+The agent will run for a few steps until finding the answer.
 
-agent.run("Can you give me a nice one-day trip around Paris with a few locations and the times? Could be in the city or outside, but should fit in one day. I'm travelling only via public transportation.")
+For the final example, we would like to check the title of a webpage. As you can see, when creating the agent, we use `additional_authorized_imports`. Code execution enforces strict security measures, meaning that imports outside a predefined safe list are not allowed by default. However, developers can authorize additional imports by passing them as a list of strings in `additional_authorized_imports`. In this case, we need to import `requests` for requesting the url and `bs4` for scraping information from web pages.  
+
+For more details on secure code execution, check out the official [guide](https://huggingface.co/docs/smolagents/tutorials/secure_code_execution).
+
+```python
+from smolagents import CodeAgent, HfApiModel
+
+agent = CodeAgent(tools=[], model=HfApiModel(), additional_authorized_imports=['requests', 'bs4'])
+
+agent.run("Could you get me the title of the page at url 'https://huggingface.co/blog'?")
 ```
 
 These examples are just the beginning of what you can do with code agents. You can learn more about how to build code agents in the [smolagents documentation](https://huggingface.co/docs/smolagents).
 
 smolagents provides a lightweight framework for building code agents, with a core implementation of approximately 1,000 lines of code. The framework specializes in agents that write and execute Python code snippets, offering sandboxed execution for security. It supports both open-source and proprietary language models, making it adaptable to various development environments.
-
 
 ## Further Reading
 
