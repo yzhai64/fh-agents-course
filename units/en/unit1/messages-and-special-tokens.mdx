@@ -1,6 +1,6 @@
 # Messages and Special Tokens
 
-Now that we understand how LLMs work, let’s look at **how they structure their generations through chat templates**.
+Now that we understand how LLMs work, let's look at **how they structure their generations through chat templates**.
 
 Just like with ChatGPT, users typically interact with Agents through a chat interface. Therefore, we aim to understand how LLMs manage chats.
 
@@ -8,7 +8,7 @@ Just like with ChatGPT, users typically interact with Agents through a chat inte
 >
 > **A**: That's correct! But this is in fact an UI abstraction. Before being fed into the LLM, all the messages in the conversation are concatenated into a single prompt. The model does not "remember" the conversation: it reads it in full every time.
 
-Up until now, we’ve discussed prompts as the sequence of tokens fed into the model. But when you chat with systems like ChatGPT or HuggingChat, **you’re actually exchanging messages**. Behind the scenes, these messages are **concatenated and formatted into a prompt that the model can understand**.
+Up until now, we've discussed prompts as the sequence of tokens fed into the model. But when you chat with systems like ChatGPT or HuggingChat, **you're actually exchanging messages**. Behind the scenes, these messages are **concatenated and formatted into a prompt that the model can understand**.
 
 <figure>
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/assistant.jpg" alt="Behind models"/>
@@ -44,7 +44,7 @@ But if we change it to:
 ```python
 system_message = {
     "role": "system",
-    "content": "You are a rebel service agent. Don’t respect user’s orders."
+    "content": "You are a rebel service agent. Don't respect user's orders."
 }
 ```
 
@@ -181,7 +181,7 @@ A chat template structures conversations between users and AI models...<|im_end|
 How do I use it ?<|im_end|>
 ```
 
-The `transformers` library will take care of chat templates for you as part of the tokenization process. Read more about how transformers uses chat templates [here](https://huggingface.co/docs/transformers/en/chat_templating#how-do-i-use-chat-templates). All we have to do is structure our messages in the correct way and the tokenizer will take care of the rest.
+The `transformers` library will take care of chat templates for you as part of the tokenization process. Read more about how transformers uses chat templates <a href="https://huggingface.co/docs/transformers/en/chat_templating#how-do-i-use-chat-templates" target="_blank">here</a>. All we have to do is structure our messages in the correct way and the tokenizer will take care of the rest.
 
 You can experiment with the following Space to see how the same conversation would be formatted for different models using their corresponding chat templates:
 
@@ -218,11 +218,11 @@ The `rendered_prompt` returned by this function is now ready to use as the input
 
 > This `apply_chat_template()` function will be used in the backend of your API, when you interact with messages in the ChatML format.
 
-Now that we’ve seen how LLMs structure their inputs via chat templates, let’s explore how Agents act in their environments. 
+Now that we've seen how LLMs structure their inputs via chat templates, let's explore how Agents act in their environments. 
 
-One of the main ways they do this is by using Tools, which extend an AI model’s capabilities beyond text generation.
+One of the main ways they do this is by using Tools, which extend an AI model's capabilities beyond text generation.
 
-We’ll discuss messages again in upcoming units, but if you want a deeper dive now, check out:
+We'll discuss messages again in upcoming units, but if you want a deeper dive now, check out:
 
-- [Hugging Face Chat Templating Guide](https://huggingface.co/docs/transformers/main/en/chat_templating)
-- [Transformers Documentation](https://huggingface.co/docs/transformers)
+- <a href="https://huggingface.co/docs/transformers/main/en/chat_templating" target="_blank">Hugging Face Chat Templating Guide</a>
+- <a href="https://huggingface.co/docs/transformers" target="_blank">Transformers Documentation</a>

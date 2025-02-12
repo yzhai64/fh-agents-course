@@ -19,7 +19,7 @@ There are multiple types of Agents that take actions differently:
 | Type of Agent          | Description                                                                                      |
 |------------------------|--------------------------------------------------------------------------------------------------|
 | JSON Agent             | The Action to take is specified as in JSON format                                                |
-| Code Agent             | The Agents writes a code block that is interpreted externally                                      |
+| Code Agent             | The Agent writes a code block that is interpreted externally                                      |
 | Function-calling Agent | It is a subcategory of the JSON Agent which has been fine-tuned to generate a new message for each action |
 
 Actions themselves can serve many purposes:
@@ -33,7 +33,7 @@ Actions themselves can serve many purposes:
 
 One crucial part of an agent is the **ability to STOP generating new tokens when an action is complete**, and that is true for all formats of Agent; JSON, code, or function-calling. This prevents unintended output and ensures that the agent’s response is clear and precise.
 
-The LLM only handles text, and uses it to describe the action it wants to take and the parameters to supply to the tool.
+The LLM only handles text and uses it to describe the action it wants to take and the parameters to supply to the tool.
 
 ## The Stop and Parse Approach
 
