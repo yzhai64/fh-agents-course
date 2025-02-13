@@ -64,7 +64,7 @@ agent.run(
 
 ### `@tool` Decorator  
 
-The `@tool` decorator is the recommended way to define simple tools. Using this approach, we define a function with:  
+The `@tool` decorator is the recommended way to define simple tools. Under the hood, smolagents will parse basic information about the function from Python. So if you name you function clearly and a good docstring, it will be easier for the LLM to use. Using this approach, we define a function with:  
 
 - **A clear and descriptive function name** that helps the LLM understand its purpose.  
 - **Type hints for both inputs and outputs** to ensure proper usage.  
