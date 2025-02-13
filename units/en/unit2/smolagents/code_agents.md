@@ -8,7 +8,7 @@ Graphic from the paper [Executable Code Actions Elicit Better LLM Agents](https:
 <Tip>If you want to learn more about why code agents are effective, check out [this guide](https://huggingface.co/docs/smolagents/en/conceptual_guides/intro_agents#code-agents) from the smolagents documentation. </Tip>
 ## Why Code Agents?
 
-In a multi-step agent process, the LLM writes and executes actions, often involving external tool calls. Typically, these actions are written in JSON format, specifying tool names and arguments, which the system must parse to determine which tool to execute.
+In a multi-step agent process, the LLM writes and executes actions, often involving external tool calls. Without code agents, these actions are written in JSON format, specifying tool names and arguments as strings, which the system must parse to determine which tool to execute.
 
 However, research has shown that it's more effective for tool-calling LLMs to work directly with code. This is one of the core ideas behind smolagents, as illustrated in the diagram above from the paper [Executable Code Actions Elicit Better LLM Agents](https://huggingface.co/papers/2402.01030).
 
