@@ -53,7 +53,7 @@ pip install smolagents
 
 In the first scenario, we create a code agent capable of searching the web using DuckDuckGo. To grant the agent access to this tool, we include it in the tool list when creating the agent.  
 
-For the model, we'll rely on `HfApiModel`, which provides access to Hugging Face's [Inference API](https://huggingface.co/docs/api-inference/index).  
+For the model, we'll rely on `HfApiModel`, which provides access to Hugging Face's [Inference API](https://huggingface.co/docs/api-inference/index).  The default model is `"Qwen/Qwen2.5-Coder-32B-Instruct"` which is performant and available for fast inference, but you can select any compatible model from the hub.
 
 Running an agent is quite straightforward:
 
