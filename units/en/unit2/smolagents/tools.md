@@ -133,7 +133,7 @@ model_download_tool = load_tool(
 
 ### Importing a Hugging Face Space as a Tool
 
-You can also import a HF Space as a tool using `Tool.from_space()`. This opens up many possibilities for integration. The functionality uses the `gradio_client` under the hood, so make sure to install it via `pip` if you don't have it already:
+You can also import a HF Space as a tool using `Tool.from_space()`. This opens up possibilities for integrating with thousands of spaces from the community for tasks from image generation to data analysis. The tool will connect with the spaces Gradio backend using the `gradio_client`, so make sure to install it via `pip` if you don't have it already:
 
 ```python
 from smolagents import CodeAgent, HfApiModel, Tool
