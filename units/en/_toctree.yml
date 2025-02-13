@@ -49,9 +49,9 @@
   - local: unit2/smolagents/why_use_smolagents
     title: Why Use smolagents
   - local: unit2/smolagents/code_agents
-    title: CodeAgents
+    title: Building Agents That Use Code
   - local: unit2/smolagents/tool_calling_agents
-    title: ToolCallingAgents
+    title: Integrating Agents With Tools
   - local: unit2/smolagents/tools
     title: Tools
   - local: unit2/smolagents/retrieval_agents
