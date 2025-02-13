@@ -1,6 +1,6 @@
 # Code Agents
 
-Code agents are the default agent type in smolagents. They generate Python tool calls to perform actions, improving both efficiency and accuracy. By reducing the number of actions required, simplifying complex operations, and enabling the reuse of existing functions in software infrastructures, code agents streamline the process.
+Code agents are the default agent type in smolagents. They generate their own Python tool calls to perform actions, improving both efficiency and accuracy. Code agents are really streamlined because they reduce the number of actions required, simplify complex operations, and enable the reuse of existing functions from code. We'll build on these advantages throughout this page.
 
 ![Code vs JSON Actions](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/code_vs_json_actions.png)
 
