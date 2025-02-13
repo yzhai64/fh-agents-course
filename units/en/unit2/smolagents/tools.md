@@ -1,6 +1,6 @@
 # Tools  
 
-A tool is essentially a function that an LLM can use within an agentic system. To interact with it, the LLM requires an API with the following components:  
+As we learnt in unit 1, agents use tools to perform actions. In `smolagents` tools are treated as functions that an LLM can use within an agentic system. To interact with a tool, the LLM requires an **interface description** with the following components:  
 
 - **Name**  
 - **Tool description**  
