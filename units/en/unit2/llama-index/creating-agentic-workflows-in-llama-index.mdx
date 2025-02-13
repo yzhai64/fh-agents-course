@@ -3,17 +3,31 @@
 A workflow helps you organize your code into simple steps that run one after another.
 
 Such a workflow is created by defining `Steps` which are triggered by `Events`, and themselves emit `Events` to trigger further steps.
-By combining steps and events, you can create arbitrarily complex logic flows and make your application more maintainable and easier to understand.
-A step can be anything from a single line of code to a complex agent and can have arbitrary inputs and outputs, which are passed around by Events.
-As you might have guessed, this strikes a great balance between autonomy of agents while maintaining control over the overall workflow.
+Workflows in LlamaIndex provide a structured way to organize your code into sequential, manageable steps. They offer several key benefits:
+
+- Clear organization of code into discrete steps
+- Event-driven architecture for flexible control flow
+- Type-safe communication between steps
+- Built-in state management
+- Support for both simple and complex agent interactions
+
+As you might have guessed, they strike a great balance between autonomy of agents while maintaining control over the overall workflow.
 
 So, let's learn how to create a workflow ourselves!
 
-### Creating a Workflow
+## Creating Workflows
 
-First things first, let's install the workflow package `pip install llama-index-utils-workflow`.
+First things first, let's install the workflow package:
+
+```bash
+pip install llama-index-utils-workflow
+```
+
+### Basic Workflow Creation
+
 Now, we can create a single step workflow by defining a class that inherits from `Workflow` and decorating your functions with `@step`.
 Note that we also need to add `StartEvent` and `StopEvent` as type hints to the function to ensure that the workflow runs correctly.
+
 ```python
 from llama_index.core.workflow import StartEvent, StopEvent, Workflow, step
 
@@ -29,28 +43,35 @@ result = await w.run()
 ```
 
 As you can see, we can now run the workflow by calling `w.run()`.
-Let's complicate the flow by adding a second step.
+
+### Connecting Multiple Steps
+
+To connect multiple steps, we create custom events that carry data between steps.
 To do so, we need to add an `Event` that is passed between the steps and transfers the output of the first step to the second step.
 
 ```python
 from llama_index.core.workflow import Event
 
-class FirstEvent(Event):
-    first_output: str
+class ProcessingEvent(Event):
+    intermediate_result: str
 
-class MyWorkflow(Workflow):
+class MultiStepWorkflow(Workflow):
     @step
-    async def my_first_step(self, ev: StartEvent) -> FirstEvent:
-        # do something here
-        return FirstEvent(first_output="Hello, world!")
+    async def step_one(self, ev: StartEvent) -> ProcessingEvent:
+        # Process initial data
+        return ProcessingEvent(intermediate_result="Step 1 complete")
 
     @step
-    async def my_second_step(self, ev: FirstEvent) -> StopEvent:
-        # do something here
-        return StopEvent(result="Hello, world!")
+    async def step_two(self, ev: ProcessingEvent) -> StopEvent:
+        # Use the intermediate result
+        final_result = f"Finished processing: {ev.intermediate_result}"
+        return StopEvent(result=final_result)
 ```
 
-The type hinting is important here, as it ensures that the workflow is executed correctly.
+The type hinting is important here, as it ensures that the workflow is executed correctly. We can use this
+
+### Loops and Branches
+
 This is also the most powerful part because the type hinting allows us to create branches, loops, joins to facilitate more complex workflows.
 
 Let's show an example of a loop to illustrate the concept.
@@ -67,6 +88,8 @@ async def step_one(self, ev: StartEvent | LoopEvent) -> FirstEvent | LoopEvent:
 ```
 
 There is one last cool trick that we will cover in the course, which is the ability to add state to the workflow.
+
+### State Management
 This is useful when you want to keep track of the state of the workflow, so that every step has access to the same state.
 
 ```python
@@ -91,9 +114,21 @@ Great! Now you know how to create a controllable workflow in LlamaIndex!
 
 > There are some more complex nuances to workflows, which you can learn about in [the LlamaIndex documentation](https://docs.llamaindex.ai/en/stable/understanding/workflows/)
 
+### Best Practices
+
+Workflows are great but can become as complex as your application so it's important to follow some best practices:
+
+- Type Hints: Always use proper type hints for events to ensure correct workflow execution
+- Error Handling: Implement appropriate error handling in each step
+- State Management: Use context for sharing data between steps instead of global variables
+- Documentation: Document the purpose and requirements of each step and event
+- Testing: Test each step independently before combining them into a workflow
+
 However, there is another way to create workflows, which is by using the `AgentWorkflow` class.
 
-### Automating workflows with Multi-Agent Workflows
+
+
+## Automating workflows with Multi-Agent Workflows
 
 Instead of manual workflow creation, we can use the **`AgentWorkflow` class to create a multi-agent workflow**.
 The `AgentWorkflow` uses Workflow Agents to allow you to create a system of one or more agents that can collaborate and hand off tasks to each other based on their specialized capabilities.
