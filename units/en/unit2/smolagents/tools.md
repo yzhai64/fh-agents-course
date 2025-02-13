@@ -7,7 +7,7 @@ As we learnt in unit 1, agents use tools to perform actions. In `smolagents` too
 - **Input types and their descriptions**  
 - **Output type**  
 
-Rather than using a regular Python function, a tool should be implemented as a class. Essentially, it wraps a function with metadata that helps the LLM understand how to use it effectively.  
+For complex tools, we can implement a class instead of a Python function. The class wraps the function with metadata that helps the LLM understand how to use it effectively.  
 
 Below, you can see an animation illustrating how a tool call is managed:  
 
