@@ -138,7 +138,7 @@ It's important to note that a base model could be fine-tuned on different chat t
 
 Because each instruct model uses different conversation formats and special tokens, chat templates are implemented to ensure that we correctly format the prompt the way each model expects.
 
-In <a href="https://huggingface.co/docs/transformers/" target="_blank">transformers</a>, chat templates include [Jinja2 code](https://jinja.palletsprojects.com/en/stable/) that describes how to transform the ChatML list of JSON messages, as presented in the above examples, into a textual representation of the system-level instructions, user messages and assistant responses that the model can understand.
+In `transformers`, chat templates include [Jinja2 code](https://jinja.palletsprojects.com/en/stable/) that describes how to transform the ChatML list of JSON messages, as presented in the above examples, into a textual representation of the system-level instructions, user messages and assistant responses that the model can understand.
 
 This structure **helps maintain consistency across interactions and ensures the model responds appropriately to different types of inputs**. 
 
