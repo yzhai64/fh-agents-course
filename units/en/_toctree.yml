@@ -48,13 +48,14 @@
   local: unit2/introduction
   sections:
     - title: LlamaIndex
-      local: unit2/llama-index/introduction
       sections:
         - local: unit2/llama-index/what-is-llama-index
           title: What is LLamaIndex?
         - local: unit2/llama-index/what-are-components-in-llama-index
           title: What are Components in LlamaIndex?
-        - local: unit2/llama-index/using-agents-and-tools-in-llama-index
+        - local: unit2/llama-index/using-tools-in-llama-index
+          title: Using Agents and Tools in LlamaIndex
+        - local: unit2/llama-index/using-agents-in-llama-index
           title: Using Agents and Tools in LlamaIndex
         - local: unit2/llama-index/creating-agentic-workflows-in-llama-index
           title: Creating Agentic Workflows in LlamaIndex
