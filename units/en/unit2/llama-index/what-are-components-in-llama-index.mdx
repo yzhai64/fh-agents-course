@@ -9,7 +9,7 @@ We will focus on creating a `QueryEngine` component because the **`QueryEngine` 
 
 ### Installation
 
-Most frameworks add their installation guide to their main documentation but LlamaIndex keep a well structured **overview in their [GitHub repository](https://github.com/run-llama/llama_index/tree/main/llama-index-integrations)**.
+LlamaIndex installation instructions are available as a well structured **overview in their [GitHub repository](https://github.com/run-llama/llama_index/tree/main/llama-index-integrations)**.
 This might be a bit overwhelming at first, but the **installation commands generally follow an easy to remember format**:
 
 ```bash
@@ -45,15 +45,15 @@ Now, let's dive a bit deeper into the components and see how you can use them to
 
 ## Creating a RAG pipeline using components
 
-LLMs are trained on enormous bodies of data but they aren't trained on your data. Retrieval-Augmented Generation (RAG) solves this problem by adding your data to the data LLMs already have access to.
+LLMs are trained on enormous bodies of data to learn general knowledge. However, they may not be trained on relevant and up-to-date data. Retrieval-Augmented Generation (RAG) solves this problem by adding your data to the data LLMs already have access to.
 
 ![Basic RAG Pipeline](https://docs.llamaindex.ai/en/stable/_static/getting_started/basic_rag.png)
 
 There are five key stages within RAG, which in turn will be a part of most larger applications you build. These are:
 
-1. **Loading**: this refers to getting your data from where it lives -- whether it's text files, PDFs, another website, a database, or an API -- into your workflow. LlamaHub provides hundreds of connectors to choose from.
-2. **Indexing**: this means creating a data structure that allows for querying the data. For LLMs this nearly always means creating vector embeddings, numerical representations of the meaning of your data, as well as numerous other metadata strategies to make it easy to accurately find contextually relevant data.
-3. **Storing**: once your data is indexed you will almost always want to store your index, as well as other metadata, to avoid having to re-index it.
+1. **Loading**: this refers to getting your data from where it lives -- whether it's text files, PDFs, another website, a database, or an API -- into your workflow. LlamaHub provides hundreds of integrations to choose from.
+2. **Indexing**: this means creating a data structure that allows for querying the data. For LLMs this nearly always means creating vector embeddings. Which are numerical representations of the meaning of text data. Indexing can also refer to numerous other metadata strategies to make it easy to accurately find contextually relevant data based on properties.
+3. **Storing**: once your data is indexed you will want to store your index, as well as other metadata, to avoid having to re-index it.
 4. **Querying**: for any given indexing strategy there are many ways you can utilize LLMs and LlamaIndex data structures to query, including sub-queries, multi-step queries and hybrid strategies.
 5. **Evaluation**: a critical step in any flow is checking how effective it is relative to other strategies, or when you make changes. Evaluation provides objective measures of how accurate, faithful and fast your responses to queries are.
 
@@ -86,7 +86,7 @@ A `Node` is just a chunk of text from the original document that's easier for th
 
 To create these nodes, we use the `IngestionPipeline` along with two simple transformations:
 1. `SentenceSplitter`: Breaks the document into smaller pieces of text by splitting it into sentences
-2. `HuggingFaceInferenceAPIEmbedding`: Turns each piece into numbers (embeddings) that the AI can understand better
+2. `HuggingFaceInferenceAPIEmbedding`: Turns each piece into numbers (embeddings) that the LLM can understand.
 
 This process helps us organise our documents in a way that's more useful for searching and analysis.
 
@@ -108,7 +108,7 @@ pipeline = IngestionPipeline(
 nodes = pipeline.run(documents=[Document.example()])
 ```
 
-> To save time and computer power, **LlamaIndex caches the results of the ingestion pipeline** so you don't need to load and embed the same documents twice.
+<Tip>To save time and computer power, **LlamaIndex caches the results of the ingestion pipeline** so you don't need to load and embed the same documents twice.</Tip>
 
 ### Storing and indexing documents
 
@@ -180,9 +180,9 @@ Once again, this is fully customisable but there are three main strategies that 
 - `compact` (default): similar to refine but concatenate the chunks beforehand, resulting in less LLM calls.
 - `tree_summarize`: create a detailed answer by going through each retrieved text chunk and creating a tree structure of the answer.
 
-> Take fine-grained control of your query workflows with the [low-level composition API](https://docs.llamaindex.ai/en/stable/module_guides/deploying/query_engine/usage_pattern/#low-level-composition-api). This API lets you customize and fine-tune every step of the query process to match your exact needs.
+<Tip>Take fine-grained control of your query workflows with the [low-level composition API](https://docs.llamaindex.ai/en/stable/module_guides/deploying/query_engine/usage_pattern/#low-level-composition-api). This API lets you customize and fine-tune every step of the query process to match your exact needs.</Tip>
 
-Because we are working with stochastic models, we can't be sure that the answer we get is always correct. So we need to evaluate the quality of the answer.
+Language model won't always perform in predictable ways, so we can't be sure that the answer we get is always correct. We can deal with this by **evaluating the quality of the answer**.
 
 ### Evaluation and observability
 
@@ -211,8 +211,10 @@ print(str(eval_result.passing))
 ```
 
 Even if we don't directly evaluate, it is still important to understand what is going on.
-To install the integration package, do pip install -U llama-index-callbacks-arize-phoenix.
-Then create an account on LlamaTrace: https://llamatrace.com/login. Create an API key and put it in the PHOENIX_API_KEY variable below.
+
+Evaluation in LlamaIndex relies on a separate platform LlamaTrace. To use it we will need to create an account on LlamaTrace: https://llamatrace.com/login. Create an API key and put it in the PHOENIX_API_KEY variable below.
+
+<Tip>To install the integration package, do pip install -U llama-index-callbacks-arize-phoenix.</Tip>
 
 ```python
 import llama_index
@@ -225,6 +227,6 @@ llama_index.core.set_global_handler(
 )
 ```
 
-> Want to learn more about components and how to use them? Continue your journey with the [Components Guides](https://docs.llamaindex.ai/en/stable/module_guides/) or the [Guide on RAG](https://docs.llamaindex.ai/en/stable/understanding/rag/).
+<Tip>Want to learn more about components and how to use them? Continue your journey with the [Components Guides](https://docs.llamaindex.ai/en/stable/module_guides/) or the [Guide on RAG](https://docs.llamaindex.ai/en/stable/understanding/rag/).</Tip>
 
 We have seen how to use components to create a `QueryEngine`. Now, let's see how we can use that same `QueryEngine` as a tool for an agent!.

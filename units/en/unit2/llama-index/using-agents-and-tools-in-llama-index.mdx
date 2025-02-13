@@ -11,8 +11,8 @@ Within LlamaIndex, we build data agents with two core components:
 
 ## Using Tools in LlamaIndex
 
-Defining a set of Tools is similar to defining any API interface.
-LlamaIndex  allows to define a `Tool` as well as a `ToolSpec` containing a series of customise functions under the hood.
+Defining a clear set of Tools is crucial to performance. As we discussed in [unit 1](../../unit1/tools.mdx), clear tool interfaces are easier for LLMs to use. Much like a software API interface for human engineers, they can get more out of the tool if it's easy to understand how it works.
+LlamaIndex allows you to define a `Tool` as well as a `ToolSpec` containing a series of customise functions under the hood.
 
 > When using an agent or LLM with function calling, the tool selected (and the arguments written for that tool) rely strongly on the tool name and description of the tools purpose and arguments.
 
@@ -27,7 +27,7 @@ We will go over each of these in more detail below.
 
 ### Creating a FunctionTool
 
-A function tool is a simple wrapper around any existing function.
+A function tool is a simple wrapper around any existing python function.
 We can choose to pass a sync or async function to the tool.
 Additionally, we can choose to name and describe the tool as we want.
 The code below shows how to create a `FunctionTool` from a function.
@@ -71,7 +71,8 @@ tool = QueryEngineTool.from_defaults(
 ### Creating Toolspecs
 
 Custom `Tools` and `ToolSpecs` are created by the community and shared on the [LlamaHub](https://llamahub.ai/).
-You can think of `ToolSpecs` like bundles of tools meant to be used together. Usually these cover useful tools across a single interface/service, like Gmail.
+You can think of `ToolSpecs` like a toolkit intended to be used together. Just like a professional toolkit, they cover relevant actions for a use case. For example, an accounting agent might have spreadsheet integration, an en email integration, and a calculator. 
+
 
 Similarly to components, these toolspecs need to be installed and follow a similar pattern.
 
@@ -96,13 +97,13 @@ tool_spec_list = tool_spec.to_tool_list()
 
 ### Utility Tools
 
-Oftentimes, directly querying an API can return a massive volume of data, which on its own may overflow the context window of the LLM (or at the very least unnecessarily increase the number of tokens that you are using).
+Oftentimes, directly querying an API can return an excessive amount of data, some of which may be irrelevant, overflow the context window of the LLM, or unnecessarily increase the number of tokens that you are using.
 Let’s walk through our two main utility tools below.
 
-1. `OnDemandToalLoader`: This tool turns any existing LlamaIndex data loader ( BaseReader class) into a tool that an agent can use. The tool can be called with all the parameters needed to trigger load_data from the data loader, along with a natural language query string. During execution, we first load data from the data loader, index it (for instance with a vector store), and then query it “on-demand”. All three of these steps happen in a single tool call.
-2. `LoadAndSearchToolSpec`: The LoadAndSearchToolSpec takes in any existing Tool as input. As a tool spec, it implements to_tool_list , and when that function is called, two tools are returned: a load tool and then a search tool. The load Tool execution would call the underlying Tool, and the index the output (by default with a vector index). The search Tool execution would take in a query string as input and call the underlying index.
+1. `OnDemandToolLoader`: This tool turns any existing LlamaIndex data loader (BaseReader class) into a tool that an agent can use. The tool can be called with all the parameters needed to trigger `load_data` from the data loader, along with a natural language query string. During execution, we first load data from the data loader, index it (for instance with a vector store), and then query it 'on-demand'. All three of these steps happen in a single tool call.
+2. `LoadAndSearchToolSpec`: The LoadAndSearchToolSpec takes in any existing Tool as input. As a tool spec, it implements `to_tool_list` , and when that function is called, two tools are returned: a load tool and then a search tool. The load Tool execution would call the underlying Tool, and the index the output (by default with a vector index). The search Tool execution would take in a query string as input and call the underlying index.
 
-> You can find other utility tools on the [LlamaHub](https://llamahub.ai/)
+<Tip>You can find other utility tools on the [LlamaHub](https://llamahub.ai/)</Tip>
 
 ## Using Agents in LlamaIndex
 
@@ -157,7 +158,7 @@ Now we've gotten the basics, let's take a look at how we can use tools in our ag
 ### Creating RAG Agents with QueryEngineTools
 
 It is easy to **wrap `QueryEngine` as tools** for an agent.
-When doing so, we need to **define a name and description within the `ToolMetadata`** to improve the agent's reasoning context.
+When doing so, we need to **define a name and description within the `ToolMetadata`**. The LLM will use this information to correctly use the tool.
 Let's see how to load in a `QueryEngineTool` using the `QueryEngine` we created in the [component section](02_components.mdx).
 
 ```python
@@ -196,6 +197,6 @@ query_engine_agent_tool = QueryEngineTool(
 multi_agent = ReActAgent.from_tools([query_engine_agent_tool], llm=llm, verbose=True)
 ```
 
-> Haven't learned enough yet? There is a lot more to discover about agents and tools in LlamaIndex within the [Agent Component Guide](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/modules/) or the [Agent Learning Guide](https://docs.llamaindex.ai/en/stable/understanding/agent/).
+<Tip>Haven't learned enough yet? There is a lot more to discover about agents and tools in LlamaIndex within the [Agent Component Guide](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/modules/) or the [Agent Learning Guide](https://docs.llamaindex.ai/en/stable/understanding/agent/).</Tip>
 
 Now that we understand the basics of agents and tools in LlamaIndex, let's see how we can use LlamaIndex to create configurable and manageable workflows!
