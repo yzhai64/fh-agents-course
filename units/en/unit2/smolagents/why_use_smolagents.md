@@ -36,7 +36,7 @@ Unlike other frameworks where agents write actions in JSON that require parsing,
 ![Code vs. JSON actions](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/code_vs_json_actions.png)
 
 ### Agent Types in `smolagents`
-Agents in `smolagents` inherit from [MultiStepAgent](https://huggingface.co/docs/smolagents/main/en/reference/agents#smolagents.MultiStepAgent), enabling them to operate in multiple steps, where each step consists of:
+Agents in `smolagents` operate as multi-step agents. Each [`MultiStepAgent`](https://huggingface.co/docs/smolagents/main/en/reference/agents#smolagents.MultiStepAgent) consists of:
 - One thought
 - One tool call and execution
 
