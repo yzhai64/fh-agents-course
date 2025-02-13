@@ -63,7 +63,7 @@ This flexibility ensures that developers can choose the most suitable model inte
 
 We've these advantages in mind, when should we use smolagents over other frameworks? 
 
-You may choose smolagents if:
+You should choose smolagents when:
 - You prioritize a lightweight and minimal solution.
 - You would like to experiment without complex configurations.
 - The logic for your application is straightforward.
