@@ -20,7 +20,9 @@ Considering these ideas, we can already identify the need for some features:
 
 ## What is `smolagents`?
 
-`smolagents` is a simple yet powerful framework for building AI agents. It provides LLMs with the _agency_ to interact with the real world, such as calling search or image generation tools. AI agents are programs where LLM outputs control the workflow.
+`smolagents` is a simple yet powerful framework for building AI agents. It provides LLMs with the _agency_ to interact with the real world, such as searching or generating images. 
+
+As we learnt in unit 1, AI agents are programs where LLM output **'thoughts'**, based upon **'observations'**, to perform **'actions'**. Let's unpack how that is implemented in smolagents.
 
 ### Key Advantages of `smolagents`
 - **Simplicity:** Minimal code complexity and abstractions.
