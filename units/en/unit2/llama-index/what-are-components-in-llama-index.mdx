@@ -1,7 +1,18 @@
 # What are components in LlamaIndex?
 
-LlamaIndex has many components but instead of going over each of the components one by one, we will take a look at the components that are used to create a `QueryEngine`.
-We will focus on creating a `QueryEngine` component because the **`QueryEngine` is the most relevant component for building agentic RAG workflows** in LlamaIndex.
+Remember Alfred, our helpful butler agent from Unit 1? To assist us effectively, Alfred needs to understand our requests and find relevant information to help complete tasks. This is where LlamaIndex's components come in.
+
+While LlamaIndex has many components, we'll focus specifically on the `QueryEngine` component. Why? Because it can be used as a tool for an agent.
+
+Think about how Alfred works:
+
+1. You ask Alfred to help plan a dinner party
+2. Alfred needs to check your calendar, dietary preferences, and past successful menus
+3. The `QueryEngine` helps Alfred find and understand this information through RAG (Retrieval Augmented Generation)
+
+This makes the `QueryEngine` **the most relevant component for building agentic RAG workflows** in LlamaIndex.
+Just as Alfred needs to search through your household information to be helpful, any agent needs a way to find and understand relevant data.
+The `QueryEngine` provides exactly this capability.
 
 **Many of the components rely on integrations with other libraries**. So, before using them, we first need to learn how to install these dependencies.
 
@@ -68,7 +79,7 @@ There are three main ways to do to load data into LlamaIndex:
 2. `LlamaParse`: LlamaParse, LlamaIndex's official tool for PDF parsing, available as a managed API.
 3. `LlamaHub`: A registry of hundreds of data loading libraries to ingest data from any source.
 
-> Get familiar with [LlamaHub](https://docs.llamaindex.ai/en/stable/module_guides/loading/connector/) loaders and [LlamaParse](https://docs.llamaindex.ai/en/stable/module_guides/loading/connector/llama_parse/) parser for more complex data sources.
+<Tip>Get familiar with [LlamaHub](https://docs.llamaindex.ai/en/stable/module_guides/loading/connector/) loaders and [LlamaParse](https://docs.llamaindex.ai/en/stable/module_guides/loading/connector/llama_parse/) parser for more complex data sources.</Tip>
 
 **The easiest way to load data is with `SimpleDirectoryReader`.** +
 It can load different types of files from a folder and turn them into `Document` objects that LlamaIndex can work with.
