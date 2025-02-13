@@ -1,6 +1,6 @@
 # Tool Calling Agents  
 
-Tool Calling Agents are the second type of agent available in `smolagents`. They utilize built-in tool-calling methods and generate tool calls in JSON format. While `smolagents` primarily focuses on `CodeAgents` and recommends using them, it also supports `ToolCallingAgents`.  
+Tool Calling Agents are the second type of agent available in `smolagents`. They utilize built-in tool-calling methods and generate tool calls in JSON format. While `smolagents` primarily focuses on `CodeAgents` and recommends using them,  `ToolCallingAgents` are an extra feature for JSON specific tasks. 
 
 ![Code vs JSON Actions](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/code_vs_json_actions.png)  
 
