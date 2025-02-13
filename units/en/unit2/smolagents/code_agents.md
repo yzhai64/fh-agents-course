@@ -3,7 +3,9 @@
 Code agents are the default agent type in smolagents. They generate their own Python tool calls to perform actions, improving both efficiency and accuracy. Code agents are really streamlined because they reduce the number of actions required, simplify complex operations, and enable the reuse of existing functions from code. We'll build on these advantages throughout this page.
 
 ![Code vs JSON Actions](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/code_vs_json_actions.png)
+Graphic from the paper [Executable Code Actions Elicit Better LLM Agents](https://huggingface.co/papers/2402.01030)
 
+<Tip>If you want to learn more about why code agents are effective, check out [this guide](https://huggingface.co/docs/smolagents/en/conceptual_guides/intro_agents#code-agents) from the smolagents documentation. </Tip>
 ## Why Code Agents?
 
 In a multi-step agent process, the LLM writes and executes actions, often involving external tool calls. Typically, these actions are written in JSON format, specifying tool names and arguments, which the system must parse to determine which tool to execute.
