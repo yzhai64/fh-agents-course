@@ -42,6 +42,10 @@
     title: Conclusion
 - title: Unit 2. Frameworks
   sections:
+  - local: unit2/introduction
+    title: Introduction
+  - local: unit2/smolagents/smolagents_introduction
+    title: smolagents Introduction
   - local: unit2/smolagents/why_use_smolagents
     title: Why Use smolagents
   - local: unit2/smolagents/code_agents
