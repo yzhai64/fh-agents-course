@@ -1,4 +1,4 @@
-# Understanding Agents and Tools in LlamaIndex
+# Using Tools in LlamaIndex
 
 Let's recap the definition of an Agent introduced in unit 1:
 
@@ -30,6 +30,7 @@ We will go over each of these in more detail below.
 A function tool is a simple wrapper around any existing python function.
 We can choose to pass a sync or async function to the tool.
 Additionally, we can choose to name and describe the tool as we want.
+This is important because this information will be used by the agent to correctly use the tool.
 The code below shows how to create a `FunctionTool` from a function.
 
 ```python
@@ -71,20 +72,16 @@ tool = QueryEngineTool.from_defaults(
 ### Creating Toolspecs
 
 Custom `Tools` and `ToolSpecs` are created by the community and shared on the [LlamaHub](https://llamahub.ai/).
-You can think of `ToolSpecs` like a toolkit intended to be used together. Just like a professional toolkit, they cover relevant actions for a use case. For example, an accounting agent might have spreadsheet integration, an en email integration, and a calculator. 
+You can think of `ToolSpecs` like a toolkit intended to be used together. Just like a professional toolkit, they cover relevant actions for a use case. For example, an accounting agent might have spreadsheet integration, an en email integration, and a calculator.
 
+<details>
+<summary>Google Toolspec</summary>
+As introduced in the [section on components](what-are-components-in-llama-index.mdx), we can install the Google toolspec with the following command:
 
-Similarly to components, these toolspecs need to be installed and follow a similar pattern.
-
-```bash
-pip install llama-index-tools-{toolspec_name}
-```
-
-Let's install a toolspec that works on Google services.
-
-```bash
+```python
 pip install llama-index-tools-google
 ```
+</details>
 
 And now we can load the toolspec and convert it to a list of tools.
 

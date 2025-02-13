@@ -128,8 +128,11 @@ The various data storage types that LlamaIndex supports are:
 We can set up a `StorageContext` ourselves, or let LlamaIndex create one for us when creating a search index.
 When we save the `StorageContext`, it creates files that store all the important information about our data, which makes it easy to persist and load later.
 
-Next, let's see how to create an index using the `VectorStoreIndex` and save it to your computer.
-We also need to provide an embedding model which should be the same as the one used during ingestion.
+To retrieve relevant nodes later, **we'll need to compare the input query against all our nodes.**
+This means we need to embed both the query and nodes in the same vector space.
+That's why we create an index using `VectorStoreIndex` and provide it with the same embedding model we used during ingestion.
+
+Let's see how to create this index and save it to your computer:
 
 ```python
 from llama_index.core import VectorStoreIndex
@@ -173,6 +176,8 @@ query_engine.query("What is the meaning of life?")
 # the meaning of life is 42
 ```
 
+### Response Processing
+
 Under the hood, the query engine doesn't only use the LLM to answer the question, but also uses a `ResponseSynthesizer` as strategy to process the response.
 Once again, this is fully customisable but there are three main strategies that work well out of the box:
 
@@ -214,7 +219,14 @@ Even if we don't directly evaluate, it is still important to understand what is 
 
 Evaluation in LlamaIndex relies on a separate platform LlamaTrace. To use it we will need to create an account on LlamaTrace: https://llamatrace.com/login. Create an API key and put it in the PHOENIX_API_KEY variable below.
 
-<Tip>To install the integration package, do pip install -U llama-index-callbacks-arize-phoenix.</Tip>
+<details>
+<summary>install LlamaTrace</summary>
+As introduced in the [section on components](what-are-components-in-llama-index.mdx), we can install the LlamaTrace integration with the following command:
+
+```python
+pip install -U llama-index-callbacks-arize-phoenix
+```
+</details>
 
 ```python
 import llama_index

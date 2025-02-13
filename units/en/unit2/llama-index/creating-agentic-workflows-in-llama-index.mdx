@@ -17,15 +17,18 @@ So, let's learn how to create a workflow ourselves!
 
 ## Creating Workflows
 
-First things first, let's install the workflow package:
-
-```bash
-pip install llama-index-utils-workflow
-```
-
 ### Basic Workflow Creation
 
-Now, we can create a single step workflow by defining a class that inherits from `Workflow` and decorating your functions with `@step`.
+<details>
+<summary>Workflow package</summary>
+As introduced in the [section on components](what-are-components-in-llama-index.mdx), we can install the Workflow package with the following command:
+
+```python
+pip install llama-index-utils-workflow
+```
+</details>
+
+We can create a single step workflow by defining a class that inherits from `Workflow` and decorating your functions with `@step`.
 We will also need to add `StartEvent` and `StopEvent`, which are special events that are used to indicate the start and end of the workflow.
 
 
