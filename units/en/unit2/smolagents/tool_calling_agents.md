@@ -10,7 +10,7 @@ This agent type follows the same multi-step workflow as `CodeAgent`. If you have
 
 ## Example: Running a Tool Calling Agent  
 
-To illustrate, let's run the same example as before, but this time using `ToolCallingAgent`. This allows us to compare their differences. Notice that we only change the agent type, while the framework handles the rest automatically:  
+To illustrate, let's run the same search example from the previous section, but this time using `ToolCallingAgent`. This allows us to compare their differences. Notice that we only change the agent type, while the framework handles the rest automatically:  
 
 ```python
 from smolagents import ToolCallingAgent, DuckDuckGoSearchTool, HfApiModel
