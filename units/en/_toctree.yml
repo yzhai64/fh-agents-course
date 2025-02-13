@@ -48,7 +48,7 @@
   sections:
   - local: unit2/introduction
     title: Introduction
-  - local: unit2/smolagents/smolagents_introduction
+  - local: unit2/smolagents/introduction
     title: smolagents Introduction
   - local: unit2/smolagents/why_use_smolagents
     title: Why use smolagents? 
