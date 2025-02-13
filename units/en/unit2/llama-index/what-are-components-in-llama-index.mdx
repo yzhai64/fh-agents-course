@@ -70,7 +70,9 @@ There are three main ways to do to load data into LlamaIndex:
 
 > Get familiar with [LlamaHub](https://docs.llamaindex.ai/en/stable/module_guides/loading/connector/) loaders and [LlamaParse](https://docs.llamaindex.ai/en/stable/module_guides/loading/connector/llama_parse/) parser for more complex data sources.
 
-**The easiest way to load data is with `SimpleDirectoryReader`.** It can load different types of files from a folder and turn them into `Document` objects that LlamaIndex can work with.
+**The easiest way to load data is with `SimpleDirectoryReader`.** +
+It can load different types of files from a folder and turn them into `Document` objects that LlamaIndex can work with.
+Underneath, we will use the `SimpleDirectoryReader` to load the data from a folder.
 
 ```python
 from llama_index.core import SimpleDirectoryReader
@@ -80,7 +82,7 @@ documents = reader.load_data()
 ```
 
 After loading our documents, we need to break them into smaller pieces called `Node` objects.
-A `Node` is just a chunk of text from the original document that's easier for the AI to work with, while it still has reteain references to the original `Document` object.
+A `Node` is just a chunk of text from the original document that's easier for the AI to work with, while it still has references to the original `Document` object.
 
 To create these nodes, we use the `IngestionPipeline` along with two simple transformations:
 1. `SentenceSplitter`: Breaks the document into smaller pieces of text by splitting it into sentences
@@ -112,18 +114,21 @@ nodes = pipeline.run(documents=[Document.example()])
 
 After creating our `Node` objects we need to index them to make them searchable but before we can do that, we need a place to store our data.
 
-Within LlamaIndex, we can **use a `StorageContext` to handle all the storage.**
-It supports various stores for different purposes:
+Within LlamaIndex, we can **use a `StorageContext` to handle a lot of different storage types.**
+For each of these storage types, there are different integrations with storage backends that can be used.
+The various data storage types that LlamaIndex supports are:
 - `DocumentStore`: Stores ingested documents (Node objects) for keyword search
 - `IndexStore`: Stores index metadata
 - `VectorStore`: Stores embedding vectors for semantic search
 - `PropertyGraphStore`: Stores knowledge graphs for graph-based queries
 - `ChatStore`: Stores and organizes chat message history
 
-We can set up a `StorageContext` ourselves, or let LlamaIndex create one for us when creating a search index.
-When we save the `StorageContext`, it creates files that store all the important information about our data.
+> An overview of the different storage types and their integrations can be found in the [LlamaIndex documentation](https://docs.llamaindex.ai/en/stable/module_guides/storing/).
 
-Next, let's see how to create a `VectorStoreIndex` and save it to your computer.
+We can set up a `StorageContext` ourselves, or let LlamaIndex create one for us when creating a search index.
+When we save the `StorageContext`, it creates files that store all the important information about our data, which makes it easy to persist and load later.
+
+Next, let's see how to create an index using the `VectorStoreIndex` and save it to your computer.
 We also need to provide an embedding model which should be the same as the one used during ingestion.
 
 ```python
@@ -204,7 +209,6 @@ response = query_engine.query(
 eval_result = evaluator.evaluate_response(response=response)
 print(str(eval_result.passing))
 ```
-
 
 Even if we don't directly evaluate, it is still important to understand what is going on.
 To install the integration package, do pip install -U llama-index-callbacks-arize-phoenix.
