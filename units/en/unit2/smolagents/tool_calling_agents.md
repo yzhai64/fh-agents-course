@@ -6,7 +6,7 @@ Tool Calling Agents are the second type of agent available in `smolagents`. They
 
 ## How Do Tool Calling Agents Work?  
 
-This agent type follows the same multi-step workflow as `CodeAgent`. If you have any doubts, refer to the previous section. Just like `CodeAgents`, the LLM generates and executes actions, often involving external tool calls. However, in this case, the actions are structured as JSON/text blobs, specifying tool names and arguments. The system then parses these instructions to determine which tool to execute.  
+This agent type follows the same multi-step workflow as `CodeAgent`. If you have any doubts, refer to the [previous section](./code_agents.md). Just like `CodeAgents`, the LLM generates and executes actions, often involving external tool calls. However, in this case, the actions are structured as JSON objects, specifying tool names and arguments as text. The system then parses these instructions to determine which tool to execute.  
 
 ## Example: Running a Tool Calling Agent  
 
