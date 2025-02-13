@@ -1,7 +1,8 @@
 # Using Agents in LlamaIndex
 
-Now we've gotten a basic understanding of what tools are in LlamaIndex, let's dive into how we can use agents in LlamaIndex.
-First, let's recap the definition of an Agent introduced in unit 1:
+Remember Alfred, our helpful butler agent from earlier? Well, he's about to get an upgrade! Now that we understand the tools available in LlamaIndex, we can give Alfred new capabilities to better serve us.
+
+But before we enhance Alfred's abilities, let's remind ourselves what makes an agent like Alfred tick. Back in Unit 1, we learned that:
 
 > An Agent is a system that leverages an AI model to interact with its environment in order to achieve a user-defined objective. It combines reasoning, planning, and the execution of actions (often via external tools) to fulfill tasks.
 
@@ -13,7 +14,9 @@ LlamaIndex supports three main types of reasoning agents:
 
 <Tip>Find more information on advanced agents on [LlamaIndex GitHub](https://github.com/run-llama/llama_index/tree/main/llama-index-packs)</Tip>
 
-An agent is initialized from a set of Tools. Here's an example of instantiating a ReAct agent from a set of Tools.
+## Initialising Agents
+
+An agent is initialised from a set of Tools. Here's an example of instantiating a ReAct agent from a set of Tools.
 
 ```python
 from llama_index.core.tools import FunctionTool
