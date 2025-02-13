@@ -61,7 +61,7 @@ This flexibility ensures that developers can choose the most suitable model inte
 
 ## When to use smolagents
 
-All the previously mentioned functionality is available in `smolagents`. So the question becomes: when should we use smolagents instead of other possible frameworks? 
+We've these advantages in mind, when should we use smolagents over other frameworks? 
 
 You may choose smolagents if:
 - You prioritize a lightweight and minimal solution.
