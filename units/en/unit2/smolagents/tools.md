@@ -7,8 +7,6 @@ As we learnt in unit 1, agents use tools to perform actions. In `smolagents` too
 - **Input types and their descriptions**  
 - **Output type**  
 
-For complex tools, we can implement a class instead of a Python function. The class wraps the function with metadata that helps the LLM understand how to use it effectively.  
-
 Below, you can see an animation illustrating how a tool call is managed:  
 
 ![Agentic pipeline from https://huggingface.co/docs/smolagents/conceptual_guides/react](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/Agent_ManimCE.gif)  
@@ -16,12 +14,44 @@ Below, you can see an animation illustrating how a tool call is managed:
 ## General Structure  
 
 In `smolagents`, tools can be defined in two ways:  
-1. **Creating a subclass of `Tool`**, which provides useful methods.  
-2. **Using the `@tool` decorator** to define a function-based tool.  
+1. **Using the `@tool` decorator** to define a function-based tool. 
+2. **Creating a subclass of `Tool`**, which provides useful methods.    
+
+### `@tool` Decorator  
+
+The `@tool` decorator is the recommended way to define simple tools. Under the hood, smolagents will parse basic information about the function from Python. So if you name you function clearly and a good docstring, it will be easier for the LLM to use. Using this approach, we define a function with:  
+
+- **A clear and descriptive function name** that helps the LLM understand its purpose.  
+- **Type hints for both inputs and outputs** to ensure proper usage.  
+- **A detailed description**, including an `Args:` section where each argument is explicitly described. These descriptions provide valuable context for the LLM, so it's important to write them carefully.  
+
+Below is an example of a function using the `@tool` decorator, replicating the same functionality as the previous example:
+
+```python
+from smolagents import tool
+
+@tool
+def model_download_tool(task: str) -> str:
+    """
+    This is a tool that returns the most downloaded model of a given task on the Hugging Face Hub.
+    It returns the name of the checkpoint.
+
+    Args:
+        task: The task for which to get the download count.
+    """
+    most_downloaded_model = next(iter(list_models(filter=task, sort="downloads", direction=-1)))
+    return most_downloaded_model.id
+
+agent = CodeAgent(tools=[model_download_tool], model=HfApiModel())
+
+agent.run(
+    "Can you give me the name of the model that has the most downloads in the 'text-to-video' task on the Hugging Face Hub?"
+)
+```
 
 ### Defining a Tool as a Python Class  
 
-The first approach involves creating a subclass of [`Tool`](https://huggingface.co/docs/smolagents/v1.8.1/en/reference/tools#smolagents.Tool). In this class, we define:  
+This approach involves creating a subclass of [`Tool`](https://huggingface.co/docs/smolagents/v1.8.1/en/reference/tools#smolagents.Tool).  For complex tools, we can implement a class instead of a Python function. The class wraps the function with metadata that helps the LLM understand how to use it effectively. In this class, we define:  
 
 - `name`: The tool’s name.  
 - `description`: A description used to populate the agent's system prompt.  
@@ -62,37 +92,7 @@ agent.run(
 )
 ```
 
-### `@tool` Decorator  
 
-The `@tool` decorator is the recommended way to define simple tools. Under the hood, smolagents will parse basic information about the function from Python. So if you name you function clearly and a good docstring, it will be easier for the LLM to use. Using this approach, we define a function with:  
-
-- **A clear and descriptive function name** that helps the LLM understand its purpose.  
-- **Type hints for both inputs and outputs** to ensure proper usage.  
-- **A detailed description**, including an `Args:` section where each argument is explicitly described. These descriptions provide valuable context for the LLM, so it's important to write them carefully.  
-
-Below is an example of a function using the `@tool` decorator, replicating the same functionality as the previous example:
-
-```python
-from smolagents import tool
-
-@tool
-def model_download_tool(task: str) -> str:
-    """
-    This is a tool that returns the most downloaded model of a given task on the Hugging Face Hub.
-    It returns the name of the checkpoint.
-
-    Args:
-        task: The task for which to get the download count.
-    """
-    most_downloaded_model = next(iter(list_models(filter=task, sort="downloads", direction=-1)))
-    return most_downloaded_model.id
-
-agent = CodeAgent(tools=[model_download_tool], model=HfApiModel())
-
-agent.run(
-    "Can you give me the name of the model that has the most downloads in the 'text-to-video' task on the Hugging Face Hub?"
-)
-```
 
 ## Default Toolbox  
 

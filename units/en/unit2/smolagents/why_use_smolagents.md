@@ -30,6 +30,15 @@ As we learnt in unit 1, AI agents are programs where LLM output **'thoughts'**, 
 - **Code-First Approach:** First-class support for Code Agents that directly write their actions in code.
 - **HF Hub Integration:** Seamless integration with Hugging Face Hub, allowing the use of Gradio Spaces as tools.
 
+### When to use smolagents
+
+We've these advantages in mind, when should we use smolagents over other frameworks? 
+
+You should choose smolagents when:
+- You prioritize a lightweight and minimal solution.
+- You would like to experiment without complex configurations.
+- The logic for your application is straightforward.
+
 ### Code vs. JSON Actions
 Unlike other frameworks where agents write actions in JSON that require parsing, `smolagents` focuses on direct tool calls in code, simplifying the execution process. The following diagram illustrates this difference:
 
@@ -58,15 +67,6 @@ We will explore each agent type in more detail in the following units.
 - **[AzureOpenAIServerModel](https://huggingface.co/docs/smolagents/main/en/reference/models#smolagents.AzureOpenAIServerModel):** Supports integration with any Azure OpenAI deployment.
 
 This flexibility ensures that developers can choose the most suitable model integration for their specific use cases.
-
-## When to use smolagents
-
-We've these advantages in mind, when should we use smolagents over other frameworks? 
-
-You should choose smolagents when:
-- You prioritize a lightweight and minimal solution.
-- You would like to experiment without complex configurations.
-- The logic for your application is straightforward.
 
 Join us as we dive deep into smolagents in the upcoming sections!
 
