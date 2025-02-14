@@ -1,15 +1,28 @@
 # Integrating Agents With Tools
 
 Tool Calling Agents are the second type of agent available in `smolagents`. Rather than formulating actions as code snippets, these agents leverage the built-in tool-calling methods from LLM providers, that generate tool calls as variations of JSON blobs. This is the standard way to make agents, proposed as the default tool calling implementation by OpenAI, Anthropic, and many others.
-For instance, for a web search on famous nuclear scientists, a `CodeAgent` would generate and run a python snippet like:`for name in ["Leo Szilard", "Enrico Fermi"]: print(web_search(f"Who was {name}?"))`
-Instead, a `ToolCallingAgent` would create this JSON blob: `{"name": "web_search", "arguments": "Who was Leo Szilard?"}`, and execute the tool call.
+
+For instance, for a web search on famous nuclear scientists, a `CodeAgent` would generate and run a python snippet like:
+
+```python
+for name in ["Leo Szilard", "Enrico Fermi"]: 
+    print(web_search(f"Who was {name}?"))
+```
+
+Instead, a `ToolCallingAgent` would create this JSON blob: 
+
+```python
+{"name": "web_search", "arguments": "Who was Leo Szilard?"}
+```
+, and execute the tool call.
+
 While `smolagents` primarily focuses on `CodeAgents` and recommends using them since [they perform better overall](https://arxiv.org/abs/2402.01030), `ToolCallingAgents` can work well in systems where you do not need any variable handling or complex tool calls.
 
 ![Code vs JSON Actions](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/code_vs_json_actions.png)  
 
 ## How Do Tool Calling Agents Work?  
 
-This agent type follows the same multi-step workflow as `CodeAgent`. If you have any doubts, refer to the [previous section](./code_agents.md). Just like `CodeAgents`, the LLM generates and executes actions, often involving external tool calls. However, in this case, the actions are structured as JSON objects, specifying tool names and arguments as text. The system then parses these instructions to determine which tool to execute.  
+This agent type follows the same multi-step workflow as `CodeAgent`. If you have any doubts, refer to the [previous section](./code_agents). Just like `CodeAgents`, the LLM generates and executes actions, often involving external tool calls. However, in this case, the actions are structured as JSON objects, specifying tool names and arguments as text. The system then parses these instructions to determine which tool to execute.  
 
 ## Example: Running a Tool Calling Agent  
 

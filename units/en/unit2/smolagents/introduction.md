@@ -14,11 +14,11 @@ This module provides a comprehensive overview of key concepts and practical stra
 
 `smolagents` is one of the many open-source agent frameworks available for application development. Alternative options include `LlamaIndex` and `LangGraph`, which are also covered in other modules in this course. This library offers several key features that might make it a great fit for specific use cases, but there are also some limitations that may lead you to consider other solutions. This module explores the advantages and drawbacks of using `smolagents`, helping you make an informed decision based on your project's requirements.
 
-### 2️⃣ [CodeAgents](./code_agents)
+### 2️⃣ [Building Agents That Use Code](./code_agents)
 
 `CodeAgents` are the primary type of agent in **smolagents**. Instead of generating JSON or text blobs, these agents produce Python code to perform actions. This module explores their purpose, functionality, and how they work, along with hands-on examples to showcase their capabilities.  
 
-### 3️⃣ [ToolCallingAgents](./tool_calling_agents)
+### 3️⃣ [Integrating Agents With Tools](./tool_calling_agents)
 
 `ToolCallingAgents` are the second type of agent supported by **smolagents**. Unlike `CodeAgents`, which generate Python code, these agents rely on JSON/text blobs that the system must parse and interpret to execute actions. This module covers their functionality, key differences from `CodeAgents`, and provides a coding example to illustrate their use.  
 

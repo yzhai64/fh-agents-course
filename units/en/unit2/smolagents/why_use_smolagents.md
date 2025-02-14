@@ -3,21 +3,6 @@
 
 In this module, we will explore the pros and cons of using [smolagents](https://huggingface.co/blog/smolagents), helping you make an informed decision about whether it's the right framework for your needs.
 
-## When to Use an Agentic Framework
-
-An agentic framework is not always needed when building an application around LLMs. They provide flexibility in the workflow to efficiently solve a specific task, but they're not always necessary. Sometimes, predefined workflows are sufficient to fulfill user requests, and there is no real need for an agentic framework. If the approach to build an agent is simple, like a chain of prompts, using plain code may be enough. The advantage is that the developer will have full control and understanding of their system without abstractions.
-
-However, when the workflow becomes more complex, such as letting an LLM call functions or using multiple agents, these abstractions start to become helpful.
-
-Considering these ideas, we can already identify the need for some features:
-
-* An LLM engine powering the system.
-* A list of tools the agent can access.
-* A parser for extracting tool calls from the LLM output.
-* A system prompt synced with the parser.
-* A memory system.
-* Error logging and retry mechanisms to control LLM mistakes.
-
 ## What is `smolagents`?
 
 `smolagents` is a simple yet powerful framework for building AI agents. It provides LLMs with the _agency_ to interact with the real world, such as searching or generating images. 
@@ -55,7 +40,12 @@ There are two types of agents available:
 
 We will explore each agent type in more detail in the following units.
 
-<Tip> In smolagents, tools are defined using `@tool` or the `Tool` class. They are distinct from `ToolCallingAgent`. Both `CodeAgents` and `ToolCallingAgent` utilize tools. Keep this distinction in mind throughout the rest of the unit to avoid confusion! </Tip>
+<Tip> 
+In smolagents, tools are defined using <code>@tool</code> or the <code>Tool</code> class. They are distinct from <code>ToolCallingAgent</code>. Both <code>CodeAgents</code> and <code>ToolCallingAgent</code> utilize tools. Keep this distinction in mind throughout the rest of the unit to avoid confusion! 
+</Tip>
+
+
+
 
 ### Model Integration in `smolagents`
 `smolagents` supports flexible LLM integration, allowing you to use any callable model as long as it meets [certain criteria](https://huggingface.co/docs/smolagents/main/en/reference/models). To simplify connections with various model types, the framework provides predefined classes:
