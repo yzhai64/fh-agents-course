@@ -166,7 +166,7 @@ agent = CodeAgent(tools=[search_tool], model=model)
 agent.run("How many more blocks (also denoted as layers) are in BERT base encoder compared to the encoder from the architecture proposed in Attention is All You Need?")
 ```
 
-## Further Reading
+## Resources
 
 - [Tools Tutorial](https://huggingface.co/docs/smolagents/tutorials/tools) - Explore this tutorial to learn how to work with tools effectively.
 - [Tools Documentation](https://huggingface.co/docs/smolagents/v1.8.1/en/reference/tools) - Comprehensive reference documentation on tools.

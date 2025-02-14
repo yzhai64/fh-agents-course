@@ -119,7 +119,7 @@ These examples are just the beginning of what you can do with code agents. You c
 
 smolagents specializes in agents that write and execute Python code snippets, offering sandboxed execution for security. It supports both open-source and proprietary language models, making it adaptable to various development environments.
 
-## Further Reading
+## Resources
 
 - [smolagents Blog](https://huggingface.co/blog/smolagents) - Introduction to smolagents and code interactions
 - [smolagents: Building Good Agents](https://huggingface.co/docs/smolagents/tutorials/building_good_agents) - Best practices for reliable agents
