@@ -1,6 +1,9 @@
 # Integrating Agents With Tools
 
-Tool Calling Agents are the second type of agent available in `smolagents`. They utilize built-in tool-calling methods and generate tool calls in JSON format. While `smolagents` primarily focuses on `CodeAgents` and recommends using them,  `ToolCallingAgents` are an extra feature for JSON specific tasks. Although `CodeAgents` are generally more versatile, `ToolCallingAgents` can be a better option in systems where tasks are simple, structured, and predictable.
+Tool Calling Agents are the second type of agent available in `smolagents`. Rather than formulating actions as code snippets, these agents leverage the built-in tool-calling methods from LLM providers, that generate tool calls as variations of JSON blobs. This is the standard way to make agents, proposed as the default tool calling implementation by OpenAI, Anthropic, and many others.
+For instance, for a web search on famous nuclear scientists, a `CodeAgent` would generate and run a python snippet like:`for name in ["Leo Szilard", "Enrico Fermi"]: print(web_search(f"Who was {name}?"))`
+Instead, a `ToolCallingAgent` would create this JSON blob: `{"name": "web_search", "arguments": "Who was Leo Szilard?"}`, and execute the tool call.
+While `smolagents` primarily focuses on `CodeAgents` and recommends using them since [they perform better overall](https://arxiv.org/abs/2402.01030), `ToolCallingAgents` can work well in systems where you do not need any variable handling or complex tool calls.
 
 ![Code vs JSON Actions](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/code_vs_json_actions.png)  
 
