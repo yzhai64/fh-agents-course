@@ -1,4 +1,4 @@
-# smolagents
+# Introduction to <code>smolagents</code>
 
 ![smolagents license to call](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/smolagents/license_to_call.png)
 

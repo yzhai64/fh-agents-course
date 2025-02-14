@@ -5,7 +5,7 @@ Code agents are the default agent type in smolagents. They generate their own Py
 ![Code vs JSON Actions](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/code_vs_json_actions.png)
 Graphic from the paper [Executable Code Actions Elicit Better LLM Agents](https://huggingface.co/papers/2402.01030)
 
-<Tip>If you want to learn more about why code agents are effective, check out [this guide](https://huggingface.co/docs/smolagents/en/conceptual_guides/intro_agents#code-agents) from the smolagents documentation. </Tip>
+<Tip>If you want to learn more about why code agents are effective, check out <a href="https://huggingface.co/docs/smolagents/en/conceptual_guides/intro_agents#code-agents" target="_blank">this guide</a> from the smolagents documentation. </Tip>
 
 ## Why Code Agents?
 
