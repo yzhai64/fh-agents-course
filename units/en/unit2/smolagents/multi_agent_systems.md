@@ -10,20 +10,7 @@ In **smolagents**, different agents can be combined to generate Python code, cal
 
 The diagram below illustrates a simple multi-agent architecture where a **Manager Agent** coordinates a **Code Interpreter Tool** and a **Web Search Agent**, which in turn utilizes tools like `Web Search` and `Visit Webpage` to gather relevant information.
 
-```bash
-              +----------------+
-              | Manager agent  |
-              +----------------+
-                       |
-        _______________|______________
-       |                              |
-Code Interpreter            +------------------+
-    tool                    | Web Search agent |
-                            +------------------+
-                               |            |
-                        Web Search tool     |
-                                   Visit webpage tool
-```
+<img src="https://mermaid.ink/img/pako:eNp1kc1qhTAQRl9FUiQb8wIpdNO76eKubrmFks1oRg3VSYgjpYjv3lFL_2hnMWQOJwn5sqgmelRWleUSKLAtFs09jqhtoWuYUFfFAa6QA9QDTnpzamheuhxn8pt40-6l13UtS0ddhtQXj6dbR4XUGQg6zEYasTF393KjeSDGnDJKNxzj8I_7hLW5IOSmP9CH9hv_NL-d94d4DVNg84p1EnK4qlIj5hGClySWbadT-6OdsrL02MI8sFOOVkciw8zx8kaNspxnrJQE0fXKtjBMMs3JA-MpgOQwftIE9Bzj14w-cMznI_39E9Z3p0uFoA?type=png" style='background: white;'>
 
 ## Multi-Agent Systems in Action  
 
@@ -60,6 +47,43 @@ manager_agent.run("How do you combine multiple adapters in peft?")
 ```
 
 The library handles system management internally, so no additional code is needed.  
+
+To better understand the multi-agent structure, `smolagents` can generate diagrams that visually represent the system's architecture:
+
+```python
+manager_agent.visualize()
+```
+
+This command will produce a diagram similar to:
+
+```python
+CodeAgent | Qwen/Qwen2.5-Coder-32B-Instruct
+├── ✅ Authorized imports: ['time', 'numpy', 'pandas']
+├── 🛠️ Tools:
+│   ┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+│   ┃ Name         ┃ Description                                   ┃ Arguments                                    ┃
+│   ┡━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│   │ final_answer │ Provides a final answer to the given problem. │ answer (`any`): The final answer to the      │
+│   │              │                                               │ problem                                      │
+│   └──────────────┴───────────────────────────────────────────────┴──────────────────────────────────────────────┘
+└── 🤖 Managed agents:
+    └── search | ToolCallingAgent | Qwen/Qwen2.5-Coder-32B-Instruct
+        ├── 📝 Description: Runs web searches for you. Give it your query as an argument.
+        └── 🛠️ Tools:
+            ┏━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+            ┃ Name          ┃ Description                              ┃ Arguments                                ┃
+            ┡━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+            │ web_search    │ Performs a duckduckgo web search based   │ query (`string`): The search query to    │
+            │               │ on your query (think a Google search)    │ perform.                                 │
+            │               │ then returns the top search results.     │                                          │
+            │ visit_webpage │ Visits a webpage at the given URL and    │ url (`string`): The URL of the webpage   │
+            │               │ returns its content as a markdown        │ to visit.                                │
+            │               │ string.                                  │                                          │
+            │ final_answer  │ Provides a final answer to the given     │ answer (`any`): The final answer to the  │
+            │               │ problem.                                 │ problem                                  │
+            └───────────────┴──────────────────────────────────────────┴──────────────────────────────────────────┘
+```
+
 
 ## Further Reading  
 

@@ -40,6 +40,9 @@ The agent will:
 For domain-specific applications, we often want to combine web search with our own knowledge base. Let's create a custom tool that can query a vector database of technical documentation.
 
 ```python
+import datasets
+from langchain.docstore.document import Document
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 from smolagents import Tool
 from langchain_community.retrievers import BM25Retriever
 
@@ -73,31 +76,6 @@ class RetrieverTool(Tool):
             ]
         )
 
-retriever_tool = RetrieverTool(docs_processed)
-```
-
-This enhanced agent can:
-1. First check the documentation for relevant information
-2. Fall back to web search if needed
-3. Combine information from both sources
-4. Maintain conversation context through memory
-
-## Enhanced Retrieval Capabilities
-
-When building agentic RAG systems, the agent can employ sophisticated strategies like:
-
-1. Query Reformulation - Instead of using the raw user query, the agent can craft optimized search terms that better match the target documents
-2. Multi-Step Retrieval - The agent can perform multiple searches, using initial results to inform subsequent queries
-3. Source Integration - Information can be combined from multiple sources like web search and local documentation
-4. Result Validation - Retrieved content can be analyzed for relevance and accuracy before being included in responses
-
-Effective agentic RAG systems require careful consideration of several key aspects. The agent should select between available tools based on the query type and context. Memory systems help maintain conversation history and avoid repetitive retrievals. Having fallback strategies ensures the system can still provide value even when primary retrieval methods fail. Additionally, implementing validation steps helps ensure the accuracy and relevance of retrieved information.
-
-```python
-import datasets
-from langchain.docstore.document import Document
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-
 knowledge_base = datasets.load_dataset("m-ric/huggingface_doc", split="train")
 knowledge_base = knowledge_base.filter(lambda row: row["source"].startswith("huggingface/transformers"))
 
@@ -114,8 +92,27 @@ text_splitter = RecursiveCharacterTextSplitter(
     separators=["\n\n", "\n", ".", " ", ""],
 )
 docs_processed = text_splitter.split_documents(source_docs)
+
+retriever_tool = RetrieverTool(docs_processed)
 ```
+
+This enhanced agent can:
+1. First check the documentation for relevant information
+2. Fall back to web search if needed
+3. Combine information from both sources
+4. Maintain conversation context through memory
+
+## Enhanced Retrieval Capabilities
+
+When building agentic RAG systems, the agent can employ sophisticated strategies like:
+
+1. **Query Reformulation:** Instead of using the raw user query, the agent can craft optimized search terms that better match the target documents
+2. **Multi-Step Retrieval** The agent can perform multiple searches, using initial results to inform subsequent queries
+3. **Source Integration** Information can be combined from multiple sources like web search and local documentation
+4. **Result Validation** Retrieved content can be analyzed for relevance and accuracy before being included in responses
+
+Effective agentic RAG systems require careful consideration of several key aspects. The agent should select between available tools based on the query type and context. Memory systems help maintain conversation history and avoid repetitive retrievals. Having fallback strategies ensures the system can still provide value even when primary retrieval methods fail. Additionally, implementing validation steps helps ensure the accuracy and relevance of retrieved information.
 
 ## Next Steps
 
-⏩ Check out the [Code Agents](./code_agents.md) module to learn how to build agents that can manipulate code.
+⏩ Check out the [Code Agents](./code_agents) module to learn how to build agents that can manipulate code.
