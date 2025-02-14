@@ -44,9 +44,6 @@ We will explore each agent type in more detail in the following units.
 In smolagents, tools are defined using <code>@tool</code> or the <code>Tool</code> class. They are distinct from <code>ToolCallingAgent</code>. Both <code>CodeAgents</code> and <code>ToolCallingAgent</code> utilize tools. Keep this distinction in mind throughout the rest of the unit to avoid confusion! 
 </Tip>
 
-
-
-
 ### Model Integration in `smolagents`
 `smolagents` supports flexible LLM integration, allowing you to use any callable model as long as it meets [certain criteria](https://huggingface.co/docs/smolagents/main/en/reference/models). To simplify connections with various model types, the framework provides predefined classes:
 
@@ -60,6 +57,6 @@ This flexibility ensures that developers can choose the most suitable model inte
 
 Join us as we dive deep into smolagents in the upcoming sections!
 
-## Further Reading
+## Resources
 
 - [smolagents Blog](https://huggingface.co/blog/smolagents) - Introduction to smolagents and code interactions

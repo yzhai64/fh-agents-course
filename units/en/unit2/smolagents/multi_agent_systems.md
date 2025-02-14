@@ -84,8 +84,7 @@ CodeAgent | Qwen/Qwen2.5-Coder-32B-Instruct
             └───────────────┴──────────────────────────────────────────┴──────────────────────────────────────────┘
 ```
 
-
-## Further Reading  
+## Resources
 
 - [Multi-Agent Systems](https://huggingface.co/docs/smolagents/main/en/examples/multiagents) – Overview of multi-agent systems.  
 - [What is Agentic RAG?](https://weaviate.io/blog/what-is-agentic-rag) – Introduction to Agentic RAG.  
