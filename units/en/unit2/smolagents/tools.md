@@ -17,7 +17,7 @@ In `smolagents`, tools can be defined in two ways:
 1. **Using the `@tool` decorator** to define a function-based tool. 
 2. **Creating a subclass of `Tool`**, which provides useful methods.    
 
-### `@tool` Decorator  
+### <code>@tool</code> Decorator  
 
 The `@tool` decorator is the recommended way to define simple tools. Under the hood, smolagents will parse basic information about the function from Python. So if you name you function clearly and a good docstring, it will be easier for the LLM to use. Using this approach, we define a function with:  
 
