@@ -62,6 +62,8 @@
     title: Retrieval Agents
   - local: unit2/smolagents/multi_agent_systems
     title: Multi-Agent Systems
+  - local: unit2/smolagents/multiagent
+    title: Multi-Agent Systems notebook
   - local: unit2/smolagents/vision_agents
     title: Vision and Browser agents
 - title: When the next steps are published?
