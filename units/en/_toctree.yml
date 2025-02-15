@@ -40,6 +40,10 @@
     title: Get Your Certificate
   - local: unit1/conclusion
     title: Conclusion
+- title: Unit 1.5 Fine-tuning an LLM for function-calling
+  sections:
+  - local: unit1.5/Fine-tuning
+    title: Let's fine-tune our model for fucntion calling
 - title: When the next steps are published?
   sections:
   - local: communication/next-units
