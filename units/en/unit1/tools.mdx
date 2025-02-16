@@ -70,8 +70,6 @@ We will implement a simplified **calculator** tool that will just multiply two i
 def calculator(a: int, b: int) -> int:
     """Multiply two integers."""
     return a * b
-
-print(calculator.to_string())
 ```
 
 So our tool is called `calculator`, it **multiplies two integers**, and it requires the following inputs:
@@ -124,7 +122,7 @@ print(calculator.to_string())
 
 Note the `@tool` decorator before the function definition.
 
-With the implementation we'll see next, we will be able to retrieve the following text automatically from the source code:
+With the implementation we'll see next, we will be able to retrieve the following text automatically from the source code via the `to_string()` function provided by the decorator:
 
 ```
 Tool Name: calculator, Description: Multiply two integers., Arguments: a: int, b: int, Outputs: int
