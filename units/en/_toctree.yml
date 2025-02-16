@@ -42,7 +42,7 @@
     title: Conclusion
 - title: Unit 1.5 Fine-tuning an LLM for function-calling
   sections:
-  - local: unit1.5/Fine-tuning
+  - local: unit1.5/fine-tuning
     title: Let's fine-tune our model for fucntion calling
 - title: When the next steps are published?
   sections:
