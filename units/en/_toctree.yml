@@ -48,8 +48,10 @@
   sections:
   - local: bonus-unit1/introduction
     title: Introduction
+  - local: bonus-unit1/what-is-function-calling
+    title: What is function calling?
   - local: bonus-unit1/fine-tuning
-    title: Let's fine-tune our model for fucntion calling
+    title: Let's fine-tune our model for function calling
   - local: bonus-unit1/conclusion
     title: Conclusion
 - title: When the next steps are published?
