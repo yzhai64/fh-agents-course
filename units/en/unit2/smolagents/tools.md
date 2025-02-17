@@ -1,15 +1,24 @@
 # Tools  
 
-As we learnt in unit 1, agents use tools to perform actions. In `smolagents` tools are treated as functions that an LLM can use within an agentic system. To interact with a tool, the LLM requires an **interface description** with the following components:  
+As we explored in unit 1, agents use tools to perform various actions. In `smolagents`, tools are treated as functions that an LLM can call within an agent system. To interact with a tool, the LLM needs an **interface description**, which includes the following components:  
 
 - **Name**  
 - **Tool description**  
 - **Input types and their descriptions**  
 - **Output type**  
 
-Below, you can see an animation illustrating how a tool call is managed:  
+For instance, Alfred, preparing for a party at Wayne Manor, may need to utilize several tools to gather information. This could involve searching for catering services, finding superhero party theme ideas, or identifying the best entertainment options for the guests. To do this, he can use the `web_search` tool. The interface for this tool might look like the following:
 
-![Agentic pipeline from https://huggingface.co/docs/smolagents/conceptual_guides/react](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/Agent_ManimCE.gif)  
+- **Name:** `web_search`
+- **Tool description:** A tool that allows searching the web for specific queries.
+- **Input types and their descriptions:** `arguments` (a string representing the search query)
+- **Output type:** A string representing the search results.
+
+By using these tools, the agent can make informed decisions and gather relevant information for any aspect of the party planning.
+
+Below, you can see an animation illustrating how a tool call is managed:
+
+![Agentic pipeline from https://huggingface.co/docs/smolagents/conceptual_guides/react](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/Agent_ManimCE.gif)
 
 ## General Structure  
 
@@ -25,28 +34,43 @@ The `@tool` decorator is the recommended way to define simple tools. Under the h
 - **Type hints for both inputs and outputs** to ensure proper usage.  
 - **A detailed description**, including an `Args:` section where each argument is explicitly described. These descriptions provide valuable context for the LLM, so it's important to write them carefully.  
 
-Below is an example of a function using the `@tool` decorator, replicating the same functionality as the previous example:
+#### Generating a tool that retrieves the highest-rated catering
+
+Let's imagine that Alfred has already decided on the menu for the party, but now he needs help preparing food for such a large number of guests. To do so, he would like to hire a catering service and needs to identify the highest-rated options available. Alfred can leverage a tool to search for the best catering services in his area. Below is an example of how Alfred can use the `@tool` decorator to make this happen:
 
 ```python
-from smolagents import tool
+from smolagents import CodeAgent, HfApiModel, tool
 
+# Let's pretend we have a function that fetches the highest-rated catering services.
 @tool
-def model_download_tool(task: str) -> str:
+def catering_service_tool(query: str) -> str:
     """
-    This is a tool that returns the most downloaded model of a given task on the Hugging Face Hub.
-    It returns the name of the checkpoint.
-
+    This tool returns the highest-rated catering service in Gotham City.
+    
     Args:
-        task: The task for which to get the download count.
+        query: A search term for finding catering services.
     """
-    most_downloaded_model = next(iter(list_models(filter=task, sort="downloads", direction=-1)))
-    return most_downloaded_model.id
+    # Example list of catering services and their ratings
+    services = {
+        "Gotham Catering Co.": 4.9,
+        "Wayne Manor Catering": 4.8,
+        "Gotham City Events": 4.7,
+    }
+    
+    # Find the highest rated catering service (simulating search query filtering)
+    best_service = max(services, key=services.get)
+    
+    return best_service
 
-agent = CodeAgent(tools=[model_download_tool], model=HfApiModel())
 
-agent.run(
-    "Can you give me the name of the model that has the most downloads in the 'text-to-video' task on the Hugging Face Hub?"
+agent = CodeAgent(tools=[catering_service_tool], model=HfApiModel())
+
+# Run the agent to find the best catering service
+result = agent.run(
+    "Can you give me the name of the highest-rated catering service in Gotham City?"
 )
+
+print(result)   # Output: Gotham Catering Co.
 ```
 
 ### Defining a Tool as a Python Class  
@@ -61,38 +85,50 @@ This approach involves creating a subclass of [`Tool`](https://huggingface.co/do
 
 Below, we can see an example of a tool built using `Tool` and to integrate it within a `CodeAgent`.
 
-```python
-from smolagents import Tool
+#### Generating a tool to generate ideas about the superhero-themed party
 
-class HFModelDownloadsTool(Tool):
-    name = "model_download_counter"
+Alfred's party at the mansion is a **superhero-themed event**, but he needs some creative ideas to make it truly special. As a fantastic host, he wants to surprise the guests with a unique theme. To do this, he can use an agent that generates superhero-themed party ideas based on a given category. This way, Alfred can find the perfect party theme to wow his guests.
+
+```python
+from smolagents import Tool, CodeAgent, HfApiModel
+
+class SuperheroPartyThemeTool(Tool):
+    name = "superhero_party_theme_generator"
     description = """
-    This is a tool that returns the most downloaded model of a given task on the Hugging Face Hub.
-    It returns the name of the checkpoint."""
+    This tool suggests creative superhero-themed party ideas based on a category.
+    It returns a unique party theme idea."""
+    
     inputs = {
-        "task": {
+        "category": {
             "type": "string",
-            "description": "the task category (such as text-classification, depth-estimation, etc)",
+            "description": "The type of superhero party (e.g., 'classic heroes', 'villain masquerade', 'futuristic Gotham').",
         }
     }
+    
     output_type = "string"
 
-    def forward(self, task: str):
-        from huggingface_hub import list_models
+    def forward(self, category: str):
+        themes = {
+            "classic heroes": "Justice League Gala: Guests come dressed as their favorite DC heroes with themed cocktails like 'The Kryptonite Punch'.",
+            "villain masquerade": "Gotham Rogues' Ball: A mysterious masquerade where guests dress as classic Batman villains.",
+            "futuristic Gotham": "Neo-Gotham Night: A cyberpunk-style party inspired by Batman Beyond, with neon decorations and futuristic gadgets."
+        }
+        
+        return themes.get(category.lower(), "Themed party idea not found. Try 'classic heroes', 'villain masquerade', or 'futuristic Gotham'.")
 
-        model = next(iter(list_models(filter=task, sort="downloads", direction=-1)))
-        return model.id
+# Instantiate the tool
+party_theme_tool = SuperheroPartyThemeTool()
+agent = CodeAgent(tools=[party_theme_tool], model=HfApiModel())
 
-model_downloads_tool = HFModelDownloadsTool()
-
-agent = CodeAgent(tools=[model_downloads_tool], model=HfApiModel())
-
-agent.run(
-    "Can you give me the name of the model that has the most downloads in the 'text-to-video' task on the Hugging Face Hub?"
+# Run the agent to generate a party theme idea
+result = agent.run(
+    "What would be a good superhero party idea for a 'villain masquerade' theme?"
 )
+
+print(result)  # Output: "Gotham Rogues' Ball: A mysterious masquerade where guests dress as classic Batman villains."
 ```
 
-
+With this tool, Alfred will be the ultimate super host, impressing his guests with a superhero-themed party they won't forget! 🦸‍♂️🦸‍♀️
 
 ## Default Toolbox  
 
@@ -105,35 +141,49 @@ agent.run(
 - **GoogleSearchTool**  
 - **VisitWebpageTool**  
 
+Alfred could use various tools to ensure a flawless party at Wayne Manor. First, he could use the `DuckDuckGoSearchTool` to find creative superhero-themed party ideas. For catering, he'd rely on the `GoogleSearchTool` to find the highest-rated services in Gotham. To manage seating arrangements, Alfred could run calculations with the `PythonInterpreterTool`. Once everything is gathered, he'd compile the plan using the `FinalAnswerTool`. Lastly, the `VisitWebpageTool` would keep him updated on any changes, ensuring a smooth event. With these tools, Alfred guarantees the party is both exceptional and seamless. 🦇💡
 
 ## Sharing and Importing Tools
 
-One of the most powerful features of **smolagents** is the ability to share your custom tools to the Hub, as well as load tools shared by the community. This includes integrating **HF Spaces** or **LangChain tools**. Below are examples showcasing each of these functionalities:
+One of the most powerful features of **smolagents** is its ability to share custom tools on the Hub and seamlessly integrate tools created by the community. This includes connecting with **HF Spaces** and **LangChain tools**, significantly enhancing Alfred’s ability to orchestrate an unforgettable party at Wayne Manor. 🎭 
+
+With these integrations, Alfred can tap into advanced event-planning tools—whether it’s adjusting the lighting for the perfect ambiance, curating the ideal playlist for the party, or coordinating with Gotham’s finest caterers.  
+
+Here are examples showcasing how these functionalities can elevate the party experience:
 
 ### Sharing a Tool to the Hub
 
-To share your custom tool, you can upload it to your Hugging Face account using the `push_to_hub()` method:
+Sharing your custom tool with the community is easy! Simply upload it to your Hugging Face account using the `push_to_hub()` method.
+
+For instance, Alfred can share his `catering_service_tool` to help others find the best catering services in Gotham. Here’s how to do it:
 
 ```python
-model_downloads_tool.push_to_hub("{your_username}/hf-model-downloads", token="<YOUR_HUGGINGFACEHUB_API_TOKEN>")
+party_theme_tool.push_to_hub("{your_username}/catering_service_tool", token="<YOUR_HUGGINGFACEHUB_API_TOKEN>")
 ```
 
 ### Importing a Tool from the Hub
 
-You can import tools developed by other users by utilizing the load_tool() function:
+You can easily import tools created by other users using the `load_tool()` function. For example, Alfred might want to generate a promotional image for the party using AI. Instead of building a tool from scratch, he can leverage a predefined one from the community: 
 
 ```python
-from smolagents import load_tool, CodeAgent
+from smolagents import load_tool, CodeAgent, HfApiModel
 
-model_download_tool = load_tool(
-    "{your_username}/hf-model-downloads", # m-ric/text-to-image
+image_generation_tool = load_tool(
+    "m-ric/text-to-image",
     trust_remote_code=True
 )
+
+agent = CodeAgent(
+    tools=[image_generation_tool],
+    model=HfApiModel()
+)
+
+agent.run("Generate an image of a luxurious superhero-themed party at Wayne Manor with made-up superheros.")
 ```
 
 ### Importing a Hugging Face Space as a Tool
 
-You can also import a HF Space as a tool using `Tool.from_space()`. This opens up possibilities for integrating with thousands of spaces from the community for tasks from image generation to data analysis. The tool will connect with the spaces Gradio backend using the `gradio_client`, so make sure to install it via `pip` if you don't have it already:
+You can also import a HF Space as a tool using `Tool.from_space()`. This opens up possibilities for integrating with thousands of spaces from the community for tasks from image generation to data analysis. The tool will connect with the spaces Gradio backend using the `gradio_client`, so make sure to install it via `pip` if you don't have it already. For the party, Alfred can also use a HF Space directly for the geneation of the previous annoucement AI-generated image. Let's build it!
 
 ```python
 from smolagents import CodeAgent, HfApiModel, Tool
@@ -145,26 +195,35 @@ image_generation_tool = Tool.from_space(
 )
 
 model = HfApiModel("Qwen/Qwen2.5-Coder-32B-Instruct")
+
 agent = CodeAgent(tools=[image_generation_tool], model=model)
 
 agent.run(
-    "Improve this prompt, then generate an image of it.", additional_args={'user_prompt': 'A rabbit wearing a space suit'}
+    "Improve this prompt, then generate an image of it.", 
+    additional_args={'user_prompt': 'A grand superhero-themed party at Wayne Manor, with Alfred overseeing a luxurious gala'}
 )
 ```
 
 ### Importing a LangChain Tool
 
-You can also load tools from LangChain using the `Tool.from_langchain()` method. Here's how to import and use a LangChain tool:
+You can easily load LangChain tools using the `Tool.from_langchain()` method. Alfred, ever the perfectionist, is preparing for a spectacular superhero night at Wayne Manor while the Waynes are away. To make sure every detail exceeds expectations, he taps into LangChain tools to find top-tier entertainment ideas.
+
+By using `Tool.from_langchain()`, Alfred effortlessly adds advanced search functionalities to his smolagent, enabling him to discover exclusive party ideas and services with just a few commands.
+
+Here’s how he does it:
 
 ```python
-from langchain.agents import load_tools, Tool
+from langchain.agents import load_tools
+from smolagents import CodeAgent, HfApiModel, Tool
 
 search_tool = Tool.from_langchain(load_tools(["serpapi"])[0])
 
 agent = CodeAgent(tools=[search_tool], model=model)
 
-agent.run("How many more blocks (also denoted as layers) are in BERT base encoder compared to the encoder from the architecture proposed in Attention is All You Need?")
+agent.run("Search for luxury entertainment ideas for a superhero-themed event, such as live performances and interactive experiences.")
 ```
+
+With this setup, Alfred can quickly discover luxurious entertainment options, ensuring Gotham’s elite guests have an unforgettable experience. This tool helps him curate the perfect superhero-themed event for Wayne Manor! 🎉
 
 ## Resources
 
