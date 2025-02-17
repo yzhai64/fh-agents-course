@@ -46,15 +46,27 @@ At the end of each step, if the agent includes any function calls (in `agent.ste
 
 ## Let's See Some Examples
 
-Now that we understand how a multi-step `CodeAgent` works, let's explore three examples. If you haven't install smolagents yet, you can run the following command:
+Alfred is planning a party at the Wayne family mansion and needs your help to ensure everything goes smoothly. To assist him, we'll apply what we've learned about how a multi-step `CodeAgent` operates.
+
+If you haven't installed `smolagents` yet, you can do so by running the following command:
 
 ```bash
 pip install smolagents
 ```
 
-In the first scenario, we create a code agent capable of searching the web using DuckDuckGo. To grant the agent access to this tool, we include it in the tool list when creating the agent.  
+Let's also login to the HF Hub to have access to the Inference API.
 
-For the model, we'll rely on `HfApiModel`, which provides access to Hugging Face's [Inference API](https://huggingface.co/docs/api-inference/index).  The default model is `"Qwen/Qwen2.5-Coder-32B-Instruct"` which is performant and available for fast inference, but you can select any compatible model from the hub.
+```python
+from huggingface_hub import notebook_login
+
+notebook_login()
+```
+
+### Selecting a playlist for the party using `smolagents`
+
+An important part of a successful party is the music. Alfred needs some help selecting the playlist, and we're covered using `smolagents`. We can build an agent capable of searching the web using DuckDuckGo. To give the agent access to this tool, we include it in the tool list when creating the agent.
+
+For the model, we'll rely on `HfApiModel`, which provides access to Hugging Face's [Inference API](https://huggingface.co/docs/api-inference/index). The default model is `"Qwen/Qwen2.5-Coder-32B-Instruct"`, which is performant and available for fast inference, but you can select any compatible model from the hub.
 
 Running an agent is quite straightforward:
 
@@ -63,61 +75,95 @@ from smolagents import CodeAgent, DuckDuckGoSearchTool, HfApiModel
 
 agent = CodeAgent(tools=[DuckDuckGoSearchTool()], model=HfApiModel())
 
-agent.run("How many seconds would it take for a leopard at full speed to run through Pont des Arts?")
+agent.run("Search for the best music recommendations for a party at the Wayne's mansion.")
 ```
 
-When you run this example, the output will display a trace of the workflow steps being executed. It will also print the corresponding Python code with the message:  
+When you run this example, the output will display a trace of the workflow steps being executed. It will also print the corresponding Python code with the message: 
 
 ```python
-Executing parsed code:...
+ ─ Executing parsed code: ──────────────────────────────────────────────────────────────────────────────────────── 
+  results = web_search(query="best music for a Batman party")                                                      
+  print(results)                                                                                                   
+ ───────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
 ```
 
-After a few steps, you'll likely see the final answer!
+After a few steps, you'll see the generated playlist that Alfred can use for the party! 🎵
 
-In the following example, we create a code agent that check which is the most downloaded 'text-to-video' model on the Hugging Face Hug. Here, we use the `@tool` decorator to define a custom function that acts as a tool. We'll cover tool creation in more detail later, so for now, we can simply run the code.  
+### Using a custom tool to prepare the menu
 
-As you can see, the generated tool is included in the `tools` list. 
+Now that we have selected a playlist, we need to organize the menu for the guests. Again, Alfred can take advantage of smolagents to do so. Here, we use the `@tool` decorator to define a custom function that acts as a tool. We'll cover tool creation in more detail later, so for now, we can simply run the code.
+
+As you can see, the generated tool is included in the `tools` list.
 
 ```python
-from smolagents import CodeAgent, HfApiModel, tool
-from huggingface_hub import list_models
+from smolagents import CodeAgent, tool
 
+# Tool to suggest a menu based on the occasion
 @tool
-def model_download_tool(task: str) -> str:
+def suggest_menu(occasion: str) -> str:
     """
-    This is a tool that returns the most downloaded model of a given task on the Hugging Face Hub.
-    It returns the name of the checkpoint.
-
+    Suggests a menu based on the occasion.
     Args:
-        task: The task for which to get the download count.
+        occasion: The type of occasion for the party.
     """
-    most_downloaded_model = next(iter(list_models(filter=task, sort="downloads", direction=-1)))
-    return most_downloaded_model.id
+    if occasion == "casual":
+        return "Pizza, snacks, and drinks."
+    elif occasion == "formal":
+        return "3-course dinner with wine and dessert."
+    elif occasion == "superhero":
+        return "Buffet with high-energy and healthy food."
+    else:
+        return "Custom menu for the butler."
 
-agent = CodeAgent(tools=[model_download_tool], model=HfApiModel())
+# Alfred, the butler, preparing the menu for the party
+agent = CodeAgent(tools=[suggest_menu], model=HfApiModel())
 
-agent.run(
-    "Can you give me the name of the model that has the most downloads in the 'text-to-video' task on the Hugging Face Hub?"
-)
+# Preparing the menu for the party
+agent.run("Prepare a formal menu for the party.")
 ```
 
 The agent will run for a few steps until finding the answer.
 
-For the final example, we would like to check the title of a webpage. As you can see, when creating the agent, we use `additional_authorized_imports`. Code execution enforces strict security measures, meaning that imports outside a predefined safe list are not allowed by default. However, developers can authorize additional imports by passing them as a list of strings in `additional_authorized_imports`. In this case, we need to import `requests` for requesting the url and `bs4` for scraping information from web pages.  
+The menu is ready! 🥗
+
+### Using imports from Python inside the Agent to check the when the party will be ready
+
+We now have the playlist and the menu, but we need to check something else that is really important: the time needed to prepare everything!
+
+Alfred needs to check what time everything would be ready if he started preparing the party right now, just in case they need to ask for help from other superheroes.
+
+To do so, as you can see, when creating the agent, we use `additional_authorized_imports`. Code execution enforces strict security measures, meaning that imports outside a predefined safe list are not allowed by default. However, developers can authorize additional imports by passing them as a list of strings in `additional_authorized_imports`. In this case, we need to import `datetime` to request the current time.
 
 For more details on secure code execution, check out the official [guide](https://huggingface.co/docs/smolagents/tutorials/secure_code_execution).
 
 ```python
 from smolagents import CodeAgent, HfApiModel
+import numpy as np
+import time
+import datetime
 
-agent = CodeAgent(tools=[], model=HfApiModel(), additional_authorized_imports=['requests', 'bs4'])
+agent = CodeAgent(tools=[], model=HfApiModel(), additional_authorized_imports=['datetime'])
 
-agent.run("Could you get me the title of the page at url 'https://huggingface.co/blog'?")
+agent.run(
+    """
+    Alfred needs to prepare for the party. Here are the tasks:
+    1. Prepare the drinks - 30 minutes
+    2. Decorate the mansion - 60 minutes
+    3. Set up the menu - 45 minutes
+    3. Prepare the music and playlist - 45 minutes
+
+    If we start right now, at what time will the party be ready?
+    """
+)
 ```
 
-These examples are just the beginning of what you can do with code agents. You can learn more about how to build code agents in the [smolagents documentation](https://huggingface.co/docs/smolagents).
+These examples are just the beginning of what you can do with code agents, and we're already starting to see their utility for preparing the party. You can learn more about how to build code agents in the [smolagents documentation](https://huggingface.co/docs/smolagents).
 
 smolagents specializes in agents that write and execute Python code snippets, offering sandboxed execution for security. It supports both open-source and proprietary language models, making it adaptable to various development environments.
+
+### Share an Agent to the Hub
+
+TODO
 
 ## Resources
 
