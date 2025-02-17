@@ -6,6 +6,10 @@
     title: Onboarding
   - local: unit0/discord101
     title: (Optional) Discord 101
+- title: Live 1. How the course works and Q&A
+  sections:
+  - local: communication/live1
+    title: Live 1. How the course works and Q&A
 - title: Unit 1. Introduction to Agents
   sections:
   - local: unit1/introduction
@@ -40,9 +44,9 @@
     title: Get Your Certificate
   - local: unit1/conclusion
     title: Conclusion
-- title: Unit 1.5 Fine-tuning an LLM for function-calling
+- title: Bonus Unit 1. Fine-tuning an LLM for function-calling
   sections:
-  - local: unit1.5/fine-tuning
+  - local: bonus-unit1/fine-tuning
     title: Let's fine-tune our model for fucntion calling
 - title: When the next steps are published?
   sections:
