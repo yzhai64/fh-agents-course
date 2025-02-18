@@ -1,23 +1,22 @@
-# What is Function-Calling?
+# What is Function Calling?
 
-Function-Calling is a **way for an LLM to take actions on its environment**. It has first been introduced in GPT-4, and was then reproduced in other models.
+Function-calling is a **way for an LLM to take actions on its environment**. It has first been [introduced in GPT-4](https://openai.com/index/function-calling-and-other-api-updates/), and was then reproduced in other models.
 
-Just like an Agent, Function-Calling is the capacity for the model to **take an action on its environment**. But this capacity **is learned by the model**, and relies **less on prompting than other agents techniques**.
+Just like the tools of an Agent, function-calling gives the model the capacity to **take an action on its environment**. However, the function calling capacity **is learned by the model**, and relies **less on prompting than other agents techniques**.
 
-If you remember, during the Unit 1, the Agent **didn't learn the Tools**, we just provided the list, and we relied on the fact that the model **was able to generalize on defining a plan using these Tools**. 
+During the Unit 1, the Agent **didn't learn to use the Tools**, we just provided the list, and we relied on the fact that the model **was able to generalize on defining a plan using these Tools**. 
 
-While here, **with Function-Calling, the Agent is fine-tuned (trained) on using these Tools**.
+While here, **with function-calling, the Agent is fine-tuned (trained) to use Tools**.
 
+## How does the model "learn" to take an action?
 
-## How does the model "learn" to take action?
-
-In Unit 1, the general workflow of an agent. When the user give some tools to the agent and prompt it with a query, the model will do a cycle of :
+In Unit 1, we explored the general workflow of an agent. Once the the user has given some tools to the agent and prompted it with a query, the model will cycle through:
 
 1. *Think* : What action(s) do I need to take in order to fulfill the objective.
 2. *Act* : Format the action with the correct parameter and stop the generation.
 3. *Observe* : Get back the result from the execution.
 
-In a "normal" conversation with a model through an API, the conversation is an alternance of user and assistant messages:
+In a "typical" conversation with a model through an API, the conversation will alternate between user and assistant messages like this:
 
 ```python
 conversation = [
@@ -27,13 +26,12 @@ conversation = [
 ]
 ```
 
-Function-Calling is adding **new roles to that conversation** ! 
+Function-calling is brings **new roles to the conversation**! 
 
 1. One new role for an **Action** 
 2. One new role for an **Observation** 
 
-If we take as an example the [Mistral API](https://docs.mistral.ai/capabilities/function_calling/), here what it looks like :
-
+If we take the [Mistral API](https://docs.mistral.ai/capabilities/function_calling/) as an example, it would look like this:
 
 ```python
 conversation = [
@@ -63,7 +61,7 @@ conversation = [
 
 > ... But you said there's a new role for function calls ?
 
-**Yes and no**, in this case and in a lot of different APIs, the model will format the action to take inside an "assistant" message but it will be inside some new **special tokens**.
+**Yes and no**, in this case and in a lot of other APIs, the model formats the action to take as an "assistant" message. The chat template will then represent this as **special tokens** for function-calling.
 
 - `[AVAILABLE_TOOLS]` – Start the list of available tools  
 - `[/AVAILABLE_TOOLS]` – End the list of available tools  
@@ -71,9 +69,9 @@ conversation = [
 - `[TOOL_RESULTS]` – "Observe" the result of the action  
 - `[/TOOL_RESULTS]` – End of the observation (i.e., the model can decode again)
 
-We'll talk again about Function-Calling in this course, but if you want to dive deeper you can check [this excellent documentation section](https://docs.mistral.ai/capabilities/function_calling/)
+We'll talk again about function-calling in this course, but if you want to dive deeper you can check [this excellent documentation section](https://docs.mistral.ai/capabilities/function_calling/)
 
 ---
-Now that we learned what is Function-Calling is and how it works, let's **add some Function-Calling capacities to a model that do not have those capacities yet**: **"google/gemma-2-2b-it"** by appending some new special tokens to the model.
+Now that we learned what function-calling is and how it works, let's **add some function-calling capabilities to a model that do not have those capacities yet**: **"google/gemma-2-2b-it"** by appending some new special tokens to the model.
 
-To be able to do that, **we need first to understand what's fine-tuning and LoRA**.
+To be able to do that, **we need first to understand fine-tuning and LoRA**. 
