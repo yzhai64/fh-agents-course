@@ -14,51 +14,13 @@ This makes the `QueryEngine` **the most relevant component for building agentic 
 Just as Alfred needs to search through your household information to be helpful, any agent needs a way to find and understand relevant data.
 The `QueryEngine` provides exactly this capability.
 
-**Many of the components rely on integrations with other libraries**. So, before using them, we first need to learn how to install these dependencies.
-
-## Integrations
-
-### Installation
-
-LlamaIndex installation instructions are available as a well structured **overview in their [GitHub repository](https://github.com/run-llama/llama_index/tree/main/llama-index-integrations)**.
-This might be a bit overwhelming at first, but the **installation commands generally follow an easy to remember format**:
-
-```bash
-pip install llama-index-{component-type}-{framework-name}
-```
-
-Let's try install the depencies for an LLM and embedding component using Hugging Face inference API as framework.
-
-```bash
-pip install llama-index-llms-huggingface-api llama-index-embeddings-huggingface-api
-```
-
-### Usage
-
-Once installed, we can use the component in our workflow. The usage patterns have been outlined in [the documentation](https://docs.llamaindex.ai/en/stable/module_guides/) but framework specific versions are also shown in the [GitHub repository](https://github.com/run-llama/llama_index/tree/main/llama-index-integrations).
-Underneath, we can see an example of the usage of **the Hugging Face inference API for an LLM component**.
-
-```python
-from llama_index.llms.huggingface_api import HuggingFaceInferenceAPI
-
-llm = HuggingFaceInferenceAPI(
-    model_name="meta-llama/Meta-Llama-3-8B-Instruct",
-    temperature=0.7,
-    max_tokens=100,
-    token="hf_xxx",
-)
-
-llm.complete("Hello, how are you?")
-# I am good, how can I help you today?
-```
-
-Now, let's dive a bit deeper into the components and see how you can use them to create a RAG pipeline.
+Now, let's dive a bit deeper into the components and see how you can **combine components to create a RAG pipeline.**
 
 ## Creating a RAG pipeline using components
 
 LLMs are trained on enormous bodies of data to learn general knowledge. However, they may not be trained on relevant and up-to-date data. Retrieval-Augmented Generation (RAG) solves this problem by adding your data to the data LLMs already have access to.
 
-![Basic RAG Pipeline](https://docs.llamaindex.ai/en/stable/_static/getting_started/basic_rag.png)
+![RAG](https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit2/llama-hub.png)
 
 There are five key stages within RAG, which in turn will be a part of most larger applications you build. These are:
 
@@ -81,9 +43,9 @@ There are three main ways to do to load data into LlamaIndex:
 
 <Tip>Get familiar with [LlamaHub](https://docs.llamaindex.ai/en/stable/module_guides/loading/connector/) loaders and [LlamaParse](https://docs.llamaindex.ai/en/stable/module_guides/loading/connector/llama_parse/) parser for more complex data sources.</Tip>
 
-**The easiest way to load data is with `SimpleDirectoryReader`.** +
-It can load different types of files from a folder and turn them into `Document` objects that LlamaIndex can work with.
-Underneath, we will use the `SimpleDirectoryReader` to load the data from a folder.
+**The simplest way to load data is with `SimpleDirectoryReader`.**
+This versatile component can load various file types from a folder and convert them into `Document` objects that LlamaIndex can work with.
+Let's see how we can use `SimpleDirectoryReader` to load data from a folder.
 
 ```python
 from llama_index.core import SimpleDirectoryReader
@@ -95,9 +57,10 @@ documents = reader.load_data()
 After loading our documents, we need to break them into smaller pieces called `Node` objects.
 A `Node` is just a chunk of text from the original document that's easier for the AI to work with, while it still has references to the original `Document` object.
 
-To create these nodes, we use the `IngestionPipeline` along with two simple transformations:
-1. `SentenceSplitter`: Breaks the document into smaller pieces of text by splitting it into sentences
-2. `HuggingFaceInferenceAPIEmbedding`: Turns each piece into numbers (embeddings) that the LLM can understand.
+The `IngestionPipeline` helps us create these nodes through two key transformations.
+1. `SentenceSplitter` breaks down documents into manageable chunks by splitting them at natural sentence boundaries.
+2. `HuggingFaceInferenceAPIEmbedding` converts each chunk into numerical embeddings - vector representations that capture the semantic meaning in a way AI can process efficiently.
+2. `HuggingFaceInferenceAPIEmbedding` converts each chunk into numerical embeddings - vector representations that capture the semantic meaning in a way AI can process efficiently.
 
 This process helps us organise our documents in a way that's more useful for searching and analysis.
 
@@ -136,12 +99,12 @@ The various data storage types that LlamaIndex supports are:
 
 > An overview of the different storage types and their integrations can be found in the [LlamaIndex documentation](https://docs.llamaindex.ai/en/stable/module_guides/storing/).
 
-We can set up a `StorageContext` ourselves, or let LlamaIndex create one for us when creating a search index.
-When we save the `StorageContext`, it creates files that store all the important information about our data, which makes it easy to persist and load later.
+LlamaIndex makes it easy to set up storage - we can either configure a `StorageContext` manually or let LlamaIndex handle it automatically when creating a search index.
+When we save the `StorageContext`, it neatly organizes all our data into files that we can easily access later.
 
-To retrieve relevant nodes later, **we'll need to compare the input query against all our nodes.**
-This means we need to embed both the query and nodes in the same vector space.
-That's why we create an index using `VectorStoreIndex` and provide it with the same embedding model we used during ingestion.
+For searching through our nodes effectively, we need a way to compare queries against them.
+This is where vector embeddings come in - by embedding both the query and nodes in the same vector space, we can find relevant matches.
+The `VectorStoreIndex` handles this for us, using the same embedding model we used during ingestion to ensure consistency.
 
 Let's see how to create this index and save it to your computer:
 
@@ -202,16 +165,15 @@ Language model won't always perform in predictable ways, so we can't be sure tha
 
 ### Evaluation and observability
 
-LlamaIndex has built-in tools to evaluate the quality of the answer.
-These evaluators use LLMs to judge and evaluate the quality of the answer according various criteria.
-There are three main evaluators:
+LlamaIndex provides built-in evaluation tools to assess response quality.
+These evaluators leverage LLMs to analyze responses across different dimensions.
+Let's look at the three main evaluators available:
 
 - `FaithfulnessEvaluator`: Evaluates the faithfulness of the answer by checking if the answer is supported by the context.
 - `AnswerRelevancyEvaluator`: Evaluates the relevance of the answer by checking if the answer is relevant to the question.
 - `CorrectnessEvaluator`: Evaluates the correctness of the answer by checking if the answer is correct.
 
 ```python
-from llama_index.llms.openai import OpenAI
 from llama_index.core.evaluation import FaithfulnessEvaluator
 
 query_engine = # from previous section
@@ -226,17 +188,20 @@ eval_result = evaluator.evaluate_response(response=response)
 print(str(eval_result.passing))
 ```
 
-Even if we don't directly evaluate, it is still important to understand what is going on.
-
-Evaluation in LlamaIndex relies on a separate platform LlamaTrace. To use it we will need to create an account on LlamaTrace: https://llamatrace.com/login. Create an API key and put it in the PHOENIX_API_KEY variable below.
+Even without direct evaluation, we can gain insights into how our system is performing through observability.
+This is especially useful when we are building more complex workflows and want to understand how each component is performing.
 
 <details>
-<summary>install LlamaTrace</summary>
+<summary>Install LlamaTrace</summary>
 As introduced in the [section on components](what-are-components-in-llama-index.mdx), we can install the LlamaTrace integration with the following command:
 
 ```python
 pip install -U llama-index-callbacks-arize-phoenix
 ```
+Additionally, we need to set the `PHOENIX_API_KEY` environment variable to our LlamaTrace API key. We can get this by:
+- Creating an account at [LlamaTrace](https://llamatrace.com/login)
+- Generating an API key in your account settings
+- Using the API key in the code below to enable tracing
 </details>
 
 ```python
