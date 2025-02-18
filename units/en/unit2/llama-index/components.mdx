@@ -1,14 +1,23 @@
 # What are components in LlamaIndex?
 
-Remember Alfred, our helpful butler agent from Unit 1? To assist us effectively, Alfred needs to understand our requests and find relevant information to help complete tasks. This is where LlamaIndex's components come in.
+Remember Alfred, our helpful butler agent from Unit 1?
+To assist us effectively, Alfred needs to understand our requests and **find relevant information to help complete tasks.**
+This is where LlamaIndex's components come in.
 
-While LlamaIndex has many components, we'll focus specifically on the `QueryEngine` component. Why? Because it can be used as a tool for an agent.
+While LlamaIndex has many components, **we'll focus specifically on the `QueryEngine` component.**
+Why? Because it can be used as a Retrieval-Augmented Generation (RAG) tool for an agent.
+
+LLMs are trained on enormous bodies of data to learn general knowledge.
+However, they may not be trained on relevant and up-to-date data.
+RAG solves this problem by finding and retrieving relevant information from your data and forward that to the LLM.
 
 Think about how Alfred works:
 
 1. You ask Alfred to help plan a dinner party
 2. Alfred needs to check your calendar, dietary preferences, and past successful menus
-3. The `QueryEngine` helps Alfred find and understand this information through RAG (Retrieval Augmented Generation)
+3. The `QueryEngine` helps Alfred find this information and use it to plan the dinner party
+
+![RAG](https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit2/rag.png)
 
 This makes the `QueryEngine` **the most relevant component for building agentic RAG workflows** in LlamaIndex.
 Just as Alfred needs to search through your household information to be helpful, any agent needs a way to find and understand relevant data.
@@ -17,10 +26,6 @@ The `QueryEngine` provides exactly this capability.
 Now, let's dive a bit deeper into the components and see how you can **combine components to create a RAG pipeline.**
 
 ## Creating a RAG pipeline using components
-
-LLMs are trained on enormous bodies of data to learn general knowledge. However, they may not be trained on relevant and up-to-date data. Retrieval-Augmented Generation (RAG) solves this problem by adding your data to the data LLMs already have access to.
-
-![RAG](https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit2/llama-hub.png)
 
 There are five key stages within RAG, which in turn will be a part of most larger applications you build. These are:
 
