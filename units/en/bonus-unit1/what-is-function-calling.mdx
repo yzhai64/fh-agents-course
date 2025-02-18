@@ -2,7 +2,7 @@
 
 Function-Calling is a **way for an LLM to take actions on its environment**. It has first been introduced in GPT-4, and was then reproduced in other models.
 
-Just like an Agent, Function-Calling is the capacity for the model to **take an action on it's environment**. But this capacity **is learned by the model**, and relies **less on prompting than other agents techniques**.
+Just like an Agent, Function-Calling is the capacity for the model to **take an action on its environment**. But this capacity **is learned by the model**, and relies **less on prompting than other agents techniques**.
 
 If you remember, during the Unit 1, the Agent **didn't learn the Tools**, we just provided the list, and we relied on the fact that the model **was able to generalize on defining a plan using these Tools**. 
 
@@ -11,13 +11,13 @@ While here, **with Function-Calling, the Agent is fine-tuned (trained) on using 
 
 ## How does the model "learn" to take action?
 
-In Unit 1, the general workflow of an agent. When the user give some tools to thee agent and prompt it with a query, the model will do a cycle of :
+In Unit 1, the general workflow of an agent. When the user give some tools to the agent and prompt it with a query, the model will do a cycle of :
 
 1. *Think* : What action(s) do I need to take in order to fulfill the objective.
 2. *Act* : Format the action with the correct parameter and stop the generation.
-3. *Observe¨ : Get back the result from the execution.
+3. *Observe* : Get back the result from the execution.
 
-in a "normal" conversation with a model through an API, the conversation is an alternance of user and assistant messages:
+In a "normal" conversation with a model through an API, the conversation is an alternance of user and assistant messages:
 
 ```python
 conversation = [
@@ -61,7 +61,7 @@ conversation = [
 ]
 ```
 
-> But you said there's a new role for function calls ?
+> ... But you said there's a new role for function calls ?
 
 **Yes and no**, in this case and in a lot of different APIs, the model will format the action to take inside an "assistant" message but it will be inside some new **special tokens**.
 
@@ -74,6 +74,6 @@ conversation = [
 We'll talk again about Function-Calling in this course, but if you want to dive deeper you can check [this excellent documentation section](https://docs.mistral.ai/capabilities/function_calling/)
 
 ---
-Now that we learned what is Function-Calling and how it works, let's **add some Function-Calling capacities to a model that do not have those capacities yet**: **"google/gemma-2-2b-it"** by appending some new special tokens to the model.
+Now that we learned what is Function-Calling is and how it works, let's **add some Function-Calling capacities to a model that do not have those capacities yet**: **"google/gemma-2-2b-it"** by appending some new special tokens to the model.
 
 To be able to do that, **we need first to understand what's fine-tuning and LoRA**.
