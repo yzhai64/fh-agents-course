@@ -82,7 +82,7 @@ The output of the tool is another integer number that we can describe like this:
 
 All of these details are important. Let's put them together in a text string that describes our tool for the LLM to understand.
 
-```
+```text
 Tool Name: calculator, Description: Multiply two integers., Arguments: a: int, b: int, Outputs: int
 ```
 
@@ -124,7 +124,7 @@ Note the `@tool` decorator before the function definition.
 
 With the implementation we'll see next, we will be able to retrieve the following text automatically from the source code via the `to_string()` function provided by the decorator:
 
-```
+```text
 Tool Name: calculator, Description: Multiply two integers., Arguments: a: int, b: int, Outputs: int
 ```
 
@@ -272,7 +272,7 @@ print(calculator.to_string())
 
 And we can use the `Tool`'s `to_string` method to automatically retrieve a text suitable to be used as a tool description for an LLM:
 
-```
+```text
 Tool Name: calculator, Description: Multiply two integers., Arguments: a: int, b: int, Outputs: int
 ```
 
