@@ -1,18 +1,40 @@
 # Introduction
 
-<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/bonus-unit1/thumbnail.jpg" alt="Bonus Unit 1 Thumbnail"/>
+![Bonus Unit 1 Thumbnail](https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/bonus-unit1/thumbnail.jpg)
 
-Welcome to this first bonus unit where you'll learn to **fine-tune a LLM model for function-calling**.
+Welcome to this first **bonus unit**, where you'll learn to **fine-tune a Large Language Model (LLM)** for function-calling. 
+In the realm of LLMs, function-calling is quickly becoming a *must-know* technique. It trains the model to **take action** and **observations** directly from the training phase, making your AI model more powerful.
 
-This unit is optional and imply you already have skills using Transformer library.
+> **When should I do this Bonus-unit?**
+> This section is **optional** and is more advanced than Unit 1, so don't hesitate to either do this unit later or revisit it when your knowledge gained from this course improved**.   
+> Rest assured, this bonus unit is designed to be **self-contained**, so we'll walk you through every core concept of fine-tuning a model for function-calling—even if you haven’t tinkered with the inner workings of fine-tuning in a while.
 
-If it's not the case, you should check first:
+---
 
+## What You’ll Learn
 
+1. **Function Calling**  
+   How modern LLMs strucutre their conversations effectively letting them trigger **tools**.
 
+2. **LoRA (Low-Rank Adaptation)**  
+   A **lightweight and efficient** fine-tuning method that cuts down on computational and storage overhead. LoRA makes training large models *faster, cheaper, and easier* to deploy.
 
-You'll learn first what is function-calling.
+3. **The Thought → Act → Observe Cycle** in Function Calling models  
+   A simple yet powerful approach for structuring how your model decides when (and how) to call functions, track intermediate steps, and interpret the results from external tools or APIs.
 
-And then, you're going to fine-tune an LLM for function calling.
+4. **New Special Tokens**  
+   We’ll introduce **special markers** that help the model distinguish between:
+   - Internal “chain-of-thought” reasoning  
+   - Outgoing function calls  
+   - Responses coming back from external tools
 
+---
 
+By the end of this unit, you’ll be able to:
+
+- **Understand** the inner working of APIs when it comes to tools.  
+- **Fine-tune** a model using LoRA techniques.  
+- **Implement** and **modify** the Thought → Act → Observe cycle to create robust and maintainable function-calling workflows.  
+- **Design and utilize** special tokens to seamlessly separate the model’s internal reasoning from its external actions.
+
+Let’s dive into **function-calling**!

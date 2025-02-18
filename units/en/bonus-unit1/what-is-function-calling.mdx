@@ -1,1 +1,62 @@
 # What is function-calling?
+
+Function-calling is a way for an LLM to take actions on it's environment. It has first been introduced in gpt-4, and was then reproduced in other models.
+
+Just like an agent, function calling is the capacity for the model to take an action on it's environment. But this capacity is learned by the model, and relies less on prompting than other agents techniques.
+
+## How does the model "learn" to take action ?
+In Unit 1, the general workflow of an agent. When the user give some tools to thee agent and prompt it with a query, the model will do a cycle of :
+1) think : What action(s) do I need to take in order to fulfill the objective.
+2) Act : Format the action with the correct parameter and stop the generation.
+3) Observe : Get back the result from the execution.
+
+in a "normal" conversation with a model through an API, the conversation is an alternance of user and assistant messages :
+
+```python
+conversation = [
+    {"role": "user", "content": "I need help with my order"},
+    {"role": "assistant", "content": "I'd be happy to help. Could you provide your order number?"},
+    {"role": "user", "content": "It's ORDER-123"},
+]
+```
+
+Function-calling is adding **new roles to that conversation** ! 
+
+1) One new role for an **action** 
+2) One new role for an **observation** 
+
+If we take as an example the mistral api, here what it looks like :
+conversation = [
+    {
+        "role": "user",
+        "content": "What's the status of my transaction T1001?"
+    },
+    {
+        "role": "assistant",
+        "content": "",
+        "function_call": {
+            "name": "retrieve_payment_status",
+            "arguments": "{\"transaction_id\": \"T1001\"}"
+        }
+    },
+    {
+        "role": "tool",
+        "name": "retrieve_payment_status",
+        "content": "{\"status\": \"Paid\"}"
+    },
+    {
+        "role": "assistant",
+        "content": "Your transaction T1001 has been successfully paid."
+    }
+]
+
+> "But you said there's a new role for function calls ?"
+
+Yes and no, in this case and in a lot of different API, the model will format the action to take inside an "assistant" message but it will be inside some new **special tokens**.
+- `[AVAILABLE_TOOLS]` – Start the list of available tools  
+- `[/AVAILABLE_TOOLS]` – End the list of available tools  
+- `[TOOL_CALLS]` – Make a call to a tool (i.e., take an "Action")  
+- `[TOOL_RESULTS]` – "Observe" the result of the action  
+- `[/TOOL_RESULTS]` – End of the observation (i.e., the model can decode again)  
+
+We will now learn how to add some function calling capacities to a model that do not have those capacities yet : **"google/gemma-2-2b-it"** by appending some new tokens to the model.
