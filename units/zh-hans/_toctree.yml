@@ -10,12 +10,12 @@
   sections:
   - local: communication/live1
     title: 直播1. 课程运作方式和问答
-- title: 第1单元. 代理简介
+- title: 第1单元. 智能体简介
   sections:
   - local: unit1/introduction
     title: 简介
   - local: unit1/what-are-agents
-    title: 什么是代理？
+    title: 什么是智能体？
   - local: unit1/quiz1
     title: 快速测验1
   - local: unit1/what-are-llms

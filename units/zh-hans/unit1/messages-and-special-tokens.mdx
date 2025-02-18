@@ -2,7 +2,7 @@
 
 现在我们了解了LLMs是如何工作的，让我们来看看**它们如何通过聊天模板 (chat templates) 构建生成内容**。
 
-就像使用ChatGPT一样，用户通常通过聊天界面与代理交互。因此，我们需要理解LLMs如何管理聊天。
+就像使用ChatGPT一样，用户通常通过聊天界面智能体交互。因此，我们需要理解LLMs如何管理聊天。
 
 > **问**: 但是...当我与ChatGPT/Hugging Chat交互时，我是使用聊天消息进行对话，而不是单个提示序列
 >
@@ -16,7 +16,7 @@
 </figcaption>
 </figure>
 
-这就是聊天模板的用武之地。它们充当**对话消息（用户和助手轮次）与所选LLM的特定格式要求之间的桥梁**。换句话说，聊天模板构建了用户和代理之间的通信，确保每个模型——尽管有其独特的特殊令牌——都能接收到正确格式化的提示。
+这就是聊天模板的用武之地。它们充当**对话消息（用户和助手轮次）与所选LLM的特定格式要求之间的桥梁**。换句话说，聊天模板构建了用户智能体之间的通信，确保每个模型——尽管有其独特的特殊令牌——都能接收到正确格式化的提示。
 
 我们再次谈到特殊令牌 (special tokens)，因为它们是模型用来界定用户和助手轮次开始和结束的标记。正如每个LLM使用自己的EOS（序列结束）令牌一样，它们也对对话中的消息使用不同的格式规则和分隔符。
 
@@ -48,11 +48,11 @@ system_message = {
 }
 ```
 
-Alfred将表现得像个叛逆的代理 😎：
+Alfred将表现得像个叛逆的智能体 😎：
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/rebel-alfred.jpg" alt="Rebel Alfred"/>
 
-在使用代理时，系统消息还**提供有关可用工具的信息，为模型提供如何格式化要采取的行动的指令，并包括关于思考过程应如何分段的指南**。
+在使用智能体时，系统消息还**提供有关可用工具的信息，为模型提供如何格式化要采取的行动的指令，并包括关于思考过程应如何分段的指南**。
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/alfred-systemprompt.jpg" alt="Alfred System Prompt"/>
 
@@ -218,7 +218,7 @@ rendered_prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_ge
 
 > 当你以ChatML格式与消息交互时，这个`apply_chat_template()`函数将在你的API后端使用。
 
-现在我们已经看到LLMs如何通过聊天模板构建它们的输入，让我们探索代理如何在它们的环境中行动。
+现在我们已经看到LLMs如何通过聊天模板构建它们的输入，让我们探智能体如何在它们的环境中行动。
 
 它们这样做的主要方式之一是使用工具 (Tools)，这些工具扩展了AI模型在文本生成之外的能力。
 
