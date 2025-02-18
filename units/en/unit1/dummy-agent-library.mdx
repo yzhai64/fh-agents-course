@@ -28,7 +28,7 @@ In the Hugging Face ecosystem, there is a convenient feature called Serverless A
 import os
 from huggingface_hub import InferenceClient
 
-## You need a token from https://hf.co/settings/tokens. If you run this on Google Colab, you can set it up in the "settings" tab under "secrets". Make sure to call it "HF_TOKEN"
+## You need a token from https://hf.co/settings/tokens, ensure that you select 'read' as the token type. If you run this on Google Colab, you can set it up in the "settings" tab under "secrets". Make sure to call it "HF_TOKEN"
 os.environ["HF_TOKEN"]="hf_xxxxxxxxxxxxxx"
 
 client = InferenceClient("meta-llama/Llama-3.2-3B-Instruct")
