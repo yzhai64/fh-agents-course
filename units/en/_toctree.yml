@@ -51,7 +51,7 @@
   - local: bonus-unit1/what-is-function-calling
     title: What is Function Calling?
   - local: bonus-unit1/fine-tuning
-    title: Let's fine-tune our model for function calling
+    title: Let's Fine-Tune your model for Function-Calling
   - local: bonus-unit1/conclusion
     title: Conclusion
 - title: When the next steps are published?

@@ -1,31 +1,53 @@
-# Fine-tuning
-## How do we train our model for function-calling ?
+# Let's Fine-Tune your model for Function-Calling
 
-> Answer : The necessicity for this is **data**
+We're now ready to fine-tune our first model for Function-Calling 🔥.
 
-A model training can be seen in 3 steps :
-- 1) The model is pretrained on a large quantity of data. The output of that step is a **pre-trained model**.
-- 2) The model can be **fine-tuned** on instruction following either by the model creator or by an individual ( or both ).
-- 3) The model can be **aligned** to the creator's preference.
+## How do we train our model for Function-Calling ?
 
-Usually a full fledged product like Gemini or mistral went throught all 3 steps while the models you can find on Hugging Face have passed by one or more steps of this training.
+> Answer : We need **data**
 
-In this tutorial, we will build a function-calling model based on **"google/gemma-2-2b-it"**. 
+A model training can be divided into 3 steps :
 
-The base model is "google/gemma-2-2b". The google team then fine-tuned the base model on instruction following : resulting in **"google/gemma-2-2b-it"**. In this case we will take **"google/gemma-2-2b-it"** as base and not the base model because the prior fine-tuning it has been through is important for our use-case.
+1. **The model is pretrained on a large quantity of data**. The output of that step is a **pre-trained model**. For instance [google/gemma-2-2b](https://huggingface.co/google/gemma-2-2b). It's a base model and only knows how **to predict the next token without good instruction following capacities**.
 
-Since we want to interract with our model throught conversations in messages, starting from the base model would requiere more training in order to learn instruction following, chat AND function-calling.
-By taking the instruct-tuned model as a base, we minimize the amount of information that our model should learn.
+2. The model then, to be useful in chat context needs to be **fine-tuned** on instructions following. In this step, it can be trained by the model creators, open-source community or both. For instance [google/gemma-2-2b-it](https://huggingface.co/google/gemma-2-2b-it) 
 
-### LoRA  (Low-Rank Adaptation of Large Language Models) :
-LoRA (Low-Rank Adaptation of Large Language Models) is a popular and lightweight training technique that significantly reduces the number of trainable parameters. It works by inserting a smaller number of new weights as an adapter into the model and only these are trained. 
+3. The model can be then **aligned** to the creator's preference. For instance, a customer chat model that must never be impolite to the customer.
+
+Usually a complete product like Gemini or Mistral **went throught all 3 steps** while the models you can find on Hugging Face have passed by one or more steps of this training.
+
+In this tutorial, we will build a Function-Calling model based on[google/gemma-2-2b-it](https://huggingface.co/google/gemma-2-2b-it) 
+
+The base model is [google/gemma-2-2b](https://huggingface.co/google/gemma-2-2b). 
+
+The Google Team then fine-tuned the base model on instruction following : resulting in **"google/gemma-2-2b-it"**. 
+
+In this case we will take **"google/gemma-2-2b-it"** as base and **not the base model because the prior fine-tuning it has been through is important for our use-case**.
+
+Since we want to interact with our model through conversations in messages, starting from the base model **would require more training in order to learn instruction following, chat AND Function-Calling**.
+
+By taking the instruct-tuned model as a base, **we minimize the amount of information that our model should learn**.
+
+## LoRA  (Low-Rank Adaptation of Large Language Models)
+
+LoRA (Low-Rank Adaptation of Large Language Models) is a popular and lightweight training technique that significantly **reduces the number of trainable parameters**.
+
+It works by **inserting a smaller number of new weights as an adapter into the model and only these are trained**. 
 This makes training with LoRA much faster, memory-efficient, and produces smaller model weights (a few hundred MBs), which are easier to store and share. 
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/blog_multi-lora-serving_LoRA.gif" alt="LoRA inference" width="50%"/>
 
-LoRA works by adding pairs of rank decomposition matrices to transformer layers, typically focusing on linear layers.
-During training, we will "freeze" the base model and will only updates the weights of those newly added adapters. By doing so, the number of trainableparamters considerably drops as we now only need to update a fraction of the initial weights of the model.
+LoRA works by adding pairs of rank decomposition matrices to Transformer layers, typically focusing on linear layers.
+During training, we will "freeze" the base model and will only updates the weights of those newly added adapters. 
+
+By doing so, the number of trainableparamters considerably drops as we now only need to update a fraction of the initial weights of the model.
+
 During inference, the input is passed into the adapter and the base model or these adapter weights can be merged with the base model, resulting in no additional latency overhead. 
 
 LoRA is particularly useful for adapting **large** language models to specific tasks or domains while keeping resource requirements manageable.
+
 This helps reduce drastically the memory requiered to train a model.
+
+If you want to dive more into how LoRA works, you should check this [tutorial](https://www.datacamp.com/tutorial/mastering-low-rank-adaptation-lora-enhancing-large-language-models-for-efficient-adaptation).
+
+
