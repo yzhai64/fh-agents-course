@@ -6,6 +6,10 @@
     title: Onboarding
   - local: unit0/discord101
     title: (Optional) Discord 101
+- title: Live 1. How the course works and Q&A
+  sections:
+  - local: communication/live1
+    title: Live 1. How the course works and Q&A
 - title: Unit 1. Introduction to Agents
   sections:
   - local: unit1/introduction
@@ -40,7 +44,7 @@
     title: Get Your Certificate
   - local: unit1/conclusion
     title: Conclusion
-- title: When the next steps are published?
+- title: When will the next units be published?
   sections:
   - local: communication/next-units
     title: Next Units

@@ -1,4 +1,4 @@
-# [The Hugging Face Agents Course](https://hf.co/learn/agents-course)
+# <a href="https://hf.co/learn/agents-course" target="_blank">The Hugging Face Agents Course</a>
 
 If you like the course, **don't hesitate to ⭐ star this repository**. This helps us to **make the course more visible 🤗**.
 
@@ -6,11 +6,11 @@ If you like the course, **don't hesitate to ⭐ star this repository**. This hel
 
 ## Content
 
-The course is divided into 5 units. That will take you from **the basics of agents to a final assignment with a benchmark**.
+The course is divided into 5 units. These will take you from **the basics of agents to a final assignment with a benchmark**.
 
-Sign up here (it's free) 👉 https://bit.ly/hf-learn-agents
+Sign up here (it's free) 👉 <a href="https://bit.ly/hf-learn-agents" target="_blank">https://bit.ly/hf-learn-agents</a>
 
-You can access the course here 👉 https://hf.co/learn/agents-course
+You can access the course here 👉 <a href="https://hf.co/learn/agents-course" target="_blank">https://hf.co/learn/agents-course</a>
 
 | Unit | Topic                          | Description                                                                 |
 |------|--------------------------------|-----------------------------------------------------------------------------|
@@ -28,11 +28,11 @@ You can access the course here 👉 https://hf.co/learn/agents-course
 
 ## Contribution Guidelines
 
-If you want to contribute to this course, you're welcome to do so. Feel free to open an issue or join the discussion in the [Discord](https://discord.gg/GC7zFgvN). For specific contributions, here are some guidelines:
+If you want to contribute to this course, you're welcome to do so. Feel free to open an issue or join the discussion in the [Discord](https://discord.gg/UrrTSsSyjb). For specific contributions, here are some guidelines:
 
 ### Small typo and grammar fixes
 
-If you find a small typo or grammar mistake, please fix it yourself and submit a pull request. This is very helpful for the students.
+If you find a small typo or grammar mistake, please fix it yourself and submit a pull request. This is very helpful for students.
 
 ### New unit
 
@@ -50,7 +50,7 @@ We are actively working on the units and if you want to join us, we will need to
 | 3    | 🗓️ Planned    | If you're experienced with agents, we're open to help with use cases |
 | 4    | 🚧 In Progress | Work is underway, no need for help with integration                         |
 
-If in doubt, join the discussion in the [Discord](https://discord.gg/GC7zFgvN).
+If in doubt, join the discussion in the [Discord](https://discord.gg/UrrTSsSyjb).
 
 
 ## Citing the project

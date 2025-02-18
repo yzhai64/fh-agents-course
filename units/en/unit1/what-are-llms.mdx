@@ -6,7 +6,7 @@ In the previous section we learned that each Agent needs **an AI Model at its co
 
 Now we will learn what LLMs are and how they power Agents.
 
-This section offers a concise technical explanation of the use of LLMs. If you want to dive deeper, you can check our [free Natural Language Processing Course](https://huggingface.co/learn/nlp-course/chapter1/1) to understand the fundamentals on which LLMs are built.
+This section offers a concise technical explanation of the use of LLMs. If you want to dive deeper, you can check our <a href="https://huggingface.co/learn/nlp-course/chapter1/1" target="_blank">free Natural Language Processing Course</a>.
 
 ## What is a Large Language Model?
 
@@ -39,7 +39,7 @@ There are 3 types of transformers :
 3. **Seq2Seq (Encoder–Decoder)**  
    A sequence-to-sequence Transformer _combines_ an encoder and a decoder. The encoder first processes the input sequence into a context representation, then the decoder generates an output sequence.
 
-   - **Example**: T5, BART, 
+   - **Example**: T5, BART 
    - **Use Cases**:  Translation, Summarization, Paraphrasing
    - **Typical Size**: Millions of parameters
 
@@ -119,7 +119,9 @@ The forms of special tokens are highly diverse across model providers.
 </table>
 
 <Tip>
+
 We do not expect you to memorize these special tokens, but it is important to appreciate their diversity and the role they play in the text generation of LLMs. If you want to know more about special tokens, you can check out the configuration of the model in its Hub repository. For example, you can find the special tokens of the SmolLM2 model in its <a href="https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct/blob/main/tokenizer_config.json">tokenizer_config.json</a>.
+
 </Tip>
 
 ## Understanding next token prediction.
@@ -210,6 +212,12 @@ We will explore these steps in more detail in this Unit, but for now, what you n
 
 That was a lot of information! We've covered the basics of what LLMs are, how they function, and their role in powering AI agents. 
 
-If you'd like to dive even deeper into the fascinating world of language models and natural language processing, don't hesitate to check out our [free NLP course](https://huggingface.co/learn/nlp-course/chapter1/1).
+If you'd like to dive even deeper into the fascinating world of language models and natural language processing, don't hesitate to check out our <a href="https://huggingface.co/learn/nlp-course/chapter1/1" target="_blank">free NLP course</a>.
 
 Now that we understand how LLMs work, it's time to see **how LLMs structure their generations in a conversational context**.
+
+To run <a href="https://huggingface.co/agents-course/notebooks/blob/main/dummy_agent_library.ipynb" target="_blank">this notebook</a>, **you need a Hugging Face token** that you can get from <a href="https://hf.co/settings/tokens" target="_blank">https://hf.co/settings/tokens</a>.
+
+For more information on how to run Juniper Notebooks, checkout <a href="https://huggingface.co/docs/hub/notebooks">Jupyter Notebooks on the Hugging Face Hub</a>.
+
+You also need to request access to <a href="https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct" target="_blank">the Meta Llama models</a>
