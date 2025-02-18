@@ -49,7 +49,7 @@
   - local: bonus-unit1/introduction
     title: Introduction
   - local: bonus-unit1/what-is-function-calling
-    title: What is function calling?
+    title: What is Function Calling?
   - local: bonus-unit1/fine-tuning
     title: Let's fine-tune our model for function calling
   - local: bonus-unit1/conclusion
