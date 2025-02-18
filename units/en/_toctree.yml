@@ -47,7 +47,7 @@
 - title: Unit 2.1 The smolagents framework
   sections:
   - local: unit2/introduction
-    title: Introduction
+    title: Frameworks for AI Agents
   - local: unit2/smolagents/introduction
     title: Introduction to smolagents
   - local: unit2/smolagents/why_use_smolagents
@@ -62,8 +62,6 @@
     title: Retrieval Agents
   - local: unit2/smolagents/multi_agent_systems
     title: Multi-Agent Systems
-  - local: unit2/smolagents/multiagent
-    title: Multi-Agent Systems notebook
   - local: unit2/smolagents/vision_agents
     title: Vision and Browser agents
 - title: When the next steps are published?
