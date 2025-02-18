@@ -62,7 +62,7 @@ from huggingface_hub import notebook_login
 notebook_login()
 ```
 
-### Selecting a playlist for the party using `smolagents`
+### Selecting a Playlist for the Party Using `smolagents`
 
 An important part of a successful party is the music. Alfred needs some help selecting the playlist, and we're covered using `smolagents`. We can build an agent capable of searching the web using DuckDuckGo. To give the agent access to this tool, we include it in the tool list when creating the agent.
 
@@ -89,7 +89,7 @@ When you run this example, the output will display a trace of the workflow steps
 
 After a few steps, you'll see the generated playlist that Alfred can use for the party! 🎵
 
-### Using a custom tool to prepare the menu
+### Using a Custom Tool to Prepare the Menu
 
 Now that we have selected a playlist, we need to organize the menu for the guests. Again, Alfred can take advantage of smolagents to do so. Here, we use the `@tool` decorator to define a custom function that acts as a tool. We'll cover tool creation in more detail later, so for now, we can simply run the code.
 
@@ -126,7 +126,7 @@ The agent will run for a few steps until finding the answer.
 
 The menu is ready! 🥗
 
-### Using imports from Python inside the Agent to check the when the party will be ready
+### Using Imports from Python Inside the Agent to Check When the Party Will Be Ready
 
 We now have the playlist and the menu, but we need to check something else that is really important: the time needed to prepare everything!
 
@@ -161,7 +161,7 @@ These examples are just the beginning of what you can do with code agents, and w
 
 smolagents specializes in agents that write and execute Python code snippets, offering sandboxed execution for security. It supports both open-source and proprietary language models, making it adaptable to various development environments.
 
-### Share an Agent to the Hub
+### Sharing Our Custom Party Preparator Agent to the Hub
 
 Wouldn't it be amazing to share the Alfred agent with the community? By doing so, anyone can easily download and use the agent directly from the Hub, bringing the ultimate party preparator of Gotham to their fingertips! Let’s make it happen! 🎉
 
