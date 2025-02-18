@@ -34,7 +34,7 @@ It works by **inserting a smaller number of new weights as an adapter into the m
 
 LoRA works by adding pairs of rank decomposition matrices to Transformer layers, typically focusing on linear layers. During training, we will "freeze" the rest of the model and will only update the weights of those newly added adapters. 
 
-By doing so, the number of paramters that we need to train drops considerably as we only need to update the adapter's weights.
+By doing so, the number of parameters that we need to train drops considerably as we only need to update the adapter's weights.
 
 During inference, the input is passed into the adapter and the base model or these adapter weights can be merged with the base model, resulting in no additional latency overhead. 
 
