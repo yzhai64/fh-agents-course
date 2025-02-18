@@ -11,13 +11,13 @@ LLMs are trained on enormous bodies of data to learn general knowledge.
 However, they may not be trained on relevant and up-to-date data.
 RAG solves this problem by finding and retrieving relevant information from your data and forward that to the LLM.
 
-Think about how Alfred works:
+![RAG](https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit2/rag.png)
+
+Now, think about how Alfred works:
 
 1. You ask Alfred to help plan a dinner party
 2. Alfred needs to check your calendar, dietary preferences, and past successful menus
 3. The `QueryEngine` helps Alfred find this information and use it to plan the dinner party
-
-![RAG](https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit2/rag.png)
 
 This makes the `QueryEngine` **the most relevant component for building agentic RAG workflows** in LlamaIndex.
 Just as Alfred needs to search through your household information to be helpful, any agent needs a way to find and understand relevant data.
@@ -46,7 +46,7 @@ There are three main ways to do to load data into LlamaIndex:
 2. `LlamaParse`: LlamaParse, LlamaIndex's official tool for PDF parsing, available as a managed API.
 3. `LlamaHub`: A registry of hundreds of data loading libraries to ingest data from any source.
 
-<Tip>Get familiar with [LlamaHub](https://docs.llamaindex.ai/en/stable/module_guides/loading/connector/) loaders and [LlamaParse](https://docs.llamaindex.ai/en/stable/module_guides/loading/connector/llama_parse/) parser for more complex data sources.</Tip>
+<Tip>Get familiar with <a href="https://docs.llamaindex.ai/en/stable/module_guides/loading/connector/">LlamaHub</a> loaders and <a href="https://docs.llamaindex.ai/en/stable/module_guides/loading/connector/llama_parse/">LlamaParse</a> parser for more complex data sources.</Tip>
 
 **The simplest way to load data is with `SimpleDirectoryReader`.**
 This versatile component can load various file types from a folder and convert them into `Document` objects that LlamaIndex can work with.
@@ -87,7 +87,7 @@ pipeline = IngestionPipeline(
 nodes = pipeline.run(documents=[Document.example()])
 ```
 
-<Tip>To save time and computer power, **LlamaIndex caches the results of the ingestion pipeline** so you don't need to load and embed the same documents twice.</Tip>
+<Tip>To save time and computer power, **LlamaIndex caches the results of the ingestion pipeline** so you don't need to load and embed the same documents twice. Learn more about caching in the <a href="https://docs.llamaindex.ai/en/stable/module_guides/loading/ingestion_pipeline.html#caching">LlamaIndex documentation</a>.</Tip>
 
 ### Storing and indexing documents
 
@@ -222,6 +222,6 @@ llama_index.core.set_global_handler(
 )
 ```
 
-<Tip>Want to learn more about components and how to use them? Continue your journey with the [Components Guides](https://docs.llamaindex.ai/en/stable/module_guides/) or the [Guide on RAG](https://docs.llamaindex.ai/en/stable/understanding/rag/).</Tip>
+<Tip>Want to learn more about components and how to use them? Continue your journey with the <a href="https://docs.llamaindex.ai/en/stable/module_guides/">Components Guides</a> or the <a href="https://docs.llamaindex.ai/en/stable/understanding/rag/">Guide on RAG</a>.</Tip>
 
 We have seen how to use components to create a `QueryEngine`. Now, let's see how we can use that same `QueryEngine` as a tool for an agent!.

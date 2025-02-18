@@ -7,13 +7,15 @@ Back in Unit 1, we learned that:
 
 > An Agent is a system that leverages an AI model to interact with its environment in order to achieve a user-defined objective. It combines reasoning, planning, and the execution of actions (often via external tools) to fulfill tasks.
 
-LlamaIndex supports three main types of reasoning agents:
+LlamaIndex supports **three main types of reasoning agents:**
 
-1. Function Calling Agents - These work with AI models that can call specific functions
-2. ReAct Agents - These can work with any AI that does chat or text endpoint and deal with complex reasoning tasks
-3. Advanced Agents - These use more complex methods like LLMCompiler or Chain-of-Abstraction
+![Agents](https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit2/agents.png)
 
-<Tip>Find more information on advanced agents on [LlamaIndex GitHub](https://github.com/run-llama/llama_index/tree/main/llama-index-packs)</Tip>
+1. `Function Calling Agents` - These work with AI models that can call specific functions.
+2. `ReAct Agents` - These can work with any AI that does chat or text endpoint and deal with complex reasoning tasks.
+3. `Advanced Agents` - These use more complex methods like LLMCompiler or Chain-of-Abstraction.
+
+<Tip>Find more information on advanced agents on <a href="https://github.com/run-llama/llama_index/tree/main/llama-index-packs">LlamaIndex GitHub</a></Tip>
 
 ## Initialising Agents
 
@@ -105,6 +107,6 @@ query_engine_agent_tool = QueryEngineTool(
 multi_agent = ReActAgent.from_tools([query_engine_agent_tool], llm=llm, verbose=True)
 ```
 
-<Tip>Haven't learned enough yet? There is a lot more to discover about agents and tools in LlamaIndex within the [Agent Component Guide](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/modules/) or the [Agent Learning Guide](https://docs.llamaindex.ai/en/stable/understanding/agent/).</Tip>
+<Tip>Haven't learned enough yet? There is a lot more to discover about agents and tools in LlamaIndex within the <a href="https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/modules/">Agent Component Guide</a> or the <a href="https://docs.llamaindex.ai/en/stable/understanding/agent/">Agent Learning Guide</a>.</Tip>
 
 Now that we understand the basics of agents and tools in LlamaIndex, let's see how we can use LlamaIndex to create configurable and manageable workflows!
