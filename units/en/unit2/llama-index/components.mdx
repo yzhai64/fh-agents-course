@@ -170,7 +170,7 @@ Language model won't always perform in predictable ways, so we can't be sure tha
 
 ### Evaluation and observability
 
-LlamaIndex provides built-in evaluation tools to assess response quality.
+LlamaIndex provides **built-in evaluation tools to assess response quality.**
 These evaluators leverage LLMs to analyze responses across different dimensions.
 Let's look at the three main evaluators available:
 
@@ -193,7 +193,7 @@ eval_result = evaluator.evaluate_response(response=response)
 print(str(eval_result.passing))
 ```
 
-Even without direct evaluation, we can gain insights into how our system is performing through observability.
+Even without direct evaluation, we can **gain insights into how our system is performing through observability.**
 This is especially useful when we are building more complex workflows and want to understand how each component is performing.
 
 <details>
@@ -224,4 +224,4 @@ llama_index.core.set_global_handler(
 
 <Tip>Want to learn more about components and how to use them? Continue your journey with the <a href="https://docs.llamaindex.ai/en/stable/module_guides/">Components Guides</a> or the <a href="https://docs.llamaindex.ai/en/stable/understanding/rag/">Guide on RAG</a>.</Tip>
 
-We have seen how to use components to create a `QueryEngine`. Now, let's see how we can use that same `QueryEngine` as a tool for an agent!.
+We have seen how to use components to create a `QueryEngine`. Now, let's see how we can **use the `QueryEngine` as a tool for an agent!**

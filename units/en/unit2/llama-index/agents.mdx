@@ -42,7 +42,7 @@ llm = HuggingFaceInferenceAPILM(model_name="meta-llama/Meta-Llama-3-8B-Instruct"
 agent = ReActAgent.from_tools([multiply_tool], llm=llm, verbose=True)
 ```
 
-Similarly, we can use the `AgentRunner` to automatically pick the best agent reasoning flow depending on the LLM.
+Similarly, we can use the **`AgentRunner` to automatically pick the best agent reasoning flow** depending on the LLM.
 Under the hood, it will thus pick either a Function Calling Agent or a ReAct Agent depending on the LLM.
 
 ```python
@@ -51,7 +51,7 @@ from llama_index.core.agent import AgentRunner
 agent_runner = AgentRunner.from_llm(llm, verbose=True)
 ```
 
-Agent supports both chat and query endpoints with `query()` and `chat()`, where chat interactions keep a history of messages.
+**Agents support both chat and query methods** with `query()` and `chat()`, where chat interactions keep a history of messages.
 This might be useful if you want to use an agent that needs to remember previous interactions, like a chatbot that maintains context across multiple messages or a task manager that needs to track progress over time.
 
 ```python
@@ -62,7 +62,7 @@ Now we've gotten the basics, let's take a look at how we can use tools in our ag
 
 ## Creating RAG Agents with QueryEngineTools
 
-Agentic RAG is a powerful way to use agents to answer questions about your data. We can pass various tools to Alfred to help him answer questions.
+**Agentic RAG is a powerful way to use agents to answer questions about your data.** We can pass various tools to Alfred to help him answer questions.
 However, instead of answering the question on top of documents automatically, Alfred can decide to use any other tool or flow to answer the question.
 
 ![Agentic RAG](https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit2/agentic-rag.png)
@@ -109,4 +109,4 @@ multi_agent = ReActAgent.from_tools([query_engine_agent_tool], llm=llm, verbose=
 
 <Tip>Haven't learned enough yet? There is a lot more to discover about agents and tools in LlamaIndex within the <a href="https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/modules/">Agent Component Guide</a> or the <a href="https://docs.llamaindex.ai/en/stable/understanding/agent/">Agent Learning Guide</a>.</Tip>
 
-Now that we understand the basics of agents and tools in LlamaIndex, let's see how we can use LlamaIndex to create configurable and manageable workflows!
+Now that we understand the basics of agents and tools in LlamaIndex, let's see how we can use LlamaIndex to **create configurable and manageable workflows!**
