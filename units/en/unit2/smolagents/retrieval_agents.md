@@ -1,18 +1,18 @@
 # Building Agentic RAG Systems
 
-Agentic RAG (Retrieval-Augmented Generation) extends the capabilities of traditional RAG systems by combining autonomous agents with dynamic knowledge retrieval. While traditional RAG systems use an LLM to answer queries based on retrieved data, agentic RAG enables the system to intelligently control both the retrieval and generation processes, enhancing its overall efficiency and accuracy.
+Agentic RAG (Retrieval-Augmented Generation) extends traditional RAG systems by combining autonomous agents with dynamic knowledge retrieval. While traditional RAG systems use an LLM to answer queries based on retrieved data, agentic RAG enables intelligent control of both retrieval and generation processes, improving efficiency and accuracy.
 
 Traditional RAG systems face key limitations, such as relying on a single retrieval step and focusing on direct semantic similarity with the user’s query, which may overlook relevant information. Agentic RAG addresses these issues by allowing the agent to autonomously formulate search queries, critique retrieved results, and conduct multiple retrieval steps for a more tailored and comprehensive output.
 
 ## Basic Retrieval with DuckDuckGo
 
-To get started, let's build a simple agent that can search the web using DuckDuckGo. This agent will retrieve relevant information and synthesize responses to answer user queries. With Agentic RAG, Alfred’s agent can:
+Let's build a simple agent that can search the web using DuckDuckGo. This agent will retrieve information and synthesize responses to answer queries. With Agentic RAG, Alfred's agent can:
 
-* Search for the latest trends in superhero-themed parties.
-* Refine search results to include luxury elements for a high-profile event.
-* Synthesize the gathered information into a complete plan covering entertainment, catering, and more.
+* Search for latest superhero party trends
+* Refine results to include luxury elements
+* Synthesize information into a complete plan
 
-Here’s how Alfred’s agent can achieve this:
+Here's how Alfred's agent can achieve this:
 
 ```python
 from smolagents import CodeAgent, DuckDuckGoSearchTool, HfApiModel
@@ -35,7 +35,7 @@ response = agent.run(
 print(response)
 ```
 
-The agent will:
+The agent follows this process:
 
 1. **Analyzes the Request:** Alfred’s agent identifies the key elements of the query—luxury superhero-themed party planning, with focus on decor, entertainment, and catering.
 2. **Performs Retrieval:**  The agent leverages DuckDuckGo to search for the most relevant and up-to-date information, ensuring it aligns with Alfred’s refined preferences for a luxurious event.
@@ -44,9 +44,9 @@ The agent will:
 
 ## Custom Knowledge Base Tool
 
-For domain-specific tasks, having a custom knowledge base can be incredibly powerful. Let's create a custom tool that allows the agent to query a vector database containing technical documentation or other specialized knowledge. By leveraging semantic search techniques, the agent can retrieve the most relevant information based on Alfred's queries.
+For specialized tasks, a custom knowledge base can be invaluable. Let's create a tool that queries a vector database of technical documentation or specialized knowledge. Using semantic search, the agent can find the most relevant information for Alfred's needs.
 
-This approach, integrating a predefined knowledge base with semantic search capabilities, provides a more context-aware and robust solution for tasks like event planning. With access to specialized knowledge, Alfred can fine-tune his party planning with precision, ensuring an unforgettable event for Gotham’s elite.
+This approach combines predefined knowledge with semantic search to provide context-aware solutions for event planning. With specialized knowledge access, Alfred can perfect every detail of the party.
 
 ```python
 from langchain.docstore.document import Document
@@ -141,5 +141,4 @@ Effective agentic RAG systems require careful consideration of several key aspec
 
 ## Resources
 
-- [Agentic RAG: turbocharge your RAG with query reformulation and self-query! 🚀
-](https://huggingface.co/learn/cookbook/agent_rag) - Recipe for developing an Agentic RAG system using smolagents.
+- [Agentic RAG: turbocharge your RAG with query reformulation and self-query! 🚀](https://huggingface.co/learn/cookbook/agent_rag) - Recipe for developing an Agentic RAG system using smolagents.
