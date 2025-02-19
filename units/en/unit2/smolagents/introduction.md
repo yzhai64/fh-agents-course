@@ -38,13 +38,9 @@ Retrieval agents combine models with knowledge bases, allowing them to search, s
 
 Orchestrating multiple agents effectively is crucial for building powerful, multi-agent systems. By combining agents with different capabilities—such as a web search agent with a code execution agent—you can create more sophisticated solutions. This module focuses on designing, implementing, and managing multi-agent systems to maximize efficiency and reliability.  
 
-### 7️⃣ [Vision Agents](./vision_agents)
+### 7️⃣ [Vision and Browser agents](./vision_agents)
 
-Vision agents extend traditional agent capabilities by incorporating **Vision-Language Models (VLMs)**, enabling them to process and interpret visual information. This module explores how to design and integrate VLM-powered agents, unlocking advanced functionalities like image-based reasoning, visual data analysis, and multimodal interactions.  
-
-### 8️⃣ [Browser Agents](./browser_agents)
-
-Browser agents are a specialized type of **vision agent** that enable web browsing with visual understanding. By integrating vision models, these agents can interact with web content in new ways, such as interpreting images, extracting relevant information from videos, and navigating web pages autonomously. This module covers various use cases, including dynamic content extraction and visual web automation.
+Vision agents extend traditional agent capabilities by incorporating **Vision-Language Models (VLMs)**, enabling them to process and interpret visual information. This module explores how to design and integrate VLM-powered agents, unlocking advanced functionalities like image-based reasoning, visual data analysis, and multimodal interactions.  We will also use vision agents to build a browser agent that can browse the web and extract information from it.
 
 ## Resources
 
