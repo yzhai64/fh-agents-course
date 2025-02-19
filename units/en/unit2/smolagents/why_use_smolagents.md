@@ -1,28 +1,28 @@
 ![smolagents banner](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/smolagents/license_to_call.png)
-# Why Use smolagents
+# Why use smolagents
 
 In this module, we will explore the pros and cons of using [smolagents](https://huggingface.co/blog/smolagents), helping you make an informed decision about whether it's the right framework for your needs.
 
 ## What is `smolagents`?
 
-`smolagents` is a simple yet powerful framework for building AI agents. It provides LLMs with the _agency_ to interact with the real world, such as searching or generating images. 
+`smolagents` is a simple yet powerful framework for building AI agents. It provides LLMs with the _agency_ to interact with the real world, such as searching or generating images.
 
-As we learnt in unit 1, AI agents are programs where LLM output **'thoughts'**, based upon **'observations'**, to perform **'actions'**. Let's unpack how that is implemented in smolagents.
+As we learned in unit 1, AI agents are programs that use LLMs to generate **'thoughts'** based on **'observations'** to perform **'actions'**. Let's explore how this is implemented in smolagents.
 
 ### Key Advantages of `smolagents`
-- **Simplicity:** Minimal code complexity and abstractions.
-- **Flexible LLM Support:** Works with any LLM through integration with Hugging Face tools and external APIs.
-- **Code-First Approach:** First-class support for Code Agents that directly write their actions in code.
-- **HF Hub Integration:** Seamless integration with Hugging Face Hub, allowing the use of Gradio Spaces as tools.
+- **Simplicity:** Minimal code complexity and abstractions
+- **Flexible LLM Support:** Works with any LLM through integration with Hugging Face tools and external APIs
+- **Code-First Approach:** First-class support for Code Agents that directly write their actions in code
+- **HF Hub Integration:** Seamless integration with Hugging Face Hub, allowing the use of Gradio Spaces as tools
 
 ### When to use smolagents
 
-We've these advantages in mind, when should we use smolagents over other frameworks? 
+With these advantages in mind, when should we use smolagents over other frameworks? 
 
-You should choose smolagents when:
-- You prioritize a lightweight and minimal solution.
-- You would like to experiment without complex configurations.
-- The logic for your application is straightforward.
+Smolagents is ideal when:
+- You need a lightweight and minimal solution
+- You want to experiment quickly without complex configurations
+- Your application logic is straightforward
 
 ### Code vs. JSON Actions
 Unlike other frameworks where agents write actions in JSON that require parsing, `smolagents` focuses on direct tool calls in code, simplifying the execution process. The following diagram illustrates this difference:
@@ -30,13 +30,13 @@ Unlike other frameworks where agents write actions in JSON that require parsing,
 ![Code vs. JSON actions](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/code_vs_json_actions.png)
 
 ### Agent Types in `smolagents`
-Agents in `smolagents` operate as multi-step agents. Each [`MultiStepAgent`](https://huggingface.co/docs/smolagents/main/en/reference/agents#smolagents.MultiStepAgent) consists of:
+Agents in `smolagents` operate as multi-step agents. Each [`MultiStepAgent`](https://huggingface.co/docs/smolagents/main/en/reference/agents#smolagents.MultiStepAgent) performs:
 - One thought
 - One tool call and execution
 
-There are two types of agents available:
-1. **[CodeAgent](https://huggingface.co/docs/smolagents/main/en/reference/agents#smolagents.CodeAgent):** The default agent type that writes tool calls using Python.
-2. **[ToolCallingAgent](https://huggingface.co/docs/smolagents/main/en/reference/agents#smolagents.ToolCallingAgent):** Writes tool calls in JSON.
+The framework offers two types of agents:
+1. **[CodeAgent](https://huggingface.co/docs/smolagents/main/en/reference/agents#smolagents.CodeAgent):** The default agent type that writes tool calls using Python
+2. **[ToolCallingAgent](https://huggingface.co/docs/smolagents/main/en/reference/agents#smolagents.ToolCallingAgent):** Writes tool calls in JSON
 
 We will explore each agent type in more detail in the following units.
 
@@ -45,7 +45,7 @@ In smolagents, tools are defined using <code>@tool</code> or the <code>Tool</cod
 </Tip>
 
 ### Model Integration in `smolagents`
-`smolagents` supports flexible LLM integration, allowing you to use any callable model as long as it meets [certain criteria](https://huggingface.co/docs/smolagents/main/en/reference/models). To simplify connections with various model types, the framework provides predefined classes:
+`smolagents` supports flexible LLM integration, allowing you to use any callable model that meets [certain criteria](https://huggingface.co/docs/smolagents/main/en/reference/models). The framework provides several predefined classes to simplify model connections:
 
 - **[TransformersModel](https://huggingface.co/docs/smolagents/main/en/reference/models#smolagents.TransformersModel):** Implements a local `transformers` pipeline for seamless integration.
 - **[HfApiModel](https://huggingface.co/docs/smolagents/main/en/reference/models#smolagents.HfApiModel):** Wraps Hugging Face's [InferenceClient](https://huggingface.co/docs/huggingface_hub/main/en/guides/inference) to support the [Inference API](https://huggingface.co/docs/api-inference/index) and [Inference Providers](https://huggingface.co/blog/inference-providers).
