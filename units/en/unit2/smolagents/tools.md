@@ -1,32 +1,32 @@
 # Tools  
 
-As we explored in unit 1, agents use tools to perform various actions. In `smolagents`, tools are treated as functions that an LLM can call within an agent system. To interact with a tool, the LLM needs an **interface description**, which includes the following components:  
+As we explored in unit 1, agents use tools to perform various actions. In `smolagents`, tools are treated as functions that an LLM can call within an agent system. To interact with a tool, the LLM needs an **interface description** with these key components:  
 
-- **Name**  
-- **Tool description**  
-- **Input types and their descriptions**  
-- **Output type**  
+- **Name**: What the tool is called
+- **Tool description**: What the tool does  
+- **Input types and descriptions**: What arguments the tool accepts
+- **Output type**: What the tool returns
 
-For instance, Alfred, preparing for a party at Wayne Manor, may need to utilize several tools to gather information. This could involve searching for catering services, finding superhero party theme ideas, or identifying the best entertainment options for the guests. To do this, he can use the `web_search` tool. The interface for this tool might look like the following:
+For instance, while preparing for a party at Wayne Manor, Alfred needs various tools to gather information - from searching for catering services to finding party theme ideas. Here's how a simple search tool interface might look:
 
 - **Name:** `web_search`
-- **Tool description:** A tool that allows searching the web for specific queries.
-- **Input types and their descriptions:** `arguments` (a string representing the search query)
-- **Output type:** A string representing the search results.
+- **Tool description:** Searches the web for specific queries
+- **Input:** `query` (string) - The search term to look up
+- **Output:** String containing the search results
 
-By using these tools, the agent can make informed decisions and gather relevant information for any aspect of the party planning.
+By using these tools, Alfred can make informed decisions and gather all the information needed for planning the perfect party.
 
 Below, you can see an animation illustrating how a tool call is managed:
 
 ![Agentic pipeline from https://huggingface.co/docs/smolagents/conceptual_guides/react](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/Agent_ManimCE.gif)
 
-## General Structure  
+## Tool Creation Methods
 
 In `smolagents`, tools can be defined in two ways:  
-1. **Using the `@tool` decorator** to define a function-based tool. 
-2. **Creating a subclass of `Tool`**, which provides useful methods.    
+1. **Using the `@tool` decorator** for simple function-based tools
+2. **Creating a subclass of `Tool`** for more complex functionality    
 
-### <code>@tool</code> Decorator  
+### The `@tool` Decorator  
 
 The `@tool` decorator is the recommended way to define simple tools. Under the hood, smolagents will parse basic information about the function from Python. So if you name you function clearly and a good docstring, it will be easier for the LLM to use. Using this approach, we define a function with:  
 
@@ -77,7 +77,7 @@ print(result)   # Output: Gotham Catering Co.
 
 This approach involves creating a subclass of [`Tool`](https://huggingface.co/docs/smolagents/v1.8.1/en/reference/tools#smolagents.Tool).  For complex tools, we can implement a class instead of a Python function. The class wraps the function with metadata that helps the LLM understand how to use it effectively. In this class, we define:  
 
-- `name`: The tool’s name.  
+- `name`: The tool's name.  
 - `description`: A description used to populate the agent's system prompt.  
 - `inputs`: A dictionary with keys `type` and `description`, providing information to help the Python interpreter process inputs.  
 - `output_type`: Specifies the expected output type.  
@@ -145,9 +145,9 @@ Alfred could use various tools to ensure a flawless party at Wayne Manor. First,
 
 ## Sharing and Importing Tools
 
-One of the most powerful features of **smolagents** is its ability to share custom tools on the Hub and seamlessly integrate tools created by the community. This includes connecting with **HF Spaces** and **LangChain tools**, significantly enhancing Alfred’s ability to orchestrate an unforgettable party at Wayne Manor. 🎭 
+One of the most powerful features of **smolagents** is its ability to share custom tools on the Hub and seamlessly integrate tools created by the community. This includes connecting with **HF Spaces** and **LangChain tools**, significantly enhancing Alfred's ability to orchestrate an unforgettable party at Wayne Manor. 🎭 
 
-With these integrations, Alfred can tap into advanced event-planning tools—whether it’s adjusting the lighting for the perfect ambiance, curating the ideal playlist for the party, or coordinating with Gotham’s finest caterers.  
+With these integrations, Alfred can tap into advanced event-planning tools—whether it's adjusting the lighting for the perfect ambiance, curating the ideal playlist for the party, or coordinating with Gotham's finest caterers.  
 
 Here are examples showcasing how these functionalities can elevate the party experience:
 
@@ -155,7 +155,7 @@ Here are examples showcasing how these functionalities can elevate the party exp
 
 Sharing your custom tool with the community is easy! Simply upload it to your Hugging Face account using the `push_to_hub()` method.
 
-For instance, Alfred can share his `catering_service_tool` to help others find the best catering services in Gotham. Here’s how to do it:
+For instance, Alfred can share his `catering_service_tool` to help others find the best catering services in Gotham. Here's how to do it:
 
 ```python
 party_theme_tool.push_to_hub("{your_username}/catering_service_tool", token="<YOUR_HUGGINGFACEHUB_API_TOKEN>")
@@ -210,7 +210,7 @@ You can easily load LangChain tools using the `Tool.from_langchain()` method. Al
 
 By using `Tool.from_langchain()`, Alfred effortlessly adds advanced search functionalities to his smolagent, enabling him to discover exclusive party ideas and services with just a few commands.
 
-Here’s how he does it:
+Here's how he does it:
 
 ```python
 from langchain.agents import load_tools
@@ -223,7 +223,7 @@ agent = CodeAgent(tools=[search_tool], model=model)
 agent.run("Search for luxury entertainment ideas for a superhero-themed event, such as live performances and interactive experiences.")
 ```
 
-With this setup, Alfred can quickly discover luxurious entertainment options, ensuring Gotham’s elite guests have an unforgettable experience. This tool helps him curate the perfect superhero-themed event for Wayne Manor! 🎉
+With this setup, Alfred can quickly discover luxurious entertainment options, ensuring Gotham's elite guests have an unforgettable experience. This tool helps him curate the perfect superhero-themed event for Wayne Manor! 🎉
 
 ## Resources
 
