@@ -1,23 +1,29 @@
-# Vision Agents with SmolAgents
+# Vision Agents with smolagents
 
-<!-- TODO: @sergiopaniego add section -->
+Empowering agents with visual capabilities is crucial for solving tasks that go beyond text processing. Many real-world challenges, such as web browsing or document understanding, require analyzing rich visual content. Fortunately, `smolagents` provides built-in support for vision (VLMs), enabling agents to process and interpret images effectively.  
 
-Empowering agents with visual capabilities is crucial for solving tasks that require more than text processing. Many real-world challenges, such as web browsing or document understanding, involve analyzing rich visual content. Fortunately, `smolagents` provides built-in support for vision.
+In this example, imagine Alfred, the butler at Wayne Manor, is tasked with verifying the identities of the guests attending tje party. As you can imagine, Alfred may not be familiar with everyone arriving. To help him, we can use an agent that verifies their identity by searching for visual information about their appearance using a Vision Language Model (VLM). This will allow Alfred to make informed decisions about who can enter. Let's build this example!
 
-## How to Interact with a Vision Agent
+But first, let's dive into a bit of theory.
 
-There are two main approaches to provide visual input:
+## Providing Images at the Start of the Agent's Execution
 
-### 1. Providing Images at the Start
+In this approach, images are passed to the agent at the start and stored as `task_images` alongside the task prompt. The agent then processes these images throughout its execution.  
 
-In this approach, images are passed at the beginning and stored as `task_images` alongside the task prompt. The agent processes these images throughout its execution.
+Consider the case where Alfred wants to verify the identities of the superheroes attending the party. He already has a dataset of images from previous parties with the names of the guests. Given a new visitor's image, the agent can compare it with the existing dataset and make a decision about letting them in.  
 
-#### **Use Case Example**
-A possible application is **document understanding**, where agents analyze long documents containing both text and visual elements, such as graphs or tables.
+In this case, a guest is trying to enter, and Alfred suspects that this visitor might be The Joker. Alfred needs to verify their identity to prevent anyone unwanted from entering.  
+
+Let’s build the example:
+
 
 ```python
-model_id = "Qwen/Qwen2.5-VL-72B-Instruct"  # Update with preferred VLM
-model = HfApiModel(model_id)
+from smolagents import CodeAgent, HfApiModel, OpenAIServerModel
+
+model = OpenAIServerModel(model_id="gpt-4o")
+
+#model_id = "Qwen/Qwen2.5-VL-72B-Instruct"  # Update with preferred VLM
+#model = HfApiModel(model_id)
 
 # Instantiate the agent
 agent = CodeAgent(
@@ -29,34 +35,130 @@ agent = CodeAgent(
 
 # Run the agent with a manufacturing quality check task
 response = agent.run(
-    "Inspect these product images for any visual defects or inconsistencies.",
-    images=[image_1, image_2]
+    """
+    I am Alfred, the butler of Wayne Manor, responsible for verifying the identity of guests at party. 
+    A superhero has arrived at the entrance claiming to be Wonder Woman, but I need to confirm if she is who she says she is. I think he is actually The Joker and he's lying.
+    Compare the visitor's appearance with the provided reference images of The Joker.
+    The first is an image of The Joker from the dataset I have, and the second image is of the visitor.
+    Describe any differences or similarities in detail to verify their identity. Compare them and tell me if the guest is The Joker or Wonder Woman
+    """,
+    images=[reference_image, visitor_image]
 )
 ```
 
-### 2. Dynamic Image Retrieval
+In this case, the output reveals that the person is impersonating someone else, so we can prevent The Joker from entering the party!
 
-In this approach, images are dynamically allocated into the agent's memory during its execution. Agents in smolagents are based on the `MultiStepAgent` class, an abstraction of the ReAct framework. This class operates in a structured cycle where existing variables and knowledge are logged at different stages:
+## Providing Images with Dynamic Retrieval
 
-1. **SystemPromptStep:** Stores the system prompt.  
-2. **TaskStep:** Logs the user query and any provided input.  
+The previous approach is valuable and has many potential use cases. However, in situations where the guest is not in the database, we need to explore other ways of identifying them. One possible solution is dynamically retrieving images and information from external sources, such as browsing the web for details.
+
+In this approach, images are dynamically added to the agent's memory during execution. As we know, agents in `smolagents` are based on the `MultiStepAgent` class, which is an abstraction of the ReAct framework. This class operates in a structured cycle where various variables and knowledge are logged at different stages:
+
+1. **SystemPromptStep:** Stores the system prompt.
+2. **TaskStep:** Logs the user query and any provided input.
 3. **ActionStep:** Captures logs from the agent's actions and results.
 
-This structured approach allows agents to incorporate visual information dynamically and respond adaptively to evolving tasks. Below is a diagram illustrating the dynamic workflow process and how different steps integrate within the agent lifecycle.
+This structured approach allows agents to incorporate visual information dynamically and respond adaptively to evolving tasks. Below is the diagram we've already seen, illustrating the dynamic workflow process and how different steps integrate within the agent lifecycle. When browsing, the agent can take screenshots and save them as `observation_images` in the `ActionStep`.
 
 ![Dynamic image retrieval](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/smolagents-can-see/diagram_adding_vlms_smolagents.png)
 
+Now that we understand the need, let's build our complete example. In this case, Alfred wants full control over the guest verification process, so browsing for details becomes a viable solution. To complete this example, we need a new set of tools for the agent. Additionally, we'll use Selenium and Helium, which are browser automation tools. This will allow us to build an agent that explores the web, searching for details about a potential guest and retrieving verification information. Let's install the tools needed:
+
+```bash
+pip install "smolagents[all]" helium selenium python-dotenv
+```
+
+We'll need a set of agent tools specifically designed for browsing, such as `search_item_ctrl_f`, `go_back`, and `close_popups`. These tools allow the agent to act like a person navigating the web.
+
+
 ```python
+@tool
+def search_item_ctrl_f(text: str, nth_result: int = 1) -> str:
+    """
+    Searches for text on the current page via Ctrl + F and jumps to the nth occurrence.
+    Args:
+        text: The text to search for
+        nth_result: Which occurrence to jump to (default: 1)
+    """
+    elements = driver.find_elements(By.XPATH, f"//*[contains(text(), '{text}')]")
+    if nth_result > len(elements):
+        raise Exception(f"Match n°{nth_result} not found (only {len(elements)} matches found)")
+    result = f"Found {len(elements)} matches for '{text}'."
+    elem = elements[nth_result - 1]
+    driver.execute_script("arguments[0].scrollIntoView(true);", elem)
+    result += f"Focused on element {nth_result} of {len(elements)}"
+    return result
+
+
+@tool
+def go_back() -> None:
+    """Goes back to previous page."""
+    driver.back()
+
+
+@tool
+def close_popups() -> str:
+    """
+    Closes any visible modal or pop-up on the page. Use this to dismiss pop-up windows! This does not work on cookie consent banners.
+    """
+    webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
+```
+
+We also need functionality for saving screenshots, as this will be an essential part of what our VLM agent uses to complete the task. This functionality captures the screenshot and saves it in `step_log.observations_images = [image.copy()]`, allowing the agent to store and process the images dynamically as it navigates.
+
+```python
+def save_screenshot(step_log: ActionStep, agent: CodeAgent) -> None:
+    sleep(1.0)  # Let JavaScript animations happen before taking the screenshot
+    driver = helium.get_driver()
+    current_step = step_log.step_number
+    if driver is not None:
+        for step_logs in agent.logs:  # Remove previous screenshots from logs for lean processing
+            if isinstance(step_log, ActionStep) and step_log.step_number <= current_step - 2:
+                step_logs.observations_images = None
+        png_bytes = driver.get_screenshot_as_png()
+        image = Image.open(BytesIO(png_bytes))
+        print(f"Captured a browser screenshot: {image.size} pixels")
+        step_log.observations_images = [image.copy()]  # Create a copy to ensure it persists, important!
+
+    # Update observations with current URL
+    url_info = f"Current url: {driver.current_url}"
+    step_log.observations = url_info if step_logs.observations is None else step_log.observations + "\n" + url_info
+    return
+```
+This function is passed to the agent as `step_callback`, as it's triggered at the end of each step during the agent's execution. This allows the agent to dynamically capture and store screenshots throughout its process.
+
+Now, we can generate our vision agent for browsing the web, providing it with the tools we created, along with the `DuckDuckGoSearchTool` to explore the web. This tool will help the agent retrieve necessary information for verifying guests' identities based on visual cues.
+
+
+```python
+model = OpenAIServerModel(model_id="gpt-4o")
+
 agent = CodeAgent(
-    tools=[],
+    tools=[DuckDuckGoSearchTool(), go_back, close_popups, search_item_ctrl_f],
     model=model,
-    step_callbacks = [save_screenshot], # This callback triggers at the end of each step
+    additional_authorized_imports=["helium"],
+    step_callbacks=[save_screenshot],
     max_steps=20,
-    verbosity_level=2
+    verbosity_level=2,
 )
 ```
+
+With that, Alfred is ready to check the guests' identities and make informed decisions about whether to let them into the party:
+
+```python
+agent.run("""
+I am Alfred, the butler of Wayne Manor, responsible for verifying the identity of guests at party. A superhero has arrived at the entrance claiming to be Wonder Woman, but I need to confirm if she is who she says she is.
+
+Please search for images of Wonder Woman and generate a detailed visual description based on those images. Additionally, navigate to Wikipedia to gather key details about her appearance. With this information, I can determine whether to grant her access to the event.
+""" + helium_instructions)
+```
+
+You can see that we include `helium_instructions` as part of the task. This special prompt is aimed to control the navigation of the agent, ensuring that it follows the correct steps while browsing the web.
+
+With all of that, we've successfully created our identity verifier for the party! Alfred now has the necessary tools to ensure only the right guests make it through the door. Everything is set to have a good time at Wayne Manor!
 
 ## Further Reading
 
 * [We just gave sight to smolagents](https://huggingface.co/blog/smolagents-can-see)
 * https://huggingface.co/docs/smolagents/examples/web_browser
+* https://github.com/huggingface/smolagents/blob/main/src/smolagents/vision_web_browser.py
