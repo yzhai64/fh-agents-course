@@ -6,7 +6,7 @@ This module covers how to build effective agents using the [`smolagents`](https:
 
 ## Module Overview
 
-This module provides a comprehensive overview of key concepts and practical strategies for building intelligent agents using smolagents. With so many open-source frameworks available, it's essential to understand the components and capabilities that make smolagents a valuable option—or to determine when another solution might be a better fit.  We'll explore critical agent types, including code agents designed for software development tasks, tool calling agents for creating modular, function-driven workflows and retrieval agents that access and synthesize information. Additionally, we'll cover the orchestration of mutiple agents, the integration of vision capabilities and web browsing to unlock new possibilities for dynamic and context-aware applications.
+This module provides a comprehensive overview of key concepts and practical strategies for building intelligent agents using smolagents. With so many open-source frameworks available, it's essential to understand the components and capabilities that make smolagents a useful option, or to determine when another solution might be a better fit. We'll explore critical agent types, including code agents designed for software development tasks, tool calling agents for creating modular, function-driven workflows and retrieval agents that access and synthesize information. Additionally, we'll cover the orchestration of mutiple agents, the integration of vision capabilities and web browsing to unlock new possibilities for dynamic and context-aware applications.
 
 In this unit, Alfred, the agent from Unit 1, makes his return. This time, he’s using the `smolagents` framework for his internal workings. Together, we’ll explore the key concepts behind this framework as Alfred tackles various tasks. Alfred is organizing a party at the Wayne Manor while the Wayne family 🦇 is away, and he has plenty to do. Join us as we showcase his journey and how he handles these tasks with `smolagents`!
 
@@ -16,11 +16,11 @@ In this unit, Alfred, the agent from Unit 1, makes his return. This time, he’s
 
 ### 1️⃣ [Why Use smolagents](./why_use_smolagents)
 
-`smolagents` is one of the many open-source agent frameworks available for application development. Alternative options include `LlamaIndex` and `LangGraph`, which are also covered in other modules in this course. This library offers several key features that might make it a great fit for specific use cases, but there are also some limitations that may lead you to consider other solutions. This module explores the advantages and drawbacks of using `smolagents`, helping you make an informed decision based on your project's requirements.
+`smolagents` is one of the many open-source agent frameworks available for application development. Alternative options include `LlamaIndex` and `LangGraph`, which are also covered in other modules in this course. This library offers several key features that might make it a great fit for specific use cases, but we should always consider all options when selecting a framework. This module explores the advantages and drawbacks of using `smolagents`, helping you make an informed decision based on your project's requirements.
 
 ### 2️⃣ [CodeAgents](./code_agents)
 
-`CodeAgents` are the primary type of agent in **smolagents**. Instead of generating JSON or text blobs, these agents produce Python code to perform actions. This module explores their purpose, functionality, and how they work, along with hands-on examples to showcase their capabilities.  
+`CodeAgents` are the primary type of agent in **smolagents**. Instead of generating JSON or text, these agents produce Python code to perform actions. This module explores their purpose, functionality, and how they work, along with hands-on examples to showcase their capabilities.  
 
 ### 3️⃣ [ToolCallingAgents](./tool_calling_agents)
 
