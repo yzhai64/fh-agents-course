@@ -1,5 +1,7 @@
 # Vision Agents with SmolAgents
 
+<!-- TODO: @sergiopaniego add section -->
+
 Empowering agents with visual capabilities is crucial for solving tasks that require more than text processing. Many real-world challenges, such as web browsing or document understanding, involve analyzing rich visual content. Fortunately, `smolagents` provides built-in support for vision.
 
 ## How to Interact with a Vision Agent
@@ -57,3 +59,4 @@ agent = CodeAgent(
 ## Further Reading
 
 * [We just gave sight to smolagents](https://huggingface.co/blog/smolagents-can-see)
+* https://huggingface.co/docs/smolagents/examples/web_browser

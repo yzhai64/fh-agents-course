@@ -44,14 +44,14 @@
     title: Get Your Certificate
   - local: unit1/conclusion
     title: Conclusion
-- title: Unit 2. Frameworks
+- title: Unit 2.1 The smolagents framework
   sections:
   - local: unit2/introduction
-    title: Introduction
+    title: Frameworks for AI Agents
   - local: unit2/smolagents/introduction
     title: Introduction to smolagents
   - local: unit2/smolagents/why_use_smolagents
-    title: Why Use smolagents
+    title: Why use smolagents? 
   - local: unit2/smolagents/code_agents
     title: Building Agents That Use Code
   - local: unit2/smolagents/tool_calling_agents
@@ -62,12 +62,8 @@
     title: Retrieval Agents
   - local: unit2/smolagents/multi_agent_systems
     title: Multi-Agent Systems
-  - local: unit2/smolagents/multiagent
-    title: Multi-Agent Systems notebook
   - local: unit2/smolagents/vision_agents
-    title: Vision Agents
-  - local: unit2/smolagents/browser_agents
-    title: Browser Agents
+    title: Vision and Browser agents
 - title: When the next steps are published?
   sections:
   - local: communication/next-units

@@ -62,7 +62,7 @@ from huggingface_hub import notebook_login
 notebook_login()
 ```
 
-### Selecting a playlist for the party using `smolagents`
+### Selecting a Playlist for the Party Using `smolagents`
 
 An important part of a successful party is the music. Alfred needs some help selecting the playlist, and we're covered using `smolagents`. We can build an agent capable of searching the web using DuckDuckGo. To give the agent access to this tool, we include it in the tool list when creating the agent.
 
@@ -161,9 +161,124 @@ These examples are just the beginning of what you can do with code agents, and w
 
 smolagents specializes in agents that write and execute Python code snippets, offering sandboxed execution for security. It supports both open-source and proprietary language models, making it adaptable to various development environments.
 
-### Share an Agent to the Hub
+### Sharing Our Custom Party Preparator Agent to the Hub
 
-TODO
+Wouldn't it be amazing to share the Alfred agent with the community? By doing so, anyone can easily download and use the agent directly from the Hub, bringing the ultimate party preparator of Gotham to their fingertips! Let’s make it happen! 🎉
+
+The `smolagents` library makes this possible by allowing you to share a complete agent with the community and download others for immediate use. It's as simple as the following:
+
+
+```python
+# Change to your username and repo name
+agent.push_to_hub('sergiopaniego/AlfredAgent')
+```
+
+To download the agent, use this:
+
+```python
+# Change to your username and repo name
+alfred_agent = agent.from_hub('sergiopaniego/AlfredAgent')
+
+alfred_agent.run("Give me best playlist for a party at the Wayne's mansion. The party idea is a 'villain masquerade' theme")
+```
+
+What’s also exciting is that shared agents are directly available as HF Spaces, allowing you to interact with them in real-time. You can explore other agents [here](https://huggingface.co/spaces/davidberenstein1957/smolagents-and-tools).
+
+For example, the _AlfredAgent_ is available [here](https://huggingface.co/spaces/sergiopaniego/AlfredAgent). You can try it out directly below:
+
+<iframe
+	src="https://sergiopaniego-alfredagent.hf.space/"
+	frameborder="0"
+	width="850"
+	height="450"
+></iframe>
+
+Now, you may be wondering—how did Alfred build such an agent using `smolagents`? By integrating several tools, he can generate an agent as follows. Don’t worry about the tools for now, as we’ll have a dedicated section later in this unit to explore that in detail:
+
+```python
+from smolagents import CodeAgent, DuckDuckGoSearchTool, HfApiModel, VisitWebpageTool, FinalAnswerTool, Tool, tool
+
+@tool
+def suggest_menu(occasion: str) -> str:
+    """
+    Suggests a menu based on the occasion.
+    Args:
+        occasion: The type of occasion for the party.
+    """
+    if occasion == "casual":
+        return "Pizza, snacks, and drinks."
+    elif occasion == "formal":
+        return "3-course dinner with wine and dessert."
+    elif occasion == "superhero":
+        return "Buffet with high-energy and healthy food."
+    else:
+        return "Custom menu for the butler."
+
+@tool
+def catering_service_tool(query: str) -> str:
+    """
+    This tool returns the highest-rated catering service in Gotham City.
+    
+    Args:
+        query: A search term for finding catering services.
+    """
+    # Example list of catering services and their ratings
+    services = {
+        "Gotham Catering Co.": 4.9,
+        "Wayne Manor Catering": 4.8,
+        "Gotham City Events": 4.7,
+    }
+    
+    # Find the highest rated catering service (simulating search query filtering)
+    best_service = max(services, key=services.get)
+    
+    return best_service
+
+class SuperheroPartyThemeTool(Tool):
+    name = "superhero_party_theme_generator"
+    description = """
+    This tool suggests creative superhero-themed party ideas based on a category.
+    It returns a unique party theme idea."""
+    
+    inputs = {
+        "category": {
+            "type": "string",
+            "description": "The type of superhero party (e.g., 'classic heroes', 'villain masquerade', 'futuristic Gotham').",
+        }
+    }
+    
+    output_type = "string"
+
+    def forward(self, category: str):
+        themes = {
+            "classic heroes": "Justice League Gala: Guests come dressed as their favorite DC heroes with themed cocktails like 'The Kryptonite Punch'.",
+            "villain masquerade": "Gotham Rogues' Ball: A mysterious masquerade where guests dress as classic Batman villains.",
+            "futuristic Gotham": "Neo-Gotham Night: A cyberpunk-style party inspired by Batman Beyond, with neon decorations and futuristic gadgets."
+        }
+        
+        return themes.get(category.lower(), "Themed party idea not found. Try 'classic heroes', 'villain masquerade', or 'futuristic Gotham'.")
+
+
+# Alfred, the butler, preparing the menu for the party
+agent = CodeAgent(
+    tools=[
+        DuckDuckGoSearchTool(), 
+        VisitWebpageTool(),
+        suggest_menu,
+        catering_service_tool,
+        SuperheroPartyThemeTool()
+        ], 
+    model=HfApiModel(),
+    max_steps=10,
+    verbosity_level=2
+)
+
+agent.run("Give me best playlist for a party at the Wayne's mansion. The party idea is a 'villain masquerade' theme")
+```
+
+As you can see, we've created a `CodeAgent` with several tools that enhance the agent's functionality, turning it into the ultimate party preparator ready to share with the community! 🎉
+
+As a challenge, it's your turn: build your own agent and share it with the community using the knowledge we've just learned! 🕵️‍♂️💡
 
 ## Resources
 
