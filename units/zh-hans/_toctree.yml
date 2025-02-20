@@ -44,17 +44,17 @@
     title: 获取你的证书
   - local: unit1/conclusion
     title: 结论
-- title: Bonus Unit 1. Fine-tuning an LLM for Function-calling
+- title: 附加单元 1. 为函数调用微调大型语言模型
   sections:
   - local: bonus-unit1/introduction
-    title: Introduction
+    title: 简介
   - local: bonus-unit1/what-is-function-calling
-    title: What is Function Calling?
+    title: 什么是函数调用？
   - local: bonus-unit1/fine-tuning
-    title: Let's Fine-Tune your model for Function-calling
+    title: 让我们为函数调用微调模型
   - local: bonus-unit1/conclusion
-    title: Conclusion
-- title: When the next steps are published?
+    title: 结论
+- title: 后续内容何时发布？
   sections:
   - local: communication/next-units
-    title: Next Units
+    title: 后续单元
