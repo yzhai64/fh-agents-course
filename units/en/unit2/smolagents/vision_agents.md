@@ -1,5 +1,9 @@
 # Vision Agents with smolagents
 
+<Tip>
+🚨 **WARNING**: The examples shown in this sectino require access to a powerful VLM model to run. We tested it using GPT-4o API.
+</Tip>
+
 Empowering agents with visual capabilities is crucial for solving tasks that go beyond text processing. Many real-world challenges, such as web browsing or document understanding, require analyzing rich visual content. Fortunately, `smolagents` provides built-in support for vision (VLMs), enabling agents to process and interpret images effectively.  
 
 In this example, imagine Alfred, the butler at Wayne Manor, is tasked with verifying the identities of the guests attending tje party. As you can imagine, Alfred may not be familiar with everyone arriving. To help him, we can use an agent that verifies their identity by searching for visual information about their appearance using a Vision Language Model (VLM). This will allow Alfred to make informed decisions about who can enter. Let's build this example!
@@ -12,18 +16,14 @@ In this approach, images are passed to the agent at the start and stored as `tas
 
 Consider the case where Alfred wants to verify the identities of the superheroes attending the party. He already has a dataset of images from previous parties with the names of the guests. Given a new visitor's image, the agent can compare it with the existing dataset and make a decision about letting them in.  
 
-In this case, a guest is trying to enter, and Alfred suspects that this visitor might be The Joker. Alfred needs to verify their identity to prevent anyone unwanted from entering.  
+In this case, a guest is trying to enter, and Alfred suspects that this visitor might be The Joker impersonating Wonder Woman. Alfred needs to verify their identity to prevent anyone unwanted from entering.  
 
 Let’s build the example:
 
-
 ```python
-from smolagents import CodeAgent, HfApiModel, OpenAIServerModel
+from smolagents import CodeAgent, OpenAIServerModel
 
 model = OpenAIServerModel(model_id="gpt-4o")
-
-#model_id = "Qwen/Qwen2.5-VL-72B-Instruct"  # Update with preferred VLM
-#model = HfApiModel(model_id)
 
 # Instantiate the agent
 agent = CodeAgent(
@@ -36,13 +36,10 @@ agent = CodeAgent(
 # Run the agent with a manufacturing quality check task
 response = agent.run(
     """
-    I am Alfred, the butler of Wayne Manor, responsible for verifying the identity of guests at party. 
-    A superhero has arrived at the entrance claiming to be Wonder Woman, but I need to confirm if she is who she says she is. I think he is actually The Joker and he's lying.
-    Compare the visitor's appearance with the provided reference images of The Joker.
-    The first is an image of The Joker from the dataset I have, and the second image is of the visitor.
-    Describe any differences or similarities in detail to verify their identity. Compare them and tell me if the guest is The Joker or Wonder Woman
+    Describe the costume and makeup that the comic character in these photos is wearing and return the description.
+    Tell me if the guest is The Joker or Wonder Woman.
     """,
-    images=[reference_image, visitor_image]
+    images=images
 )
 ```
 
@@ -131,6 +128,7 @@ Now, we can generate our vision agent for browsing the web, providing it with th
 
 
 ```python
+from smolagents import CodeAgent, OpenAIServerModel, DuckDuckGoSearchTool
 model = OpenAIServerModel(model_id="gpt-4o")
 
 agent = CodeAgent(
@@ -159,6 +157,6 @@ With all of that, we've successfully created our identity verifier for the party
 
 ## Further Reading
 
-* [We just gave sight to smolagents](https://huggingface.co/blog/smolagents-can-see)
-* https://huggingface.co/docs/smolagents/examples/web_browser
-* https://github.com/huggingface/smolagents/blob/main/src/smolagents/vision_web_browser.py
+- [We just gave sight to smolagents](https://huggingface.co/blog/smolagents-can-see) - Blog describing the vision agent functionality.
+- [Web Browser Automation with Agents 🤖🌐](https://huggingface.co/docs/smolagents/examples/web_browser) - Example for Web browsing using a vision agent.
+- [Web Browser Vision Agent Example](https://github.com/huggingface/smolagents/blob/main/src/smolagents/vision_web_browser.py) - Example for Web browsing using a vision agent.
