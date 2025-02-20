@@ -6,7 +6,7 @@ This module covers how to build effective agents using the [`smolagents`](https:
 
 ## Module Overview
 
-This module provides a comprehensive overview of key concepts and practical strategies for building intelligent agents using smolagents. With so many open-source frameworks available, it's essential to understand the components and capabilities that make smolagents a useful option, or to determine when another solution might be a better fit. We'll explore critical agent types, including code agents designed for software development tasks, tool calling agents for creating modular, function-driven workflows and retrieval agents that access and synthesize information. Additionally, we'll cover the orchestration of mutiple agents, the integration of vision capabilities and web browsing to unlock new possibilities for dynamic and context-aware applications.
+This module provides a comprehensive overview of key concepts and practical strategies for building intelligent agents using `smolagents`. With so many open-source frameworks available, it's essential to understand the components and capabilities that make `smolagents` a useful option or to determine when another solution might be a better fit. We'll explore critical agent types, including code agents designed for software development tasks, tool calling agents for creating modular, function-driven workflows and retrieval agents that access and synthesize information. Additionally, we'll cover the orchestration of multiple agents and the integration of vision capabilities and web browsing to unlock new possibilities for dynamic and context-aware applications.
 
 In this unit, Alfred, the agent from Unit 1, makes his return. This time, he’s using the `smolagents` framework for his internal workings. Together, we’ll explore the key concepts behind this framework as Alfred tackles various tasks. Alfred is organizing a party at the Wayne Manor while the Wayne family 🦇 is away, and he has plenty to do. Join us as we showcase his journey and how he handles these tasks with `smolagents`!
 
@@ -20,11 +20,11 @@ In this unit, Alfred, the agent from Unit 1, makes his return. This time, he’s
 
 ### 2️⃣ [CodeAgents](./code_agents)
 
-`CodeAgents` are the primary type of agent in **smolagents**. Instead of generating JSON or text, these agents produce Python code to perform actions. This module explores their purpose, functionality, and how they work, along with hands-on examples to showcase their capabilities.  
+`CodeAgents` are the primary type of agent in `smolagents`. Instead of generating JSON or text, these agents produce Python code to perform actions. This module explores their purpose, functionality, and how they work, along with hands-on examples to showcase their capabilities.  
 
 ### 3️⃣ [ToolCallingAgents](./tool_calling_agents)
 
-`ToolCallingAgents` are the second type of agent supported by **smolagents**. Unlike `CodeAgents`, which generate Python code, these agents rely on JSON/text blobs that the system must parse and interpret to execute actions. This module covers their functionality, key differences from `CodeAgents`, and provides a coding example to illustrate their use.  
+`ToolCallingAgents` are the second type of agent supported by `smolagents. Unlike `CodeAgents`, which generate Python code, these agents rely on JSON/text blobs that the system must parse and interpret to execute actions. This module covers their functionality, their key differences from `CodeAgents`, and it provides a coding example to illustrate their usage.  
 
 ### 4️⃣ [Tools](./tools)
 
