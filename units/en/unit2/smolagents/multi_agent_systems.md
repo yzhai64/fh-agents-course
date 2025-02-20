@@ -24,7 +24,7 @@ For example, a **Multi-Agent RAG system** can integrate:
 
 All of these agents operate under an orchestrator that manages task delegation and interaction.  
 
-# Solving a complex task with a multi-agent hierarchy
+## Solving a complex task with a multi-agent hierarchy
 
 The reception is approaching! With your help, Alfred is now nearly finished with the preparations.
 
