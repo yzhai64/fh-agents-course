@@ -10,7 +10,7 @@ However, when the workflow becomes more complex, such as letting an LLM call fun
 
 Considering these ideas, we can already identify the need for some features:
 
-* An LLM engine powering the system.
+* An LLM engine that powers the system.
 * A list of tools the agent can access.
 * A parser for extracting tool calls from the LLM output.
 * A system prompt synced with the parser.
@@ -21,4 +21,4 @@ Considering these ideas, we can already identify the need for some features:
 
 | Framework  | Description | Unit Author |
 |------------|----------------|----------------|
-| [smolagents](./smolagents/introduction) | Agents framework developed by Hugging Face. | Sergio Paniego - [HF](https://huggingface.co/burtenshaw) - [X](https://x.com/ben_burtenshaw) - [Linkedin](https://www.linkedin.com/in/ben-burtenshaw/) |
+| [smolagents](./smolagents/introduction) | Agents framework developed by Hugging Face. | Sergio Paniego - [HF](https://huggingface.co/sergiopaniego) - [X](https://x.com/sergiopaniego) - [Linkedin](https://www.linkedin.com/in/sergio-paniego-blanco) |
