@@ -153,7 +153,8 @@ Thanks to these quick changes, we obtained a much more concise report by simply 
 💸 But as you can see, the context window is quickly filling up. So **if we ask our agent to combine the results of detailed search with another, it will be slower and quickly ramp up tokens and costs**.
 
 ➡️ We need to improve the structure of our system.
-## ✌️ Splitting the task between two agents
+
+### ✌️ Splitting the task between two agents
 
 Multi-agent structures allow to separate memories between different sub-tasks, with two great benefits:
 - Each agent is more focused on its core task, thus more performant
