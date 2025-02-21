@@ -27,6 +27,14 @@ Ba thành phần này kết hợp với nhau trong một vòng lặp liên tục
 
 Trực quan, quy trình trông như thế này:
 
+Chú thích hình ảnh:
+- Query: truy vấn từ phía người dùng
+- Think: lập luận bởi Agent
+- Act: hành động của Agent
+- Observe: phản hồi từ môi trường
+- END: kết thúc chu kỳ
+- Finish or Another Action needed?: xác định xem chu kỳ đã hoàn thành hay cần thêm hành động
+
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/AgentCycle.gif" alt="Chu kỳ Think, Act, Observe"/>
 
 Trong nhiều framework Agent, **các quy tắc và hướng dẫn được nhúng trực tiếp vào system prompt**, đảm bảo mọi chu kỳ tuân theo logic định sẵn.
@@ -34,6 +42,16 @@ Trong nhiều framework Agent, **các quy tắc và hướng dẫn được nhú
 Phiên bản đơn giản hóa của system prompt có thể như sau:
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/system_prompt_cycle.png" alt="Chu kỳ Think, Act, Observe"/>
+
+> Bạn là một trợ lý AI được thiết kế để giúp người dùng một cách hiệu quả và chính xác. Mục tiêu chính của bạn là cung cấp các câu trả lời hữu ích, chính xác và rõ ràng.
+> 
+> Bạn có quyền truy cập vào các công cụ sau:  
+> Tên công cụ: calculator, Mô tả: Nhân hai số nguyên., Tham số: a: int, b: int, Đầu ra: int  
+> 
+> Bạn nên suy nghĩ từng bước để hoàn thành mục tiêu với lập luận được chia thành các phần Suy nghĩ/Hành động/Quan sát > có thể lặp lại nhiều lần nếu cần thiết.  
+> 
+> Trước tiên, bạn nên phản ánh bằng ‘Suy nghĩ: {your_thoughts}’ về tình huống hiện tại, sau đó (nếu cần), gọi một công cụ với định dạng JSON thích hợp ‘Hành động: {JSON_BLOB}’, hoặc in câu trả lời cuối cùng của bạn bắt đầu với tiền tố ‘Câu trả lời cuối cùng:’
+
 
 Ta thấy ở System Message đã định nghĩa:
 

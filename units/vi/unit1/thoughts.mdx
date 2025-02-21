@@ -16,27 +16,27 @@ Thông qua quá trình này, agent có thể **chia nhỏ các vấn đề phứ
 
 Dưới đây là một số ví dụ về các loại tư duy phổ biến:
 
-| Loại tư duy | Ví dụ |
-|----------------|---------|
-| Lập kế hoạch | "I need to break this task into three steps: 1) gather data, 2) analyze trends, 3) generate report" |
-| Phân tích | "Based on the error message, the issue appears to be with the database connection parameters" |
-| Ra quyết định | "Given the user's budget constraints, I should recommend the mid-tier option" |
-| Giải quyết vấn đề | "To optimize this code, I should first profile it to identify bottlenecks" |
-| Tích hợp bộ nhớ | "The user mentioned their preference for Python earlier, so I'll provide examples in Python" |
-| Tự phản ánh | "My last approach didn't work well, I should try a different strategy" |
-| Thiết lập mục tiêu | "To complete this task, I need to first establish the acceptance criteria" |
-| Ưu tiên hóa | "The security vulnerability should be addressed before adding new features" |
+| Loại tư duy          | Ví dụ |
+|----------------------|---------|
+| Lập kế hoạch        | "Tôi cần chia nhiệm vụ này thành ba bước: 1) thu thập dữ liệu, 2) phân tích xu hướng, 3) tạo báo cáo" |
+| Phân tích           | "Dựa trên thông báo lỗi, vấn đề có vẻ liên quan đến tham số kết nối cơ sở dữ liệu" |
+| Ra quyết định       | "Với hạn chế về ngân sách của người dùng, tôi nên đề xuất tùy chọn tầm trung" |
+| Giải quyết vấn đề   | "Để tối ưu hóa đoạn mã này, tôi nên chạy phân tích hiệu suất để xác định điểm nghẽn" |
+| Tích hợp bộ nhớ     | "Người dùng đã đề cập rằng họ thích Python trước đó, vì vậy tôi sẽ cung cấp ví dụ bằng Python" |
+| Tự phản ánh         | "Cách tiếp cận trước của tôi không hiệu quả, tôi nên thử một chiến lược khác" |
+| Thiết lập mục tiêu  | "Để hoàn thành nhiệm vụ này, tôi cần xác định tiêu chí chấp nhận trước tiên" |
+| Ưu tiên hóa         | "Lỗ hổng bảo mật cần được giải quyết trước khi thêm tính năng mới" |
 
 > **Lưu ý:** Trường hợp với các LLM đã được fine-tuning (tinh chỉnh) cho function-calling, quá trình tư duy là tùy chọn.
 > *Nếu bạn chưa quen với function-calling, sẽ có thêm chi tiết trong phần Hành động.*
 
 ## Phương pháp Re-Act
 
-Một phương pháp quan trọng là **ReAct approach**, kết hợp giữa "Lập luận" (Think) và "Hành động" (Act).
+Một phương pháp quan trọng là **ReAct**, kết hợp giữa "Lập luận / Suy nghĩ" (Think) và "Hành động" (Act).
 
-ReAct là kỹ thuật prompting đơn giản bằng cách thêm "Let's think step by step" (hãy suy nghĩ tường bước một) trước khi để LLM giải mã các token tiếp theo.
+ReAct là kỹ thuật prompting đơn giản bằng cách thêm "Let's think step by step" (hãy suy nghĩ từng bước một) trước khi để LLM giải mã các token tiếp theo.
 
-Việc nhắc model suy nghĩ "từng bước" thực sự khuyến khích quá trình giải mã tạo ra **một kế hoạch**, thay vì giải pháp cuối cùng ngay lập tức, vì model được khuyến khích **phân rã** vấn đề thành các *nhiệm vụ con*.
+Việc nhắc model suy nghĩ "từng bước" thực sự khuyến khích quá trình giải mã tạo ra **một kế hoạch**, thay vì giải pháp cuối cùng ngay lập tức, vì model được khuyến khích **chia nhỏ** vấn đề thành các *nhiệm vụ con*.
 
 Cách này cho phép model xem xét các bước con chi tiết hơn, thường dẫn đến ít lỗi hơn so với việc cố gắng tạo ra giải pháp cuối cùng trực tiếp.
 
