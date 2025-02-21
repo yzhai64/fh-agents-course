@@ -5,7 +5,7 @@
   - local: unit0/onboarding
     title: Làm quen
   - local: unit0/discord101
-    title: (Tùy chọn) Discord 101 (Giới thiệu cơ bản về Discord)
+    title: (Bổ trợ) Discord 101 (Giới thiệu cơ bản về Discord)
 - title: Live 1. Cách khóa học vận hành và Hỏi và Đáp
   sections:
   - local: communication/live1
@@ -15,19 +15,19 @@
   - local: unit1/introduction
     title: Giới thiệu
   - local: unit1/what-are-agents
-    title: Agent (tác nhân) là gì?
+    title: Agent là gì?
   - local: unit1/quiz1
     title: Kiểm tra nhanh 1
   - local: unit1/what-are-llms
-    title: LLM (Large Language Model) là gì?
+    title: LLM là gì?
   - local: unit1/messages-and-special-tokens
-    title: Messages và Special Token (Token đặc biệt)
+    title: Tin nhắn và Special Token
   - local: unit1/tools
-    title: Tools (công cụ) là gì?
+    title: Tools là gì?
   - local: unit1/quiz2
     title: Kiểm tra nhanh 2
   - local: unit1/agent-steps-and-structure
-    title: Hiểu về AI Agents qua chu kỳ Thought-Action-Observation (Suy nghĩ - Hành động - Quan sát)
+    title: Hiểu về AI Agents qua chu kỳ Thought-Action-Observation
   - local: unit1/thoughts
     title: Suy nghĩ, Lập luận nội bộ và Phương pháp Re-Act
   - local: unit1/actions
@@ -42,14 +42,14 @@
     title: Bài kiểm tra cuối Chương 1
   - local: unit1/conclusion
     title: Kết luận
-- title: Chương Thêm 1. Tinh chỉnh LLM cho Function-calling
+- title: Chương Bổ Trợ 1. Tinh chỉnh LLM cho Function-calling
   sections:
   - local: bonus-unit1/introduction
     title: Giới thiệu
   - local: bonus-unit1/what-is-function-calling
     title: Function Calling là gì?
   - local: bonus-unit1/fine-tuning
-    title: Hãy fine-tuning (tinh chỉnh) model cho Function-calling
+    title: Hãy fine-tuning model cho Function-calling
   - local: bonus-unit1/conclusion
     title: Kết luận
 - title: Khi nào các bước tiếp theo được công bố?

@@ -1,12 +1,12 @@
-# Thông điệp và Special Token (Token đặc biệt)
+# Tin nhắn và Special Token
 
 Giờ ta đã hiểu cách LLM (Language Model) hoạt động, hãy cùng xem **cách chúng tổ chức các phản hồi thông qua chat templates**.
 
 Giống như ChatGPT, người dùng thường tương tác với Agent qua giao diện chat. Do đó, ta cần hiểu cách LLM quản lý các cuộc hội thoại.
 
-> **Q**: Nhưng... Khi tôi dùng ChatGPT/Hugging Chat, tôi đang trò chuyện bằng các Message chứ không phải một prompt đơn lẻ?
+> **Hỏi**: Nhưng... Khi tôi dùng ChatGPT/Hugging Chat, tôi đang trò chuyện bằng các Message (Tin nhắn) chứ không phải một prompt (một lệnh) đơn lẻ?
 >
-> **A**: Đúng vậy! Nhưng đây thực chất là một lớp UI. Trước khi đưa vào LLM, tất cả message được nối thành một prompt duy nhất. Model không "nhớ" cuộc hội thoại: nó đọc lại toàn bộ mỗi lần.
+> **Đáp**: Đúng vậy! Nhưng đây thực chất là một lớp UI. Trước khi đưa vào LLM, tất cả message được nối thành một prompt duy nhất. Model không "nhớ" cuộc hội thoại: nó đọc lại toàn bộ mỗi lần.
 
 Cho đến nay, ta đã xem prompt như một chuỗi token đầu vào. Nhưng khi chat với hệ thống như ChatGPT hay HuggingChat, **bạn thực sự đang trao đổi các message**. Đằng sau hậu trường, các message này được **ghép nối và định dạng thành prompt mà model có thể hiểu**.
 
@@ -16,13 +16,13 @@ Cho đến nay, ta đã xem prompt như một chuỗi token đầu vào. Nhưng 
 </figcaption>
 </figure>
 
-Đây là lúc chat templates phát huy tác dụng. Chúng đóng vai trò **cầu nối giữa message hội thoại (lượt người dùng và trợ lý) với yêu cầu định dạng đặc thù** của LLM bạn chọn. Nói cách khác, chat templates cấu trúc giao tiếp giữa người dùng và agent, đảm bảo mọi model - dù có Special Token riêng - đều nhận được prompt đúng định dạng.
+Đây là lúc chat templates phát huy tác dụng. Chúng đóng vai trò **cầu nối giữa message hội thoại (lượt người dùng và trợ lý) với yêu cầu định dạng đặc thù** của LLM bạn chọn. Nói cách khác, chat templates cấu trúc giao tiếp giữa người dùng và agent, đảm bảo mọi model - dù có **Special Token (Token đặc biệt)** riêng - đều nhận được prompt đúng định dạng.
 
 Ta lại nói về Special Token vì đây là cách model xác định điểm bắt đầu/kết thúc các lượt hội thoại. Giống như mỗi LLM dùng EOS (End Of Sequence) token riêng, chúng cũng có quy tắc định dạng và dấu phân cách khác nhau cho các message.
 
 
 ## Message: Hệ thống cốt lõi của LLM
-### System Message (Thông điệp hệ thống)
+### System Message (Tin nhắn hệ thống)
 
 System Message (còn gọi là System Prompt) định nghĩa **cách model nên hành xử**. Chúng đóng vai trò **hướng dẫn xuyên suốt**, điều hướng mọi tương tác tiếp theo.
 
