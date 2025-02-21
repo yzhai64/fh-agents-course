@@ -6,19 +6,19 @@
 
 为了解释什么是智能体，我们先从一个类比开始。
 
-## 整体概览：智能体Alfred
+## 整体概览：智能体 Alfred
 
-来见见Alfred。Alfred是一个**智能体**。
+来见见 Alfred。Alfred 是一个**智能体**。
 
-<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/this-is-alfred.jpg" alt="这是Alfred"/>
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/this-is-alfred.jpg" alt="这是 Alfred"/>
 
-想象Alfred**收到一个指令**，比如：“Alfred，我想来杯咖啡。”
+想象 Alfred**收到一个指令**，比如：“Alfred，我想来杯咖啡。”
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/coffee-please.jpg" alt="我想来杯咖啡"/>
 
-因为Alfred**理解自然语言**，他很快就明白了我们的请求。
+因为 Alfred **理解自然语言**，他很快就明白了我们的请求。
 
-在完成任务之前，Alfred会进行**推理和规划**，弄清楚他需要的步骤和工具：
+在完成任务之前，Alfred 会进行**推理和规划**，弄清楚他需要的步骤和工具：
 
 1. 去厨房  
 2. 使用咖啡机  
@@ -33,7 +33,7 @@
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/make-coffee.jpg" alt="煮咖啡"/>
 
-最后，Alfred把刚煮好的咖啡拿给我们。
+最后，Alfred 把刚煮好的咖啡拿给我们。
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/bring-coffee.jpg" alt="拿咖啡"/>
 
@@ -51,9 +51,9 @@
 
 可以把智能体想象成有两个主要部分：
 
-1. **大脑（AI模型）**
+1. **大脑（AI 模型）**
 
-这是所有思考发生的地方。AI模型**负责推理和规划**。它根据情况决定**采取哪些行动**。
+这是所有思考发生的地方。AI 模型**负责推理和规划**。它根据情况决定**采取哪些行动**。
 
 2. **身体（能力和工具）**
 
@@ -61,23 +61,23 @@
 
 **可能行动的范围**取决于智能体**被配备了什么**。例如，因为人类没有翅膀，所以他们不能执行“飞”这个**行动**，但他们可以执行“走”、“跑”、“跳”、“抓”等**行动**。
 
-## 我们为智能体使用什么类型的AI模型？
+## 我们为智能体使用什么类型的 AI 模型？
 
-智能体中最常见的AI模型是LLM（大型语言模型），它接受**文本**作为输入，并输出**文本**。
+智能体中最常见的 AI 模型是 LLM（大型语言模型），它接受**文本**作为输入，并输出**文本**。
 
-知名的例子包括**OpenAI**的**GPT4**、**Meta**的**LLama**、**Google**的**Gemini**等。这些模型已经经过大量文本的训练，并且具有很好的泛化能力。我们将在[下一节](what-are-llms)中更深入地了解LLM。
+知名的例子包括**OpenAI** 的 **GPT4**、**Meta** 的 **LLama**、**Google** 的 **Gemini** 等。这些模型已经经过大量文本的训练，并且具有很好的泛化能力。我们将在[下一节](what-are-llms)中更深入地了解 LLM。
 
 <Tip>
-也可以使用接受其他输入作为智能体核心模型的模型。例如，视觉语言模型（VLM），它就像LLM一样，但也能理解图像作为输入。我们现在将重点关注LLM，稍后再讨论其他选项。
+也可以使用接受其他输入作为智能体核心模型的模型。例如，视觉语言模型（VLM），它就像 LLM 一样，但也能理解图像作为输入。我们现在将重点关注 LLM，稍后再讨论其他选项。
 </Tip>
 
-## AI如何在环境中采取行动？
+## AI 如何在环境中采取行动？
 
-LLM是令人惊叹的模型，但**它们只能生成文本**。
+LLM 是令人惊叹的模型，但**它们只能生成文本**。
 
-然而，如果你让像HuggingChat或ChatGPT这样的知名聊天应用程序生成图像，它们却可以做到！这是怎么可能的？
+然而，如果你让像 HuggingChat 或 ChatGPT 这样的知名聊天应用程序生成图像，它们却可以做到！这是怎么可能的？
 
-答案是，HuggingChat、ChatGPT和类似应用程序的开发者实现了额外的功能（称为**工具**），LLM可以利用这些工具来创建图像。
+答案是，HuggingChat、ChatGPT 和类似应用程序的开发者实现了额外的功能（称为**工具**），LLM 可以利用这些工具来创建图像。
 
 <figure>
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/eiffel_brocolis.jpg" alt="埃菲尔铁塔与西兰花"/>
@@ -91,7 +91,7 @@ LLM是令人惊叹的模型，但**它们只能生成文本**。
 
 智能体可以通过**工具**执行我们实现的任何任务来完成**行动**。
 
-例如，如果我编写一个智能体作为我电脑上的个人助理（像Siri一样），并且我让它“给我的经理发一封邮件，要求推迟今天的会议”，我可以给它一些发送邮件的代码。这将是一个新的工具，智能体在需要发送邮件时可以随时使用。我们可以用Python编写它：
+例如，如果我编写一个智能体作为我电脑上的个人助理（像 Siri 一样），并且我让它“给我的经理发一封邮件，要求推迟今天的会议”，我可以给它一些发送邮件的代码。这将是一个新的工具，智能体在需要发送邮件时可以随时使用。我们可以用 Python 编写它：
 
 ```python
 def send_message_to(recipient, message):

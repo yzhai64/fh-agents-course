@@ -1,6 +1,6 @@
 # 目录
 
-您可以在 hf.co/learn 上访问第1单元 👉 <a href="https://hf.co/learn/agents-course/unit1/introduction">此处</a>
+您可以在 hf.co/learn 上访问第 1 单元 👉 <a href="https://hf.co/learn/agents-course/unit1/introduction">此处</a>
 
 <!--
 | 标题 | 描述 |

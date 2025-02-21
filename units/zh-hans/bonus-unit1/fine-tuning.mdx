@@ -8,11 +8,11 @@
 
 模型训练可以分为3个步骤：
 
-1. **模型在大量数据上进行预训练(pretrained)**。这一步的输出是一个**预训练模型(pre-trained model)**。例如 [google/gemma-2-2b](https://huggingface.co/google/gemma-2-2b)。这是一个基础模型，只知道**如何预测下一个词元(token)，而没有良好的指令跟随能力**。
+1. **模型在大量数据上进行预训练 (pretrained)**。这一步的输出是一个**预训练模型 (pre-trained model)**。例如 [google/gemma-2-2b](https://huggingface.co/google/gemma-2-2b)。这是一个基础模型，只知道**如何预测下一个词元(token)，而没有良好的指令跟随能力**。
 
-2. 然后，为了在对话环境中发挥作用，模型需要进行**微调(fine-tuned)**以遵循指令。在这一步中，可以由模型创建者、开源社区、你或任何人进行训练。例如 [google/gemma-2-2b-it](https://huggingface.co/google/gemma-2-2b-it) 是由 Gemma 项目背后的谷歌团队进行的指令微调模型。
+2. 然后，为了在对话环境中发挥作用，模型需要进行**微调 (fine-tuned)**以遵循指令。在这一步中，可以由模型创建者、开源社区、你或任何人进行训练。例如 [google/gemma-2-2b-it](https://huggingface.co/google/gemma-2-2b-it) 是由 Gemma 项目背后的谷歌团队进行的指令微调模型。
 
-3. 然后可以将模型**对齐(aligned)**到创建者的偏好。例如，一个必须永远不能对客户无礼的客户服务聊天模型。
+3. 然后可以将模型**对齐 (aligned)**到创建者的偏好。例如，一个必须永远不能对客户无礼的客户服务聊天模型。
 
 通常，像 Gemini 或 Mistral 这样的完整产品**会经历所有这3个步骤**，而你在 Hugging Face 上找到的模型可能已经经过了这些训练步骤中的一个或多个。
 

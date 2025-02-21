@@ -1,26 +1,26 @@
 # 消息和特殊令牌 (Messages and Special Tokens)
 
-现在我们了解了LLMs是如何工作的，让我们来看看**它们如何通过聊天模板 (chat templates) 构建生成内容**。
+现在我们了解了 LLMs 是如何工作的，让我们来看看**它们如何通过聊天模板 (chat templates) 构建生成内容**。
 
-就像使用ChatGPT一样，用户通常通过聊天界面智能体交互。因此，我们需要理解LLMs如何管理聊天。
+就像使用 ChatGPT 一样，用户通常通过聊天界面与智能体交互。因此，我们需要理解 LLMs 如何管理聊天。
 
-> **问**: 但是...当我与ChatGPT/Hugging Chat交互时，我是使用聊天消息进行对话，而不是单个提示序列
+> **问**: 但是...当我与 ChatGPT/Hugging Chat 交互时，我是使用聊天消息进行对话，而不是单个提示序列
 >
-> **答**: 这是正确的！但这实际上是一个UI抽象。在输入LLM之前，对话中的所有消息都会被连接成一个单一提示。模型不会"记住"对话：它每次都会完整地读取全部内容。
+> **答**: 这是正确的！但这实际上是一个 UI 抽象。在输入 LLM 之前，对话中的所有消息都会被连接成一个单一提示。模型不会"记住"对话：它每次都会完整地读取全部内容。
 
-到目前为止，我们讨论提示 (prompts) 时将其视为输入模型的令牌序列。但当你与ChatGPT或HuggingChat这样的系统聊天时，**你实际上是在交换消息**。在后台，这些消息会**被连接并格式化成模型可以理解的提示**。
+到目前为止，我们讨论提示 (prompts) 时将其视为输入模型的令牌序列。但当你与 ChatGPT 或 HuggingChat 这样的系统聊天时，**你实际上是在交换消息**。在后台，这些消息会**被连接并格式化成模型可以理解的提示**。
 
 <figure>
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/assistant.jpg" alt="Behind models"/>
-<figcaption>我们在这里看到UI中显示的内容和输入模型的提示之间的区别。
+<figcaption>我们在这里看到 UI 中显示的内容和输入模型的提示之间的区别。
 </figcaption>
 </figure>
 
-这就是聊天模板的用武之地。它们充当**对话消息（用户和助手轮次）与所选LLM的特定格式要求之间的桥梁**。换句话说，聊天模板构建了用户智能体之间的通信，确保每个模型——尽管有其独特的特殊令牌——都能接收到正确格式化的提示。
+这就是聊天模板的用武之地。它们充当**对话消息（用户和助手轮次）与所选 LLM 的特定格式要求之间的桥梁**。换句话说，聊天模板构建了用户与智能体之间的通信，确保每个模型——尽管有其独特的特殊令牌——都能接收到正确格式化的提示。
 
-我们再次谈到特殊令牌 (special tokens)，因为它们是模型用来界定用户和助手轮次开始和结束的标记。正如每个LLM使用自己的EOS（序列结束）令牌一样，它们也对对话中的消息使用不同的格式规则和分隔符。
+我们再次谈到特殊令牌 (special tokens)，因为它们是模型用来界定用户和助手轮次开始和结束的标记。正如每个 LLM 使用自己的 EOS（序列结束）令牌一样，它们也对对话中的消息使用不同的格式规则和分隔符。
 
-## 消息：LLMs的底层系统 (Messages: The Underlying System of LLMs)
+## 消息：LLMs 的底层系统 (Messages: The Underlying System of LLMs)
 
 ### 系统消息 (System Messages)
 
@@ -35,7 +35,7 @@ system_message = {
 }
 ```
 
-有了这个系统消息，Alfred变得礼貌和乐于助人：
+有了这个系统消息，Alfred 变得礼貌和乐于助人：
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/polite-alfred.jpg" alt="Polite alfred"/>
 
@@ -48,7 +48,7 @@ system_message = {
 }
 ```
 
-Alfred将表现得像个叛逆的智能体 😎：
+Alfred 将表现得像个叛逆的智能体 😎：
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/rebel-alfred.jpg" alt="Rebel Alfred"/>
 
@@ -72,9 +72,9 @@ conversation = [
 ]
 ```
 
-在这个例子中，用户最初写道他们需要订单帮助。LLM询问订单号，然后用户在新消息中提供了它。正如我们刚才解释的，我们总是将对话中的所有消息连接起来，并将其作为单个独立序列传递给LLM。聊天模板将这个Python列表中的所有消息转换为提示，这只是一个包含所有消息的字符串输入。
+在这个例子中，用户最初写道他们需要订单帮助。LLM 询问订单号，然后用户在新消息中提供了它。正如我们刚才解释的，我们总是将对话中的所有消息连接起来，并将其作为单个独立序列传递给 LLM。聊天模板将这个 Python 列表中的所有消息转换为提示，这只是一个包含所有消息的字符串输入。
 
-例如，这是SmolLM2聊天模板如何将之前的交换格式化为提示：
+例如，这是 SmolLM2 聊天模板如何将之前的交换格式化为提示：
 
 ```
 <|im_start|>system
@@ -88,7 +88,7 @@ It's ORDER-123<|im_end|>
 <|im_start|>assistant
 ```
 
-然而，使用Llama 3.2时，同样的对话会被转换为以下提示：
+然而，使用 Llama 3.2 时，同样的对话会被转换为以下提示：
 
 ```
 <|begin_of_text|><|start_header_id|>system<|end_header_id|>
@@ -156,7 +156,7 @@ You are a helpful AI assistant named SmolLM, trained by Hugging Face
 {% endfor %}
 ```
 
-如你所见，chat_template描述了消息列表将如何被格式化。
+如你所见，chat_template 描述了消息列表将如何被格式化。
 
 给定这些消息：
 
@@ -182,7 +182,7 @@ A chat template structures conversations between users and AI models...<|im_end|
 How do I use it ?<|im_end|>
 ```
 
-`transformers`库会将聊天模板作为标记化过程的一部分为你处理。在<a href="https://huggingface.co/docs/transformers/en/chat_templating#how-do-i-use-chat-templates" target="_blank">这里</a>阅读更多关于transformers如何使用聊天模板的信息。我们要做的就是以正确的方式构建我们的消息，标记器将处理剩下的事情。
+`transformers`库会将聊天模板作为标记化过程的一部分为你处理。在<a href="https://huggingface.co/docs/transformers/en/chat_templating#how-do-i-use-chat-templates" target="_blank">这里</a>阅读更多关于 transformers 如何使用聊天模板的信息。我们要做的就是以正确的方式构建我们的消息，标记器将处理剩下的事情。
 
 你可以使用以下Space实验，看看同样的对话如何使用不同模型的相应聊天模板进行格式化：
 
@@ -195,7 +195,7 @@ How do I use it ?<|im_end|>
 
 ### 消息到提示的转换 (Messages to prompt)
 
-确保你的LLM正确接收格式化对话的最简单方法是使用模型标记器的`chat_template`。
+确保你的 LLM 正确接收格式化对话的最简单方法是使用模型标记器的`chat_template`。
 
 ```python
 messages = [
@@ -216,13 +216,13 @@ rendered_prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_ge
 
 这个函数返回的`rendered_prompt`现在可以作为你选择的模型的输入使用了！
 
-> 当你以ChatML格式与消息交互时，这个`apply_chat_template()`函数将在你的API后端使用。
+> 当你以 ChatML 格式与消息交互时，这个`apply_chat_template()`函数将在你的API后端使用。
 
-现在我们已经看到LLMs如何通过聊天模板构建它们的输入，让我们探智能体如何在它们的环境中行动。
+现在我们已经看到 LLMs 如何通过聊天模板构建它们的输入，让我们探智能体如何在它们的环境中行动。
 
 它们这样做的主要方式之一是使用工具 (Tools)，这些工具扩展了AI模型在文本生成之外的能力。
 
 我们将在接下来的单元中再次讨论消息，但如果你现在想深入了解，请查看：
 
-- <a href="https://huggingface.co/docs/transformers/main/en/chat_templating" target="_blank">Hugging Face聊天模板指南</a>
-- <a href="https://huggingface.co/docs/transformers" target="_blank">Transformers文档</a>
+- <a href="https://huggingface.co/docs/transformers/main/en/chat_templating" target="_blank">Hugging Face 聊天模板指南</a>
+- <a href="https://huggingface.co/docs/transformers" target="_blank">Transformers 文档</a>
