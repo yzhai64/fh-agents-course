@@ -1,7 +1,8 @@
 # Vision Agents with smolagents
 
 <Tip>
-🚨 **WARNING**: The examples shown in this sectino require access to a powerful VLM model to run. We tested it using GPT-4o API.
+🚨 <strong>WARNING</strong>: The examples in this section require access to a powerful VLM model. We tested them using the GPT-4o API.  
+However, <a href="./why_use_smolagents">Why use smolagents</a> discusses alternative solutions supported by smolagents and Hugging Face. If you'd like to explore other options, be sure to check that section.
 </Tip>
 
 Empowering agents with visual capabilities is crucial for solving tasks that go beyond text processing. Many real-world challenges, such as web browsing or document understanding, require analyzing rich visual content. Fortunately, `smolagents` provides built-in support for vision (VLMs), enabling agents to process and interpret images effectively.  
@@ -18,7 +19,26 @@ Consider the case where Alfred wants to verify the identities of the superheroes
 
 In this case, a guest is trying to enter, and Alfred suspects that this visitor might be The Joker impersonating Wonder Woman. Alfred needs to verify their identity to prevent anyone unwanted from entering.  
 
-Let’s build the example:
+Let’s build the example. First, the images are loaded. In this case, we use images from Wikipedia to keep the example minimal, but image the possible use-case! 
+
+```python
+from PIL import Image
+import requests
+from io import BytesIO
+
+image_urls = [
+    "https://upload.wikimedia.org/wikipedia/commons/e/e8/The_Joker_at_Wax_Museum_Plus.jpg", # Joker image
+    "https://upload.wikimedia.org/wikipedia/en/9/98/Joker_%28DC_Comics_character%29.jpg" # Joker image
+]
+
+images = []
+for url in image_urls:
+    response = requests.get(url)
+    image = Image.open(BytesIO(response.content)).convert("RGB")
+    images.append(image)
+```
+
+Now that we have the images, the agent will tell us wether the guests is actually a superhero (Wonder Woman) or a villian (The Joker).
 
 ```python
 from smolagents import CodeAgent, OpenAIServerModel
@@ -41,6 +61,22 @@ response = agent.run(
     """,
     images=images
 )
+```
+
+In the case of my run, the output is the following, although it could vary in your case, as we've already discussed:
+
+```python
+    {
+        'Costume and Makeup - First Image': (
+            'Purple coat and a purple silk-like cravat or tie over a mustard-yellow shirt.',
+            'White face paint with exaggerated features, dark eyebrows, blue eye makeup, red lips forming a wide smile.'
+        ),
+        'Costume and Makeup - Second Image': (
+            'Dark suit with a flower on the lapel, holding a playing card.',
+            'Pale skin, green hair, very red lips with an exaggerated grin.'
+        ),
+        'Character Identity': 'This character resembles known depictions of The Joker from comic book media.'
+    }
 ```
 
 In this case, the output reveals that the person is impersonating someone else, so we can prevent The Joker from entering the party!
@@ -66,7 +102,6 @@ pip install "smolagents[all]" helium selenium python-dotenv
 ```
 
 We'll need a set of agent tools specifically designed for browsing, such as `search_item_ctrl_f`, `go_back`, and `close_popups`. These tools allow the agent to act like a person navigating the web.
-
 
 ```python
 @tool
@@ -122,10 +157,10 @@ def save_screenshot(step_log: ActionStep, agent: CodeAgent) -> None:
     step_log.observations = url_info if step_logs.observations is None else step_log.observations + "\n" + url_info
     return
 ```
+
 This function is passed to the agent as `step_callback`, as it's triggered at the end of each step during the agent's execution. This allows the agent to dynamically capture and store screenshots throughout its process.
 
 Now, we can generate our vision agent for browsing the web, providing it with the tools we created, along with the `DuckDuckGoSearchTool` to explore the web. This tool will help the agent retrieve necessary information for verifying guests' identities based on visual cues.
-
 
 ```python
 from smolagents import CodeAgent, OpenAIServerModel, DuckDuckGoSearchTool
@@ -153,7 +188,21 @@ Please search for images of Wonder Woman and generate a detailed visual descript
 
 You can see that we include `helium_instructions` as part of the task. This special prompt is aimed to control the navigation of the agent, ensuring that it follows the correct steps while browsing the web.
 
+Let's see how this works in the video below:
+
+<video width="600" controls>
+  <source src="./VisionBrowserAgent.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+This is the final output:
+
+```python
+Final answer: Wonder Woman is typically depicted wearing a red and gold bustier, blue shorts or skirt with white stars, a golden tiara, silver bracelets, and a golden Lasso of Truth. She is Princess Diana of Themyscira, known as Diana Prince in the world of men.
+```
+
 With all of that, we've successfully created our identity verifier for the party! Alfred now has the necessary tools to ensure only the right guests make it through the door. Everything is set to have a good time at Wayne Manor!
+
 
 ## Further Reading
 
