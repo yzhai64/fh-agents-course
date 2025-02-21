@@ -1,3 +1,9 @@
+<CourseFloatingBanner chapter={2}
+  classNames="absolute z-10 right-0 top-0"
+  notebooks={[
+    {label: "Google Colab", value: "https://colab.research.google.com/github/huggingface/agents-course/blob/main/notebooks/unit2/smolagents/vision_agents.ipynb"},
+]} />
+
 # Vision Agents with smolagents
 
 <Tip>
@@ -12,6 +18,10 @@ In this example, imagine Alfred, the butler at Wayne Manor, is tasked with verif
 But first, let's dive into a bit of theory.
 
 ## Providing Images at the Start of the Agent's Execution
+
+<Tip>
+The following code can be followed in <a href="https://colab.research.google.com/github/huggingface/agents-course/blob/main/notebooks/unit2/smolagents/vision_agents.ipynb" target="_blank">this notebook</a> that you can run using Google Colab.
+</Tip>
 
 In this approach, images are passed to the agent at the start and stored as `task_images` alongside the task prompt. The agent then processes these images throughout its execution.  
 
@@ -82,6 +92,10 @@ In the case of my run, the output is the following, although it could vary in yo
 In this case, the output reveals that the person is impersonating someone else, so we can prevent The Joker from entering the party!
 
 ## Providing Images with Dynamic Retrieval
+
+<Tip>
+The following code can be followed in <a href="https://colab.research.google.com/github/huggingface/agents-course/blob/main/notebooks/unit2/smolagents/vision_web_browser.ipynb" target="_blank">this Python file</a>
+</Tip>
 
 The previous approach is valuable and has many potential use cases. However, in situations where the guest is not in the database, we need to explore other ways of identifying them. One possible solution is dynamically retrieving images and information from external sources, such as browsing the web for details.
 

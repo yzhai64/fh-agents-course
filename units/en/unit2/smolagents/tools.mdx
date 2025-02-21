@@ -1,7 +1,7 @@
 <CourseFloatingBanner chapter={2}
   classNames="absolute z-10 right-0 top-0"
   notebooks={[
-    {label: "Google Colab", value: "https://colab.research.google.com/github/huggingface/agents-course/blob/main/notebooks/unit2/smolagents/smolagents_tools.ipynb"},
+    {label: "Google Colab", value: "https://colab.research.google.com/github/huggingface/agents-course/blob/main/notebooks/unit2/smolagents/tools.ipynb"},
 ]} />
 
 # Tools  
@@ -47,6 +47,10 @@ Using this approach, we define a function with:
 #### Generating a tool that retrieves the highest-rated catering
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit2/smolagents/alfred-catering.jpg" alt="Alfred Catering"/>
+
+<Tip>
+The following code can be followed in <a href="https://colab.research.google.com/github/huggingface/agents-course/blob/main/notebooks/unit2/smolagents/tools.ipynb" target="_blank">this notebook</a> that you can run using Google Colab.
+</Tip>
 
 Let's imagine that Alfred has already decided on the menu for the party, but now he needs help preparing food for such a large number of guests. To do so, he would like to hire a catering service and needs to identify the highest-rated options available. Alfred can leverage a tool to search for the best catering services in his area. 
 
