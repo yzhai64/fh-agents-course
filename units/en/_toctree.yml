@@ -44,9 +44,13 @@
     title: Get Your Certificate
   - local: unit1/conclusion
     title: Conclusion
-- title: Unit 2.1 The smolagents framework
+- title: Unit 2. Frameworks for AI Agents
   sections:
   - local: unit2/introduction
+    title: Frameworks for AI Agents
+- title: Unit 2.1 The smolagents framework
+  sections:
+  - local: unit2/smolagents/introduction
     title: Frameworks for AI Agents
   - local: unit2/smolagents/introduction
     title: Introduction to smolagents
