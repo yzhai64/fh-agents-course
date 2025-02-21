@@ -306,8 +306,6 @@ agent.run("Give me best playlist for a party at the Wayne's mansion. The party i
 As you can see, we've created a `CodeAgent` with several tools that enhance the agent's functionality, turning it into the ultimate party planner ready to share with the community! 🎉
 
 Now, it's your turn: build your very own agent and share it with the community using the knowledge we've just learned! 🕵️‍♂️💡
----
-Now that we created our first Code Agent, let's  **learn how we can create Tool Calling Agents**, the second type of agent available in `smolagents`.
 
 ### Inspecting Our Party Preparator Agent with OpenTelemetry and Langfuse 📡
 
@@ -364,9 +362,14 @@ agent = CodeAgent(tools=[], model=HfApiModel())
 alfred_agent = agent.from_hub('sergiopaniego/AlfredAgent', trust_remote_code=True)
 alfred_agent.run("Give me best playlist for a party at the Wayne's mansion. The party idea is a 'villain masquerade' theme")
 ```
+
 Alfred can now access this logs [here](https://cloud.langfuse.com/project/cm7bq0abj025rad078ak3luwi/traces/995fc019255528e4f48cf6770b0ce27b?timestamp=2025-02-19T10%3A28%3A36.929Z) to review and analyze them.  
 
 Meanwhile, the [suggested playlist](https://open.spotify.com/playlist/0gZMMHjuxMrrybQ7wTMTpw) sets the perfect vibe for the party preparations. Cool, right? 🎶  
+
+---
+
+Now that we created our first Code Agent, let's  **learn how we can create Tool Calling Agents**, the second type of agent available in `smolagents`.
 
 ## Resources
 
