@@ -36,11 +36,10 @@
 首先，复制这个 Space：<a href="https://huggingface.co/spaces/agents-course/First_agent_template" target="_blank">https://huggingface.co/spaces/agents-course/First_agent_template</a>
 > 感谢 <a href="https://huggingface.co/m-ric" target="_blank">Aymeric</a> 提供的这个模板！🙌
 
-
 复制这个 Space 意味着**在你的个人资料中创建一个本地副本**：
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/duplicate-space.gif" alt="复制"/>
 
-在整个课程中，你唯一需要修改的文件是当前不完整的**“app.py”**。你可以在这里查看[模板中的原始文件](https://huggingface.co/spaces/agents-course/First_agent_template/blob/main/app.py)。要找到你的文件，请进入你复制的 Space，然后点击`Files`选项卡，再在目录列表中点击`app.py`。
+在整个课程中，你唯一需要修改的文件是当前不完整的**"app.py"**。你可以在这里查看[模板中的原始文件](https://huggingface.co/spaces/agents-course/First_agent_template/blob/main/app.py)。要找到你的文件，请进入你复制的 Space，然后点击 `Files` 选项卡，再在目录列表中点击 `app.py`。
 
 让我们一起分解代码：
 
@@ -102,7 +101,7 @@ def get_current_time_in_timezone(timezone: str) -> str:
 
 ### The Agent（智能体）
 
-它使用 [`Qwen/Qwen2.5-Coder-32B-Instruct`](https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct) 作为LLM引擎。这是一个非常强大的模型，我们将通过无服务器API访问它。
+它使用 [`Qwen/Qwen2.5-Coder-32B-Instruct`](https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct) 作为 LLM 引擎。这是一个非常强大的模型，我们将通过无服务器 API 访问它。
 
 ```python
 final_answer = FinalAnswerTool()
@@ -134,9 +133,9 @@ GradioUI(agent).launch()
 
 这个智能体仍在使用我们在前面部分中看到的`InferenceClient`，它位于**HfApiModel**类的背后！
 
-当我们介绍Unit 2中的框架时，我们会给出更深入的例子。目前，你需要专注于通过智能体的`tools`参数**向工具列表中添加新工具**。
+当我们介绍 Unit 2 中的框架时，我们会给出更深入的例子。目前，你需要专注于通过智能体的`tools`参数**向工具列表中添加新工具**。
 
-例如，你可以使用代码第一行导入的`DuckDuckGoSearchTool`，或者你可以检查稍后从Hub加载的`image_generation_tool`。
+例如，你可以使用代码第一行导入的`DuckDuckGoSearchTool`，或者你可以检查稍后从 Hub 加载的`image_generation_tool`。
 
 **添加工具将赋予你的智能体新的能力**，在这里尝试发挥创意吧！
 

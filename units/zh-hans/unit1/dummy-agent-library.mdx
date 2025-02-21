@@ -2,37 +2,37 @@
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/whiteboard-unit1sub3DONE.jpg" alt="Unit 1 planning"/>
 
-本课程是框架无关的，因为我们想要**专注于AI智能体（AI Agent）的概念，避免陷入特定框架的细节中**。
+本课程是框架无关的，因为我们想要**专注于 AI 智能体（AI Agent）的概念，避免陷入特定框架的细节中**。
 
 同时，我们希望学生能够在自己的项目中使用他们在本课程中学到的概念，使用任何他们喜欢的框架。
 
-因此，在第一单元中，我们将使用一个简单智能体库和一个简单的无服务器API (serverless API) 来访问我们的LLM引擎。
+因此，在第一单元中，我们将使用一个简单智能体库和一个简单的无服务器 API (serverless API) 来访问我们的 LLM 引擎。
 
 你可能不会在生产环境中使用这些，但它们将作为**理解智能体如何工作的良好起点**。
 
-在本节之后，你将准备好**使用`smolagents`创建一个简单的智能体**。
+在本节之后，你将准备好**使用 `smolagents` 创建一个简单的智能体**。
 
-在接下来的单元中，我们还将使用其他AI智能体库，如`LangGraph`、`LangChain`和`LlamaIndex`。
+在接下来的单元中，我们还将使用其他 AI 智能体库，如 `LangGraph`、`LangChain` 和 `LlamaIndex`。
 
-为了保持简单，我们将使用一个简单的Python函数作为工具和智能体。
+为了保持简单，我们将使用一个简单的 Python 函数作为工具和智能体。
 
-我们将使用内置的Python包，如`datetime`和`os`，这样你可以在任何环境中尝试它。
+我们将使用内置的 Python 包，如 `datetime` 和 `os`，这样你可以在任何环境中尝试它。
 
-你可以[在这个notebook中](https://huggingface.co/agents-course/notebooks/blob/main/dummy_agent_library.ipynb)跟随过程并**自己运行代码**。
+你可以[在这个 notebook 中](https://huggingface.co/agents-course/notebooks/blob/main/dummy_agent_library.ipynb)跟随过程并**自己运行代码**。
 
-## 无服务器API (Serverless API)
+## 无服务器 API (Serverless API)
 
-在Hugging Face生态系统中，有一个称为无服务器API的便捷功能，它允许你轻松地在许多模型上运行推理。不需要安装或部署。
+在 Hugging Face 生态系统中，有一个称为无服务器 API 的便捷功能，它允许你轻松地在许多模型上运行推理。不需要安装或部署。
 
 ```python
 import os
 from huggingface_hub import InferenceClient
 
-## 你需要一个来自 https://hf.co/settings/tokens 的令牌，确保你选择'read'作为令牌类型。如果你在Google Colab上运行，你可以在"settings"标签下的"secrets"中设置它。确保将其命名为"HF_TOKEN"
+## 你需要一个来自 https://hf.co/settings/tokens 的令牌，确保你选择'read'作为令牌类型。如果你在 Google Colab 上运行，你可以在"settings"标签下的"secrets"中设置它。确保将其命名为"HF_TOKEN"
 os.environ["HF_TOKEN"]="hf_xxxxxxxxxxxxxx"
 
 client = InferenceClient("meta-llama/Llama-3.2-3B-Instruct")
-# 如果下一个单元格的输出不正确，免费模型可能过载。你也可以使用这个包含Llama-3.2-3B-Instruct的公共端点
+# 如果下一个单元格的输出不正确，免费模型可能过载。你也可以使用这个包含 Llama-3.2-3B-Instruct 的公共端点
 # client = InferenceClient("https://jc26mwg228mkj8dw.us-east-1.aws.endpoints.huggingface.cloud")
 ```
 
@@ -48,9 +48,9 @@ print(output)
 ```
 Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris. The capital of France is Paris.
 ```
-如LLM部分所见，如果我们只做解码，**模型只会在预测到EOS令牌时停止**，而这里没有发生，因为这是一个会话（聊天）模型，**我们没有应用它期望的聊天模板**。
+如 LLM 部分所见，如果我们只做解码，**模型只会在预测到 EOS 令牌时停止**，而这里没有发生，因为这是一个会话（聊天）模型，**我们没有应用它期望的聊天模板**。
 
-如果我们现在添加与我们使用的<a href="https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct">Llama-3.2-3B-Instruct模型</a>相关的特殊令牌，行为会改变，现在会产生预期的EOS。
+如果我们现在添加与我们使用的<a href="https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct"> Llama-3.2-3B-Instruct 模型</a>相关的特殊令牌，行为会改变，现在会产生预期的 EOS。
 
 ```python
 prompt="""<|begin_of_text|><|start_header_id|>user<|end_header_id|>
@@ -82,7 +82,7 @@ print(output.choices[0].message.content)
 ```
 Paris.
 ```
-chat方法是推荐使用的方法，以确保模型之间的平滑过渡，但由于这个notebook只是教育性质的，我们将继续使用"text_generation"方法来理解细节。
+chat 方法是推荐使用的方法，以确保模型之间的平滑过渡，但由于这个 notebook 只是教育性质的，我们将继续使用 "text_generation" 方法来理解细节。
 
 ## 简单智能体 (Dummy Agent)
 
@@ -101,6 +101,6 @@ chat方法是推荐使用的方法，以确保模型之间的平滑过渡，但�
 
 ---
 
-我们学习了如何从头开始使用Python代码创建智能体，并且**看到了这个过程有多么繁琐**。幸运的是，许多智能体库通过处理大量繁重工作来简化这项工作。
+我们学习了如何从头开始使用 Python 代码创建智能体，并且**看到了这个过程有多么繁琐**。幸运的是，许多智能体库通过处理大量繁重工作来简化这项工作。
 
 现在，我们准备好**使用`smolagents`库创建我们的第一个真实智能体**。
