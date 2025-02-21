@@ -1,7 +1,7 @@
 ![smolagents banner](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/smolagents/license_to_call.png)
 # Why use smolagents
 
-In this module, we will explore the pros and cons of using [smolagents](https://huggingface.co/blog/smolagents), helping you make an informed decision about whether it's the right framework for your needs.
+In this module, we will explore the pros and cons of using [smolagents](https://huggingface.co/docs/smolagents/en/index), helping you make an informed decision about whether it's the right framework for your needs.
 
 ## What is `smolagents`?
 
@@ -15,22 +15,28 @@ As we learned in unit 1, AI agents are programs that use LLMs to generate **'tho
 - **Code-First Approach:** First-class support for Code Agents that directly write their actions in code
 - **HF Hub Integration:** Seamless integration with Hugging Face Hub, allowing the use of Gradio Spaces as tools
 
-### When to use smolagents
+### When to use smolagents?
 
 With these advantages in mind, when should we use smolagents over other frameworks? 
 
 Smolagents is ideal when:
-- You need a lightweight and minimal solution
-- You want to experiment quickly without complex configurations
-- Your application logic is straightforward
+- You need a **lightweight and minimal solution.**
+- You want to **experiment quickly** without complex configurations.
+- Your **application logic is straightforward.**
 
 ### Code vs. JSON Actions
-Unlike other frameworks where agents write actions in JSON that require parsing, `smolagents` focuses on direct tool calls in code, simplifying the execution process. The following diagram illustrates this difference:
+Unlike other frameworks where agents write actions in JSON that require parsing, `smolagents` **focuses on direct tool calls in code**, simplifying the execution process. 
+
+The following diagram illustrates this difference:
 
 ![Code vs. JSON actions](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/transformers/code_vs_json_actions.png)
 
+If you don't remember the difference between Code vs JSON Actions, check [Unit 1, Section Actions](https://huggingface.co/learn/agents-course/unit1/actions#actions-enabling-the-agent-to-engage-with-its-environment)
+
 ### Agent Types in `smolagents`
-Agents in `smolagents` operate as multi-step agents. Each [`MultiStepAgent`](https://huggingface.co/docs/smolagents/main/en/reference/agents#smolagents.MultiStepAgent) performs:
+Agents in `smolagents` operate as **multi-step agents**. 
+
+Each [`MultiStepAgent`](https://huggingface.co/docs/smolagents/main/en/reference/agents#smolagents.MultiStepAgent) performs:
 - One thought
 - One tool call and execution
 
@@ -55,7 +61,7 @@ In smolagents, tools are defined using <code>@tool</code> or the <code>Tool</cod
 
 This flexibility ensures that developers can choose the most suitable model integration for their specific use cases.
 
-Join us as we dive deep into smolagents in the upcoming sections!
+Now that we understood why and when to use smolagents, let's dive deeper into this powerful library!
 
 ## Resources
 
