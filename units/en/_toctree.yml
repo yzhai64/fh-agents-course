@@ -44,6 +44,20 @@
     title: Get Your Certificate
   - local: unit1/conclusion
     title: Conclusion
+- title: Bonus Unit 1. Fine-tuning an LLM for Function-calling
+  sections:
+  - local: bonus-unit1/introduction
+    title: Introduction
+  - local: bonus-unit1/what-is-function-calling
+    title: What is Function Calling?
+  - local: bonus-unit1/fine-tuning
+    title: Let's Fine-Tune your model for Function-calling
+  - local: bonus-unit1/conclusion
+    title: Conclusion
+- title: Unit 2. Frameworks for AI Agents
+  sections:
+  - local: unit2/introduction
+    title: Frameworks for AI Agents
 - title: Unit 2.1 The smolagents framework
   sections:
   - local: unit2/introduction
@@ -70,16 +84,6 @@
     title: Vision and Browser agents
   - local: unit2/smolagents/final_quiz
     title: Final Quiz
-- title: Bonus Unit 1. Fine-tuning an LLM for Function-calling
-  sections:
-  - local: bonus-unit1/introduction
-    title: Introduction
-  - local: bonus-unit1/what-is-function-calling
-    title: What is Function Calling?
-  - local: bonus-unit1/fine-tuning
-    title: Let's Fine-Tune your model for Function-calling
-  - local: bonus-unit1/conclusion
-    title: Conclusion
 - title: When the next steps are published?
   sections:
   - local: communication/next-units
