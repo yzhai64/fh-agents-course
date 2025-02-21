@@ -57,6 +57,8 @@ client = InferenceClient(
 	provider="together",
     # api_key is read from the environment
 )
+escape_special_tokens = lambda x: x.replace('<think>', '<%%think%%>').replace('</think>', '<%%/think%%>')
+unescape_special_tokens = lambda x: x.replace('<%%think%%>', '<think>').replace('<%%/think%%>', '</think>')
 
 # Get the list of all files in the directory, recursively
 inp_files: list[str] = []
@@ -82,6 +84,7 @@ for i, inp_file in enumerate(inp_files):
         continue
     with open(inp_file, 'r', encoding='utf-8') as f:
         content: str = f.read()
+        content = escape_special_tokens(content)
         if content.strip() == "":
             print(f'[{i+1}/{len(inp_files)}] Skipping empty file: {inp_file}')
             write_out_file(out_file, "")
@@ -104,6 +107,7 @@ for i, inp_file in enumerate(inp_files):
         # Optionally filter <think>...</think> reasoning process
         final_text = final_text.split('</think>').pop().strip()
         # Write the output to the file
+        final_text = unescape_special_tokens(final_text)
         write_out_file(out_file, final_text)
         print()
         print(f'  -> Translated to: {out_file}')
