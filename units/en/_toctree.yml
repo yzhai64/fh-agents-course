@@ -74,6 +74,8 @@
     title: Vision and Browser agents
   - local: unit2/smolagents/final_quiz
     title: Final Quiz
+  - local: unit2/smolagents/conclusion
+    title: Conclusion
 - title: Bonus Unit 1. Fine-tuning an LLM for Function-calling
   sections:
   - local: bonus-unit1/introduction
