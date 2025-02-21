@@ -6,7 +6,7 @@
 
 # Multi-Agent Systems
 
-Multi-agent systems enable specialized agents to collaborate on complex tasks, improving modularity, scalability, and robustness. Instead of relying on a single agent, tasks are distributed among agents with distinct capabilities.
+Multi-agent systems enable **specialized agents to collaborate on complex tasks**, improving modularity, scalability, and robustness. Instead of relying on a single agent, tasks are distributed among agents with distinct capabilities.  
 
 In **smolagents**, different agents can be combined to generate Python code, call external tools, perform web searches, and more. By orchestrating these agents, we can create powerful workflows.
 
@@ -162,8 +162,10 @@ Thanks to these quick changes, we obtained a much more concise report by simply 
 
 ### ✌️ Splitting the task between two agents
 
+![image](https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit2/smolagents/two-alfred.jpg)  
+
 Multi-agent structures allow to separate memories between different sub-tasks, with two great benefits:
-- Each agent is more focused on its core task, thus more performant
+- Each agent is **more focused on its core task**, thus more performant  
 - Separating memories reduces the count of input tokens at each step, thus reducing latency and cost.
 
 Let's create a team with a dedicated web search agent, managed by another agent.
