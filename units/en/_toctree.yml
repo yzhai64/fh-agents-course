@@ -42,6 +42,38 @@
     title: Unit 1 Final Quiz
   - local: unit1/conclusion
     title: Conclusion
+- title: Unit 2. Frameworks for AI Agents
+  sections:
+  - local: unit2/introduction
+    title: Frameworks for AI Agents
+- title: Unit 2.1 The smolagents framework
+  sections:
+  - local: unit2/smolagents/introduction
+    title: Frameworks for AI Agents
+  - local: unit2/smolagents/introduction
+    title: Introduction to smolagents
+  - local: unit2/smolagents/why_use_smolagents
+    title: Why use smolagents? 
+  - local: unit2/smolagents/quiz1
+    title: Quick Quiz 1
+  - local: unit2/smolagents/code_agents
+    title: Building Agents That Use Code
+  - local: unit2/smolagents/tool_calling_agents
+    title: Integrating Agents With Tools
+  - local: unit2/smolagents/tools
+    title: Tools
+  - local: unit2/smolagents/retrieval_agents
+    title: Retrieval Agents
+  - local: unit2/smolagents/quiz2
+    title: Quick Quiz 2
+  - local: unit2/smolagents/multi_agent_systems
+    title: Multi-Agent Systems
+  - local: unit2/smolagents/vision_agents
+    title: Vision and Browser agents
+  - local: unit2/smolagents/final_quiz
+    title: Final Quiz
+  - local: unit2/smolagents/conclusion
+    title: Conclusion
 - title: Bonus Unit 1. Fine-tuning an LLM for Function-calling
   sections:
   - local: bonus-unit1/introduction
