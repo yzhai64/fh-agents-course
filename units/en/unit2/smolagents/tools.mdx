@@ -1,6 +1,14 @@
+<CourseFloatingBanner chapter={2}
+  classNames="absolute z-10 right-0 top-0"
+  notebooks={[
+    {label: "Google Colab", value: "https://colab.research.google.com/github/huggingface/agents-course/blob/main/notebooks/unit2/smolagents/smolagents_tools.ipynb"},
+]} />
+
 # Tools  
 
-As we explored in unit 1, agents use tools to perform various actions. In `smolagents`, tools are treated as functions that an LLM can call within an agent system. To interact with a tool, the LLM needs an **interface description** with these key components:  
+As we explored in [unit 1](https://huggingface.co/learn/agents-course/unit1/tools), agents use tools to perform various actions. In `smolagents`, tools are treated as **functions that an LLM can call within an agent system**. 
+
+To interact with a tool, the LLM needs an **interface description** with these key components:  
 
 - **Name**: What the tool is called
 - **Tool description**: What the tool does  
@@ -28,7 +36,9 @@ In `smolagents`, tools can be defined in two ways:
 
 ### The `@tool` Decorator  
 
-The `@tool` decorator is the recommended way to define simple tools. Under the hood, smolagents will parse basic information about the function from Python. So if you name you function clearly and a good docstring, it will be easier for the LLM to use. Using this approach, we define a function with:  
+The `@tool` decorator is the **recommended way to define simple tools**. Under the hood, smolagents will parse basic information about the function from Python. So if you name you function clearly and a good docstring, it will be easier for the LLM to use. 
+
+Using this approach, we define a function with:  
 
 - **A clear and descriptive function name** that helps the LLM understand its purpose.  
 - **Type hints for both inputs and outputs** to ensure proper usage.  
@@ -36,7 +46,11 @@ The `@tool` decorator is the recommended way to define simple tools. Under the h
 
 #### Generating a tool that retrieves the highest-rated catering
 
-Let's imagine that Alfred has already decided on the menu for the party, but now he needs help preparing food for such a large number of guests. To do so, he would like to hire a catering service and needs to identify the highest-rated options available. Alfred can leverage a tool to search for the best catering services in his area. Below is an example of how Alfred can use the `@tool` decorator to make this happen:
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit2/smolagents/alfred-catering.jpg" alt="Alfred Catering"/>
+
+Let's imagine that Alfred has already decided on the menu for the party, but now he needs help preparing food for such a large number of guests. To do so, he would like to hire a catering service and needs to identify the highest-rated options available. Alfred can leverage a tool to search for the best catering services in his area. 
+
+Below is an example of how Alfred can use the `@tool` decorator to make this happen:
 
 ```python
 from smolagents import CodeAgent, HfApiModel, tool
@@ -87,7 +101,9 @@ Below, we can see an example of a tool built using `Tool` and to integrate it wi
 
 #### Generating a tool to generate ideas about the superhero-themed party
 
-Alfred's party at the mansion is a **superhero-themed event**, but he needs some creative ideas to make it truly special. As a fantastic host, he wants to surprise the guests with a unique theme. To do this, he can use an agent that generates superhero-themed party ideas based on a given category. This way, Alfred can find the perfect party theme to wow his guests.
+Alfred's party at the mansion is a **superhero-themed event**, but he needs some creative ideas to make it truly special. As a fantastic host, he wants to surprise the guests with a unique theme. 
+
+To do this, he can use an agent that generates superhero-themed party ideas based on a given category. This way, Alfred can find the perfect party theme to wow his guests.
 
 ```python
 from smolagents import Tool, CodeAgent, HfApiModel
@@ -141,7 +157,20 @@ With this tool, Alfred will be the ultimate super host, impressing his guests wi
 - **GoogleSearchTool**  
 - **VisitWebpageTool**  
 
-Alfred could use various tools to ensure a flawless party at Wayne Manor. First, he could use the `DuckDuckGoSearchTool` to find creative superhero-themed party ideas. For catering, he'd rely on the `GoogleSearchTool` to find the highest-rated services in Gotham. To manage seating arrangements, Alfred could run calculations with the `PythonInterpreterTool`. Once everything is gathered, he'd compile the plan using the `FinalAnswerTool`. Lastly, the `VisitWebpageTool` would keep him updated on any changes, ensuring a smooth event. With these tools, Alfred guarantees the party is both exceptional and seamless. 🦇💡
+Alfred could use various tools to ensure a flawless party at Wayne Manor:
+
+- First, he could use the `DuckDuckGoSearchTool` to find creative superhero-themed party ideas. 
+
+- For catering, he'd rely on the `GoogleSearchTool` to find the highest-rated services in Gotham. 
+
+- To manage seating arrangements, Alfred could run calculations with the `PythonInterpreterTool`. 
+
+- Once everything is gathered, he'd compile the plan using the `FinalAnswerTool`. 
+
+- Lastly, the `VisitWebpageTool` would keep him updated on any changes, ensuring a smooth event. 
+
+With these tools, Alfred guarantees the party is both exceptional and seamless. 🦇💡
+<img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit2/smolagents/alfred-plan.jpg" alt="Alfred plan" />
 
 ## Sharing and Importing Tools
 
@@ -183,7 +212,9 @@ agent.run("Generate an image of a luxurious superhero-themed party at Wayne Mano
 
 ### Importing a Hugging Face Space as a Tool
 
-You can also import a HF Space as a tool using `Tool.from_space()`. This opens up possibilities for integrating with thousands of spaces from the community for tasks from image generation to data analysis. The tool will connect with the spaces Gradio backend using the `gradio_client`, so make sure to install it via `pip` if you don't have it already. For the party, Alfred can also use a HF Space directly for the geneation of the previous annoucement AI-generated image. Let's build it!
+You can also import a HF Space as a tool using `Tool.from_space()`. This opens up possibilities for integrating with thousands of spaces from the community for tasks from image generation to data analysis. 
+
+The tool will connect with the spaces Gradio backend using the `gradio_client`, so make sure to install it via `pip` if you don't have it already. For the party, Alfred can also use a HF Space directly for the generation of the previous annoucement AI-generated image. Let's build it!
 
 ```python
 from smolagents import CodeAgent, HfApiModel, Tool
