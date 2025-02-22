@@ -48,7 +48,6 @@
     title: Frameworks for AI Agents
 - title: Unit 2.1 The smolagents framework
   sections:
-  - local: unit2/smolagents/introduction
     title: Frameworks for AI Agents
   - local: unit2/smolagents/introduction
     title: Introduction to smolagents
