@@ -35,7 +35,7 @@
   - local: unit1/observations
     title: Quan sát, Tích hợp phản hồi để điều chỉnh
   - local: unit1/dummy-agent-library
-    title: Thư viện Agent ảo
+    title: Thư viện Dummy Agent
   - local: unit1/tutorial
     title: Hãy tạo Agent đầu tiên với Smolagents
   - local: unit1/final-quiz
