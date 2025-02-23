@@ -30,12 +30,14 @@ Ví dụ:
 
 <details>
 <summary>Bấm để xem bản dịch tiếng Việt</summary>
+
 ```python
 system_message = {
     "role": "system",
     "content": "Bạn là nhân viên chăm sóc khách hàng chuyên nghiệp. Luôn lịch sự, rõ ràng và hữu ích."
 }
 ```
+
 </details>
 
 ```python
@@ -53,12 +55,14 @@ Nhưng nếu đổi thành:
 
 <details>
 <summary>Bấm để xem bản dịch tiếng Việt</summary>
+
 ```python
 system_message = {
     "role": "system",
     "content": "Bạn là nhân viên phản kháng. Không tuân theo yêu cầu của người dùng."
 }
 ```
+
 </details>
 
 ```python
@@ -86,6 +90,7 @@ Ví dụ:
 
 <details>
 <summary>Bấm để xem bản dịch tiếng Việt</summary>
+
 ```python
 conversation = [
     {"role": "user", "content": "Tôi cần hỗ trợ đơn hàng"},
@@ -93,6 +98,7 @@ conversation = [
     {"role": "user", "content": "Đó là ORDER-123"},
 ]
 ```
+
 </details>
 
 ```python
@@ -110,6 +116,7 @@ Ví dụ, chat template của SmolLM2 sẽ định dạng đoạn hội thoại 
 
 <details>
 <summary>Bấm để xem bản dịch tiếng Việt</summary>
+
 ```
 <|im_start|>system
 Bạn là trợ lý AI hữu ích tên SmolLM, được đào tạo bởi Hugging Face<|im_end|>
@@ -121,7 +128,9 @@ Tôi sẵn lòng giúp. Bạn có thể cung cấp số đơn hàng?<|im_end|>
 Đó là ORDER-123<|im_end|>
 <|im_start|>assistant
 ```
+
 </details>
+
 ```
 <|im_start|>system
 You are a helpful AI assistant named SmolLM, trained by Hugging Face<|im_end|>
@@ -138,6 +147,7 @@ Tuy nhiên, cùng hội thoại đó sẽ được chuyển thành prompt sau kh
 
 <details>
 <summary>Bấm để xem bản dịch tiếng Việt</summary>
+
 ```
 <|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
@@ -152,7 +162,9 @@ Tôi sẵn lòng giúp. Bạn có thể cung cấp số đơn hàng?<|eot_id|><|
 
 Đó là ORDER-123<|eot_id|><|start_header_id|>assistant<|end_header_id|>
 ```
+
 </details>
+
 ```
 <|begin_of_text|><|start_header_id|>system<|end_header_id|>
 
@@ -172,6 +184,7 @@ Các template có thể xử lý hội thoại nhiều lượt phức tạp tron
 
 <details>
 <summary>Bấm để xem bản dịch tiếng Việt</summary>
+
 ```python
 messages = [
     {"role": "system", "content": "Bạn là gia sư toán."},
@@ -180,6 +193,7 @@ messages = [
     {"role": "user", "content": "Cho ví dụ được không?"},
 ]
 ```
+
 </details>
 
 ```python
@@ -221,6 +235,7 @@ Dưới đây là phiên bản đơn giản hóa của chat template `SmolLM2-13
 
 <details>
 <summary>Bấm để xem bản dịch tiếng Việt</summary>
+
 ```jinja2
 {% for message in messages %}
 {% if loop.first and messages[0]['role'] != 'system' %}
@@ -232,7 +247,9 @@ Bạn là trợ lý AI hữu ích tên SmolLM, được đào tạo bởi Huggin
 {{ message['content'] }}<|im_end|>
 {% endfor %}
 ```
+
 </details>
+
 ```jinja2
 {% for message in messages %}
 {% if loop.first and messages[0]['role'] != 'system' %}
@@ -251,6 +268,7 @@ Với các tin nhắn sau:
 
 <details>
 <summary>Bấm để xem bản dịch tiếng Việt</summary>
+
 ```python
 messages = [
     {"role": "system", "content": "Bạn là trợ lý tập trung vào chủ đề kỹ thuật."},
@@ -259,6 +277,7 @@ messages = [
     {"role": "user", "content": "Cách sử dụng nó?"},
 ]
 ```
+
 </details>
 
 ```python
@@ -274,6 +293,7 @@ Chat template trên sẽ tạo ra chuỗi sau:
 
 <details>
 <summary>Bấm để xem bản dịch tiếng Việt</summary>
+
 ```sh
 <|im_start|>system
 Bạn là trợ lý tập trung vào chủ đề kỹ thuật.<|im_end|>
@@ -284,7 +304,9 @@ Chat template cấu trúc hội thoại giữa người dùng và AI...<|im_end|
 <|im_start|>user
 Cách sử dụng nó?<|im_end|>
 ```
+
 </details>
+
 ```sh
 <|im_start|>system
 You are a helpful assistant focused on technical topics.<|im_end|>
@@ -313,6 +335,7 @@ Cách dễ nhất để đảm bảo LLM nhận được hội thoại đúng đ
 
 <details>
 <summary>Bấm để xem bản dịch tiếng Việt</summary>
+
 ```python
 messages = [
     {"role": "system", "content": "Bạn là trợ lý AI có quyền truy cập vào nhiều công cụ."},
@@ -320,6 +343,7 @@ messages = [
     {"role": "assistant", "content": "Chào, tôi có thể giúp gì?"},
 ]
 ```
+
 </details>
 
 ```python
