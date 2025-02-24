@@ -20,7 +20,7 @@ But first, let's dive into a bit of theory.
 ## Providing Images at the Start of the Agent's Execution
 
 <Tip>
-The following code can be followed in <a href="https://colab.research.google.com/github/huggingface/agents-course/blob/main/notebooks/unit2/smolagents/vision_agents.ipynb" target="_blank">this notebook</a> that you can run using Google Colab.
+You can follow the code in <a href="https://huggingface.co/agents-course/notebooks/blob/main/unit2/smolagents/vision_agents.ipynb" target="_blank">this notebook</a> that you can run using Google Colab.
 </Tip>
 
 In this approach, images are passed to the agent at the start and stored as `task_images` alongside the task prompt. The agent then processes these images throughout its execution.  
@@ -94,7 +94,7 @@ In this case, the output reveals that the person is impersonating someone else, 
 ## Providing Images with Dynamic Retrieval
 
 <Tip>
-The following code can be followed in <a href="https://colab.research.google.com/github/huggingface/agents-course/blob/main/notebooks/unit2/smolagents/vision_web_browser.ipynb" target="_blank">this Python file</a>
+You can follow the code in <a href="https://huggingface.co/agents-course/notebooks/blob/main/unit2/smolagents/vision_web_browser.py" target="_blank">this Python file</a>
 </Tip>
 
 The previous approach is valuable and has many potential use cases. However, in situations where the guest is not in the database, we need to explore other ways of identifying them. One possible solution is dynamically retrieving images and information from external sources, such as browsing the web for details.
@@ -204,9 +204,8 @@ You can see that we include `helium_instructions` as part of the task. This spec
 
 Let's see how this works in the video below:
 
-<video width="600" controls>
-  <source src="./VisionBrowserAgent.mp4" type="video/mp4">
-  Your browser does not support the video tag.
+<video controls>
+  <source src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit2/smolagents/VisionBrowserAgent.mp4" type="video/mp4">
 </video>
 
 This is the final output:

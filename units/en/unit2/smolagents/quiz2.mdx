@@ -4,27 +4,27 @@ It's time to test your understanding of the *Code Agents*, *Tool Calling Agents*
 
 ---
 
-### Q1: What is the key difference between creating a tool with the `@tool` decorator versus creating a subclass of `Tool` in SmolAgents?
+### Q1: What is the key difference between creating a tool with the `@tool` decorator versus creating a subclass of `Tool` in smolagents?
 
 Which statement best describes the distinction between these two approaches for defining tools?
 
 <Question
 choices={[
   {
-    text: "Using the `@tool` decorator is mandatory for retrieval-based tools, while subclasses of `Tool` are only for text-generation tasks",
+    text: "Using the <code>@tool</code> decorator is mandatory for retrieval-based tools, while subclasses of <code>Tool</code> are only for text-generation tasks",
     explain: "Both approaches can be used for any type of tool, including retrieval-based or text-generation tools.",
   },
   {
-    text: "The `@tool` decorator is recommended for simple function-based tools, while subclasses of `Tool` offer more flexibility for complex functionality or custom metadata",
+    text: "The <code>@tool</code> decorator is recommended for simple function-based tools, while subclasses of <code>Tool</code> offer more flexibility for complex functionality or custom metadata",
     explain: "This is correct. The decorator approach is simpler, but subclassing allows more customized behavior.",
     correct: true
   },
   {
-    text: "`@tool` can only be used in multi-agent systems, while creating a `Tool` subclass is for single-agent scenarios",
+    text: "<code>@tool</code> can only be used in multi-agent systems, while creating a <code>Tool</code> subclass is for single-agent scenarios",
     explain: "All agents (single or multi) can use either approach to define tools; there is no such restriction.",
   },
   {
-    text: "Decorating a function with `@tool` replaces the need for a docstring, whereas subclasses must not include docstrings",
+    text: "Decorating a function with <code>@tool</code> replaces the need for a docstring, whereas subclasses must not include docstrings",
     explain: "Both methods benefit from clear docstrings. The decorator doesn't replace them, and a subclass can still have docstrings.",
   }
 ]}
@@ -71,7 +71,7 @@ choices={[
     explain: "Sharing a tool doesn't automatically set up retrieval or multi-step logic. It's just making the tool available.",
   },
   {
-    text: "It allows others to discover, reuse, and integrate your tool in their SmolAgents without extra setup",
+    text: "It allows others to discover, reuse, and integrate your tool in their smolagents without extra setup",
     explain: "Yes. Sharing on the Hub makes tools accessible for anyone to download and incorporate quickly.",
     correct: true
   },
@@ -116,9 +116,9 @@ choices={[
 
 ---
 
-### Q5: What is included in the SmolAgents default toolbox, and why might you use it?
+### Q5: What is included in the smolagents default toolbox, and why might you use it?
 
-Which statement best captures the purpose and contents of the default toolbox in SmolAgents?
+Which statement best captures the purpose and contents of the default toolbox in smolagents?
 
 <Question
 choices={[
@@ -144,4 +144,4 @@ choices={[
 
 ---
 
-Congratulations on completing this quiz! 🎉 If any questions gave you trouble, revisit the *Code Agents*, *Tool Calling Agents*, or *Tools* sections to strengthen your understanding. If you aced it, you're well on your way to building robust SmolAgents applications!
+Congratulations on completing this quiz! 🎉 If any questions gave you trouble, revisit the *Code Agents*, *Tool Calling Agents*, or *Tools* sections to strengthen your understanding. If you aced it, you're well on your way to building robust smolagents applications!
