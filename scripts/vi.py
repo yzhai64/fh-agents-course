@@ -1,9 +1,8 @@
-import os
-import sys
-import re
-from huggingface_hub import InferenceClient
+from translation import auto_translate
 
-PROMPT = lambda content: f'''
+output_lang = "vi"
+
+prompt = lambda content: f'''
 You are a translator for the Vietnamese translation team. You are tasked with translating the following text into Vietnamese. You must follow these instructions:
 - Translate the text into Vietnamese, while keeping the original formatting (either Markdown, MDX or HTML)
 - Inside code blocks, translate the comments but leave the code as-is ; If the code block contains quite plain texts, you MUST provide the translation in <details> tag.
@@ -70,79 +69,7 @@ Please translate the following text to vietnamese:
 === END OF TEXT ===
 '''.strip()
 
-# Get the directory containing the current script
-script_dir = os.path.dirname(os.path.abspath(__file__))
-inp_dir = os.path.join(script_dir, '..', 'units/en')
-get_our_path = lambda x: x.replace('/en', '/vi')
-model = "deepseek-ai/DeepSeek-R1"
-client = InferenceClient(
-	provider="together",
-    # api_key is read from the environment
+auto_translate(
+    prompt=prompt,
+    output_lang=output_lang,
 )
-
-def auto_translate(
-    inp_dir: str,
-    get_our_path: callable,
-    model: str,
-    client: InferenceClient,
-    PROMPT: callable
-):
-    escape_special_tokens = lambda x: x.replace('<think>', '<%%think%%>').replace('</think>', '<%%/think%%>')
-    unescape_special_tokens = lambda x: x.replace('<%%think%%>', '<think>').replace('<%%/think%%>', '</think>')
-
-    # Get the list of all files in the directory, recursively
-    inp_files: list[str] = []
-    print('Collecting files...')
-    for root, dirs, files in os.walk(inp_dir):
-        for file in files:
-            if file.endswith('.mdx') or file == "_toctree.yml":
-                fname = os.path.join(root, file)
-                print('  +', fname)
-                inp_files.append(fname)
-
-    def write_out_file(fpath: str, content: str):
-        base_path = os.path.dirname(fpath)
-        os.makedirs(base_path, exist_ok=True)
-        with open(fpath, 'w', encoding='utf-8') as f:
-            f.write(content)
-
-    # Read the content of the file and process
-    for i, inp_file in enumerate(inp_files):
-        out_file = get_our_path(inp_file)
-        if os.path.exists(out_file):
-            print(f'[{i+1}/{len(inp_files)}] Skipping file: {inp_file}')
-            continue
-        with open(inp_file, 'r', encoding='utf-8') as f:
-            content: str = f.read()
-            content = escape_special_tokens(content)
-            if content.strip() == "":
-                print(f'[{i+1}/{len(inp_files)}] Skipping empty file: {inp_file}')
-                write_out_file(out_file, "")
-                continue
-
-            print(f'[{i+1}/{len(inp_files)}] Processing file: {inp_file}')
-            stream = client.chat.completions.create(
-                model=model,
-                temperature=0.0,
-                messages=[
-                    {"role": "user", "content": PROMPT(content)},
-                ],
-                stream=True,
-            )
-            final_text = ""
-            for chunk in stream:
-                print(chunk.choices[0].delta.content, end="")
-                sys.stdout.flush()
-                final_text += chunk.choices[0].delta.content
-            # Optionally filter <think>...</think> reasoning process
-            final_text = final_text.split('</think>').pop().strip()
-            # Write the output to the file
-            final_text = unescape_special_tokens(final_text)
-            write_out_file(out_file, final_text)
-            print()
-            print(f'  -> Translated to: {out_file}')
-            print("--" * 20)
-            #break
-
-if __name__ == '__main__':
-    auto_translate(inp_dir, get_our_path, model, client, PROMPT)
