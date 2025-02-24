@@ -11,20 +11,20 @@ Which statement best describes the distinction between these two approaches for 
 <Question
 choices={[
   {
-    text: "Using the `@tool` decorator is mandatory for retrieval-based tools, while subclasses of `Tool` are only for text-generation tasks",
+    text: "Using the <code>@tool</code> decorator is mandatory for retrieval-based tools, while subclasses of <code>Tool</code> are only for text-generation tasks",
     explain: "Both approaches can be used for any type of tool, including retrieval-based or text-generation tools.",
   },
   {
-    text: "The `@tool` decorator is recommended for simple function-based tools, while subclasses of `Tool` offer more flexibility for complex functionality or custom metadata",
+    text: "The <code>@tool</code> decorator is recommended for simple function-based tools, while subclasses of <code>Tool</code> offer more flexibility for complex functionality or custom metadata",
     explain: "This is correct. The decorator approach is simpler, but subclassing allows more customized behavior.",
     correct: true
   },
   {
-    text: "`@tool` can only be used in multi-agent systems, while creating a `Tool` subclass is for single-agent scenarios",
+    text: "<code>@tool</code> can only be used in multi-agent systems, while creating a <code>Tool</code> subclass is for single-agent scenarios",
     explain: "All agents (single or multi) can use either approach to define tools; there is no such restriction.",
   },
   {
-    text: "Decorating a function with `@tool` replaces the need for a docstring, whereas subclasses must not include docstrings",
+    text: "Decorating a function with <code>@tool</code> replaces the need for a docstring, whereas subclasses must not include docstrings",
     explain: "Both methods benefit from clear docstrings. The decorator doesn't replace them, and a subclass can still have docstrings.",
   }
 ]}
