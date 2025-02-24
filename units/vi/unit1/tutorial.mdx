@@ -1,6 +1,6 @@
 # Hãy tạo Agent đầu tiên của chúng ta với smolagents
 
-Ở Chương trước, ta đã học cách tạo Agent từ đầu bằng Python và **thấy quá trình này tốn công thế nào**. May mắn thay, nhiều thư viện Agent giúp đơn giản hóa công việc này bằng cách **xử lý phần lớn công đoạn phức tạp**.
+Ở chương trước, ta đã học cách tạo Agent từ đầu bằng Python và **thấy quá trình này tốn công thế nào**. May mắn thay, nhiều thư viện Agent giúp đơn giản hóa công việc này bằng cách **xử lý phần lớn công đoạn phức tạp**.
 
 Trong bài thực hành này, **bạn sẽ tạo Agent đầu tiên của riêng mình** có khả năng thực hiện các hành động như tạo ảnh, tìm kiếm web, kiểm tra múi giờ và hơn thế nữa!
 
@@ -17,7 +17,7 @@ Cùng bắt đầu thôi!
 
 Thư viện nhẹ này được thiết kế cho sự đơn giản, nhưng nó đóng gói phần lớn độ phức tạp khi xây dựng Agent, giúp bạn tập trung vào thiết kế hành vi cho agent.
 
-Ta sẽ tìm hiểu sâu hơn về smolagents ở Chương tiếp theo. Trong lúc chờ, bạn có thể xem <a href="https://huggingface.co/blog/smolagents" target="_blank">blog post</a> hoặc <a href="https://github.com/huggingface/smolagents" target="_blank">repo GitHub</a> của thư viện.
+Ta sẽ tìm hiểu sâu hơn về smolagents ở chương tiếp theo. Trong lúc chờ, bạn có thể xem <a href="https://huggingface.co/blog/smolagents" target="_blank">blog post</a> hoặc <a href="https://github.com/huggingface/smolagents" target="_blank">repo GitHub</a> của thư viện.
 
 Tóm lại, `smolagents` là thư viện tập trung vào **codeAgent** - loại agent thực hiện **"Hành động"** qua các khối code, sau đó **"Quan sát"** kết quả bằng cách chạy code.
 
@@ -133,7 +133,7 @@ GradioUI(agent).launch()
 
 Agent này vẫn dùng `InferenceClient` mà ta đã thấy ở phần trước thông qua lớp **HfApiModel**!
 
-Chúng mình sẽ đưa thêm ví dụ chi tiết khi giới thiệu framework ở Chương 2. Hiện tại, bạn cần tập trung vào **thêm tool mới vào danh sách tools** qua tham số `tools` của Agent.
+Chúng mình sẽ đưa thêm ví dụ chi tiết khi giới thiệu framework ở chương 2. Hiện tại, bạn cần tập trung vào **thêm tool mới vào danh sách tools** qua tham số `tools` của Agent.
 
 Ví dụ bạn có thể dùng `DuckDuckGoSearchTool` đã được import ở dòng đầu, hoặc xem qua `image_generation_tool` được load từ Hub ở phần sau.
 
@@ -219,7 +219,7 @@ Chúng mình rất mong chờ thành quả agent tuyệt vời của bạn ở k
 ---
 Chúc mừng bạn đã build xong Agent đầu tiên! Đừng ngại chia sẻ với bạn bè và đồng nghiệp nhé.
 
-Vì đây là lần đầu thử nghiệm, việc agent có lỗi nhỏ hoặc chạy chậm là hoàn toàn bình thường. Ở các Chương sau, ta sẽ học cách xây dựng Agent tốt hơn.
+Vì đây là lần đầu thử nghiệm, việc agent có lỗi nhỏ hoặc chạy chậm là hoàn toàn bình thường. Ở các chương sau, ta sẽ học cách xây dựng Agent tốt hơn.
 
 Cách học tốt nhất là thực hành, nên đừng ngần ngại cập nhật nó, thêm tool mới, thử với model khác, v.v.
 

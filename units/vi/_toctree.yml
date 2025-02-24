@@ -6,10 +6,10 @@
     title: Làm quen
   - local: unit0/discord101
     title: (Bổ trợ) Discord 101 (Giới thiệu cơ bản về Discord)
-- title: Live 1. Cách khóa học vận hành và Hỏi và Đáp
+- title: Live 1. Cách khóa học vận hành + Hỏi và Đáp
   sections:
   - local: communication/live1
-    title: Live 1. Cách khóa học vận hành và Hỏi và Đáp
+    title: Live 1. Cách khóa học vận hành + Hỏi và Đáp
 - title: Chương 1. Giới thiệu về Agents
   sections:
   - local: unit1/introduction
@@ -29,7 +29,7 @@
   - local: unit1/agent-steps-and-structure
     title: Hiểu về AI Agents qua chu kỳ Thought-Action-Observation
   - local: unit1/thoughts
-    title: Suy nghĩ, Lập luận nội bộ và Phương pháp Re-Act
+    title: Suy nghĩ, Lập luận nội bộ và phương pháp Re-Act
   - local: unit1/actions
     title: Hành động, Giúp Agent tương tác với môi trường
   - local: unit1/observations
@@ -39,10 +39,10 @@
   - local: unit1/tutorial
     title: Hãy tạo Agent đầu tiên với Smolagents
   - local: unit1/final-quiz
-    title: Bài kiểm tra cuối Chương 1
+    title: Bài kiểm tra cuối chương 1
   - local: unit1/conclusion
     title: Kết luận
-- title: Chương Bổ Trợ 1. Fine-tune LLM cho Function-calling
+- title: Chương bổ trợ 1. Fine-tune LLM cho Function-calling
   sections:
   - local: bonus-unit1/introduction
     title: Giới thiệu

@@ -4,13 +4,13 @@ Function-calling là **cách để LLM thực hiện hành động trên môi tr
 
 Giống như Tools của Agent, function-calling cho phép model **tương tác với môi trường**. Tuy nhiên, khả năng gọi hàm **được model học** và ít phụ thuộc vào prompting hơn các kỹ thuật Agent khác.
 
-Trong Chương 1, Agent **không học cách sử dụng Tools** mà chỉ được cung cấp danh sách Tools, dựa trên khả năng tổng quát hóa của model để lập kế hoạch sử dụng chúng.
+Trong chương 1, Agent **không học cách sử dụng Tools** mà chỉ được cung cấp danh sách Tools, dựa trên khả năng tổng quát hóa của model để lập kế hoạch sử dụng chúng.
 
 Còn với function-calling, **Agent được fine-tuning (tinh chỉnh) để sử dụng Tools**.
 
 ## Model "học" cách thực hiện hành động như thế nào?
 
-Ở Chương 1, ta đã tìm hiểu workflow tổng quan của Agent. Khi người dùng cung cấp Tools và đưa ra truy vấn, model sẽ lặp qua các bước:
+Ở chương 1, ta đã tìm hiểu workflow tổng quan của Agent. Khi người dùng cung cấp Tools và đưa ra truy vấn, model sẽ lặp qua các bước:
 
 1. *Suy nghĩ*: Xác định hành động cần thực hiện để đạt mục tiêu
 2. *Hành động*: Định dạng hành động với tham số chính xác và dừng generation
