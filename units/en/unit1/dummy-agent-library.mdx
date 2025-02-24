@@ -130,7 +130,7 @@ Now begin! Reminder to ALWAYS use the exact characters `Final Answer:` when you 
 ```
 
 Since we are running the "text_generation" method, we need to apply the prompt manually:
-```
+```python
 prompt=f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 {SYSTEM_PROMPT}
 <|eot_id|><|start_header_id|>user<|end_header_id|>
@@ -140,7 +140,7 @@ What's the weather in London ?
 ```
 
 We can also do it like this, which is what happens inside the `chat` method :
-```
+```python
 messages=[
     {"role": "system", "content": SYSTEM_PROMPT},
     {"role": "user", "content": "What's the weather in London ?"},
