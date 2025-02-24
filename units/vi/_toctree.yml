@@ -42,7 +42,7 @@
     title: Bài kiểm tra cuối Chương 1
   - local: unit1/conclusion
     title: Kết luận
-- title: Chương Bổ Trợ 1. Tinh chỉnh LLM cho Function-calling
+- title: Chương Bổ Trợ 1. Fine-tune LLM cho Function-calling
   sections:
   - local: bonus-unit1/introduction
     title: Giới thiệu
@@ -55,4 +55,4 @@
 - title: Khi nào các bước tiếp theo được công bố?
   sections:
   - local: communication/next-units
-    title: Các Chương tiếp theo
+    title: Các chương tiếp theo
