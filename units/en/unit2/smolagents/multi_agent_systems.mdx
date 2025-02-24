@@ -6,6 +6,11 @@
 
 # Multi-Agent Systems
 
+<Tip warning={true}>
+The examples in this section require access to some powerful models. We tested them using the GPT-4o API and Together AI.  
+However, <a href="./why_use_smolagents">Why use smolagents</a> discusses alternative solutions supported by smolagents and Hugging Face. If you'd like to explore other options, be sure to check that section.
+</Tip>
+
 Multi-agent systems enable **specialized agents to collaborate on complex tasks**, improving modularity, scalability, and robustness. Instead of relying on a single agent, tasks are distributed among agents with distinct capabilities.  
 
 In **smolagents**, different agents can be combined to generate Python code, call external tools, perform web searches, and more. By orchestrating these agents, we can create powerful workflows.
@@ -162,6 +167,29 @@ result = agent.run(task)
 result
 ```
 
+In our case, this generates this output:
+
+```python
+|  | Location                                             | Travel Time to Gotham (hours) |
+|--|------------------------------------------------------|------------------------------|
+| 0  | Necropolis Cemetery, Glasgow, Scotland, UK         | 8.60                         |
+| 1  | St. George's Hall, Liverpool, England, UK         | 8.81                         |
+| 2  | Two Temple Place, London, England, UK             | 9.17                         |
+| 3  | Wollaton Hall, Nottingham, England, UK           | 9.00                         |
+| 4  | Knebworth House, Knebworth, Hertfordshire, UK    | 9.15                         |
+| 5  | Acton Lane Power Station, Acton Lane, Acton, UK  | 9.16                         |
+| 6  | Queensboro Bridge, New York City, USA            | 1.01                         |
+| 7  | Wall Street, New York City, USA                  | 1.00                         |
+| 8  | Mehrangarh Fort, Jodhpur, Rajasthan, India       | 18.34                        |
+| 9  | Turda Gorge, Turda, Romania                      | 11.89                        |
+| 10 | Chicago, USA                                     | 2.68                         |
+| 11 | Hong Kong, China                                 | 19.99                        |
+| 12 | Cardington Studios, Northamptonshire, UK        | 9.10                         |
+| 13 | Warner Bros. Leavesden Studios, Hertfordshire, UK | 9.13                         |
+| 14 | Westwood, Los Angeles, CA, USA                  | 6.79                         |
+| 15 | Woking, UK (McLaren)                             | 9.13                         |
+```
+
 We could already improve this a bit by throwing in some dedicated planning steps, and adding more prompting.
 
 ```python
@@ -181,6 +209,16 @@ print(detailed_report)
 ```python
 detailed_report
 ```
+
+In our case, this generates this output:
+
+```python
+|  | Location                                         | Travel Time (hours) |
+|--|--------------------------------------------------|---------------------|
+| 0  | Bridge of Sighs, Glasgow Necropolis, Glasgow, UK | 8.6                 |
+| 1  | Wishart Street, Glasgow, Scotland, UK         | 8.6                 |
+```
+
 
 Thanks to these quick changes, we obtained a much more concise report by simply providing our agent a detailed prompt, and giving it planning capabilities!
 
