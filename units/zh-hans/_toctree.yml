@@ -40,8 +40,6 @@
     title: 使用 Smolagents 创建我们的第一个代理
   - local: unit1/final-quiz
     title: 第 1 单元最终测验
-  - local: unit1/get-your-certificate
-    title: 获取你的证书
   - local: unit1/conclusion
     title: 结论
 - title: 附加单元 1. 为函数调用微调大型语言模型
