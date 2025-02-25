@@ -143,7 +143,7 @@ from smolagents import CodeAgent, GoogleSearchTool, HfApiModel, VisitWebpageTool
 model = HfApiModel(model_id="Qwen/Qwen2.5-Coder-32B-Instruct", provider="together")
 ```
 
-We can start with creating a baseline, simple agent to give us a simple report.
+We can start by creating a simple agent as a baseline to give us a simple report.
 
 ```python
 task = """Find all Batman filming locations in the world, calculate the time to transfer via cargo plane to here (we're in Gotham, 40.7128° N, 74.0060° W), and return them to me as a pandas dataframe.
