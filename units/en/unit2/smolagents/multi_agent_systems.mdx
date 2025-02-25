@@ -6,11 +6,6 @@
 
 # Multi-Agent Systems
 
-<Tip warning={true}>
-The examples in this section require access to some powerful models. We tested them using the GPT-4o API and Together AI.  
-However, <a href="./why_use_smolagents">Why use smolagents</a> discusses alternative solutions supported by smolagents and Hugging Face. If you'd like to explore other options, be sure to check that section.
-</Tip>
-
 Multi-agent systems enable **specialized agents to collaborate on complex tasks**, improving modularity, scalability, and robustness. Instead of relying on a single agent, tasks are distributed among agents with distinct capabilities.  
 
 In **smolagents**, different agents can be combined to generate Python code, call external tools, perform web searches, and more. By orchestrating these agents, we can create powerful workflows.
@@ -131,7 +126,7 @@ print(calculate_cargo_travel_time((41.8781, -87.6298), (-33.8688, 151.2093)))
 
 For the model provider, we use Together AI, one of the new [inference providers on the Hub](https://huggingface.co/blog/inference-providers)!
 
-Regarding the GoogleSearchTool: this requires either having setup env variable `SERPAPI_API_KEY` and passing `provider="serpapi"` or having `SERPER_API_KEY` and passing `provider=serper`.
+The GoogleSearchTool uses the [Serper API](https://serper.dev) to search the web, so this requires either having setup env variable `SERPAPI_API_KEY` and passing `provider="serpapi"` or having `SERPER_API_KEY` and passing `provider=serper`.
 
 If you don't have any Serp API provider setup, you can use `DuckDuckGoSearchTool` but beware that it has a rate limit.
 
@@ -192,6 +187,8 @@ In our case, it generates this output:
 
 We could already improve this a bit by throwing in some dedicated planning steps, and adding more prompting.
 
+Planning steps allow the agent to think ahead and plan its next steps, which can be useful for more complex tasks.
+
 ```python
 agent.planning_interval = 4
 
@@ -222,7 +219,7 @@ In our case, it generates this output:
 
 Thanks to these quick changes, we obtained a much more concise report by simply providing our agent a detailed prompt, and giving it planning capabilities!
 
-💸 But as you can see, the context window is quickly filling up. So **if we ask our agent to combine the results of detailed search with another, it will be slower and quickly ramp up tokens and costs**.
+The model's context window is quickly filling up. So **if we ask our agent to combine the results of detailed search with another, it will be slower and quickly ramp up tokens and costs**.
 
 ➡️ We need to improve the structure of our system.
 

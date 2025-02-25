@@ -66,6 +66,8 @@ A vector database is just a collection of documents with rich representations by
 
 This approach combines predefined knowledge with semantic search to provide context-aware solutions for event planning. With specialized knowledge access, Alfred can perfect every detail of the party.
 
+In this example, we'll create a tool that retrieves party planning ideas from a custom knowledge base. We'll use a BM25 retriever to search the knowledge base and return the top results, and `RecursiveCharacterTextSplitter` to split the documents into smaller chunks for more efficient search.
+
 ```python
 from langchain.docstore.document import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
