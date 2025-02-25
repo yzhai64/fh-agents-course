@@ -52,9 +52,7 @@ A `CodeAgent` performs actions through a cycle of steps, with existing variables
     
     2.5 The results are logged into memory in an `ActionStep`.
 
-At the end of each step, if the agent includes any function calls (in `agent.step_callback`), they are executed. Below, you can see an comparison diagram between a multi-step agent using the ReAct framework and a one step agent.
-
-![Comparison diagram between a multi-step agent using the ReAct framework and a one step agent](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/open-source-llms-as-agents/ReAct.png)
+At the end of each step, if the agent includes any function calls (in `agent.step_callback`), they are executed.
 
 ## Let's See Some Examples
 
@@ -72,7 +70,7 @@ If you haven't installed `smolagents` yet, you can do so by running the followin
 pip install smolagents -U
 ```
 
-Let's also login to the Hugging Face Hub to have access to the Inference API.
+Let's also login to the Hugging Face Hub to have access to the Serverless Inference API.
 
 ```python
 from huggingface_hub import login
@@ -82,11 +80,11 @@ login()
 
 ### Selecting a Playlist for the Party Using `smolagents`
 
-An important part of a successful party is the music. Alfred needs some help selecting the playlist. Luckily, `smolagents` has got us covered! We can build an agent capable of searching the web using DuckDuckGo. To give the agent access to this tool, we include it in the tool list when creating the agent.
+Music is an essential part of a successful party! Alfred needs some help selecting the playlist. Luckily, `smolagents` has got us covered! We can build an agent capable of searching the web using DuckDuckGo. To give the agent access to this tool, we include it in the tool list when creating the agent.
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit2/smolagents/alfred-playlist.jpg" alt="Alfred Playlist"/>
 
-For the model, we'll rely on `HfApiModel`, which provides access to Hugging Face's [Inference API](https://huggingface.co/docs/api-inference/index). The default model is `"Qwen/Qwen2.5-Coder-32B-Instruct"`, which is performant and available for fast inference, but you can select any compatible model from the Hub.
+For the model, we'll rely on `HfApiModel`, which provides access to Hugging Face's [Serverless Inference API](https://huggingface.co/docs/api-inference/index). The default model is `"Qwen/Qwen2.5-Coder-32B-Instruct"`, which is performant and available for fast inference, but you can select any compatible model from the Hub.  
 
 Running an agent is quite straightforward:
 
@@ -154,12 +152,11 @@ We have the playlist and menu ready, but we need to check one more crucial detai
 
 Alfred needs to calculate when everything would be ready if he started preparing now, in case they need assistance from other superheroes.
 
-`smolagents` specializes in agents that write and execute Python code snippets, offering sandboxed execution for security. It supports both open-source and proprietary language models, making it adaptable to various development environments.
-
+`smolagents` specializes in agents that write and execute Python code snippets, offering sandboxed execution for security.  
 **Code execution has strict security measures** - imports outside a predefined safe list are blocked by default. However, you can authorize additional imports by passing them as strings in `additional_authorized_imports`.
 For more details on secure code execution, see the official [guide](https://huggingface.co/docs/smolagents/tutorials/secure_code_execution).
 
-When creating the agent, we ill use `additional_authorized_imports` to allow for importing the `datetime` module. 
+When creating the agent, we'll use `additional_authorized_imports` to allow for importing the `datetime` module. 
 
 ```python
 from smolagents import CodeAgent, HfApiModel
@@ -186,7 +183,7 @@ agent.run(
 These examples are just the beginning of what you can do with code agents, and we're already starting to see their utility for preparing the party. 
 You can learn more about how to build code agents in the [smolagents documentation](https://huggingface.co/docs/smolagents).
 
-`smolagents` specializes in agents that write and execute Python code snippets, offering sandboxed execution for security. It supports both open-source and proprietary language models, making it adaptable to various development environments.
+In summary, `smolagents` specializes in agents that write and execute Python code snippets, offering sandboxed execution for security. It supports both local and API-based language models, making it adaptable to various development environments.  
 
 ### Sharing Our Custom Party Preparator Agent to the Hub
 
@@ -205,7 +202,7 @@ To download the agent again, use the code below:
 # Change to your username and repo name
 alfred_agent = agent.from_hub('sergiopaniego/AlfredAgent')
 
-alfred_agent.run("Give me best playlist for a party at the Wayne's mansion. The party idea is a 'villain masquerade' theme")
+alfred_agent.run("Give me the best playlist for a party at Wayne's mansion. The party idea is a 'villain masquerade' theme")  
 ```
 
 What's also exciting is that shared agents are directly available as Hugging Face Spaces, allowing you to interact with them in real-time. You can explore other agents [here](https://huggingface.co/spaces/davidberenstein1957/smolagents-and-tools).
@@ -306,6 +303,10 @@ As you can see, we've created a `CodeAgent` with several tools that enhance the 
 
 Now, it's your turn: build your very own agent and share it with the community using the knowledge we've just learned! 🕵️‍♂️💡
 
+<Tip>
+If you would like to share your agent project, then make a space and tag the [agents-course](https://huggingface.co/agents-course) on the Hugging Face Hub. We'd love to see what you've created!
+</Tip>
+
 ### Inspecting Our Party Preparator Agent with OpenTelemetry and Langfuse 📡
 
 As Alfred fine-tunes the Party Preparator Agent, he's growing weary of debugging its runs. Agents, by nature, are unpredictable and difficult to inspect. But since he aims to build the ultimate Party Preparator Agent and deploy it in production, he needs robust traceability for future monitoring and analysis.  
@@ -359,7 +360,7 @@ from smolagents import CodeAgent, HfApiModel
 
 agent = CodeAgent(tools=[], model=HfApiModel())
 alfred_agent = agent.from_hub('sergiopaniego/AlfredAgent', trust_remote_code=True)
-alfred_agent.run("Give me best playlist for a party at the Wayne's mansion. The party idea is a 'villain masquerade' theme")
+alfred_agent.run("Give me the best playlist for a party at Wayne's mansion. The party idea is a 'villain masquerade' theme")  
 ```
 
 Alfred can now access this logs [here](https://cloud.langfuse.com/project/cm7bq0abj025rad078ak3luwi/traces/995fc019255528e4f48cf6770b0ce27b?timestamp=2025-02-19T10%3A28%3A36.929Z) to review and analyze them.  
