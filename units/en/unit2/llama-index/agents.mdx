@@ -9,7 +9,7 @@ Back in Unit 1, we learned that:
 
 LlamaIndex supports **three main types of reasoning agents:**
 
-![Agents](https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit2/agents.png)
+![Agents](https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit2/llama-index/agents.png)
 
 1. `Function Calling Agents` - These work with AI models that can call specific functions.
 2. `ReAct Agents` - These can work with any AI that does chat or text endpoint and deal with complex reasoning tasks.
@@ -65,7 +65,7 @@ Now we've gotten the basics, let's take a look at how we can use tools in our ag
 **Agentic RAG is a powerful way to use agents to answer questions about your data.** We can pass various tools to Alfred to help him answer questions.
 However, instead of answering the question on top of documents automatically, Alfred can decide to use any other tool or flow to answer the question.
 
-![Agentic RAG](https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit2/agentic-rag.png)
+![Agentic RAG](https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit2/llama-index/agentic-rag.png)
 
 It is easy to **wrap `QueryEngine` as tools** for an agent.
 When doing so, we need to **define a name and description within the `ToolMetadata`**. The LLM will use this information to correctly use the tool.
