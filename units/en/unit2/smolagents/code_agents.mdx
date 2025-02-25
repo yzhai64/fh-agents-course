@@ -34,19 +34,19 @@ Writing actions in code rather than JSON offers several key advantages:
 
 ![From https://huggingface.co/docs/smolagents/conceptual_guides/react](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/smolagents/codeagent_docs.png)
 
-The diagram above illustrates how `CodeAgent.run()` operates, following the [ReAct framework](https://huggingface.co/papers/2210.03629), which is currently the preferred approach for building multi-step agents. We already introduced the `MultiStepAgent` in the previous section, which serves as the core building block for `smolagents`. The `CodeAgent` is a special kind of `MultiStepAgent`, as we will see in this example underneath.
+The diagram above illustrates how `CodeAgent.run()` operates, following the ReAct framework we mentioned in Unit 1. The main abstraction for agents in `smolagents` is a `MultiStepAgent`, which serves as the core building block. `CodeAgent` is a special kind of `MultiStepAgent`, as we will see in an example below.  
 
-A `CodeAgent` performs actions through a cycle of steps, with existing variables and knowledge being incorporated into the agent's logs as follows:
+A `CodeAgent` performs actions through a cycle of steps, with existing variables and knowledge being incorporated into the agent's context, which is kept in an execution log:  
 
 1. The system prompt is stored in a `SystemPromptStep`, and the user query is logged in a `TaskStep`.
 
 2. Then, the following while loop is executed:
 
-    2.1 The method `agent.write_memory_to_messages()` writes the agent's logs into a list of LLM-readable [chat messages](https://huggingface.co/docs/transformers/en/chat_templating).
+    2.1 Method `agent.write_memory_to_messages()` writes the agent's logs into a list of LLM-readable [chat messages](https://huggingface.co/docs/transformers/en/chat_templating).  
     
     2.2 These messages are sent to a `Model`, which generates a completion. 
     
-    2.3 The completion is parsed to extract the action, which, in our case, could be a code snippet since we're working with a `CodeAgent`.
+    2.3 The completion is parsed to extract the action, which, in our case, should be a code snippet since we're working with a `CodeAgent`.  
     
     2.4 The action is executed.
     
@@ -113,7 +113,7 @@ After a few steps, you'll see the generated playlist that Alfred can use for the
 
 Now that we have selected a playlist, we need to organize the menu for the guests. Again, Alfred can take advantage of `smolagents` to do so. Here, we use the `@tool` decorator to define a custom function that acts as a tool. We'll cover tool creation in more detail later, so for now, we can simply run the code.
 
-As you can see in the example below, we will create a tool using `@tool` decorator and include it in the `tools` list.
+As you can see in the example below, we will create a tool using the `@tool` decorator and include it in the `tools` list.  
 
 ```python
 from smolagents import CodeAgent, tool
