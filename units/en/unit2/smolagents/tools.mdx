@@ -36,7 +36,7 @@ In `smolagents`, tools can be defined in two ways:
 
 ### The `@tool` Decorator  
 
-The `@tool` decorator is the **recommended way to define simple tools**. Under the hood, smolagents will parse basic information about the function from Python. So if you name you function clearly and a good docstring, it will be easier for the LLM to use. 
+The `@tool` decorator is the **recommended way to define simple tools**. Under the hood, smolagents will parse basic information about the function from Python. So if you name your function clearly and write a good docstring, it will be easier for the LLM to use. 
 
 Using this approach, we define a function with:  
 
@@ -101,7 +101,7 @@ This approach involves creating a subclass of [`Tool`](https://huggingface.co/do
 - `output_type`: Specifies the expected output type.  
 - `forward`: The method containing the inference logic to execute.
 
-Below, we can see an example of a tool built using `Tool` and to integrate it within a `CodeAgent`.
+Below, we can see an example of a tool built using `Tool` and how to integrate it within a `CodeAgent`.
 
 #### Generating a tool to generate ideas about the superhero-themed party
 
@@ -187,10 +187,10 @@ Here are examples showcasing how these functionalities can elevate the party exp
 
 Sharing your custom tool with the community is easy! Simply upload it to your Hugging Face account using the `push_to_hub()` method.
 
-For instance, Alfred can share his `catering_service_tool` to help others find the best catering services in Gotham. Here's how to do it:
+For instance, Alfred can share his `party_theme_tool` to help others find the best catering services in Gotham. Here's how to do it:
 
 ```python
-party_theme_tool.push_to_hub("{your_username}/catering_service_tool", token="<YOUR_HUGGINGFACEHUB_API_TOKEN>")
+party_theme_tool.push_to_hub("{your_username}/party_theme_tool", token="<YOUR_HUGGINGFACEHUB_API_TOKEN>")
 ```
 
 ### Importing a Tool from the Hub
@@ -217,7 +217,9 @@ agent.run("Generate an image of a luxurious superhero-themed party at Wayne Mano
 
 You can also import a HF Space as a tool using `Tool.from_space()`. This opens up possibilities for integrating with thousands of spaces from the community for tasks from image generation to data analysis. 
 
-The tool will connect with the spaces Gradio backend using the `gradio_client`, so make sure to install it via `pip` if you don't have it already. For the party, Alfred can also use a HF Space directly for the generation of the previous annoucement AI-generated image. Let's build it!
+The tool will connect with the spaces Gradio backend using the `gradio_client`, so make sure to install it via `pip` if you don't have it already.
+
+For the party, Alfred can use an existing HF Space for the generation of the AI-generated image to be used in the announcement (instead of the pre-built tool we mentioned before). Let's build it!
 
 ```python
 from smolagents import CodeAgent, HfApiModel, Tool
@@ -239,6 +241,9 @@ agent.run(
 ```
 
 ### Importing a LangChain Tool
+
+
+We'll discuss the `LangChain` framework in upcoming sections. For now, we just note that we can reuse LangChain tools in your smolagents workflow!
 
 You can easily load LangChain tools using the `Tool.from_langchain()` method. Alfred, ever the perfectionist, is preparing for a spectacular superhero night at Wayne Manor while the Waynes are away. To make sure every detail exceeds expectations, he taps into LangChain tools to find top-tier entertainment ideas.
 

@@ -11,11 +11,10 @@ The examples in this section require access to a powerful VLM model. We tested t
 However, <a href="./why_use_smolagents">Why use smolagents</a> discusses alternative solutions supported by smolagents and Hugging Face. If you'd like to explore other options, be sure to check that section.
 </Tip>
 
-Empowering agents with visual capabilities is crucial for solving tasks that go beyond text processing. Many real-world challenges, such as web browsing or document understanding, require analyzing rich visual content. Fortunately, `smolagents` provides built-in support for vision (VLMs), enabling agents to process and interpret images effectively.  
+Empowering agents with visual capabilities is crucial for solving tasks that go beyond text processing. Many real-world challenges, such as web browsing or document understanding, require analyzing rich visual content. Fortunately, `smolagents` provides built-in support for vision-language models (VLMs), enabling agents to process and interpret images effectively.  
 
-In this example, imagine Alfred, the butler at Wayne Manor, is tasked with verifying the identities of the guests attending tje party. As you can imagine, Alfred may not be familiar with everyone arriving. To help him, we can use an agent that verifies their identity by searching for visual information about their appearance using a Vision Language Model (VLM). This will allow Alfred to make informed decisions about who can enter. Let's build this example!
+In this example, imagine Alfred, the butler at Wayne Manor, is tasked with verifying the identities of the guests attending the party. As you can imagine, Alfred may not be familiar with everyone arriving. To help him, we can use an agent that verifies their identity by searching for visual information about their appearance using a VLM. This will allow Alfred to make informed decisions about who can enter. Let's build this example!
 
-But first, let's dive into a bit of theory.
 
 ## Providing Images at the Start of the Agent's Execution
 
@@ -48,7 +47,7 @@ for url in image_urls:
     images.append(image)
 ```
 
-Now that we have the images, the agent will tell us wether the guests is actually a superhero (Wonder Woman) or a villian (The Joker).
+Now that we have the images, the agent will tell us whether one guest is actually a superhero (Wonder Woman) or a villain (The Joker).
 
 ```python
 from smolagents import CodeAgent, OpenAIServerModel
@@ -63,7 +62,6 @@ agent = CodeAgent(
     verbosity_level=2
 )
 
-# Run the agent with a manufacturing quality check task
 response = agent.run(
     """
     Describe the costume and makeup that the comic character in these photos is wearing and return the description.
@@ -97,7 +95,7 @@ In this case, the output reveals that the person is impersonating someone else, 
 You can follow the code in <a href="https://huggingface.co/agents-course/notebooks/blob/main/unit2/smolagents/vision_web_browser.py" target="_blank">this Python file</a>
 </Tip>
 
-The previous approach is valuable and has many potential use cases. However, in situations where the guest is not in the database, we need to explore other ways of identifying them. One possible solution is dynamically retrieving images and information from external sources, such as browsing the web for details.
+The previous approach is valuable and has many potential use cases. However, in situations where the guest is not in the database, we need to explore other ways of identifying them. One possible solution is to dynamically retrieve images and information from external sources, such as browsing the web for details.
 
 In this approach, images are dynamically added to the agent's memory during execution. As we know, agents in `smolagents` are based on the `MultiStepAgent` class, which is an abstraction of the ReAct framework. This class operates in a structured cycle where various variables and knowledge are logged at different stages:
 
