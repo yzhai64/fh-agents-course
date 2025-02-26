@@ -1,69 +1,69 @@
-# Introduction to `smolagents`
+# `smolagents` 简介
 
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit2/smolagents/thumbnail.jpg" alt="Unit 2.1 Thumbnail"/>
 
-Welcome to this module, where you'll learn **how to build effective agents** using the [`smolagents`](https://github.com/huggingface/smolagents) library, which provides a lightweight framework for creating capable AI agents.  
+欢迎来到本模块，在这里你将学习**如何使用 [`smolagents`](https://github.com/huggingface/smolagents) 库构建有效的智能体**，该库提供了一个轻量级框架，用于创建功能强大的AI智能体。  
 
-`smolagents` is a Hugging Face library; therefore, we would appreciate your support by **starring** the smolagents [`repository`](https://github.com/huggingface/smolagents) :
+`smolagents` 是 Hugging Face 的一个库；因此，我们非常感谢您通过**加星标**的方式支持 smolagents [`仓库`](https://github.com/huggingface/smolagents)：
 <img src="https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit2/smolagents/star_smolagents.gif" alt="staring smolagents"/>
 
-## Module Overview
+## 模块概览
 
-This module provides a comprehensive overview of key concepts and practical strategies for building intelligent agents using `smolagents`. 
+本模块提供了使用 `smolagents` 构建智能体的关键概念和实用策略的全面概述。
 
-With so many open-source frameworks available, it's essential to understand the components and capabilities that make `smolagents` a useful option or to determine when another solution might be a better fit. 
+面对众多可用的开源框架，了解使 `smolagents` 成为有用选择的组件和功能，或确定何时另一种解决方案可能更合适，这一点至关重要。
 
-We'll explore critical agent types, including code agents designed for software development tasks, tool calling agents for creating modular, function-driven workflows, and retrieval agents that access and synthesize information. 
+我们将探索关键的智能体类型，包括为软件开发任务设计的代码智能体（code agents），用于创建模块化、函数驱动工作流的工具调用智能体（tool calling agents），以及访问和综合信息的检索智能体（retrieval agents）。
 
-Additionally, we'll cover the orchestration of multiple agents as well as the integration of vision capabilities and web browsing, which unlock new possibilities for dynamic and context-aware applications.
+此外，我们还将讨论多个智能体的编排，以及视觉能力和网络浏览的集成，这为动态和上下文感知应用开辟了新的可能性。
 
-In this unit, Alfred, the agent from Unit 1, makes his return. This time, he’s using the `smolagents` framework for his internal workings. Together, we’ll explore the key concepts behind this framework as Alfred tackles various tasks. Alfred is organizing a party at the Wayne Manor while the Wayne family 🦇 is away, and he has plenty to do. Join us as we showcase his journey and how he handles these tasks with `smolagents`!
+在本单元中，第一单元的智能体阿尔弗雷德（Alfred）回归了。这次，他使用 `smolagents` 框架进行内部运作。我们将一起探索这个框架背后的关键概念，同时阿尔弗雷德将处理各种任务。阿尔弗雷德正在韦恩庄园（Wayne Manor）组织一场派对，趁韦恩家族🦇外出时，他有很多事情要做。跟随我们一起展示他的旅程，看他如何使用 `smolagents` 处理这些任务！
 
 <Tip>
 
-In this unit, you will learn to build AI agents with the `smolagents` library. Your agents will be able to search for data, execute code, and interact with web pages. You will also learn how to combine multiple agents to create more powerful systems.
+在本单元中，您将学习使用 `smolagents` 库构建AI智能体。您的智能体将能够搜索数据、执行代码并与网页交互。您还将学习如何结合多个智能体来创建更强大的系统。
 
 </Tip>
 
 ![Alfred the agent](https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/this-is-alfred.jpg)
 
-## Contents
+## 内容
 
-During this unit on `smolagents`, we cover:  
+在这个关于 `smolagents` 的单元中，我们涵盖：  
 
-### 1️⃣ [Why Use smolagents](./why_use_smolagents)
+### 1️⃣ [为什么使用 smolagents](./why_use_smolagents)
 
-`smolagents` is one of the many open-source agent frameworks available for application development. Alternative options include `LlamaIndex` and `LangGraph`, which are also covered in other modules in this course. `smolagents` offers several key features that might make it a great fit for specific use cases, but we should always consider all options when selecting a framework. We'll explore the advantages and drawbacks of using `smolagents`, helping you make an informed decision based on your project's requirements.
+`smolagents` 是众多可用于应用程序开发的开源智能体框架之一。其他选择包括 `LlamaIndex` 和 `LangGraph`，这些在本课程的其他模块中也有涵盖。`smolagents` 提供了几个关键特性，可能使其非常适合特定用例，但在选择框架时，我们应该始终考虑所有选项。我们将探讨使用 `smolagents` 的优势和缺点，帮助您根据项目需求做出明智的决定。
 
-### 2️⃣ [CodeAgents](./code_agents)
+### 2️⃣ [代码智能体](./code_agents)
 
-`CodeAgents` are the primary type of agent in `smolagents`. Instead of generating JSON or text, these agents produce Python code to perform actions. This module explores their purpose, functionality, and how they work, along with hands-on examples to showcase their capabilities.  
+`CodeAgents`（代码智能体）是 `smolagents` 中的主要智能体类型。这些智能体不是生成 JSON 或文本，而是生成 Python 代码来执行操作。本模块探讨它们的目的、功能以及工作原理，并提供实际例子来展示它们的能力。  
 
-### 3️⃣ [ToolCallingAgents](./tool_calling_agents)
+### 3️⃣ [工具调用智能体](./tool_calling_agents)
 
-`ToolCallingAgents` are the second type of agent supported by `smolagents`. Unlike `CodeAgents`, which generate Python code, these agents rely on JSON/text blobs that the system must parse and interpret to execute actions. This module covers their functionality, their key differences from `CodeAgents`, and it provides an example to illustrate their usage.
+`ToolCallingAgents`（工具调用智能体）是 `smolagents` 支持的第二种智能体类型。与生成 Python 代码的 `CodeAgents` 不同，这些智能体依赖于系统必须解析和解释以执行操作的 JSON/文本块。本模块涵盖它们的功能、与 `CodeAgents` 的主要区别，并提供示例说明其用法。
 
-### 4️⃣ [Tools](./tools)
+### 4️⃣ [工具](./tools)
 
-As we saw in Unit 1, tools are functions that an LLM can use within an agentic system, and they act as the essential building blocks for agent behavior. This module covers how to create tools, their structure, and different implementation methods using the `Tool` class or the `@tool` decorator. You'll also learn about the default toolbox, how to share tools with the community, and how to load community-contributed tools for use in your agents.
+正如我们在第 1 单元中看到的，工具是大语言模型（LLM）可以在智能体系统中使用的函数，它们作为智能体行为的基本构建块。本模块涵盖如何创建工具、它们的结构，以及使用 `Tool` 类或 `@tool` 装饰器的不同实现方法。您还将了解默认工具箱、如何与社区共享工具，以及如何加载社区贡献的工具以在您的智能体中使用。
 
-### 5️⃣ [Retrieval Agents](./retrieval_agents)
+### 5️⃣ [检索智能体](./retrieval_agents)
 
-Retrieval agents allow models access to knowledge bases, making it possible to search, synthesize, and retrieve information from multiple sources. They leverage vector stores for efficient retrieval and implement **Retrieval-Augmented Generation (RAG)** patterns. These agents are particularly useful for integrating web search with custom knowledge bases while maintaining conversation context through memory systems. This module explores implementation strategies, including fallback mechanisms for robust information retrieval.
+检索智能体（Retrieval agents）使模型能够访问知识库，从而可以从多个来源搜索、综合和检索信息。它们利用向量存储（vector stores）进行高效检索，并实现**检索增强生成（Retrieval-Augmented Generation，RAG）**模式。这些智能体特别适用于将网络搜索与自定义知识库集成，同时通过记忆系统维持对话上下文。本模块探讨实施策略，包括用于稳健信息检索的回退机制。
 
-### 6️⃣ [Multi-Agent Systems](./multi_agent_systems)
+### 6️⃣ [多智能体系统](./multi_agent_systems)
 
-Orchestrating multiple agents effectively is crucial for building powerful, multi-agent systems. By combining agents with different capabilities—such as a web search agent with a code execution agent—you can create more sophisticated solutions. This module focuses on designing, implementing, and managing multi-agent systems to maximize efficiency and reliability.  
+有效地编排多个智能体对于构建强大的多智能体系统至关重要。通过组合具有不同能力的智能体（例如，将网络搜索智能体与代码执行智能体结合），您可以创建更复杂的解决方案。本模块专注于设计、实施和管理多智能体系统，以最大限度地提高效率和可靠性。  
 
-### 7️⃣ [Vision and Browser agents](./vision_agents)
+### 7️⃣ [视觉和浏览器智能体](./vision_agents)
 
-Vision agents extend traditional agent capabilities by incorporating **Vision-Language Models (VLMs)**, enabling them to process and interpret visual information. This module explores how to design and integrate VLM-powered agents, unlocking advanced functionalities like image-based reasoning, visual data analysis, and multimodal interactions.  We will also use vision agents to build a browser agent that can browse the web and extract information from it.
+视觉智能体（Vision agents）通过整合**视觉-语言模型（Vision-Language Models，VLMs）**扩展了传统智能体的能力，使其能够处理和解释视觉信息。本模块探讨如何设计和集成由 VLM 驱动的智能体，从而解锁诸如基于图像的推理、视觉数据分析和多模态交互等高级功能。我们还将使用视觉智能体构建一个浏览器智能体，能够浏览网络并从中提取信息。
 
-## Resources
+## 资源
 
-- [smolagents Documentation](https://huggingface.co/docs/smolagents) - Official docs for the smolagents library
-- [Building Effective Agents](https://www.anthropic.com/research/building-effective-agents) - Research paper on agent architectures
-- [Agent Guidelines](https://huggingface.co/docs/smolagents/tutorials/building_good_agents) - Best practices for building reliable agents
-- [LangGraph Agents](https://langchain-ai.github.io/langgraph/) - Additional examples of agent implementations
-- [Function Calling Guide](https://platform.openai.com/docs/guides/function-calling) - Understanding function calling in LLMs
-- [RAG Best Practices](https://www.pinecone.io/learn/retrieval-augmented-generation/) - Guide to implementing effective RAG
+- [smolagents 文档](https://huggingface.co/docs/smolagents) - smolagents 库的官方文档
+- [构建有效的智能体](https://www.anthropic.com/research/building-effective-agents) - 关于智能体架构的研究论文
+- [智能体指南](https://huggingface.co/docs/smolagents/tutorials/building_good_agents) - 构建可靠智能体的最佳实践
+- [LangGraph 智能体](https://langchain-ai.github.io/langgraph/) - 智能体实现的其他示例
+- [函数调用指南](https://platform.openai.com/docs/guides/function-calling) - 了解大语言模型中的函数调用
+- [RAG 最佳实践](https://www.pinecone.io/learn/retrieval-augmented-generation/) - 实施有效 RAG 的指南

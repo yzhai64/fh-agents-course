@@ -1,142 +1,142 @@
-# Small Quiz (ungraded) [[quiz1]]
+# 小测验 (不计分) [[quiz1]]
 
-Let's test your understanding of `smolagents` with a quick quiz! Remember, testing yourself helps reinforce learning and identify areas that may need review.
+让我们用一个快速测验来测试你对 `smolagents` 的理解！请记住，自我测试有助于强化学习并识别可能需要复习的领域。
 
-This is an optional quiz and it's not graded.
+这是一个可选测验，不计分。
 
-### Q1: What is one of the primary advantages of choosing `smolagents` over other frameworks?
-Which statement best captures a core strength of the `smolagents` approach?
+### Q1: 选择 `smolagents` 而非其他框架的主要优势之一是什么？
+哪个陈述最能体现 `smolagents` 方法的核心优势？
 
 <Question
 choices={[
   {
-    text: "It uses highly specialized configuration files and a steep learning curve to ensure only expert developers can use it",
-    explain: "smolagents is designed for simplicity and minimal code complexity, not steep learning curves.",
+    text: "它使用高度专业化的配置文件和陡峭的学习曲线，确保只有专业开发人员能够使用它",
+    explain: "smolagents 设计注重简单性和最小代码复杂性，而不是陡峭的学习曲线。",
   },
   {
-    text: "It supports a code-first approach with minimal abstractions, letting agents interact directly via Python function calls",
-    explain: "Yes, smolagents emphasizes a straightforward, code-centric design with minimal abstractions.",
+    text: "它支持代码优先方法，具有最少的抽象，让智能体通过 Python 函数调用直接交互",
+    explain: "是的，smolagents 强调直接、以代码为中心的设计，具有最小的抽象。",
     correct: true
   },
   {
-    text: "It focuses on JSON-based actions, removing the need for agents to write any code",
-    explain: "While smolagents supports JSON-based tool calls (ToolCallingAgents), the library emphasizes code-based approaches with CodeAgents.",
+    text: "它专注于基于 JSON 的操作，消除了智能体编写任何代码的需求",
+    explain: "虽然 smolagents 支持基于 JSON 的工具调用（ToolCallingAgents），但该库强调基于代码的方法，如 CodeAgents。",
   },
   {
-    text: "It deeply integrates with a single LLM provider and specialized hardware",
-    explain: "smolagents supports multiple model providers and does not require specialized hardware.",
+    text: "它与单一 LLM 提供商和专用硬件深度集成",
+    explain: "smolagents 支持多种模型提供商，并且不需要专用硬件。",
   }
 ]}
 />
 
 ---
 
-### Q2: In which scenario would you likely benefit most from using smolagents?
-Which situation aligns well with what smolagents does best?
+### Q2: 在哪种情况下，你可能最能从使用 smolagents 中受益？
+哪种情况最符合 smolagents 的优势？
 
 <Question
 choices={[
   {
-    text: "Building a large-scale enterprise system where you need dozens of microservices and real-time data pipelines",
-    explain: "While possible, smolagents is more focused on lightweight, code-centric experimentation rather than heavy enterprise infrastructure.",
+    text: "构建大型企业系统，需要数十个微服务和实时数据管道",
+    explain: "虽然可能，但 smolagents 更专注于轻量级、以代码为中心的实验，而不是重型企业基础设施。",
   },
   {
-    text: "Prototyping or experimenting quickly with agent logic, particularly when your application is relatively straightforward",
-    explain: "Yes. smolagents is designed for simple and nimble agent creation without extensive setup overhead.",
+    text: "快速原型设计或实验智能体逻辑，特别是当你的应用相对简单直接时",
+    explain: "是的。smolagents 设计用于简单灵活的智能体创建，无需大量设置开销。",
     correct: true
   },
   {
-    text: "Needing a framework that only supports cloud-based LLMs and forbids local inference",
-    explain: "smolagents offers flexible integration with local or hosted models, not exclusively cloud-based LLMs.",
+    text: "需要一个只支持基于云的 LLM 并禁止本地推理的框架",
+    explain: "smolagents 提供与本地或托管模型的灵活集成，不仅限于基于云的 LLM。",
   },
   {
-    text: "A scenario that requires advanced orchestration, multi-modal perception, and enterprise-scale features out-of-the-box",
-    explain: "While you can integrate advanced capabilities, smolagents itself is lightweight and minimal at its core.",
+    text: "需要高级编排、多模态感知和开箱即用的企业级功能的场景",
+    explain: "虽然你可以集成高级功能，但 smolagents 本身在核心上是轻量级和简约的。",
   }
 ]}
 />
 
 ---
 
-### Q3: smolagents offers flexibility in model integration. Which statement best reflects its approach?
-Choose the most accurate description of how smolagents interoperates with LLMs.
+### Q3: smolagents 在模型集成方面提供了灵活性。哪个陈述最能反映其方法？
+选择最准确描述 smolagents 如何与 LLM 互操作的说明。
 
 <Question
 choices={[
   {
-    text: "It only provides a single built-in model and does not allow custom integrations",
-    explain: "smolagents supports multiple different backends and user-defined models.",
+    text: "它只提供一个内置模型，不允许自定义集成",
+    explain: "smolagents 支持多种不同的后端和用户定义的模型。",
   },
   {
-    text: "It can be used with a wide range of LLMs, offering predefined classes like TransformersModel, HfApiModel, and LiteLLMModel",
-    explain: "This is correct. smolagents supports flexible model integration through various classes.",
+    text: "它可以与广泛的 LLM 一起使用，提供预定义的类如 TransformersModel、HfApiModel 和 LiteLLMModel",
+    explain: "这是正确的。smolagents 通过各种类支持灵活的模型集成。",
     correct: true
   },
   {
-    text: "It requires you to implement your own model connector for every LLM usage",
-    explain: "There are multiple prebuilt connectors that make LLM integration straightforward.",
+    text: "它要求你为每次 LLM 使用实现自己的模型连接器",
+    explain: "有多种预构建的连接器使 LLM 集成变得简单直接。",
   },
   {
-    text: "It only integrates with open-source LLMs but not commercial APIs",
-    explain: "smolagents can integrate with both open-source and commercial model APIs.",
+    text: "它只与开源 LLM 集成，不支持商业 API",
+    explain: "smolagents 可以与开源和商业模型 API 集成。",
   }
 ]}
 />
 
 ---
 
-### Q4: How does smolagents handle the debate between code-based actions and JSON-based actions?
-Which statement correctly characterizes smolagents' philosophy about action formats?
+### Q4: smolagents 如何处理基于代码的操作和基于 JSON 的操作之间的争论？
+哪个陈述正确地描述了 smolagents 关于操作格式的理念？
 
 <Question
 choices={[
   {
-    text: "It only allows JSON-based actions for all agent tasks, requiring a parser to extract the tool calls",
-    explain: "ToolCallingAgent uses JSON-based calls, but smolagents also provides a primary CodeAgent option that writes Python code.",
+    text: "它只允许所有智能体任务使用基于 JSON 的操作，需要解析器来提取工具调用",
+    explain: "ToolCallingAgent 使用基于 JSON 的调用，但 smolagents 也提供主要的 CodeAgent 选项，可以编写 Python 代码。",
   },
   {
-    text: "It focuses on code-based actions via a CodeAgent but also supports JSON-based tool calls with a ToolCallingAgent",
-    explain: "Yes, smolagents primarily recommends code-based actions but includes a JSON-based alternative for users who prefer it or need it.",
+    text: "它通过 CodeAgent 专注于基于代码的操作，但也通过 ToolCallingAgent 支持基于 JSON 的工具调用",
+    explain: "是的，smolagents 主要推荐基于代码的操作，但也为喜欢或需要它的用户提供了基于 JSON 的替代方案。",
     correct: true
   },
   {
-    text: "It disallows any external function calls, instead requiring all logic to reside entirely within the LLM",
-    explain: "smolagents is specifically designed to grant LLMs the ability to call tools or code externally.",
+    text: "它禁止任何外部函数调用，而是要求所有逻辑完全存在于 LLM 内部",
+    explain: "smolagents 专门设计用于授予 LLM 调用外部工具或代码的能力。",
   },
   {
-    text: "It requires users to manually convert every code snippet into a JSON object before running the agent",
-    explain: "smolagents can automatically manage code snippet creation within the CodeAgent path, no manual JSON conversion necessary.",
+    text: "它要求用户在运行智能体之前手动将每个代码片段转换为 JSON 对象",
+    explain: "smolagents 可以在 CodeAgent 路径中自动管理代码片段创建，无需手动 JSON 转换。",
   }
 ]}
 />
 
 ---
 
-### Q5: How does smolagents integrate with the Hugging Face Hub for added benefits?
-Which statement accurately describes one of the core advantages of Hub integration?
+### Q5: smolagents 如何与 Hugging Face Hub 集成以获得额外优势？
+哪个陈述准确描述了 Hub 集成的核心优势之一？
 
 <Question
 choices={[
   {
-    text: "It automatically upgrades all public models to commercial license tiers",
-    explain: "Hub integration doesn't change the license tier for models or tools.",
+    text: "它自动将所有公共模型升级到商业许可层级",
+    explain: "Hub 集成不会改变模型或工具的许可层级。",
   },
   {
-    text: "It allows you to push and share agents or tools, making them easily discoverable and reusable by other developers",
-    explain: "Correct. smolagents supports uploading agents and tools to the HF Hub for others to reuse.",
+    text: "它允许你推送和共享智能体或工具，使其他开发者易于发现和重用",
+    explain: "正确。smolagents 支持将智能体和工具上传到 HF Hub 供他人重用。",
     correct: true
   },
   {
-    text: "It disables local inference entirely, forcing remote model usage only",
-    explain: "Users can still do local inference if they prefer; pushing to the Hub doesn't override local usage.",
+    text: "它完全禁用本地推理，只强制使用远程模型",
+    explain: "如果用户愿意，仍然可以进行本地推理；推送到 Hub 不会覆盖本地使用。",
   },
   {
-    text: "It permanently stores all your code-based agents, preventing any updates or versioning",
-    explain: "Hub repositories support updates and version control, so you can revise your code-based agents any time.",
+    text: "它永久存储所有基于代码的智能体，防止任何更新或版本控制",
+    explain: "Hub 仓库支持更新和版本控制，因此你可以随时修改基于代码的智能体。",
   }
 ]}
 />
 
 ---
 
-Congratulations on completing this quiz! 🎉 If you missed any questions, consider reviewing the *Why use smolagents* section for a deeper understanding. If you did well, you're ready to explore more advanced topics in smolagents!
+恭喜你完成了这个测验！🎉 如果你错过了任何问题，可以考虑复习*为什么使用 smolagents*部分以更深入理解。如果你表现良好，你已经准备好探索 smolagents 中更高级的主题了！
