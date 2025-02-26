@@ -42,36 +42,36 @@
     title: 第 1 单元最终测验
   - local: unit1/conclusion
     title: 结论
-- title: Unit 2. Frameworks for AI Agents
+- title: Unit 2. AI智能体框架
   sections:
   - local: unit2/introduction
-    title: Frameworks for AI Agents
-- title: Unit 2.1 The smolagents framework
+    title: AI智能体框架
+- title: Unit 2.1 smolagents框架
   sections:
   - local: unit2/smolagents/introduction
-    title: Introduction to smolagents
+    title: smolagents简介
   - local: unit2/smolagents/why_use_smolagents
-    title: Why use smolagents? 
+    title: 为什么使用smolagents？
   - local: unit2/smolagents/quiz1
-    title: Quick Quiz 1
+    title: 快速测验1
   - local: unit2/smolagents/code_agents
-    title: Building Agents That Use Code
+    title: 构建使用代码的智能体
   - local: unit2/smolagents/tool_calling_agents
-    title: Integrating Agents With Tools
+    title: 将智能体与工具集成
   - local: unit2/smolagents/tools
-    title: Tools
+    title: 工具
   - local: unit2/smolagents/retrieval_agents
-    title: Retrieval Agents
+    title: 检索智能体
   - local: unit2/smolagents/quiz2
-    title: Quick Quiz 2
+    title: 快速测验2
   - local: unit2/smolagents/multi_agent_systems
-    title: Multi-Agent Systems
+    title: 多智能体系统
   - local: unit2/smolagents/vision_agents
-    title: Vision and Browser agents
+    title: 视觉和浏览器智能体
   - local: unit2/smolagents/final_quiz
-    title: Final Quiz
+    title: 最终测验
   - local: unit2/smolagents/conclusion
-    title: Conclusion
+    title: 结论
 - title: 附加单元 1. 为函数调用微调大型语言模型
   sections:
   - local: bonus-unit1/introduction
