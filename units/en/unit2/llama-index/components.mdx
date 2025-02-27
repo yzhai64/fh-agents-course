@@ -9,7 +9,7 @@ Why? Because it can be used as a Retrieval-Augmented Generation (RAG) tool for a
 
 So, what is RAG? LLMs are trained on enormous bodies of data to learn general knowledge.
 However, they may not be trained on relevant and up-to-date data.
-RAG solves this problem by finding and retrieving relevant information from your data and forward that to the LLM.
+RAG solves this problem by finding and retrieving relevant information from your data and forwarding that to the LLM.
 
 ![RAG](https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit2/llama-index/rag.png)
 
@@ -30,7 +30,7 @@ Now, let's dive a bit deeper into the components and see how you can **combine c
 There are five key stages within RAG, which in turn will be a part of most larger applications you build. These are:
 
 1. **Loading**: this refers to getting your data from where it lives -- whether it's text files, PDFs, another website, a database, or an API -- into your workflow. LlamaHub provides hundreds of integrations to choose from.
-2. **Indexing**: this means creating a data structure that allows for querying the data. For LLMs this nearly always means creating vector embeddings. Which are numerical representations of the meaning of text data. Indexing can also refer to numerous other metadata strategies to make it easy to accurately find contextually relevant data based on properties.
+2. **Indexing**: this means creating a data structure that allows for querying the data. For LLMs, this nearly always means creating vector embeddings. Which are numerical representations of the meaning of text data. Indexing can also refer to numerous other metadata strategies to make it easy to accurately find contextually relevant data based on properties.
 3. **Storing**: once your data is indexed you will want to store your index, as well as other metadata, to avoid having to re-index it.
 4. **Querying**: for any given indexing strategy there are many ways you can utilize LLMs and LlamaIndex data structures to query, including sub-queries, multi-step queries and hybrid strategies.
 5. **Evaluation**: a critical step in any flow is checking how effective it is relative to other strategies, or when you make changes. Evaluation provides objective measures of how accurate, faithful and fast your responses to queries are.
@@ -40,11 +40,11 @@ Next, let's see how we can reproduce these stages using components.
 ### Loading and embedding documents
 
 As mentioned before, LlamaIndex can work on top of your own data, however, **before accessing data, we need to load it.**
-There are three main ways to do to load data into LlamaIndex:
+There are three main ways to load data into LlamaIndex:
 
 1. `SimpleDirectoryReader`: A built-in loader for various file types from a local directory.
 2. `LlamaParse`: LlamaParse, LlamaIndex's official tool for PDF parsing, available as a managed API.
-3. `LlamaHub`: A registry of hundreds of data loading libraries to ingest data from any source.
+3. `LlamaHub`: A registry of hundreds of data-loading libraries to ingest data from any source.
 
 <Tip>Get familiar with <a href="https://docs.llamaindex.ai/en/stable/module_guides/loading/connector/">LlamaHub</a> loaders and <a href="https://github.com/run-llama/llama_cloud_services/blob/main/parse.md">LlamaParse</a> parser for more complex data sources.</Tip>
 
@@ -77,8 +77,8 @@ from llama_index.core.ingestion import IngestionPipeline
 # create the pipeline with transformations
 pipeline = IngestionPipeline(
     transformations=[
-        SentenceSplitter(chunk_size=25, chunk_overlap=0),
-        HuggingFaceInferenceAPIEmbedding("BAAI/bge-small-en-v1.5"),
+ SentenceSplitter(chunk_size=25, chunk_overlap=0),
+ HuggingFaceInferenceAPIEmbedding("BAAI/bge-small-en-v1.5"),
     ]
 )
 
@@ -94,7 +94,7 @@ After creating our `Node` objects we need to index them to make them searchable,
 
 Since we are using an ingestion pipeline, we can directly attach a vector store to the pipeline to populate it. In this case, we will use `Chroma` to store our documents.
 
-First we install the integration:
+First, we install the integration:
 
 ```bash
 pip install llama-index-vector-stores-chroma
@@ -111,8 +111,8 @@ vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
 
 pipeline = IngestionPipeline(
     transformations=[
-        SentenceSplitter(chunk_size=25, chunk_overlap=0),
-        HuggingFaceInferenceAPIEmbedding("BAAI/bge-small-en-v1.5"),
+ SentenceSplitter(chunk_size=25, chunk_overlap=0),
+ HuggingFaceInferenceAPIEmbedding("BAAI/bge-small-en-v1.5"),
     ],
     vector_store=vector_store,
 )
@@ -134,7 +134,7 @@ embed_model = HuggingFaceInferenceAPIEmbedding("BAAI/bge-small-en-v1.5")
 index = VectorStoreIndex.from_vector_store(vector_store, embed_model=embed_model)
 ```
 
-We can load our index any time using the`from_vector_store()` method and passing in the same embedding model that we used to embed our data.
+We can load our index at any time using the`from_vector_store()` method and passing in the same embedding model that we used to embed our data.
 
 ```python
 from llama_index.core import StorageContext, load_index_from_storage
@@ -164,16 +164,16 @@ from llama_index.llms.huggingface_api import HuggingFaceInferenceAPILM
 llm = HuggingFaceInferenceAPILM(model_name="meta-llama/Meta-Llama-3-8B-Instruct")
 query_engine = index.as_query_engine(llm=llm)
 query_engine.query("What is the meaning of life?")
-# the meaning of life is 42
+# The meaning of life is 42
 ```
 
 ### Response Processing
 
-Under the hood, the query engine doesn't only use the LLM to answer the question, but also uses a `ResponseSynthesizer` as strategy to process the response.
+Under the hood, the query engine doesn't only use the LLM to answer the question but also uses a `ResponseSynthesizer` as a strategy to process the response.
 Once again, this is fully customisable but there are three main strategies that work well out of the box:
 
 - `refine`: create and refine an answer by sequentially going through each retrieved text chunk. This makes a separate LLM call per Node/retrieved chunk.
-- `compact` (default): similar to refine but concatenate the chunks beforehand, resulting in less LLM calls.
+- `compact` (default): similar to refining but concatenating the chunks beforehand, resulting in fewer LLM calls.
 - `tree_summarize`: create a detailed answer by going through each retrieved text chunk and creating a tree structure of the answer.
 
 <Tip>Take fine-grained control of your query workflows with the <a href="https://docs.llamaindex.ai/en/stable/module_guides/deploying/query_engine/usage_pattern/#low-level-composition-api">low-level composition API</a>. This API lets you customize and fine-tune every step of the query process to match your exact needs, which also pairs great with <a href="https://docs.llamaindex.ai/en/stable/module_guides/workflow/">Workflows</a> </Tip>
@@ -187,14 +187,14 @@ These evaluators leverage LLMs to analyze responses across different dimensions.
 Let's look at the three main evaluators available:
 
 - `FaithfulnessEvaluator`: Evaluates the faithfulness of the answer by checking if the answer is supported by the context.
-- `AnswerRelevancyEvaluator`: Evaluates the relevance of the answer by checking if the answer is relevant to the question.
-- `CorrectnessEvaluator`: Evaluates the correctness of the answer by checking if the answer is correct.
+- `AnswerRelevancyEvaluator`: Evaluate the relevance of the answer by checking if the answer is relevant to the question.
+- `CorrectnessEvaluator`: Evaluate the correctness of the answer by checking if the answer is correct.
 
 ```python
 from llama_index.core.evaluation import FaithfulnessEvaluator
 
-query_engine = # from previous section
-llm = # from previous section
+query_engine = # from the previous section
+llm = # from the previous section
 
 # query index
 evaluator = FaithfulnessEvaluator(llm=llm)

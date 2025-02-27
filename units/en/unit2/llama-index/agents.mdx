@@ -1,12 +1,12 @@
 # Using Agents in LlamaIndex
 
 Remember Alfred, our helpful butler agent from earlier? Well, he's about to get an upgrade!
-Now that we understand the tools available in LlamaIndex, we can give Alfred new capabilities to better serve us.
+Now that we understand the tools available in LlamaIndex, we can give Alfred new capabilities to serve us better.
 
 But before we continue, let's remind ourselves what makes an agent like Alfred tick.
 Back in Unit 1, we learned that:
 
-> An Agent is a system that leverages an AI model to interact with its environment in order to achieve a user-defined objective. It combines reasoning, planning, and the execution of actions (often via external tools) to fulfill tasks.
+> An Agent is a system that leverages an AI model to interact with its environment to achieve a user-defined objective. It combines reasoning, planning, and action execution (often via external tools) to fulfil tasks.
 
 LlamaIndex supports **three main types of reasoning agents:**
 
@@ -23,7 +23,7 @@ LlamaIndex supports **three main types of reasoning agents:**
 To create an agent, we start by providing it with a **set of functions/tools that define its capabilities**.
 Let's look at how to create an agent with some basic tools. As of this writing, the agent will automatically use the function calling API (if available), or a standard ReAct agent loop.
 
-LLMs that support a tools/functions API are relatively new, but they provide a powerful way to call tools by avoiding specific prompting, and allowing the LLM to create tool calls based on provided schemas.
+LLMs that support a tools/functions API are relatively new, but they provide a powerful way to call tools by avoiding specific prompting and allowing the LLM to create tool calls based on provided schemas.
 
 ReAct agents are also good at complex reasoning tasks and can work with any LLM that has chat or text completion capabilities. They are more verbose, and show the reasoning behind certain actions that they take.
 
@@ -34,7 +34,7 @@ from llama_index.core.tools import FunctionTool
 
 # define sample Tool -- type annotations, function names, and docstrings, are all included in parsed schemas!
 def multiply(a: int, b: int) -> int:
-    """Multiple two integers and returns the result integer"""
+    """Multiplies two integers and returns the resulting integer"""
     return a * b
 
 # initialize llm
@@ -63,7 +63,7 @@ response = await agent.run("My name is Bob.", ctx=ctx)
 response = await agent.run("What was my name again?", ctx=ctx)
 ```
 
-You'll notice that agents in `LlamaIndex` are async. If you are new to async code in python, or need a refresher, they have an [excellent async guide](https://docs.llamaindex.ai/en/stable/getting_started/async_python/).
+You'll notice that agents in `LlamaIndex` are async. If you are new to async code in Python, or need a refresher, they have an [excellent async guide](https://docs.llamaindex.ai/en/stable/getting_started/async_python/).
 
 Now we've gotten the basics, let's take a look at how we can use more complex tools in our agents.
 
@@ -74,7 +74,7 @@ However, instead of answering the question on top of documents automatically, Al
 
 ![Agentic RAG](https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit2/llama-index/agentic-rag.png)
 
-It is easy to **wrap `QueryEngine` as tools** for an agent.
+It is easy to **wrap `QueryEngine` as a tool** for an agent.
 When doing so, we need to **define a name and description**. The LLM will use this information to correctly use the tool.
 Let's see how to load in a `QueryEngineTool` using the `QueryEngine` we created in the [component section](02_components.mdx).
 
@@ -84,7 +84,7 @@ from llama_index.core.tools import QueryEngineTool
 query_engine = index.as_query_engine(llm=llm, similarity_top_k=3) # as shown in the previous section
 
 query_engine_tool = QueryEngineTool.from_defaults(
-    query_engine,
+ query_engine,
     name="a specific name",
     description="a specific description",
     return_direct=False,
@@ -102,9 +102,9 @@ By narrowing the scope of each agent, we can help increase their general accurac
 
 ```python
 from llama_index.core.agent.workflow import (
-    AgentWorkflow,
-    FunctionAgent,
-    ReActAgent,
+ AgentWorkflow,
+ FunctionAgent,
+ ReActAgent,
 )
 
 # Define some tools

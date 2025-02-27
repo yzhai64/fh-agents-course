@@ -15,7 +15,7 @@ Let's take a look at Alfred showing a LlamaIndex workflow for a RAG task.
 - Built-in state management
 - Support for both simple and complex agent interactions
 
-As you might have guessed, **workflows strike a great balance between autonomy of agents while maintaining control over the overall workflow.**
+As you might have guessed, **workflows strike a great balance between the autonomy of agents while maintaining control over the overall workflow.**
 
 So, let's learn how to create a workflow ourselves!
 
@@ -32,7 +32,7 @@ pip install llama-index-utils-workflow
 ```
 </details>
 
-We can create a single step workflow by defining a class that inherits from `Workflow` and decorating your functions with `@step`.
+We can create a single-step workflow by defining a class that inherits from `Workflow` and decorating your functions with `@step`.
 We will also need to add `StartEvent` and `StopEvent`, which are special events that are used to indicate the start and end of the workflow.
 
 ```python
@@ -60,7 +60,7 @@ To do so, we need to add an `Event` that is passed between the steps and transfe
 from llama_index.core.workflow import Event
 
 class ProcessingEvent(Event):
-    intermediate_result: str
+ intermediate_result: str
 
 class MultiStepWorkflow(Workflow):
     @step
@@ -71,7 +71,7 @@ class MultiStepWorkflow(Workflow):
     @step
     async def step_two(self, ev: ProcessingEvent) -> StopEvent:
         # Use the intermediate result
-        final_result = f"Finished processing: {ev.intermediate_result}"
+ final_result = f"Finished processing: {ev.intermediate_result}"
         return StopEvent(result=final_result)
 ```
 
@@ -79,9 +79,9 @@ The type hinting is important here, as it ensures that the workflow is executed 
 
 ### Loops and Branches
 
-The type hinting is the most powerful part of workflows because it allows us to create branches, loops, joins to facilitate more complex workflows.
+The type hinting is the most powerful part of workflows because it allows us to create branches, loops, and joins to facilitate more complex workflows.
 
-Let's show an example of **creating a loop** by using the union-operator `|`.
+Let's show an example of **creating a loop** by using the union operator `|`.
 In the example below, we see that the `LoopEvent` is taken as input for the step and can also be returned as output.
 
 ```python
@@ -109,10 +109,10 @@ from llama_index.core.workflow import Context, StartEvent, StopEvent
 @step
 async def query(self, ctx: Context, ev: StartEvent) -> StopEvent:
     # retrieve from context
-    query = await ctx.get("query")
+ query = await ctx.get("query")
 
     # do something with context and event
-    val = ...
+ val = ...
 
     # store in context
     await ctx.set("key", val)
@@ -138,7 +138,7 @@ When a user message comes in, it is first routed to the root agent.
 Each agent can then:
 
 - Handle the request directly using their tools
-- Hand off to another agent better suited for the task
+- Handoff to another agent better suited for the task
 - Return a response to the user
 
 Let's see how to create a multi-agent workflow.
