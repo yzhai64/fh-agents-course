@@ -25,7 +25,7 @@ So, let's learn how to create a workflow ourselves!
 
 <details>
 <summary>Install the Workflow package</summary>
-As introduced in the [section on components](what-are-components-in-llama-index.mdx), we can install the Workflow package with the following command:
+As introduced in the [section on the LlamaHub](llama-hub.mdx), we can install the Workflow package with the following command:
 
 ```python
 pip install llama-index-utils-workflow
@@ -150,7 +150,7 @@ query_engine_agent_tool = # as defined in the previous section
 # Define the agents
 multiply_agent = FunctionAgent(
     fn=lambda x, y: x * y,
-    name="multiply",
+    name="multiply_agent",
     description="Multiplies two integers",
 )
 retriever_agent = ReActAgent(
@@ -159,7 +159,8 @@ retriever_agent = ReActAgent(
 )
 # Create the workflow
 workflow = AgentWorkflow(
-    agents=[multiply_agent, retriever_agent], root_agent="multiply"
+    agents=[multiply_agent, retriever_agent],
+    root_agent="multiply_agent"
 )
 
 # Run the system

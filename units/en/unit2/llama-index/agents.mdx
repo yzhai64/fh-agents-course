@@ -84,7 +84,7 @@ from llama_index.core.tools import QueryEngineTool
 query_engine = index.as_query_engine(llm=llm, similarity_top_k=3) # as shown in the previous section
 
 query_engine_tool = QueryEngineTool.from_defaults(
- query_engine,
+    query_engine,
     name="a specific name",
     description="a specific description",
     return_direct=False,

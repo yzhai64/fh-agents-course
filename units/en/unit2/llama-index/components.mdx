@@ -77,13 +77,11 @@ from llama_index.core.ingestion import IngestionPipeline
 # create the pipeline with transformations
 pipeline = IngestionPipeline(
     transformations=[
- SentenceSplitter(chunk_size=25, chunk_overlap=0),
- HuggingFaceInferenceAPIEmbedding("BAAI/bge-small-en-v1.5"),
+        SentenceSplitter(chunk_overlap=0),
+        HuggingFaceInferenceAPIEmbedding(model_name="BAAI/bge-small-en-v1.5"),
     ]
 )
 
-# run the pipeline sync or async
-nodes = pipeline.run(documents=[Document.example()])
 nodes = await pipeline.arun(documents=[Document.example()])
 ```
 
@@ -92,27 +90,30 @@ nodes = await pipeline.arun(documents=[Document.example()])
 
 After creating our `Node` objects we need to index them to make them searchable, but before we can do that, we need a place to store our data.
 
-Since we are using an ingestion pipeline, we can directly attach a vector store to the pipeline to populate it. In this case, we will use `Chroma` to store our documents.
+Since we are using an ingestion pipeline, we can directly attach a vector store to the pipeline to populate it.
+In this case, we will use `Chroma` to store our documents.
 
-First, we install the integration:
+<details>
+<summary>Install ChromaDB</summary>
+As introduced in the [section on the LlamaHub](llama-hub.mdx), we can install the ChromaDB vector store with the following command:
 
 ```bash
 pip install llama-index-vector-stores-chroma
 ```
-
-Then we can use it!
+</details>
 
 ```python
+import chromadb
 from llama_index.vector_stores.chroma import ChromaVectorStore
 
-db = chromadb.PersistentClient(path="./alfed_chroma_db")
-chroma_collection = db2.get_or_create_collection("alfred")
+db = chromadb.PersistentClient(path="./alfred_chroma_db")
+chroma_collection = db.get_or_create_collection("alfred")
 vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
 
 pipeline = IngestionPipeline(
     transformations=[
- SentenceSplitter(chunk_size=25, chunk_overlap=0),
- HuggingFaceInferenceAPIEmbedding("BAAI/bge-small-en-v1.5"),
+        SentenceSplitter(chunk_size=25, chunk_overlap=0),
+        HuggingFaceInferenceAPIEmbedding(model_name="BAAI/bge-small-en-v1.5"),
     ],
     vector_store=vector_store,
 )
@@ -130,20 +131,11 @@ Let's see how to create this index from our vector store and embeddings:
 from llama_index.core import VectorStoreIndex
 from llama_index.embeddings.huggingface_api import HuggingFaceInferenceAPIEmbedding
 
-embed_model = HuggingFaceInferenceAPIEmbedding("BAAI/bge-small-en-v1.5")
+embed_model = HuggingFaceInferenceAPIEmbedding(model_name="BAAI/bge-small-en-v1.5")
 index = VectorStoreIndex.from_vector_store(vector_store, embed_model=embed_model)
 ```
 
-We can load our index at any time using the`from_vector_store()` method and passing in the same embedding model that we used to embed our data.
-
-```python
-from llama_index.core import StorageContext, load_index_from_storage
-from llama_index.embeddings.huggingface_api import HuggingFaceInferenceAPIEmbedding
-
-embed_model = HuggingFaceInferenceAPIEmbedding("BAAI/bge-small-en-v1.5")
-storage_context = StorageContext.from_defaults(persist_dir="path/to/vector/store")
-index = load_index_from_storage(storage_context, embed_model=embed_model)
-```
+All infomration is automatically persisted within the `ChromaVectorStore` object and the passed directory path.
 
 Great! Now that we can save and load our index easily, let's explore how to query it in different ways.
 
@@ -159,10 +151,13 @@ We'll focus on the query engine since it is more common for agent-like interacti
 We also pass in an LLM to the query engine to use for the response.
 
 ```python
-from llama_index.llms.huggingface_api import HuggingFaceInferenceAPILM
+from llama_index.llms.huggingface_api import HuggingFaceInferenceAPI
 
-llm = HuggingFaceInferenceAPILM(model_name="meta-llama/Meta-Llama-3-8B-Instruct")
-query_engine = index.as_query_engine(llm=llm)
+llm = HuggingFaceInferenceAPI(model_name="meta-llama/Meta-Llama-3-8B-Instruct")
+query_engine = index.as_query_engine(
+    llm=llm,
+    response_mode="tree_summarize",
+)
 query_engine.query("What is the meaning of life?")
 # The meaning of life is 42
 ```
@@ -202,7 +197,7 @@ response = query_engine.query(
     "What battles took place in New York City in the American Revolution?"
 )
 eval_result = evaluator.evaluate_response(response=response)
-print(str(eval_result.passing))
+eval_result.passing
 ```
 
 Even without direct evaluation, we can **gain insights into how our system is performing through observability.**
@@ -210,7 +205,7 @@ This is especially useful when we are building more complex workflows and want t
 
 <details>
 <summary>Install LlamaTrace</summary>
-As introduced in the [section on components](components.mdx), we can install the LlamaTrace callback from Arize Phoenix with the following command:
+As introduced in the [section on the LlamaHub](llama-hub.mdx), we can install the LlamaTrace callback from Arize Phoenix with the following command:
 
 ```bash
 pip install -U llama-index-callbacks-arize-phoenix
@@ -230,7 +225,8 @@ import os
 PHOENIX_API_KEY = "<PHOENIX_API_KEY>"
 os.environ["OTEL_EXPORTER_OTLP_HEADERS"] = f"api_key={PHOENIX_API_KEY}"
 llama_index.core.set_global_handler(
-    "arize_phoenix", endpoint="https://llamatrace.com/v1/traces"
+    "arize_phoenix",
+    endpoint="https://llamatrace.com/v1/traces"
 )
 ```
 

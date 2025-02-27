@@ -25,13 +25,13 @@ Let's look at how to create a FunctionTool below.
 from llama_index.core.tools import FunctionTool
 
 def get_weather(location: str) -> str:
-    """Usfeful for getting the weather for a given location."""
+    """Useful for getting the weather for a given location."""
     ...
 
 tool = FunctionTool.from_defaults(
- get_weather,
-    # name="...",
-    # description="...",
+    get_weather,
+    name="my_weather_tool",
+    description="Useful for getting the weather for a given location.",
 )
 ```
 
@@ -70,7 +70,7 @@ For example, an accounting agent's `ToolSpec` might elegantly integrate spreadsh
 
 <details>
 <summary>Install the Google Toolspec</summary>
-As introduced in the [section on components](what-are-components-in-llama-index.mdx), we can install the Google toolspec with the following command:
+As introduced in the [section on the LlamaHub](llama-hub.mdx), we can install the Google toolspec with the following command:
 
 ```python
 pip install llama-index-tools-google
