@@ -13,9 +13,9 @@ LlamaIndex supports **three main types of reasoning agents:**
 
 1. `Function Calling Agents` - These work with AI models that can call specific functions.
 2. `ReAct Agents` - These can work with any AI that does chat or text endpoint and deal with complex reasoning tasks.
-3. `Advanced Agents` - These use more complex methods like LLMCompiler or Chain-of-Abstraction.
+3. `Advanced Custom Agents` - These use more complex methods to deal with more complex tasks and workflows.
 
-<Tip>Find more information on advanced agents on <a href="https://github.com/run-llama/llama_index/tree/main/llama-index-packs">LlamaIndex GitHub</a></Tip>
+<Tip>Find more information on advanced agents on <a href="https://github.com/run-llama/llama_index/blob/main/llama-index-core/llama_index/core/agent/workflow/base_agent.py">BaseWorkflowAgent</a></Tip>
 
 ## Initialising Agents
 
@@ -41,7 +41,7 @@ llm = HuggingFaceInferenceAPILM(model_name="meta-llama/Meta-Llama-3-8B-Instruct"
 
 # initialize agent
 agent = AgentWorkflow.from_tools_or_functions(
-  [FunctionTool.from_defaults(multiply_tool)], 
+  [FunctionTool.from_defaults(multiply_tool)],
   llm=llm
 )
 ```

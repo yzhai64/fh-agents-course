@@ -82,8 +82,9 @@ pipeline = IngestionPipeline(
     ]
 )
 
-# run the pipeline
+# run the pipeline sync or async
 nodes = pipeline.run(documents=[Document.example()])
+nodes = await pipeline.arun(documents=[Document.example()])
 ```
 
 
@@ -91,7 +92,7 @@ nodes = pipeline.run(documents=[Document.example()])
 
 After creating our `Node` objects we need to index them to make them searchable, but before we can do that, we need a place to store our data.
 
-Since we are using an ingestion pipeline, we can directly attach a vector store to the pipeline to populate it. In this case, we will use `Chroma` to store our documents. 
+Since we are using an ingestion pipeline, we can directly attach a vector store to the pipeline to populate it. In this case, we will use `Chroma` to store our documents.
 
 First we install the integration:
 
@@ -209,7 +210,7 @@ This is especially useful when we are building more complex workflows and want t
 
 <details>
 <summary>Install LlamaTrace</summary>
-As introduced in the [section on components](what-are-components-in-llama-index.mdx), we can install the LlamaTrace integration with the following command:
+As introduced in the [section on components](components.mdx), we can install the LlamaTrace callback from Arize Phoenix with the following command:
 
 ```bash
 pip install -U llama-index-callbacks-arize-phoenix
