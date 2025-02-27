@@ -133,7 +133,9 @@ The `AgentWorkflow` uses Workflow Agents to allow you to create a system of one 
 This enables building complex agent systems where different agents handle different aspects of a task.
 Instead of importing classes from `llama_index.core.agent`, we will import the agent classes from `llama_index.core.agent.workflow`.
 One agent must be designated as the root agent in the `AgentWorkflow` constructor.
-When a user message comes in, it is first routed to the root agent. Each agent can then:
+When a user message comes in, it is first routed to the root agent. 
+
+Each agent can then:
 
 - Handle the request directly using their tools
 - Hand off to another agent better suited for the task

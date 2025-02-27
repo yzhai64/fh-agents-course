@@ -88,7 +88,7 @@ tool_spec_list = tool_spec.to_tool_list()
 
 ## Utility Tools
 
-Oftentimes, directly querying an API can return an excessive amount of data, some of which may be irrelevant, overflow the context window of the LLM, or unnecessarily increase the number of tokens that you are using.
+Oftentimes, directly querying an API **can return an excessive amount of data**, some of which may be irrelevant, overflow the context window of the LLM, or unnecessarily increase the number of tokens that you are using.
 Let's walk through our two main utility tools below.
 
 1. `OnDemandToolLoader`: This tool turns any existing LlamaIndex data loader (BaseReader class) into a tool that an agent can use. The tool can be called with all the parameters needed to trigger `load_data` from the data loader, along with a natural language query string. During execution, we first load data from the data loader, index it (for instance with a vector store), and then query it 'on-demand'. All three of these steps happen in a single tool call.

@@ -2,6 +2,7 @@
 
 Remember Alfred, our helpful butler agent from earlier? Well, he's about to get an upgrade!
 Now that we understand the tools available in LlamaIndex, we can give Alfred new capabilities to better serve us.
+
 But before we continue, let's remind ourselves what makes an agent like Alfred tick.
 Back in Unit 1, we learned that:
 
@@ -19,7 +20,7 @@ LlamaIndex supports **three main types of reasoning agents:**
 
 ## Initialising Agents
 
-To create an agent, we start by providing it with a set of functions/tools that define its capabilities.
+To create an agent, we start by providing it with a **set of functions/tools that define its capabilities**.
 Let's look at how to create an agent with some basic tools. As of this writing, the agent will automatically use the function calling API (if available), or a standard ReAct agent loop.
 
 LLMs that support a tools/functions API are relatively new, but they provide a powerful way to call tools by avoiding specific prompting, and allowing the LLM to create tool calls based on provided schemas.
@@ -46,7 +47,7 @@ agent = AgentWorkflow.from_tools_or_functions(
 )
 ```
 
-**Agents are stateless by default, add remembering past interactions is opt-in using a `Context` object
+**Agents are stateless by default**, add remembering past interactions is opt-in using a `Context` object
 This might be useful if you want to use an agent that needs to remember previous interactions, like a chatbot that maintains context across multiple messages or a task manager that needs to track progress over time.
 
 ```python

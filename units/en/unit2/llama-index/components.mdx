@@ -176,7 +176,7 @@ Once again, this is fully customisable but there are three main strategies that 
 - `compact` (default): similar to refine but concatenate the chunks beforehand, resulting in less LLM calls.
 - `tree_summarize`: create a detailed answer by going through each retrieved text chunk and creating a tree structure of the answer.
 
-<Tip>Take fine-grained control of your query workflows with the [low-level composition API](https://docs.llamaindex.ai/en/stable/module_guides/deploying/query_engine/usage_pattern/#low-level-composition-api). This API lets you customize and fine-tune every step of the query process to match your exact needs, which also pairs great with [Workflows](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)</Tip>
+<Tip>Take fine-grained control of your query workflows with the <a href="https://docs.llamaindex.ai/en/stable/module_guides/deploying/query_engine/usage_pattern/#low-level-composition-api">low-level composition API</a>. This API lets you customize and fine-tune every step of the query process to match your exact needs, which also pairs great with <a href="https://docs.llamaindex.ai/en/stable/module_guides/workflow/">Workflows</a> </Tip>
 
 The language model won't always perform in predictable ways, so we can't be sure that the answer we get is always correct. We can deal with this by **evaluating the quality of the answer**.
 
