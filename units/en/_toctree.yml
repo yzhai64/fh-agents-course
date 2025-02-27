@@ -63,7 +63,7 @@
   - local: unit2/llama-index/llama-index
     title: Introduction to LLamaIndex
   - local: unit2/llama-index/llama-hub
-    title: Introduction to the LlamaHub
+    title: Introduction to LlamaHub
   - local: unit2/llama-index/components
     title: What are Components in LlamaIndex?
   - local: unit2/llama-index/tools

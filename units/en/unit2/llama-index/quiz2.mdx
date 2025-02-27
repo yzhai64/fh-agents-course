@@ -4,52 +4,52 @@ What?! Another Quiz? We know, we know, ... 😅 But this short, ungraded quiz is
 
 This quiz covers agent workflows and interactions - essential components for building effective AI agents.
 
-### Q1: What is the purpose of AgentRunner in LlamaIndex?
+### Q1: What is the purpose of AgentWorkflow in LlamaIndex?
 
 <Question
 choices={[
 {
-text: "To run multiple agents simultaneously and create an agentic workflow to answer questions",
-explain: "This is not the main purpose of AgentRunner.",
-},
-{
-text: "To create new agents based on the LLM used and the tools available",
-explain: "AgentRunner does not create new agents.",
-},
-{
-text: "To automatically pick the best agent reasoning flow depending on the LLM",
-explain: "AgentRunner selects the most appropriate agent reasoning flow based on the LLM being used.",
+text: "To run one or more agents with tools",
+explain: "Yes, the AgentWorkflow is the main way to quickly create a system with one or more agents.",
 correct: true
 },
 {
+text: "To create a single agent that can query your data without memory",
+explain: "No, the AgentWorkflow is more capabale than that, the QueryEngine is for simple queries over your data.",
+},
+{
+text: "To automatically build tools for agents",
+explain: "The AgentWorkflow does not build tools, that is the job of the developer.",
+},
+{
 text: "To manage agent memory and state",
-explain: "Managing memory and state is not the primary purpose of AgentRunner.",
+explain: "Managing memory and state is not the primary purpose of AgentWorkflow.",
 }
 ]}
 />
 
 ---
 
-### Q2: What type hint is used for keeping track of the state of the workflow?
+### Q2: What object is used for keeping track of the state of the workflow?
 
 <Question
 choices={[
 {
 text: "State",
-explain: "State is not the correct type hint for workflow state management.",
+explain: "State is not the correct object for workflow state management.",
 },
 {
 text: "Context",
-explain: "Context is the correct type hint used for keeping track of workflow state.",
+explain: "Context is the correct object used for keeping track of workflow state.",
 correct: true
 },
 {
 text: "WorkflowState",
-explain: "WorkflowState is not the correct type hint.",
+explain: "WorkflowState is not the correct object.",
 },
 {
 text: "Management",
-explain: "Management is not a valid type hint for workflow state.",
+explain: "Management is not a valid object for workflow state.",
 }
 ]}
 />
@@ -61,21 +61,21 @@ explain: "Management is not a valid type hint for workflow state.",
 <Question
 choices={[
 {
-text: "query()",
-explain: "query() does not maintain conversation history.",
+text: "run(query_str)",
+explain: ".run(query_str) does not maintain conversation history.",
 },
 {
-text: "chat()",
-explain: "chat() is the correct method as it keeps a history of messages.",
-correct: true
+text: "chat(query_str, ctx=ctx)",
+explain: "chat() is not a valid method on workflows.",
 },
 {
-text: "interact()",
+text: "interact(query_str)",
 explain: "interact() is not a valid method for agent interactions.",
 },
 {
-text: "remember()",
-explain: "remember() is not a valid method for agent interactions.",
+text: "run(query_str, ctx=ctx",
+explain: "By passing in and maintaining the context, we can maintain state!",
+correct: true
 }
 ]}
 />

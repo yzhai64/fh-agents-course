@@ -87,27 +87,27 @@ explain: "Toolspecs can include various types of tools, not just text processing
 
 ---
 
-### Q4: What is Required in ToolMetadata?
-What information must be included when creating ToolMetadata?
+### Q4: What is Required to create a tool?
+What information must be included when creating a tool?
 
 <Question
 choices={[
 {
-text: "Both a name and description must be defined.",
-explain: "ToolMetadata requires both name and description for proper tool documentation.",
-correct: true
+text: "A function, a name, and description must be defined.",
+explain: "While these all make up a tool, the name and description can be parsed from the function and docstring.",
 },
 {
 text: "Only the name is required.",
-explain: "A description is also required for proper tool documentation.",
+explain: "A function and description/docstring is also required for proper tool documentation.",
 },
 {
 text: "Only the description is required.",
-explain: "A name is also required for proper tool identification.",
+explain: "A function is required so that we have code to run when an agent selects a tool",
 },
 {
-text: "Neither name nor description is required.",
-explain: "Both name and description are essential for tool documentation.",
+text: "Only the function is required.",
+explain: "The name and description default to the name and docstring from the provided function",
+correct: true
 }
 ]}
 />

@@ -19,7 +19,7 @@ Now, think about how Alfred works:
 2. Alfred needs to check your calendar, dietary preferences, and past successful menus
 3. The `QueryEngine` helps Alfred find this information and use it to plan the dinner party
 
-This makes the `QueryEngine` **the most relevant component for building agentic RAG workflows** in LlamaIndex.
+This makes the `QueryEngine` **a key component for building agentic RAG workflows** in LlamaIndex.
 Just as Alfred needs to search through your household information to be helpful, any agent needs a way to find and understand relevant data.
 The `QueryEngine` provides exactly this capability.
 
@@ -46,7 +46,7 @@ There are three main ways to do to load data into LlamaIndex:
 2. `LlamaParse`: LlamaParse, LlamaIndex's official tool for PDF parsing, available as a managed API.
 3. `LlamaHub`: A registry of hundreds of data loading libraries to ingest data from any source.
 
-<Tip>Get familiar with <a href="https://docs.llamaindex.ai/en/stable/module_guides/loading/connector/">LlamaHub</a> loaders and <a href="https://docs.llamaindex.ai/en/stable/module_guides/loading/connector/llama_parse/">LlamaParse</a> parser for more complex data sources.</Tip>
+<Tip>Get familiar with <a href="https://docs.llamaindex.ai/en/stable/module_guides/loading/connector/">LlamaHub</a> loaders and <a href="https://github.com/run-llama/llama_cloud_services/blob/main/parse.md">LlamaParse</a> parser for more complex data sources.</Tip>
 
 **The simplest way to load data is with `SimpleDirectoryReader`.**
 This versatile component can load various file types from a folder and convert them into `Document` objects that LlamaIndex can work with.
@@ -65,7 +65,6 @@ A `Node` is just a chunk of text from the original document that's easier for th
 The `IngestionPipeline` helps us create these nodes through two key transformations.
 1. `SentenceSplitter` breaks down documents into manageable chunks by splitting them at natural sentence boundaries.
 2. `HuggingFaceInferenceAPIEmbedding` converts each chunk into numerical embeddings - vector representations that capture the semantic meaning in a way AI can process efficiently.
-2. `HuggingFaceInferenceAPIEmbedding` converts each chunk into numerical embeddings - vector representations that capture the semantic meaning in a way AI can process efficiently.
 
 This process helps us organise our documents in a way that's more useful for searching and analysis.
 
@@ -73,7 +72,7 @@ This process helps us organise our documents in a way that's more useful for sea
 from llama_index.core import Document
 from llama_index.embeddings.huggingface_api import HuggingFaceInferenceAPIEmbedding
 from llama_index.core.node_parser import SentenceSplitter
-from llama_index.core.ingestion import IngestionPipeline, IngestionCache
+from llama_index.core.ingestion import IngestionPipeline
 
 # create the pipeline with transformations
 pipeline = IngestionPipeline(
@@ -87,42 +86,54 @@ pipeline = IngestionPipeline(
 nodes = pipeline.run(documents=[Document.example()])
 ```
 
-<Tip>To save time and computer power, **LlamaIndex caches the results of the ingestion pipeline** so you don't need to load and embed the same documents twice. Learn more about caching in the <a href="https://docs.llamaindex.ai/en/stable/module_guides/loading/ingestion_pipeline.html#caching">LlamaIndex documentation</a>.</Tip>
 
 ### Storing and indexing documents
 
-After creating our `Node` objects we need to index them to make them searchable but before we can do that, we need a place to store our data.
+After creating our `Node` objects we need to index them to make them searchable, but before we can do that, we need a place to store our data.
 
-Within LlamaIndex, we can **use a `StorageContext` to handle a lot of different storage types.**
-For each of these storage types, there are different integrations with storage backends that can be used.
-The various data storage types that LlamaIndex supports are:
-- `DocumentStore`: Stores ingested documents (Node objects) for keyword search
-- `IndexStore`: Stores index metadata
-- `VectorStore`: Stores embedding vectors for semantic search
-- `PropertyGraphStore`: Stores knowledge graphs for graph-based queries
-- `ChatStore`: Stores and organizes chat message history
+Since we are using an ingestion pipeline, we can directly attach a vector store to the pipeline to populate it. In this case, we will use `Chroma` to store our documents. 
 
-<Tip>An overview of the different storage types and their integrations can be found in the <a href="https://docs.llamaindex.ai/en/stable/module_guides/storing/">LlamaIndex documentation</a>.</Tip>
+First we install the integration:
 
-LlamaIndex makes it easy to set up storage - we can either configure a `StorageContext` manually or let LlamaIndex handle it automatically when creating a search index.
-When we save the `StorageContext`, it neatly organizes all our data into files that we can easily access later.
+```bash
+pip install llama-index-vector-stores-chroma
+```
 
-For searching through our nodes effectively, we need a way to compare queries against them.
+Then we can use it!
+
+```python
+from llama_index.vector_stores.chroma import ChromaVectorStore
+
+db = chromadb.PersistentClient(path="./alfed_chroma_db")
+chroma_collection = db2.get_or_create_collection("alfred")
+vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
+
+pipeline = IngestionPipeline(
+    transformations=[
+        SentenceSplitter(chunk_size=25, chunk_overlap=0),
+        HuggingFaceInferenceAPIEmbedding("BAAI/bge-small-en-v1.5"),
+    ],
+    vector_store=vector_store,
+)
+```
+
+<Tip>An overview of the different vector stores can be found in the <a href="https://docs.llamaindex.ai/en/stable/module_guides/storing/vector_stores/">LlamaIndex documentation</a>.</Tip>
+
+
 This is where vector embeddings come in - by embedding both the query and nodes in the same vector space, we can find relevant matches.
 The `VectorStoreIndex` handles this for us, using the same embedding model we used during ingestion to ensure consistency.
 
-Let's see how to create this index and save it to your computer:
+Let's see how to create this index from our vector store and embeddings:
 
 ```python
 from llama_index.core import VectorStoreIndex
 from llama_index.embeddings.huggingface_api import HuggingFaceInferenceAPIEmbedding
 
 embed_model = HuggingFaceInferenceAPIEmbedding("BAAI/bge-small-en-v1.5")
-index = VectorStoreIndex.from_documents(nodes, embed_model=embed_model)
-index.storage_context.persist("path/to/vector/store")
+index = VectorStoreIndex.from_vector_store(vector_store, embed_model=embed_model)
 ```
 
-We can load our index again using files that were created when saving the `StorageContext`.
+We can load our index any time using the`from_vector_store()` method and passing in the same embedding model that we used to embed our data.
 
 ```python
 from llama_index.core import StorageContext, load_index_from_storage
@@ -141,7 +152,7 @@ Before we can query our index, we need to convert it to a query interface. The m
 
 - `as_retriever`: For basic document retrieval, returning a list of `NodeWithScore` objects with similarity scores
 - `as_query_engine`: For single question-answer interactions, returning a written response
-- `as_chat_engine`: For conversational interactions that maintain memory across multiple messages, returning a chat history
+- `as_chat_engine`: For conversational interactions that maintain memory across multiple messages, returning a written response using chat history and indexed context
 
 We'll focus on the query engine since it is more common for agent-like interactions.
 We also pass in an LLM to the query engine to use for the response.
@@ -164,9 +175,9 @@ Once again, this is fully customisable but there are three main strategies that 
 - `compact` (default): similar to refine but concatenate the chunks beforehand, resulting in less LLM calls.
 - `tree_summarize`: create a detailed answer by going through each retrieved text chunk and creating a tree structure of the answer.
 
-<Tip>Take fine-grained control of your query workflows with the [low-level composition API](https://docs.llamaindex.ai/en/stable/module_guides/deploying/query_engine/usage_pattern/#low-level-composition-api). This API lets you customize and fine-tune every step of the query process to match your exact needs.</Tip>
+<Tip>Take fine-grained control of your query workflows with the [low-level composition API](https://docs.llamaindex.ai/en/stable/module_guides/deploying/query_engine/usage_pattern/#low-level-composition-api). This API lets you customize and fine-tune every step of the query process to match your exact needs, which also pairs great with [Workflows](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)</Tip>
 
-Language model won't always perform in predictable ways, so we can't be sure that the answer we get is always correct. We can deal with this by **evaluating the quality of the answer**.
+The language model won't always perform in predictable ways, so we can't be sure that the answer we get is always correct. We can deal with this by **evaluating the quality of the answer**.
 
 ### Evaluation and observability
 

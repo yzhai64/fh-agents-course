@@ -29,8 +29,7 @@ def get_weather(location: str) -> str:
     ...
 
 tool = FunctionTool.from_defaults(
-    fn=get_weather,
-    # async_fn=aget_weather,
+    get_weather,
     # name="...",
     # description="...",
 )
@@ -44,18 +43,23 @@ The `QueryEngine` we defined in the previous unit can be easily transformed into
 Let's see how to create a `QueryEngineTool` from a `QueryEngine` in the example below.
 
 ```python
-from llama_index.core import StorageContext, load_index_from_storage
+from llama_index.core import VectorStoreIndex
 from llama_index.core.tools import QueryEngineTool
 from llama_index.llms.huggingface_api import HuggingFaceInferenceAPILM
 from llama_index.embeddings.huggingface_api import HuggingFaceInferenceAPIEmbedding
+from llama_index.vector_stores.chroma import ChromaVectorStore
 
 embed_model = HuggingFaceInferenceAPIEmbedding("BAAI/bge-small-en-v1.5")
-storage_context = StorageContext.from_defaults(persist_dir="path/to/vector/store")
-index = load_index_from_storage(storage_context, embed_model=embed_model)
+
+db = chromadb.PersistentClient(path="./alfed_chroma_db")
+chroma_collection = db2.get_or_create_collection("alfred")
+vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
+
+index = VectorStoreIndex.from_vector_store(vector_store, embed_model=embed_model)
 
 llm = HuggingFaceInferenceAPILM(model_name="meta-llama/Meta-Llama-3-8B-Instruct")
 query_engine = index.as_query_engine(llm=llm)
-tool = QueryEngineTool.from_defaults(query_engine)
+tool = QueryEngineTool.from_defaults(query_engine, name="some useful name", description="some useful description")
 ```
 
 ## Creating Toolspecs
