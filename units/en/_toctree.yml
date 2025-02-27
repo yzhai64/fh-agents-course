@@ -51,7 +51,7 @@
   - local: unit2/smolagents/introduction
     title: Introduction to smolagents
   - local: unit2/smolagents/why_use_smolagents
-    title: Why use smolagents? 
+    title: Why use smolagents?
   - local: unit2/smolagents/quiz1
     title: Quick Quiz 1
   - local: unit2/smolagents/code_agents
@@ -72,23 +72,9 @@
     title: Final Quiz
   - local: unit2/smolagents/conclusion
     title: Conclusion
-- title: Bonus Unit 1. Fine-tuning an LLM for Function-calling
-  sections:
-  - local: bonus-unit1/introduction
-    title: Introduction
-  - local: bonus-unit1/what-is-function-calling
-    title: What is Function Calling?
-  - local: bonus-unit1/fine-tuning
-    title: Let's Fine-Tune your model for Function-calling
-  - local: bonus-unit1/conclusion
-    title: Conclusion
-- title: When the next steps are published?
-  sections:
-  - local: communication/next-units
-    title: Next Units
 - title: Unit 2.2 The LlamaIndex framework
   sections:
-  - local: unit2/llama-index/llama-index
+  - local: unit2/llama-index/introduction
     title: Introduction to LLamaIndex
   - local: unit2/llama-index/llama-hub
     title: Introduction to LlamaHub
@@ -106,3 +92,18 @@
     title: Quick Quiz 2
   - local: unit2/llama-index/conclusion
     title: Conclusion
+- title: Bonus Unit 1. Fine-tuning an LLM for Function-calling
+  sections:
+  - local: bonus-unit1/introduction
+    title: Introduction
+  - local: bonus-unit1/what-is-function-calling
+    title: What is Function Calling?
+  - local: bonus-unit1/fine-tuning
+    title: Let's Fine-Tune your model for Function-calling
+  - local: bonus-unit1/conclusion
+    title: Conclusion
+- title: When the next steps are published?
+  sections:
+  - local: communication/next-units
+    title: Next Units
+

@@ -38,7 +38,7 @@ def multiply(a: int, b: int) -> int:
     return a * b
 
 # initialize llm
-llm = HuggingFaceInferenceAPILM(model_name="meta-llama/Meta-Llama-3-8B-Instruct")
+llm = HuggingFaceInferenceAPI(model_name="meta-llama/Meta-Llama-3-8B-Instruct")
 
 # initialize agent
 agent = AgentWorkflow.from_tools_or_functions(
