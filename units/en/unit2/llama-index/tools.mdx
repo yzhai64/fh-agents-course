@@ -19,20 +19,22 @@ We will go over each of them in more detail below.
 A FunctionTool provides a simple way to wrap any Python function and make it available to an agent.
 You can pass either a synchronous or asynchronous function to the tool, along with optional `name` and `description` parameters.
 The name and description are particularly important as they help the agent understand when and how to use the tool effectively.
-Let's look at how to create a FunctionTool below.
+Let's look at how to create a FunctionTool below and then call it.
 
 ```python
 from llama_index.core.tools import FunctionTool
 
 def get_weather(location: str) -> str:
     """Useful for getting the weather for a given location."""
-    ...
+    print(f"Getting weather for {location}")
+    return f"The weather in {location} is sunny"
 
 tool = FunctionTool.from_defaults(
     get_weather,
     name="my_weather_tool",
     description="Useful for getting the weather for a given location.",
 )
+tool.call("New York")
 ```
 
 <Tip>When using an agent or LLM with function calling, the tool selected (and the arguments written for that tool) rely strongly on the tool name and description of the purpose and arguments of the tool. Learn more about function calling in the <a href="https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/modules/function_calling.html">Function Calling Guide</a> and <a href="https://docs.llamaindex.ai/en/stable/understanding/agent/function_calling.html">Function Calling Learning Guide</a>.</Tip>
@@ -45,7 +47,7 @@ Let's see how to create a `QueryEngineTool` from a `QueryEngine` in the example 
 ```python
 from llama_index.core import VectorStoreIndex
 from llama_index.core.tools import QueryEngineTool
-from llama_index.llms.huggingface_api import HuggingFaceInferenceAPILM
+from llama_index.llms.huggingface_api import HuggingFaceInferenceAPI
 from llama_index.embeddings.huggingface_api import HuggingFaceInferenceAPIEmbedding
 from llama_index.vector_stores.chroma import ChromaVectorStore
 
@@ -57,7 +59,7 @@ vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
 
 index = VectorStoreIndex.from_vector_store(vector_store, embed_model=embed_model)
 
-llm = HuggingFaceInferenceAPILM(model_name="meta-llama/Meta-Llama-3-8B-Instruct")
+llm = HuggingFaceInferenceAPI(model_name="meta-llama/Meta-Llama-3-8B-Instruct")
 query_engine = index.as_query_engine(llm=llm)
 tool = QueryEngineTool.from_defaults(query_engine, name="some useful name", description="some useful description")
 ```
@@ -84,6 +86,12 @@ from llama_index.tools.google import GmailToolSpec
 
 tool_spec = GmailToolSpec()
 tool_spec_list = tool_spec.to_tool_list()
+```
+
+To get a more detailed view of the tools, we can take a look at the `metadata` of each tool.
+
+```python
+[(tool.metadata.name, tool.metadata.description) for tool in tool_spec_list]
 ```
 
 ## Utility Tools
