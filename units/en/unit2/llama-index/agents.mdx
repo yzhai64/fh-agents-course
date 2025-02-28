@@ -28,7 +28,7 @@ LLMs that support a tools/functions API are relatively new, but they provide a p
 ReAct agents are also good at complex reasoning tasks and can work with any LLM that has chat or text completion capabilities. They are more verbose, and show the reasoning behind certain actions that they take.
 
 ```python
-from llama_index.llms.huggingface_api import HuggingFaceInferenceAPI
+from llama_index.llms.openai import OpenAI
 from llama_index.core.agent.workflow import AgentWorkflow
 from llama_index.core.tools import FunctionTool
 
@@ -38,12 +38,12 @@ def multiply(a: int, b: int) -> int:
     return a * b
 
 # initialize llm
-llm = HuggingFaceInferenceAPI(model_name="meta-llama/Meta-Llama-3-8B-Instruct")
+llm = OpenAI(model="gpt-4o")
 
 # initialize agent
 agent = AgentWorkflow.from_tools_or_functions(
-  [FunctionTool.from_defaults(multiply_tool)],
-  llm=llm
+    [FunctionTool.from_defaults(multiply)],
+    llm=llm
 )
 ```
 
@@ -84,12 +84,16 @@ from llama_index.core.tools import QueryEngineTool
 query_engine = index.as_query_engine(llm=llm, similarity_top_k=3) # as shown in the previous section
 
 query_engine_tool = QueryEngineTool.from_defaults(
-    query_engine,
-    name="a specific name",
+    query_engine=query_engine,
+    name="name",
     description="a specific description",
     return_direct=False,
 )
-query_engine_agent = AgentWorkflow.from_tools([query_engine_tool], llm=llm)
+query_engine_agent = AgentWorkflow.from_tools_or_functions(
+    [query_engine_tool],
+    llm=llm,
+    system_prompt="You are a helpful assistant that has access to a database containing persona descriptions. "
+)
 ```
 
 ## Creating Multi-agent systems
@@ -102,9 +106,9 @@ By narrowing the scope of each agent, we can help increase their general accurac
 
 ```python
 from llama_index.core.agent.workflow import (
- AgentWorkflow,
- FunctionAgent,
- ReActAgent,
+    AgentWorkflow,
+    FunctionAgent,
+    ReActAgent,
 )
 
 # Define some tools
