@@ -42,16 +42,16 @@
     title: 第 1 单元最终测验
   - local: unit1/conclusion
     title: 结论
-- title: Unit 2. AI智能体框架
+- title: Unit 2. AI 智能体框架
   sections:
   - local: unit2/introduction
-    title: AI智能体框架
-- title: Unit 2.1 smolagents框架
+    title: AI 智能体框架
+- title: Unit 2.1 smolagents 框架
   sections:
   - local: unit2/smolagents/introduction
-    title: smolagents简介
+    title: smolagents 简介
   - local: unit2/smolagents/why_use_smolagents
-    title: 为什么使用smolagents？
+    title: 为什么使用 smolagents？
   - local: unit2/smolagents/quiz1
     title: 快速测验1
   - local: unit2/smolagents/code_agents
