@@ -59,7 +59,7 @@ vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
 
 index = VectorStoreIndex.from_vector_store(vector_store, embed_model=embed_model)
 
-llm = HuggingFaceInferenceAPI(model_name="meta-llama/Llama-3.2-3B-Instruct")
+llm = HuggingFaceInferenceAPI(model_name="Qwen/Qwen2.5-Coder-32B-Instruct")
 query_engine = index.as_query_engine(llm=llm)
 tool = QueryEngineTool.from_defaults(query_engine, name="some useful name", description="some useful description")
 ```

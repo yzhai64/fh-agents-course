@@ -28,7 +28,7 @@ LLMs that support a tools/functions API are relatively new, but they provide a p
 ReAct agents are also good at complex reasoning tasks and can work with any LLM that has chat or text completion capabilities. They are more verbose, and show the reasoning behind certain actions that they take.
 
 ```python
-from llama_index.llms.openai import OpenAI
+from llama_index.llms.huggingface_api import HuggingFaceInferenceAPI
 from llama_index.core.agent.workflow import AgentWorkflow
 from llama_index.core.tools import FunctionTool
 
@@ -38,7 +38,7 @@ def multiply(a: int, b: int) -> int:
     return a * b
 
 # initialize llm
-llm = OpenAI(model="gpt-4o")
+llm = HuggingFaceInferenceAPI(model_name="Qwen/Qwen2.5-Coder-32B-Instruct")
 
 # initialize agent
 agent = AgentWorkflow.from_tools_or_functions(
