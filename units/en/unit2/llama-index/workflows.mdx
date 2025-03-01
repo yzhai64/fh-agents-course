@@ -187,21 +187,21 @@ Let's see how to create a multi-agent workflow.
 
 ```python
 from llama_index.core.agent.workflow import AgentWorkflow, FunctionAgent, ReActAgent
+from llama_index.llms.huggingface_api import HuggingFaceInferenceAPI
 
-query_engine_agent_tool = # as defined in the previous section
-# Define the agents
 multiply_agent = FunctionAgent(
     fn=lambda x, y: x * y,
     name="multiply_agent",
     description="Multiplies two integers",
 )
-retriever_agent = ReActAgent(
-    llm=llm,
-    tools=[query_engine_agent_tool],
+addition_agent = FunctionAgent(
+    fn=lambda x, y: x + y,
+    name="addition_agent",
+    description="Adds two integers",
 )
 # Create the workflow
 workflow = AgentWorkflow(
-    agents=[multiply_agent, retriever_agent],
+    agents=[multiply_agent, addition_agent],
     root_agent="multiply_agent"
 )
 
