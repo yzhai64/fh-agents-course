@@ -89,7 +89,6 @@ Let's show an example of **creating a loop** by using the union operator `|`.
 In the example below, we see that the `LoopEvent` is taken as input for the step and can also be returned as output.
 
 ```python
-from re import I
 from llama_index.core.workflow import Event
 import random
 
@@ -205,22 +204,22 @@ multiply_agent = ReActAgent(
     name="multiply_agent",
     description="Is able to multiply two integers",
     system_prompt="A helpful assistant that can use a tool to multiply numbers.",
-    tools=[multiply], 
+    tools=[multiply],
     llm=llm,
 )
 
 addition_agent = ReActAgent(
     name="add_agent",
     description="Is able to add two integers",
-    system_prompt="A helpful assistant that can use a tool to add numbers."
-    tools=[add], 
+    system_prompt="A helpful assistant that can use a tool to add numbers.",
+    tools=[add],
     llm=llm,
 )
 
 # Create the workflow
 workflow = AgentWorkflow(
     agents=[multiply_agent, addition_agent],
-    root_agent="multiply_agent"
+    root_agent="multiply_agent",
 )
 
 # Run the system
@@ -242,18 +241,18 @@ async def add(ctx: Context, a: int, b: int) -> int:
     cur_state = await ctx.get("state")
     cur_state["num_fn_calls"] += 1
     await ctx.set("state", cur_state)
-    
+
     return a + b
-    
+
 async def multiply(ctx: Context, a: int, b: int) -> int:
     """Multiply two numbers."""
     # update our count
     cur_state = await ctx.get("state")
     cur_state["num_fn_calls"] += 1
     await ctx.set("state", cur_state)
-    
+
     return a * b
- 
+
 ...
 
 workflow = AgentWorkflow(
