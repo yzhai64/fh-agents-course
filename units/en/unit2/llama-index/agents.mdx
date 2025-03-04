@@ -67,7 +67,7 @@ response = await agent.run("My name is Bob.", ctx=ctx)
 response = await agent.run("What was my name again?", ctx=ctx)
 ```
 
-You'll notice that agents in `LlamaIndex` are async. If you are new to async code in Python, or need a refresher, they have an [excellent async guide](https://docs.llamaindex.ai/en/stable/getting_started/async_python/).
+You'll notice that agents in `LlamaIndex` are async because they use Python's `await` operator. If you are new to async code in Python, or need a refresher, they have an [excellent async guide](https://docs.llamaindex.ai/en/stable/getting_started/async_python/).
 
 Now we've gotten the basics, let's take a look at how we can use more complex tools in our agents.
 
